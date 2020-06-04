@@ -8,3 +8,9 @@
  
  https://github.com/joseemaro/Paw_TpFinal/blob/master/wireframes.md
  
+ ### Site map
+
+ - En el siguiente link se pueden observar el site-map del proyecto:
+ 
+ https://github.com/joseemaro/Paw_TpFinal/blob/master/SiteMap.md
+ 
