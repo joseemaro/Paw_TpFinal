@@ -1,6 +1,6 @@
-#Primera entrega del trabajo final: INK MASTER
+# Primera entrega del trabajo final: INK MASTER
 
-##Análisis de requerimientos
+## Análisis de requerimientos
 
 Tomamos como requisitos funcionales aquellas funciones principales del sistema que "hacen" al mismo. Es decir, un conjunto de entradas, comportamientos y salidas. <br>
 
@@ -17,7 +17,7 @@ Solamente los usuarios autorizados (profesionales) podrán visualizar la agenda 
 * RQ-006
 El sistema debe permitir que un usuario autorizado cancele su turno. Reflejando los cambios en la ficha del mismo.
 
-##Componentes funcionales
+## Componentes funcionales
 
 Algunos de los componentes que se ponen en marcha como resultado de la interacción del usuario son: <br>
 
@@ -31,26 +31,26 @@ Algunos de los componentes que se ponen en marcha como resultado de la interacci
 * Ver el catálogo de diseños disponibles (usuario / cliente).
 * Ver experiencias de otros clientes / trabajos realizados (usuario / cliente).
 
-##Site map
+## Site map
 
 En el siguiente link se pueden observar el site-map del proyecto: <br>
 
-[SiteMap](URL "")
+[SiteMap](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/SiteMap.md")
 
-##Wireframes
+## Wireframes
 
 En el siguiente link se pueden observar los wireframes de las principales pantallas del proyecto: <br>
 
-[Wireframes](URL "")
+[Wireframes](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/wireframes.md")
 
-##Diagrama de clases
+## Diagrama de clases
 
 En el siguiente link se puede observar el diagrama de clases incorporando el patrón MVC: <br>
 
-[clases](URL "")
+[clases](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/Diagramas.md")
 
-##Diseño del modelo de datos
+## Diseño del modelo de datos
 
 En el siguiente link se puede observar el modelo de datos: <br>
 
-[DER](URL "")
+[DER](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/DER.md")
