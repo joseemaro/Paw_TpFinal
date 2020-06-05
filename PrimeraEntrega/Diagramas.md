@@ -24,7 +24,7 @@ Las vistas que interactuan con el UserController son aquellas que intercambian d
 - log.in.html (Pantalla de login del usuario)
 
 
-![alt text](Diagrama_User.jpg)
+![alt text](Diagramas/Diagrama_User.jpg)
 
 
 ### ApController
