@@ -10,5 +10,5 @@ El objetivo principal de esta página web es, como mencionamos ofrecer contenido
 
 ### Primera entrega
 
-[PrimeraEntrega](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/PrimeraEntrega.md")
+[PrimeraEntrega](PrimeraEntrega/PrimeraEntrega.md)
  

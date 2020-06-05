@@ -35,22 +35,22 @@ Algunos de los componentes que se ponen en marcha como resultado de la interacci
 
 En el siguiente link se pueden observar el site-map del proyecto: <br>
 
-[SiteMap](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/SiteMap.md")
+[SiteMap](SiteMap.md)
 
 ## Wireframes
 
 En el siguiente link se pueden observar los wireframes de las principales pantallas del proyecto: <br>
 
-[Wireframes](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/wireframes.md")
+[Wireframes](wireframes.md)
 
 ## Diagrama de clases
 
 En el siguiente link se puede observar el diagrama de clases incorporando el patrón MVC: <br>
 
-[clases](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/Diagramas.md")
+[Clases](Diagramas.md)
 
 ## Diseño del modelo de datos
 
 En el siguiente link se puede observar el modelo de datos: <br>
 
-[DER](URL "https://github.com/joseemaro/Paw_TpFinal/blob/master/Primera%20entrega/DER.md")
+[DER](DER.md)

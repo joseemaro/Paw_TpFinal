@@ -13,7 +13,7 @@ Las vistas que interactuan con el GeneralController son aquellas que solo son vi
 - view.faq.html (Pantalla de pregunta frecuente específica)
 
 
-![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_General.jpg)
+![alt text](Diagramas/Diagrama_General.jpg)
 
 
 ### UserController
@@ -24,7 +24,7 @@ Las vistas que interactuan con el UserController son aquellas que intercambian d
 - log.in.html (Pantalla de login del usuario)
 
 
-![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_User.jpg)
+![alt text](Diagrama_User.jpg)
 
 
 ### ApController
@@ -35,7 +35,7 @@ Las vistas que interactuan con el ApController son aquellas que intercambian dat
 - edit.ap.html (Pantalla de edición de turnos)
 
 
-![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_Ap.jpg)
+![alt text](Diagramas/Diagrama_Ap.jpg)
 
 
 ### MsgController
@@ -44,4 +44,4 @@ Las vistas que interactuan con el MsgController son aquellas que intercambian da
 - list.msg.html (Pantalla de visualización de los mensajes)
 - view.msg.html (Pantalla de visualización del mensaje específico)
 
-![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_Msg.jpg)
+![alt text](Diagramas/Diagrama_Msg.jpg)
