@@ -12,7 +12,9 @@ Las vistas que interactuan con el GeneralController son aquellas que solo son vi
 - list.faq.html (Pantalla de preguntas frecuentes)
 - view.faq.html (Pantalla de pregunta frecuente específica)
 
+
 ![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_General.jpg)
+
 
 ### UserController
 Las vistas que interactuan con el UserController son aquellas que intercambian datos con la clase User:
@@ -21,12 +23,25 @@ Las vistas que interactuan con el UserController son aquellas que intercambian d
 - edit.user.html (Pantalla de edición del usuario)
 - log.in.html (Pantalla de login del usuario)
 
+
 ![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_User.jpg)
 
+
 ### ApController
+Las vistas que interactuan con el ApController son aquellas que intercambian datos con la clase Appointment:
+- new.ap.html (Pantalla de creación de nuevos turnos)
+- list.ap.html (Pantalla de visualización de los turnos)
+- view.ap.html (Pantalla de visualización del turno específico)
+- edit.ap.html (Pantalla de edición de turnos)
+
 
 ![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_Ap.jpg)
 
+
 ### MsgController
+Las vistas que interactuan con el MsgController son aquellas que intercambian datos con la clase Message:
+- new.msg.html (Pantalla de creación de nuevos mensajes en la sección de contactos)
+- list.msg.html (Pantalla de visualización de los mensajes)
+- view.msg.html (Pantalla de visualización del mensaje específico)
 
 ![alt text](https://github.com/joseemaro/Paw_TpFinal/blob/master/Diagramas/Diagrama_Msg.jpg)
