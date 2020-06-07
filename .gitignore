@@ -1,1 +1,4 @@
 *.idea/
+*SegundaEntrega/InkMaster/.idea/
+*SegundaEntrega/InkMaster/app/views/cache/
+*SegundaEntrega/InkMaster/vendor/

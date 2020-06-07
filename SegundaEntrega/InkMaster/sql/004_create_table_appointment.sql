@@ -1,0 +1,16 @@
+USE inkmaster_db;
+
+CREATE TABLE appointment (
+    id_appointment INT NOT NULL,
+    id_local INT NOT NULL,
+    id_user VARCHAR(100) NOT NULL,
+    id_artist VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    hour TIME NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    price DOUBLE,
+    PRIMARY KEY (id_appointment),
+    FOREIGN KEY (id_local) REFERENCES local(id_local),
+    FOREIGN KEY (id_user) REFERENCES user(id_local),
+    FOREIGN KEY (id_artist) REFERENCES user(id_local)
+);
