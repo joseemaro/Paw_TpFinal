@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block header %}
+    {{ include('nav.views.html') }}
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+{% endblock %}
+
+{% block main %}
+    <h1>Iniciar Sesión</h1>
+    <form class="general-form" action="/login2" method="post" enctype="multipart/form-data">
+        <label><b>Usuario: </b></label><br>
+        <input type="text" name="id_user" placeholder="Ingrese su usuario" required><br>
+        <label><b>Contraseña: </b></label><br>
+        <input type="text" name="password" placeholder="Ingrese su contraseña" required><br>
+
+        <input type="submit" value="Iniciar Sesión" />
+    </form>
+    <a href="/register">Registrate</a>
+    <p> Los campos marcados como (*) son obligatorios </p>
+{% endblock %}

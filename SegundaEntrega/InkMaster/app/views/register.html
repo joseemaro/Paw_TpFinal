@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block header %}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <script src="/public/js/sha1.js"></script>
+{% endblock %}
+
+{% block main %}
+    <h1>Registro</h1>
+    <form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
+        <label><b>Usuario: (*)</b>
+            <input type="text" name="id_user" required>
+        </label><br>
+        <label><b>Contraseña: (*)</b>
+            <input id="password" type="password" name="password" required>
+        </label><br>
+        <!--<label><b>Confirme contraseña: </b></label><br><input type="text" name="password" required><br>-->
+        <label><b>Nombres: (*)</b>
+            <input type="text" name="first_name" required>
+        </label><br>
+        <label><b>Apellidos: (*)</b>
+            <input type="text" name="last_name" required>
+        </label><br>
+        <label><b>Edad: (*)</b>
+            <input type="text" name="age" maxlength="10" max="99" required>
+        </label><br>
+        <label><b>Nro de Documento: (*)</b>
+            <input type="text" name="num_doc" required>
+        </label><br>
+        <label><b>Teléfono: </b>
+            <input type="text" name="phone">
+        </label><br>
+        <label><b>Dirección: </b>
+            <input type="text" name="direction">
+        </label><br>
+        <label><b>Email: (*)</b>
+            <input type="text" name="email" required>
+        </label><br>
+        <label><b>Foto de perfil: </b>
+            <input type="text" name="photo">
+        </label><br>
+
+        <input type="submit" onclick="cifrar()" value="Registrate" />
+    </form>
+
+    <a href="/login">Iniciar Sesión</a>
+    <p> Los campos marcados como (*) son obligatorios </p>
+{% endblock %}

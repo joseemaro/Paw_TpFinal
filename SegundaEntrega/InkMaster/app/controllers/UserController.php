@@ -17,7 +17,9 @@ class UserController extends Controller
     }
 
     public function newUser() {
-        return view();#'list.appointments', compact('appointments'));
+        var_dump($_POST);
+        $this->user;
+        return view('register');
     }
 
     public function saveUser() {
@@ -44,8 +46,12 @@ class UserController extends Controller
         return view();#'list.appointments', compact('appointments'));
     }
 
+    public function register() {
+        return view('register');
+    }
+
     public function logIn() {
-        return view();#'list.appointments', compact('appointments'));
+        return view('log.in');
     }
 
     public function logOut() {

@@ -6,12 +6,12 @@ CREATE TABLE user (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     age INT NOT NULL,
-    dni VARCHAR(100) NOT NULL,
+    nro_doc VARCHAR(100) NOT NULL,
     phone VARCHAR(50),
     direction VARCHAR(100),
     email VARCHAR(100) NOT NULL,
     photo MEDIUMBLOB,
-    artist BOOLEAN NOT NULL,
+    artist BOOLEAN,
     txt VARCHAR(300),
     PRIMARY KEY (id_user)
 );
