@@ -61,7 +61,7 @@ class UserController extends Controller
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
         $result = $this->user->find($id_user, $password);
-        var_dump($result);
+        var_dump($result); #se podria mandar mensaje dependiendo de esto
         session_start();
         $_SESSION["id_user"] = $id_user;
         $session = $this->session();
@@ -72,7 +72,7 @@ class UserController extends Controller
         session_start();
         unset($_SESSION["id_user"]);
         $session = $this->session();
-        return view('index.views', compact('session'));#'list.appointments', compact('appointments'));
+        return view('index.views', compact('session'));
     }
 
     public function session() {
