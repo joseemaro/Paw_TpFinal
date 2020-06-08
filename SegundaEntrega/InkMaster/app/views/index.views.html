@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+    Home
+{% endblock %}
 
 {% block header %}
-{{ include('nav.views.html') }}
-<a href="/login">Login</a>
+    {{ include('nav.views.html') }}
+    {{ include('session.views.html') }}
 {% endblock %}
 
 {% block head %}
-{{ parent() }}
-<meta name="keywords" content="PAW,2020,Templates,PHP">
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
 {% endblock %}
+
 {% block main %}
-    <p></p>
+    <p>{{app.session.get('id_user')}}</p>
 {% endblock %}

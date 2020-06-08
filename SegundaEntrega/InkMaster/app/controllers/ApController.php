@@ -8,7 +8,9 @@ class ApController extends Controller
 {
 
     public  function newAp() {
-        return view('new.appointment');
+        session_start();
+        $session = $this->session();
+        return view('new.appointment', compact('session'));
     }
 
     public function saveAp ()
@@ -110,5 +112,14 @@ class ApController extends Controller
             $params["horario_turno"] = $_POST["horario_turno"];
         }
         return $params;
+    }
+
+    public function session() {
+        if (isset($_SESSION["id_user"])) {
+            $session = true;
+        } else {
+            $session = false;
+        }
+        return $session;
     }
 }

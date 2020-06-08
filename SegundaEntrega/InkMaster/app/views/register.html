@@ -6,6 +6,7 @@
 
 {% block header %}
     {{ include('nav.views.html') }}
+    {{ include('session.views.html') }}
 {% endblock %}
 
 {% block head %}
@@ -14,6 +15,9 @@
 {% endblock %}
 
 {% block main %}
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
     <h1>Registro</h1>
     <form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
         <label><b>Usuario: (*)</b>
@@ -45,7 +49,7 @@
             <input type="text" name="email" required>
         </label><br>
         <label><b>Foto de perfil: </b>
-            <input type="text" name="photo">
+            <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
         </label><br>
 
         <input type="submit" onclick="cifrar()" value="Registrate" />

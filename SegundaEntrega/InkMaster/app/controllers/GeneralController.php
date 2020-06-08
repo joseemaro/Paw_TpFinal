@@ -15,9 +15,10 @@ class GeneralController extends Controller
         $this->tatto = new Tattoo();
     }
 
-    public function index()
-    {
-        return view('index.views');
+    public function index() {
+        session_start();
+        $session = $this->session();
+        return view('index.views', compact('session'));
     }
 
     public function listTattoo() {
@@ -42,5 +43,14 @@ class GeneralController extends Controller
 
     public function viewFaq() {
         return view();#'list.appointments', compact('appointments'));
+    }
+
+    public function session() {
+        if (isset($_SESSION["id_user"])) {
+            $session = true;
+        } else {
+            $session = false;
+        }
+        return $session;
     }
 }

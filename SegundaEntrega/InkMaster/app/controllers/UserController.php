@@ -17,13 +17,16 @@ class UserController extends Controller
     }
 
     public function newUser() {
-        var_dump($_POST);
-        $this->user;
         return view('register');
     }
 
     public function saveUser() {
-        return view();#'list.appointments', compact('appointments'));
+        $msg = $this->user->newUser($_POST);
+        if ($msg == "Correcto") {
+            return view('register');
+        } else {
+            return view('register', compact('msg'));
+        }
     }
 
     public function editUser() {
@@ -51,10 +54,33 @@ class UserController extends Controller
     }
 
     public function logIn() {
-        return view('log.in');
+        return view('login');
+    }
+
+    public function find() {
+        $id_user = $_POST["id_user"];
+        $password = $_POST["password"];
+        $result = $this->user->find($id_user, $password);
+        var_dump($result);
+        session_start();
+        $_SESSION["id_user"] = $id_user;
+        $session = $this->session();
+        return view('index.views', compact('session'));
     }
 
     public function logOut() {
-        return view();#'list.appointments', compact('appointments'));
+        session_start();
+        unset($_SESSION["id_user"]);
+        $session = $this->session();
+        return view('index.views', compact('session'));#'list.appointments', compact('appointments'));
+    }
+
+    public function session() {
+        if (isset($_SESSION["id_user"])) {
+            $session = true;
+        } else {
+            $session = false;
+        }
+        return $session;
     }
 }
