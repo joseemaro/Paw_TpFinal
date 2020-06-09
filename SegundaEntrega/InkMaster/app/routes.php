@@ -3,6 +3,7 @@
 $router->get('', 'GeneralController@index');
 
 $router->get('new_appointment', 'ApController@newAp');
+$router->post('save_appointment', 'ApController@saveAp');
 
 $router->get('login', 'UserController@logIn');
 $router->post('login2', 'UserController@find');
