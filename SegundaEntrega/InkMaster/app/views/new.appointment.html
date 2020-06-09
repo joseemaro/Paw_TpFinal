@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+<!--{% extends "base.html" %}
 
 {% block title %}
     New Appointment
@@ -14,19 +14,172 @@
     <meta name="keywords" content="PAW,2020,Templates,PHP">
 {% endblock %}
 
-{% block main %}
-    <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
-        <label><b>Artista: </b><select name="artist">
-                <option>Juan</option>
-                <option>Pablo</option>
-                <option>Minguito</option>
-            </select></label><br>
-        <label><b>Fecha de turno: (*)</b><input type="date" name="date" required></label><br>
-        <label><b>Horario de turno(hh:min): (*)</b> <input type="time" min="08:00" max="17:00" step="900" name="time" required></label><br>
-        <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
+{% block main %}-->
 
-        <input type="submit" value="Enviar" />
-        <input type="reset" value="Limpiar" />
-    </form>
-    <p> Los campos marcados como (*) son obligatorios </p>
-{% endblock %}
+<head>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Registro de Turno</h1>
+        <article id="column1">
+            <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
+                <label>
+                    <b>Artista: </b>
+                    <select name="artist">
+                            <option>Juan</option>
+                            <option>Pablo</option>
+                            <option>Minguito</option>
+                    </select>
+                </label>
+                <br>
+                <label><b>Fecha de turno:(*)</b><input type="date" name="date" required></label><br>
+                <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="time" required></label><br>
+                <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
+
+
+                <label class="enfermedades" for=""><b class="enfermedades">Selecciona tus enfermedades/tratamientos:</b></label>
+                <label for=""><input name="cbipeliculas" type="checkbox" />Quimioterapia</label>
+                <br />
+                <label for=""><input name="cbilibros" type="checkbox" />Anemia</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Leucemia</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Trombocitopenia</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Acne</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Alergia</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Deficiencia de G6PD</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Diabetes</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Von Willebrand</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Esferocitosis hereditaria</label>
+                <br />
+                <label for=""></label><input name="cbiinternet" type="checkbox" />Hemofilia</label>
+
+                <div class="btn">
+                    <input class="boton-personalizado" type="reset" value="Limpiar" />
+                    <input class="boton-personalizado" type="submit" value="Enviar" />
+                </div>
+                <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
+
+            </form>
+
+        </article>
+    </div>
+
+
+</body>
+
+<!-- {% endblock %} -->
+
+
+<style>
+    * {
+        padding: 0 0;
+        margin: 0 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    body {
+        background-color: #F5CAC3;
+    }
+    
+    header {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #f7ede2;
+    }
+    
+    #wrapper {
+        width: 80%;
+        margin: auto auto;
+        background-color: #f7ede2;
+    }
+    
+    article {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        float: left;
+        height: 100%;
+        padding: 2%;
+    }
+    
+    #column1 {
+        width: 100%;
+        background-color: #f7ede2;
+    }
+    
+    b {
+        display: inline-block;
+        width: 50%;
+        padding-top: 5%;
+        font-weight: normal;
+    }
+    
+    input {
+        display: inline-block;
+        width: 30%;
+        margin-top: 5%;
+    }
+    
+    input[type=submit] {
+        margin-top: 5%;
+        margin-left: 10%;
+    }
+    
+    input[type=reset] {
+        margin-top: 5%;
+        margin-left: 15%;
+        background-color: #F28482;
+    }
+    
+    input[type=checkbox] {
+        margin-top: 0%;
+        background-color: #F28482;
+    }
+    
+    .footer-form {
+        margin-top: 5%;
+        text-align: center;
+    }
+    
+    .enfermedades {
+        width: 100%;
+    }
+    
+    label {
+        margin-left: 10%;
+        margin-right: auto;
+    }
+    
+    form {
+        width: 50%;
+        height: 100%;
+        background-color: #fbf5ef;
+        border: black 1px solid;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1%;
+    }
+    
+    .boton-personalizado {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #84A59D;
+        border-color: #d8d8d8;
+        border-width: 3px;
+        border-style: solid;
+        border-radius: 35px;
+    }
+</style>
