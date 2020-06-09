@@ -1,0 +1,187 @@
+body {
+    background-color: #F5CAC3; /*color Baby Pink*/
+}
+
+header{
+    background-color: #F7EDE2; /*Color Linen*/
+    padding: 1em 0; /*Arriba y abajo 1em de padding, nada a los costados*/
+    position: relative;
+}
+
+/*Container maneja los elementos que se colocan en el header*/
+.container {
+    width: 100%;
+}
+
+header::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+/*Nav principal está pensado Mobile first*/
+.site-nav{
+    top:100%;
+    right:0;
+    position: absolute;
+    background-color: #84A59D; /*Morning Blue*/
+    /* Animación para el menú */
+    clip-path: circle(0px at top right);
+    transition: clip-path ease-in-out 700ms;
+}
+
+/*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/
+.site-nav-open{
+    clip-path: circle(150% at top right);
+}
+
+.site-nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav li{
+    border-bottom: 1px solid #575766;
+}
+
+.site-nav li:last-child{
+    border-bottom: none;
+}
+
+.site-nav a{
+    color: #ebedb3;
+    display: block;
+    padding: 2em 6em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:focus{
+    background: #F6BD60; /*Maximun yellow red*/
+    color: #464655;
+}
+
+/*el símbolo de menu desplegable*/
+.menu_toggle{
+    position: absolute;
+    right: 0.5em;
+    padding: 0.5em;
+}
+
+/*menu-open y site-nav-open son las clases que se agregan con js*/
+.menu-open .hamburger{
+    transform: rotate(45deg);
+}
+
+.menu-open .hamburger::before{
+    opacity: 0;
+}
+
+.menu-open .hamburger::after{
+    transform: translateY(-3px) rotate(-90deg);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after{
+    content: '';
+    display: block;
+    background: black;
+    height: 3px;
+    width: 1.75em;
+    border-radius: 3px;
+    transition: all ease-in-out 500ms;
+}
+
+.hamburger::before{
+    transform: translateY(-6px);
+}
+
+.hamburger::after{
+    transform: translateY(3px);
+}
+
+/*Versión del nav escritorio*/
+@media screen and (min-width:700px){
+
+    /*Esto hace que desaparezca la "hamburguesa"*/
+    .menu_toggle{
+        display: none;
+    }
+
+    .site-nav{
+        height: 25%;
+        width: 100%;
+        clip-path: initial;
+        text-align: center;
+        /*Me falta acomodar el desborde del nav cuando la pantalla se achica*/
+    }
+
+    .site-nav li{
+        display: inline-block;
+        border: none;
+        padding: 1rem;
+    }
+
+    .site-nav a{
+        padding: 0;
+        margin-left: 3em;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus{
+        background: transparent;
+    }
+
+}
+
+.logo{
+    float: left;
+    max-width: 33vw;
+    max-height: 30vh;
+    min-width: 15vw;
+    min-height: 15vh;
+}
+
+.social-network {
+    position: absolute;
+    right: 0;
+    bottom:0;
+    width: 33vw;
+    height: 30vh;
+}
+
+#icon-fb, #icon-inst, #icon-tw, #icon-yt {
+    font-size: 2.5em;
+    width: 2em;
+    color: rgba(0, 0, 0, .4);
+    position: absolute;
+    bottom: 0.5em;
+}
+#icon-fb {
+    right: 0;
+}
+
+#icon-inst {
+    right: 2em;
+}
+
+#icon-tw {
+    right: 4em;
+}
+
+#icon-yt {
+    right: 6em;
+}
+
+/*
+.site-nav--icon{
+    display: inline-block;
+    font-size: 1.5em;
+    margin-right: 1em;
+    width: 1.1em;
+    text-align: center;
+    color: rgba(255, 255, 255, .4);
+}*/

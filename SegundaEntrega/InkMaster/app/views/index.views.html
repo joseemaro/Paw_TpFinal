@@ -4,16 +4,21 @@
     Home
 {% endblock %}
 
-{% block header %}
-    {{ include('nav.views.html') }}
-    {{ include('session.views.html') }}
-{% endblock %}
-
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
 {% endblock %}
 
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+<!--{{ include('session.views.html') }}-->
+{% endblock %}
+
 {% block main %}
     <p>{{app.session.get('id_user')}}</p>
+{% endblock %}
+
+{% block footer %}
+<!--{{ include('footer.views.html') }}-->
 {% endblock %}
