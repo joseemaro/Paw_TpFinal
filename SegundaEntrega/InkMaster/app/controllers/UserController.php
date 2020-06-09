@@ -58,20 +58,31 @@ class UserController extends Controller
     }
 
     public function find() {
+        $session = null;
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
         $result = $this->user->find($id_user, $password);
-        var_dump($result); #se podria mandar mensaje dependiendo de esto
-        session_start();
-        $_SESSION["id_user"] = $id_user;
-        $session = $this->session();
+        var_dump($result);
+        if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
+            var_dump("se encontró el usuario, bienvenido");
+            session_start();
+            $_SESSION["id_user"] = $id_user;
+            $session = $_SESSION;
+            //$session = $this->get('session');
+            //$session = null;
+            //$session->set('array', array('id_user' => $_SESSION["id_user"]));
+            //$twig = new \Twig_Environment();
+            //$twig->addGlobal('session', $_SESSION);
+        } else {
+            var_dump("gil poné un usuario válido");
+        }
         return view('index.views', compact('session'));
     }
 
     public function logOut() {
         session_start();
-        unset($_SESSION["id_user"]);
-        $session = $this->session();
+        $_SESSION = array();
+        $session = $_SESSION;
         return view('index.views', compact('session'));
     }
 

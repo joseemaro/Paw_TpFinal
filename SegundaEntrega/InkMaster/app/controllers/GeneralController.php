@@ -17,7 +17,7 @@ class GeneralController extends Controller
 
     public function index() {
         session_start();
-        $session = $this->session();
+        $session = $_SESSION;
         return view('index.views', compact('session'));
     }
 

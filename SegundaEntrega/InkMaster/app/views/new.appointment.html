@@ -1,4 +1,4 @@
-<!--{% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
     New Appointment
@@ -14,69 +14,66 @@
     <meta name="keywords" content="PAW,2020,Templates,PHP">
 {% endblock %}
 
-{% block main %}-->
+{% block main %}
+    <head>
+    </head>
 
-<head>
-
-</head>
-
-<body>
-    <div id="wrapper">
-        <article id="column1">
-            <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
-                <h1>Registro de Turno</h1>
-                <label>
-                    <b>Artista: </b>
-                    <select name="artist">
-                            <option>Juan</option>
-                            <option>Pablo</option>
-                            <option>Minguito</option>
-                    </select>
-                </label>
-                <br>
-                <label><b>Fecha de turno:(*)</b><input type="date" name="date" required></label><br>
-                <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="time" required></label><br>
-                <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
+    <body>
+        <div id="wrapper">
+            <article id="column1">
+                <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
+                    <h1>Registro de Turno</h1>
+                    <label>
+                        <b>Artista: </b>
+                        <select name="artist">
+                                <option>Juan</option>
+                                <option>Pablo</option>
+                                <option>Minguito</option>
+                        </select>
+                    </label>
+                    <br>
+                    <label><b>Fecha de turno:(*)</b><input type="date" name="date" required></label><br>
+                    <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="time" required></label><br>
+                    <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
 
 
-                <label class="enfermedades" for=""><b class="enfermedades">Selecciona tus enfermedades/tratamientos:</b></label>
-                <label for=""><input name="cbipeliculas" type="checkbox" />Quimioterapia</label>
-                <br />
-                <label for=""><input name="cbilibros" type="checkbox" />Anemia</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Leucemia</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Trombocitopenia</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Acne</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Alergia</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Deficiencia de G6PD</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Diabetes</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Von Willebrand</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Esferocitosis hereditaria</label>
-                <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Hemofilia</label>
+                    <label class="enfermedades" for=""><b class="enfermedades">Selecciona tus enfermedades/tratamientos:</b></label>
+                    <label for=""><input name="cbipeliculas" type="checkbox" />Quimioterapia</label>
+                    <br />
+                    <label for=""><input name="cbilibros" type="checkbox" />Anemia</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Leucemia</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Trombocitopenia</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Acne</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Alergia</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Deficiencia de G6PD</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Diabetes</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Von Willebrand</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Esferocitosis hereditaria</label>
+                    <br />
+                    <label for=""></label><input name="cbiinternet" type="checkbox" />Hemofilia</label>
 
-                <div class="btn">
-                    <input class="boton-personalizado" type="reset" value="Limpiar" />
-                    <input class="boton-personalizado" type="submit" value="Enviar" />
-                </div>
-                <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
+                    <div class="btn">
+                        <input class="boton-personalizado" type="reset" value="Limpiar" />
+                        <input class="boton-personalizado" type="submit" value="Enviar" />
+                    </div>
+                    <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
 
-            </form>
+                </form>
 
-        </article>
-    </div>
+            </article>
+        </div>
 
 
-</body>
-
-<!-- {% endblock %} -->
+    </body>
+{% endblock %}
 
 
 <style>

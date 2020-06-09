@@ -1,5 +1,7 @@
-{% if session %}
-    <a href="/logout">Logout</a>
+{% if session.id_user %}
+    <a href="/logout">Logout</a><br>
+    {{ session.id_user }}
 {% else %}
-    <a href="/login">Login</a>
+    <a href="/login">Login</a><br>
+    {{ session.id_user }}
 {% endif %}
