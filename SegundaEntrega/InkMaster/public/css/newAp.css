@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+* {
+    padding: 0 0;
+    margin: 0 0;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+body {
+    background-color: #F5CAC3;
+}
+
+header {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #f7ede2;
+}
+
+#wrapper {
+    width: 80%;
+    margin: auto auto;
+    /*background-color: #f7ede2;*/
+}
+
+article {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    padding: 2%;
+}
+
+#column1 {
+    width: 100%;
+    /*background-color: #f7ede2;*/
+}
+
+b {
+    display: inline-block;
+    width: 50%;
+    padding-top: 5%;
+    font-weight: normal;
+}
+
+input {
+    display: inline-block;
+    width: 30%;
+    margin-top: 5%;
+}
+
+input[type=submit] {
+    margin-top: 5%;
+    margin-left: 10%;
+}
+
+input[type=reset] {
+    margin-top: 5%;
+    margin-left: 15%;
+    background-color: #F28482;
+}
+
+input[type=checkbox] {
+    margin-top: 0%;
+    background-color: #F28482;
+}
+
+.footer-form {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.enfermedades {
+    width: 100%;
+}
+
+label {
+    margin-left: 10%;
+    margin-right: auto;
+}
+
+form {
+    width: 50%;
+    height: 100%;
+    background-color: #fbf5ef;
+    border: #84A59D 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    border-radius: 5px;
+}
+
+.boton-personalizado {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #84A59D;
+    border-color: #d8d8d8;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 35px;
+}

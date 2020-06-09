@@ -28,6 +28,7 @@ header::after{
     /* Animación para el menú */
     clip-path: circle(0px at top right);
     transition: clip-path ease-in-out 700ms;
+
 }
 
 /*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/
@@ -112,11 +113,12 @@ header::after{
     }
 
     .site-nav{
-        height: 25%;
+        position: static;
         width: 100%;
         clip-path: initial;
-        text-align: center;
-        /*Me falta acomodar el desborde del nav cuando la pantalla se achica*/
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     .site-nav li{
@@ -146,9 +148,7 @@ header::after{
 }
 
 .social-network {
-    position: absolute;
-    right: 0;
-    bottom:0;
+    float: right;
     width: 33vw;
     height: 30vh;
 }
@@ -157,9 +157,8 @@ header::after{
     font-size: 2.5em;
     width: 2em;
     color: rgba(0, 0, 0, .4);
-    position: absolute;
-    bottom: 0.5em;
 }
+/*
 #icon-fb {
     right: 0;
 }
@@ -174,7 +173,7 @@ header::after{
 
 #icon-yt {
     right: 6em;
-}
+}*/
 
 /*
 .site-nav--icon{
