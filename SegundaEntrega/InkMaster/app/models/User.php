@@ -51,4 +51,8 @@ class User extends Model
         //return $this->db->findUser($this->table, $id_user, $password);
         return $this->db->query($sql, $id_user, $password);
     }
+
+    public function listArtist() {
+        return $this->db->findArtist($this->table);
+    }
 }

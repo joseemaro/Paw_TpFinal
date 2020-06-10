@@ -132,4 +132,24 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+
+    
+    /**
+     * Finds a artist into a table.
+     *
+     * @param string $table
+     */
+    public function findArtist($table)
+    {
+        $sql = "select * from $table where artist = 1;";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            //return $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
 }

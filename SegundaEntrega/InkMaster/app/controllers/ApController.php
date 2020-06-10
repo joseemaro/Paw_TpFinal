@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\models\Appointment;
+use App\models\User;
 
 class ApController extends Controller
 {
@@ -15,7 +16,11 @@ class ApController extends Controller
         session_start();
         $session = $_SESSION;
         //buscar si el usuario es menor de 18 años, en tal caso que descargue el formulario
-        return view('new.appointment', compact('session'));
+
+        //recupero artista de bd
+        $artistas = new User();
+        $artistas = $artistas->listArtist();
+        return view('new.appointment', compact('session','artistas'));
     }
 
     public function saveAp ()
