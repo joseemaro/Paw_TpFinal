@@ -119,4 +119,17 @@ class QueryBuilder
         }
         return $cleaned_params;
     }
+
+    /**
+     * Select all records from a database table.
+     *
+     * @param string $table
+     */
+    public function selectAll($table)
+    {
+        $statement = $this->pdo->prepare("select * from {$table}");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
 }

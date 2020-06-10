@@ -5,6 +5,7 @@ namespace App\models;
 use App\Core\Model;
 use App\Core\App;
 
+
 class FAQ extends Model
 {
     protected $table = 'faq';
@@ -12,4 +13,10 @@ class FAQ extends Model
     protected $question;
     protected $answer;
     protected $summary;
+
+
+public function listFaq() {
+    return $this->db->selectAll($this->table);
+}
+
 }

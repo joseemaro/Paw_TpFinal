@@ -14,3 +14,5 @@ $router->get('logout', 'UserController@logOut');
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
 
+//faq
+$router->get('faq', 'GeneralController@listFaq');

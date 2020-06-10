@@ -22,7 +22,7 @@ class GeneralController extends Controller
     }
 
     public function listTattoo() {
-        return view('faq');#'list.appointments', compact('appointments'));
+        return view();#'list.appointments', compact('appointments'));
     }
 
     public function viewTattoo() {
@@ -38,7 +38,9 @@ class GeneralController extends Controller
     }
 
     public function listFaq() {
-        return view('');#'list.appointments', compact('appointments'));
+        $faq = new FAQ();
+        $faq = $faq->listFaq();
+        return view('faq', compact('faq'));#'list.appointments', compact('appointments'));
     }
 
     public function viewFaq() {
