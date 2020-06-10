@@ -11,6 +11,12 @@
         <li> <a href="/list_tattoos"> <i class="far fa-image site-nav--icon"></i> Galeria  </a></li>
         <li> <a href="/new_appointment"> <i class="fas fa-calendar-check site-nav--icon"></i> Solicitar turno </a></li>
         <li> <a href="/faq"><i class=" far fa-question-circle site-nav--icon"></i> FAQs </a></li>
-        <!--<li> <a href="/login"><i class="fas fa-user site-nav--icon"></i> login </a></li>-->
+        {% if session.id_user %}
+            <li> <a href="/logout"><i class="fas fa-user site-nav--icon"></i> Logout </a></li>
+            {{ session.id_user }}
+        {% else %}
+            <li> <a href="/login"><i class="fas fa-user site-nav--icon"></i> login </a></li>
+            {{ session.id_user }}
+        {% endif %}
     </ul>
 </nav>

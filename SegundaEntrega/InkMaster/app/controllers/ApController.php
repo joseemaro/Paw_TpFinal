@@ -13,48 +13,36 @@ class ApController extends Controller
 
     public  function newAp() {
         session_start();
-        $session = $this->session();
+        $session = $_SESSION;
+        //buscar si el usuario es menor de 18 años, en tal caso que descargue el formulario
         return view('new.appointment', compact('session'));
     }
 
     public function saveAp ()
     {
-        $appointment = new Appointment();
-        $params = array(
-            "artist" => $_POST["artist"],
-            "date" => $_POST["date"],
-            "hour" => $_POST["hour"],
-            "reference_image" => $_FILES,
-        );
-        $medical_record = array(
-            "quimioterapia" => $_POST["artist"],
-            "date" => $_POST["date"],
-            "hour" => $_POST["hour"],
-            "reference_image" => $_FILES,
-            "talla_calzado" => $_POST["talla_calzado"],
-            "altura" => $_POST["altura"],
-            "fecha_nacimiento" => $_POST["fecha_nacimiento"],
-            "color_pelo" => $_POST["color_pelo"],
-            "fecha_turno" => $_POST["fecha_turno"],
-            "horario_turno" => $_POST["horario_turno"],
-            "diagnostico" => $_FILES,
-        );
-        $boolean = $appointment->validarImagen($params["diagnostico"]);
-        if ($boolean) {
-            $respuesta = $appointment->validarInsert($params);
-            $errores = array_shift($respuesta);
-            if ($errores == "Correcto") {
-                $ap = $appointment->findturno();
-                $diagnostico64 = base64_encode($ap["diagnostico"]);
-                return view('views.appointment', compact('ap', 'diagnostico64')) ;
-            }
-            elseif ($errores == "Incorrecto") {
-                return view('error.views', compact('respuesta'));
-            }
+        $parameters = array();
+        $parameters["local"] = "local"; #recuperar los datos del local
+        $parameters["user"] = $_SESSION["id_user"];
+        $parameters["date"] = $_POST["date"];
+        $parameters["hour"] = $_POST["hour"];
+        $parameters["artist"] = $_POST["artist"];
+
+        $reference_image["reference_image"] = $_FILES;
+
+        $medical_record = $this->medical_reference();
+        var_dump($medical_record);
+
+        $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
+
+        session_start();
+        $session = $_SESSION;
+
+        if ($array["status"]) {     #si salio bien la validacion
+            $parameters = $array;
+            return view('view.appointment', compact('session', 'parameters'));
         } else {
-            $diagnostico = array_pop($params);
-            $ap = $params;
-            return view('error.image', compact('ap'));
+            $errors = $array;
+            return view('new.appointment', compact('session', 'errors'));
         }
     }
 
@@ -131,5 +119,45 @@ class ApController extends Controller
             $session = false;
         }
         return $session;
+    }
+
+    public function medical_reference() {
+        $medical_record = array();
+        if (isset($_POST["chemotherapy"])) {
+            $medical_record["chemotherapy"] = true;
+        }
+        if (isset($_POST["anemia"])) {
+            $medical_record["anemia"] = true;
+        }
+        if (isset($_POST["leukemia"])) {
+            $medical_record["leukemia"] = true;
+        }
+        if (isset($_POST["thrombocytopenia"])) {
+            $medical_record["thrombocytopenia"] = true;
+        }
+        if (isset($_POST["acne"])) {
+            $medical_record["acne"] = true;
+        }
+        if (isset($_POST["allergy"])) {
+            $medical_record["allergy"] = true;
+            $medical_record["allergy-txt"] = $_POST["allergy-txt"];
+        }
+        if (isset($_POST["G6PD_deficiency"])) {
+            $medical_record["G6PD_deficiency"] = true;
+        }
+        if (isset($_POST["diabetes"])) {
+            $medical_record["diabetes"] = true;
+        }
+        if (isset($_POST["von_willebrand"])) {
+            $medical_record["von_willebrand"] = true;
+        }
+        if (isset($_POST["hereditary_spherocytosis"])) {
+            $medical_record["hereditary_spherocytosis"] = true;
+        }
+        if (isset($_POST["hemophilia"])) {
+            $medical_record["hemophilia"] = true;
+        }
+
+        return $medical_record;
     }
 }
