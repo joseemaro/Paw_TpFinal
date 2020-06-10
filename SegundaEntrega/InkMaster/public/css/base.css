@@ -1,29 +1,48 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
 * {
     box-sizing: border-box;
 }
 
 body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content 1fr max-content;
+    grid-template-areas:
+            "encabezado encabezado"
+            "navegador navegador"
+            "principal autor"
+            "pie pie";
     background-color: #F5CAC3; /*color Baby Pink*/
     font-size: 100%;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    /*-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;*/
+    max-width: 2000px;
+    min-height: 100vh;
+    margin: 0 auto;
 }
 
-header{
-    background-color: #F7EDE2; /*Color Linen*/
-    padding: 1em 0; /*Arriba y abajo 1em de padding, nada a los costados*/
-    width: 100%;
-    position: relative;
+nav {
+    grid-area: navegador;
 }
 
 main {
-    float: left;
-    width: 100%;
+    grid-area: principal;
+}
+
+header{
+    grid-area: encabezado;
+    background-color: #F7EDE2; /*Color Linen*/
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
 }
 
 footer {
+    grid-area: pie;
     background-color: #84A59D;
-    float: left;
-    width: 100%;
-    margin-bottom: 0.2em;
+    margin: 0;
 }
 
 /*Container maneja los elementos que se colocan en el header*/
@@ -159,10 +178,8 @@ header::after{
 
 .logo{
     float: left;
-    max-width: 33vw;
-    max-height: 30vh;
-    min-width: 15vw;
-    min-height: 15vh;
+    width: 20%;
+    height: 20%;
 }
 
 .social-network {

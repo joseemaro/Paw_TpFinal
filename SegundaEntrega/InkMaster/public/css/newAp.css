@@ -1,22 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 * {
     padding: 0 0;
     margin: 0 0;
-    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
 }
 
 h1 {
     text-align: center;
-}
-
-body {
-    background-color: #F5CAC3;
-}
-
-header {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #f7ede2;
 }
 
 #wrapper {
