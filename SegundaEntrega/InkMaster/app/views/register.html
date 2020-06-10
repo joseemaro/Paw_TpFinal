@@ -4,6 +4,11 @@
     Register
 {% endblock %}
 
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+{% endblock %}
+
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}

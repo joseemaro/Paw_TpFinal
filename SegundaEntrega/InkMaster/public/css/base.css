@@ -1,5 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #F5CAC3; /*color Baby Pink*/
+    font-size: 100%;
 }
 
 header{
@@ -149,8 +154,7 @@ header::after{
 
 .social-network {
     float: right;
-    width: 33vw;
-    height: 30vh;
+    margin-right: 1em;
 }
 
 #icon-fb, #icon-inst, #icon-tw, #icon-yt {
@@ -184,3 +188,10 @@ header::after{
     text-align: center;
     color: rgba(255, 255, 255, .4);
 }*/
+
+footer {
+    background-color: #84A59D;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+}

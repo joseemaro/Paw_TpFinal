@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/login.css">
 {% endblock %}
 
@@ -26,4 +28,8 @@
         <input type="submit" class="submit-btn" value="Iniciar Sesión" />
         <p> Los campos marcados como (*) son obligatorios </p>
     </form>
+{% endblock %}
+
+{% block footer %}
+{{ include('footer.views.html') }}
 {% endblock %}
