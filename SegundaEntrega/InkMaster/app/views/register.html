@@ -12,7 +12,7 @@
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}
-    {{ include('session.views.html') }}
+    <!--{{ include('session.views.html') }}-->
 {% endblock %}
 
 {% block main %}
@@ -58,4 +58,8 @@
     <p> Los campos marcados como (*) son obligatorios </p><br>
 
     <a href="/login">Iniciar Sesión</a>
+{% endblock %}
+
+{% block footer %}
+{{ include('footer.views.html') }}
 {% endblock %}

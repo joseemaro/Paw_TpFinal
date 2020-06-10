@@ -13,7 +13,7 @@
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}
-    {{ include('session.views.html') }}
+    <!--{{ include('session.views.html') }}-->
 {% endblock %}
 
 {% block main %}
@@ -31,7 +31,7 @@
                 </label>
                 <br>
                 <label><b>Fecha de turno:(*)</b><input type="date" name="date" required></label><br>
-                <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="time" required></label><br>
+                <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label><br>
                 <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
 
                 <label for=""><input name="chemotherapy" type="checkbox" />Quimioterapia</label>
@@ -50,15 +50,15 @@
                     <input name="allergy-txt" type="text" />
                 </label>
                 <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Deficiencia de G6PD</label>
+                <label for=""></label><input name="G6PD_deficiency" type="checkbox" />Deficiencia de G6PD</label>
                 <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Diabetes</label>
+                <label for=""></label><input name="diabetes" type="checkbox" />Diabetes</label>
                 <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Von Willebrand</label>
+                <label for=""></label><input name="von_willebrand" type="checkbox" />Von Willebrand</label>
                 <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Esferocitosis hereditaria</label>
+                <label for=""></label><input name="hereditary_spherocytosis" type="checkbox" />Esferocitosis hereditaria</label>
                 <br />
-                <label for=""></label><input name="cbiinternet" type="checkbox" />Hemofilia</label>
+                <label for=""></label><input name="hemophilia" type="checkbox" />Hemofilia</label>
 
                 <div class="btn">
                     <input class="boton-personalizado" type="reset" value="Limpiar" />

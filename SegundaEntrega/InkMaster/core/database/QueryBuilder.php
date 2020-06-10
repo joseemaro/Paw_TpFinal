@@ -34,6 +34,7 @@ class QueryBuilder
     public function insert($table, $parameters)
     {
         $parameters = $this->cleanParameterName($parameters);
+        var_dump($parameters);
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
             $table,
@@ -79,7 +80,7 @@ class QueryBuilder
      * @param string $param2
      * @return integer
      */
-    public function find($sql, $param1, $param2) {
+    public function query($sql, $param1, $param2) {
         //var_dump($sql);
         try {
             $statement = $this->pdo->prepare($sql);

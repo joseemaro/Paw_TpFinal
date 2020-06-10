@@ -49,6 +49,6 @@ class User extends Model
     public function find($id_user, $password) {
         $sql = "select count(*) from $this->table where id_user = :1 and password = :2";
         //return $this->db->findUser($this->table, $id_user, $password);
-        return $this->db->find($sql, $id_user, $password);
+        return $this->db->query($sql, $id_user, $password);
     }
 }
