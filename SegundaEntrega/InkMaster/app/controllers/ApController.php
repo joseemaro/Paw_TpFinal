@@ -6,6 +6,10 @@ use App\models\Appointment;
 
 class ApController extends Controller
 {
+    public function __construct()
+    {
+        $this->appointment = new Appointment();
+    }
 
     public  function newAp() {
         session_start();
@@ -17,10 +21,16 @@ class ApController extends Controller
     {
         $appointment = new Appointment();
         $params = array(
-            "nombre" => $_POST["nombre"],
-            "email" => $_POST["email"],
-            "telefono" => $_POST["telefono"],
-            "edad" => $_POST["edad"],
+            "artist" => $_POST["artist"],
+            "date" => $_POST["date"],
+            "hour" => $_POST["hour"],
+            "reference_image" => $_FILES,
+        );
+        $medical_record = array(
+            "quimioterapia" => $_POST["artist"],
+            "date" => $_POST["date"],
+            "hour" => $_POST["hour"],
+            "reference_image" => $_FILES,
             "talla_calzado" => $_POST["talla_calzado"],
             "altura" => $_POST["altura"],
             "fecha_nacimiento" => $_POST["fecha_nacimiento"],

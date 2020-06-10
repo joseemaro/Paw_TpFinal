@@ -6,7 +6,10 @@
 
 {% block head %}
     {{ parent() }}
+<<<<<<< HEAD
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+=======
+>>>>>>> master
     <link rel="stylesheet" type="text/css" href="/public/css/login.css">
 {% endblock %}
 
@@ -24,9 +27,9 @@
         <label><b>Contraseña: </b></label><br>
         <input type="text" name="password" placeholder="Ingrese su contraseña" required><br>
 
-        <a href="/register">Registrate <br></a>
         <input type="submit" class="submit-btn" value="Iniciar Sesión" />
-        <p> Los campos marcados como (*) son obligatorios </p>
+
+        <a href="/register">Registrate <br></a>
     </form>
 {% endblock %}
 
