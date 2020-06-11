@@ -1,28 +1,18 @@
-{% extends "base.html" %}
-
-{% block title %} New Appointment {% endblock %}
-
-{% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
-{% endblock %}
-
-{% block header %}
-    {{ include('header.views.html') }}
-    {{ include('nav.views.html') }}
-    <!--{{ include('session.views.html') }}-->
-{% endblock %}
-
-{% block main %}
-    <div id="wrapper">
-        <article id="column1">
-            {% if not session.id_user %}
-                <p>Se necesita estar logueado para poder registrar un turno</p>
-            {% endif %}
-            <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
-                <h1>Registro de Turno</h1>
-                <label>
+{% extends "base.html" %} {% block title %} New Appointment {% endblock %} {% block head %} {{ parent() }}
+<meta name="keywords" content="PAW,2020,Templates,PHP">
+<link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+<script type="text/javascript" src="/public/js/newUser.js"></script>
+{% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }}
+<!--{{ include('session.views.html') }}-->
+{% endblock %} {% block main %}
+<div id="wrapper">
+    <article id="column1">
+        {% if not session.id_user %}
+        <p>Se necesita estar logueado para poder registrar un turno</p>
+        {% endif %}
+        <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
+            <h1>Registro de Turno</h1>
+            <label>
                     <b>Artista: </b>
                     <select name="id_artist">
                         {% for artist in artists %}
@@ -36,46 +26,22 @@
             <label><b>Horario de turno(hh:min):(*)</b> <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label><br>
             <label><b>Imagenes de referencia </b><input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label><br>
 
-            <label class="enfermedades"><b class="enfermedades">Selecciona tus enfermedades/tratamientos:</b></label>
-            <label><input name="chemotherapy" type="checkbox" />Quimioterapia</label>
-            <br />
-            <label><input name="anemia" type="checkbox" />Anemia</label>
-            <br />
-            <label></label><input name="leukemia" type="checkbox" />Leucemia</label>
-            <br />
-            <label></label><input name="thrombocytopenia" type="checkbox" />Trombocitopenia</label>
-            <br />
-            <label></label><input name="acne" type="checkbox" />Acne</label>
-            <br />
-            <label></label>
-                <input name="allergy" type="checkbox" /> Alergia
-                <input name="allergy-txt" type="text" />
-            </label>
-            <br />
-            <label></label><input name="G6PD_deficiency" type="checkbox" />Deficiencia de G6PD</label>
-            <br />
-            <label></label><input name="diabetes" type="checkbox" />Diabetes</label>
-            <br />
-            <label></label><input name="von_willebrand" type="checkbox" />Von Willebrand</label>
-            <br />
-            <label></label><input name="hereditary_spherocytosis" type="checkbox" />Esferocitosis hereditaria</label>
-            <br />
-            <label></label><input name="hemophilia" type="checkbox" />Hemofilia</label>
+            <section class="list-enf">
+                <label for="chec">Posee enfermedades?</label>
+                <input name="chec" type="checkbox" id="chec" onChange="comprobar(this);" />
+                <textarea class="enf" name="text" id="boton" style="display:none"></textarea>
+            </section>
+            <section class="terminos">
+                <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="http://">Acepta terminos y condiciones? <br></a></label>
+            </section>
 
             <div class="btn">
-                <input class="boton-personalizado" type="reset" value="Limpiar" />
-                {% if not session.id_user %}
-                    <input class="boton-personalizado" type="submit" value="Enviar" disabled/>
-                {% else %}
-                    <input class="boton-personalizado" type="submit" value="Enviar" />
-                {% endif %}
+                <input class="boton-personalizado" type="reset" value="Limpiar" /> {% if not session.id_user %}
+                <input class="boton-personalizado" type="submit" value="Enviar" disabled/> {% else %}
+                <input class="boton-personalizado" type="submit" value="Enviar" /> {% endif %}
             </div>
             <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
         </form>
     </article>
 </div>
-{% endblock %}
-
-{% block footer %}
-    {{ include('footer.views.html') }}
-{% endblock %}
+{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}

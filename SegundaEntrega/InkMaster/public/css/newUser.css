@@ -1,6 +1,6 @@
 * {
-    padding: 0;
-    margin: 0;
+    padding: 0 0;
+    margin: 0 0;
 }
 
 h1 {
@@ -14,7 +14,7 @@ h1 {
 }
 
 #wrapper {
-    width: 80%;
+    width: 70%;
     margin: auto auto;
     /*background-color: #f7ede2;*/
 }
@@ -33,33 +33,40 @@ article {
     /*background-color: #f7ede2;*/
 }
 
+a {
+    margin-left: 20%;
+    color: black;
+}
+
 b {
     display: inline-block;
-    width: 50%;
-    padding-top: 5%;
+    width: 30%;
+    padding-top: 1%;
     font-weight: normal;
 }
 
 input {
     display: inline-block;
-    width: 30%;
-    margin-top: 5%;
+    width: 25%;
+    margin-top: 2%;
 }
 
 input[type=submit] {
+    text-align: center;
     margin-top: 5%;
-    margin-left: 10%;
-}
-
-input[type=reset] {
-    margin-top: 5%;
-    margin-left: 15%;
-    background-color: #F28482;
+    margin-left: 20%;
+    margin-right: auto;
 }
 
 input[type=checkbox] {
-    margin-top: 0%;
-    background-color: #F28482;
+    width: 5%;
+    text-align: left;
+}
+
+.enf {
+    width: 70%;
+    margin-left: 20%;
+    height: 20%;
 }
 
 .footer-form {
@@ -67,13 +74,24 @@ input[type=checkbox] {
     text-align: center;
 }
 
+.list-enf {
+    margin-top: 2%;
+    padding-top: 2%;
+}
+
 .enfermedades {
     width: 100%;
 }
 
 label {
-    margin-left: 10%;
+    margin-left: 20%;
     margin-right: auto;
+}
+
+.terminos {
+    margin-left: 0%;
+    padding-top: 0%;
+    margin-top: 5%;
 }
 
 form {
@@ -84,6 +102,7 @@ form {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
+    margin-bottom: 1%;
     border-radius: 5px;
 }
 
@@ -95,27 +114,4 @@ form {
     border-width: 3px;
     border-style: solid;
     border-radius: 35px;
-}
-
-.terminos {
-    margin-left: 0%;
-    padding-top: 0%;
-    margin-top: 5%;
-}
-
-.enf {
-    width: 70%;
-    margin-left: 10%;
-    height: 20%;
-}
-
-.list-enf {
-    margin-top: 2%;
-    padding-top: 2%;
-}
-
-input[type=checkbox] {
-    width: 5%;
-    text-align: left;
-    color: black;
 }
