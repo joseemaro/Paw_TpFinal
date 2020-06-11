@@ -3,117 +3,103 @@
     margin: 0;
 }
 
+form {
+    border: 1px solid var(--color-logo);
+    width: 90%; /*Mobile first*/
+    text-align: center;
+    background-color: #FBF5EF;
+    border-radius: 0.3125em;
+    padding: 1em;
+    margin: 1em auto;
+    font-size: 1em;
+}
+
 h1 {
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
-    padding-left: 1em;
-    font-size: larger;
+    text-align: left;
     font-weight: bold;
-    text-decoration: underline;
-}
-
-#wrapper {
-    width: 80%;
-    margin: auto auto;
-}
-
-article {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    float: left;
-    height: 100%;
-    padding: 2%;
-}
-
-#column1 {
-    width: 100%;
-}
-
-b {
-    display: inline-block;
-    width: 50%;
-    padding-top: 5%;
-    font-weight: normal;
-}
-
-input {
-    display: inline-block;
-    width: 30%;
-    margin-top: 5%;
-}
-
-input[type=submit] {
-    margin-top: 5%;
-    margin-left: 10%;
-}
-
-input[type=reset] {
-    margin-top: 5%;
-    margin-left: 15%;
-    background-color: rgba(0, 0, 0, .4);
-}
-
-input[type=checkbox] {
-    margin-top: 0%;
-    background-color: rgba(0, 0, 0, .4);
-}
-
-.footer-form {
-    margin-top: 5%;
-    text-align: center;
-}
-
-.enfermedades {
-    width: 100%;
+    font-size: 1.5em;
+    color: #575766;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
 }
 
 label {
-    margin-left: 10%;
-    margin-right: auto;
+    display: block;
+    margin: 1em auto;
 }
 
-form {
-    width: 50%;
-    height: 100%;
-    background-color: #fbf5ef;
+input[type=date],
+input[type=time],
+select,
+textarea {
+    outline: none;
+    box-shadow: none;
+    display:block;
+    height: 3em;
     border: 1px solid var(--color-logo);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    border-radius: 5px;
+    width: 80%;
+    margin: 0.5em auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+input[type=file] {
+    outline: none;
+    box-shadow: none;
+    display:block;
+    height: 3em;
+    width: 80%;
+    margin: 0.5em auto;
+}
+
+.list-enf label {
+    width: 100%;
+    margin: 0.5em auto;
+    display: inline;
+}
+
+.list-enf input[type=checkbox] {
+    display: inline;
+}
+
+@media screen and (min-width:1000px) {
+
+    form {
+        width: 40%;
+    }
+}
+
+.footer-form {
+    border-top: 1px dashed #A31D21;
+    margin-top: 2em;
+    padding: 1em;
+    text-align: center;
+}
+
+input[type=submit] {
+    margin: 1em auto;
+    width: 40%;
+}
+
+input[type=reset] {
+    margin: 1em auto;
+    width: 40%;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 .boton-personalizado {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 0.3125em 0;
     background-color: rgba(0, 0, 0, .4);
     border-color: #d8d8d8;
     border-width: 3px;
     border-style: solid;
-    border-radius: 35px;
-}
-
-.terminos {
-    margin-left: 0%;
-    padding-top: 0%;
-    margin-top: 5%;
+    border-radius: 2.2em;
 }
 
 .enf {
-    width: 70%;
-    margin-left: 10%;
-    height: 20%;
+    display:none;
 }
 
-.list-enf {
-    margin-top: 2%;
-    padding-top: 2%;
-}
 
-input[type=checkbox] {
-    width: 5%;
-    text-align: left;
-    color: black;
-}
+
