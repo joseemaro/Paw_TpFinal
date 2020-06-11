@@ -16,4 +16,4 @@ $router->get('internal_error', 'ErrorController@internal_error');
 
 //faq
 $router->get('faq', 'GeneralController@listFaq');
-$router->get('faq.view/{id_faq}', 'GeneralController@viewFaq');
+$router->get('faq.view/{id_faq}', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler

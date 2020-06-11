@@ -43,6 +43,8 @@ class GeneralController extends Controller
         return view('faq', compact('faq'));#'list.appointments', compact('appointments'));
     }
 
+    //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
+    //esa vista va a mostrar la descripcion de esa pregunta
     public function viewFaq() {
         return view();#'list.appointments', compact('appointments'));
     }
