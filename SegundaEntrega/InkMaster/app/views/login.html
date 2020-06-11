@@ -18,15 +18,16 @@
 
 {% block main %}
     <form class="general-form" action="/login2" method="post" enctype="multipart/form-data">
-        <h2>Iniciar Sesión</h2>
-        <label><b>Usuario: </b></label><br>
-        <input type="text" name="id_user" placeholder="Ingrese su usuario" required><br>
-        <label><b>Contraseña: </b></label><br>
-        <input type="text" name="password" placeholder="Ingrese su contraseña" required><br>
+        <h1>Ingresar</h1>
+        <label>Usuario:</label>
+        <input type="text" name="id_user" placeholder="Ingrese su usuario" required>
 
-        <input type="submit" class="submit-btn" value="Iniciar Sesión" />
+        <label>Contraseña:</label>
+        <input type="password" name="password" placeholder="Ingrese su contraseña" required>
 
-        <a href="/register">Registrate <br></a>
+        <button type="submit" class="submit-btn"> Iniciar sesión </button>
+        <button type="submit" class="submit-btn"> <a href="/register">Registrate</a></button>
+
     </form>
 {% endblock %}
 

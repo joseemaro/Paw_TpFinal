@@ -18,6 +18,7 @@ body {
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     /*-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;*/
+    width: 100%;
     max-width: 2000px;
     min-height: 100vh;
     margin: 0 auto;
@@ -42,6 +43,7 @@ footer {
     grid-area: pie;
     background-color: #84A59D;
     margin: 0;
+    width: 100%;
 }
 
 header::after{
@@ -53,13 +55,13 @@ header::after{
 /*Nav principal está pensado Mobile first*/
 .site-nav{
     top:100%;
-    right:0;
+    left:0;
     position: absolute;
     background-color: #84A59D; /*Morning Blue*/
     /* Animación para el menú */
-    clip-path: circle(0px at top right);
+    clip-path: circle(0px at top left);
     transition: clip-path ease-in-out 700ms;
-
+    width: 70%;
 }
 
 /*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/
@@ -105,7 +107,7 @@ li > ul {
 /*el símbolo de menu desplegable*/
 .menu_toggle{
     position: absolute;
-    right: 0.5em;
+    left: 0.5em;
     padding: 0.5em;
 }
 
@@ -143,13 +145,13 @@ li > ul {
 }
 
 .logo{
-    float: left;
+    float: right;
     max-width: 50%;
     min-height: 100%;
 }
 
 .social-network {
-    float: left;
+    float: right;
     max-width: 30%;
     min-height: 100%;
 }
@@ -163,11 +165,6 @@ li > ul {
 
 /*Versión del nav escritorio*/
 @media screen and (min-width:700px){
-    header{
-        width: 80%;
-        margin: 0 auto;
-    }
-
     /*Esto hace que desaparezca la "hamburguesa"*/
     .menu_toggle{
         display: none;
@@ -212,7 +209,9 @@ li > ul {
     }
 
     .social-network {
-        float: right;
+        float: left;
+        margin-top: 1em;
+        margin-left: 1em;
     }
 
     #icon-fb, #icon-inst, #icon-tw, #icon-yt {
@@ -220,3 +219,22 @@ li > ul {
     }
 
 }
+
+/*Para pantallas muy grandes*/
+@media screen and (min-width:2000px) {
+    header {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    main {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    footer {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
