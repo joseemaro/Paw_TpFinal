@@ -2,6 +2,7 @@
 
 * {
     box-sizing: border-box;
+    --color-logo: #A31D21; /*Auburn*/
 }
 
 body {
@@ -13,7 +14,7 @@ body {
             "navegador navegador"
             "principal autor"
             "pie pie";
-    background-color: #F5CAC3; /*color Baby Pink*/
+    background-color: #FFFFFF;
     font-size: 100%;
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
     /*-webkit-font-smoothing: antialiased;
@@ -34,14 +35,14 @@ main {
 
 header{
     grid-area: encabezado;
-    background-color: #F7EDE2; /*Color Linen*/
+    background-color: #464A4B; /* Davys grey*/
     width: 100%;
     position: relative;
 }
 
 footer {
     grid-area: pie;
-    background-color: #84A59D;
+    background-color: var(--color-logo);
     margin: 0;
     width: 100%;
 }
@@ -57,7 +58,7 @@ header::after{
     top:100%;
     left:0;
     position: absolute;
-    background-color: #84A59D; /*Morning Blue*/
+    background-color: var(--color-logo);
     /* Animación para el menú */
     clip-path: circle(0px at top left);
     transition: clip-path ease-in-out 700ms;
@@ -160,7 +161,7 @@ li > ul {
     float: left;
     font-size: 1.5em;
     width: 2em;
-    color: rgba(0, 0, 0, .4);
+    color: rgba(255, 255, 255, .4);
 }
 
 /*Versión del nav escritorio*/
@@ -200,7 +201,7 @@ li > ul {
         flex-flow: column;
         position: absolute;
         overflow: hidden;
-        background-color: #84A59D;
+        background-color: var(--color-logo);
         margin-top: 0.5rem;
     }
 

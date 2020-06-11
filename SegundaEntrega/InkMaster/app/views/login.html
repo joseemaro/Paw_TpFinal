@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block main %}
-    <form class="general-form" action="/login2" method="post" enctype="multipart/form-data">
+    <form action="/login2" method="post" enctype="multipart/form-data">
         <h1>Ingresar</h1>
         <label>Usuario:</label>
         <input type="text" name="id_user" placeholder="Ingrese su usuario" required>
@@ -25,8 +25,10 @@
         <label>Contraseña:</label>
         <input type="password" name="password" placeholder="Ingrese su contraseña" required>
 
-        <button type="submit" class="submit-btn"> Iniciar sesión </button>
-        <a class="submit-btn" href="/register">Registrate</a>
+        <div id="button-form">
+            <button type="submit" class="submit-btn"> Iniciar sesión </button>
+            <a class="submit-btn" href="/register">Registrate</a>
+        </div>
     </form>
 {% endblock %}
 

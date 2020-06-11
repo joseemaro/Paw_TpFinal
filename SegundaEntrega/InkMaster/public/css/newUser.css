@@ -98,7 +98,7 @@ form {
     width: 50%;
     height: 100%;
     background-color: #fbf5ef;
-    border: #84A59D 1px solid;
+    border: 1px solid var(--color-logo);
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;

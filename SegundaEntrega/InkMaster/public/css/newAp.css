@@ -16,7 +16,6 @@ h1 {
 #wrapper {
     width: 80%;
     margin: auto auto;
-    /*background-color: #f7ede2;*/
 }
 
 article {
@@ -30,7 +29,6 @@ article {
 
 #column1 {
     width: 100%;
-    /*background-color: #f7ede2;*/
 }
 
 b {
@@ -54,12 +52,12 @@ input[type=submit] {
 input[type=reset] {
     margin-top: 5%;
     margin-left: 15%;
-    background-color: #F28482;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 input[type=checkbox] {
     margin-top: 0%;
-    background-color: #F28482;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 .footer-form {
@@ -80,7 +78,7 @@ form {
     width: 50%;
     height: 100%;
     background-color: #fbf5ef;
-    border: #84A59D 1px solid;
+    border: 1px solid var(--color-logo);
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
@@ -90,7 +88,7 @@ form {
 .boton-personalizado {
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: #84A59D;
+    background-color: rgba(0, 0, 0, .4);
     border-color: #d8d8d8;
     border-width: 3px;
     border-style: solid;
