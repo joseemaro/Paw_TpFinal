@@ -46,13 +46,12 @@ class User extends Model
 
         return "roto pero tranquilo que está hardcodeado";
     }
-    public function find($id_user, $password) {
-        $sql = "select count(*) from $this->table where id_user = :1 and password = :2";
-        //return $this->db->findUser($this->table, $id_user, $password);
-        return $this->db->query($sql, $id_user, $password);
+
+    public function autentication($id_user, $password) {
+        return $this->db->autentication($id_user, $password);
     }
 
     public function listArtist() {
-        return $this->db->findArtist($this->table);
+        return $this->db->selectArtists($this->table);
     }
 }

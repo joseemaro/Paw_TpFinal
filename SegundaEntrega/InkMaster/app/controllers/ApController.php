@@ -10,44 +10,48 @@ class ApController extends Controller
     public function __construct()
     {
         $this->appointment = new Appointment();
+        $this->artists = new User();
     }
 
     public  function newAp() {
         session_start();
         $session = $_SESSION;
-        //buscar si el usuario es menor de 18 años, en tal caso que descargue el formulario
-
         //recupero artista de bd
-        $artistas = new User();
-        $artistas = $artistas->listArtist();
-        return view('new.appointment', compact('session','artistas'));
+        $artists = $this->artists->listArtist();
+
+        //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
+        return view('new.appointment', compact('session','artists'));
     }
 
     public function saveAp ()
     {
+        session_start();
+        $session = $_SESSION;
+
         $parameters = array();
-        $parameters["local"] = "local"; #recuperar los datos del local
+        $parameters["local"] = "1"; #recuperar los datos del local
         $parameters["user"] = $_SESSION["id_user"];
         $parameters["date"] = $_POST["date"];
         $parameters["hour"] = $_POST["hour"];
-        $parameters["artist"] = $_POST["artist"];
+        $parameters["artist"] = $_POST["id_artist"];
+
+        $artists = $this->artists->listArtist();
 
         $reference_image["reference_image"] = $_FILES;
 
         $medical_record = $this->medical_reference();
+        echo "medical_reference<br>";
         var_dump($medical_record);
+        echo "<br>";
 
         $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
-
-        session_start();
-        $session = $_SESSION;
 
         if ($array["status"]) {     #si salio bien la validacion
             $parameters = $array;
             return view('view.appointment', compact('session', 'parameters'));
         } else {
             $errors = $array;
-            return view('new.appointment', compact('session', 'errors'));
+            return view('view.appointment', compact('session', 'errors', 'artists'));
         }
     }
 
@@ -58,10 +62,10 @@ class ApController extends Controller
     }
 
     public function viewAp() {
-        $appointment = new Appointment();
+        /*$appointment = new Appointment();
         $ap = $appointment->findid($_GET['id']);
-        $diagnostico64 = base64_encode($ap['diagnostico']);
-        return view('views.appointment', compact('ap', 'diagnostico64'));
+        $diagnostico64 = base64_encode($ap['diagnostico']);*/
+        return view('view.appointment');#, compact('ap', 'diagnostico64'));
     }
 
     public function editAp() {
