@@ -1,6 +1,17 @@
-{% extends "base.html" %} {% block title %} FAQ {% endblock %} {% block head %} {{ parent() }}
-<meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/faq.css"> {% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }} {% endblock %} {% block main %}
+{% extends "base.html" %}
+{% block title %}
+    FAQ {% endblock %}
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/faq.css">
+{% endblock %}
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
 <section id="wrapper">
     <h1>Preguntas Frecuentes</h1>
     <section>
@@ -17,4 +28,7 @@
         </article>
     </section>
 </section>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
+{% endblock %}
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

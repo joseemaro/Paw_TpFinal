@@ -34,8 +34,7 @@ main {
 header{
     grid-area: encabezado;
     background-color: #F7EDE2; /*Color Linen*/
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     position: relative;
 }
 
@@ -43,11 +42,6 @@ footer {
     grid-area: pie;
     background-color: #84A59D;
     margin: 0;
-}
-
-/*Container maneja los elementos que se colocan en el header*/
-.container {
-    position: relative;
 }
 
 header::after{
@@ -101,6 +95,13 @@ header::after{
     color: #464655;
 }
 
+/*Esto que estoy haciendo acá es para desplegable de artistas*/
+li > ul {
+    display: none;
+}
+
+/*hasta acá*/
+
 /*el símbolo de menu desplegable*/
 .menu_toggle{
     position: absolute;
@@ -141,8 +142,31 @@ header::after{
     transform: translateY(3px);
 }
 
+.logo{
+    float: left;
+    max-width: 50%;
+    min-height: 100%;
+}
+
+.social-network {
+    float: left;
+    max-width: 30%;
+    min-height: 100%;
+}
+
+#icon-fb, #icon-inst, #icon-tw, #icon-yt {
+    float: left;
+    font-size: 1.5em;
+    width: 2em;
+    color: rgba(0, 0, 0, .4);
+}
+
 /*Versión del nav escritorio*/
 @media screen and (min-width:700px){
+    header{
+        width: 80%;
+        margin: 0 auto;
+    }
 
     /*Esto hace que desaparezca la "hamburguesa"*/
     .menu_toggle{
@@ -174,47 +198,25 @@ header::after{
         background: transparent;
     }
 
-}
+    nav li:hover ul {
+        display: flex;
+        flex-flow: column;
+        position: absolute;
+        overflow: hidden;
+        background-color: #84A59D;
+        margin-top: 0.5rem;
+    }
 
-.logo{
-    float: left;
-    width: 20%;
-    height: 20%;
-}
+    nav li:hover ul li {
+        border-bottom: 1px solid #575766;
+    }
 
-.social-network {
-    float: right;
-    margin-right: 1em;
-}
+    .social-network {
+        float: right;
+    }
 
-#icon-fb, #icon-inst, #icon-tw, #icon-yt {
-    font-size: 2.5em;
-    width: 2em;
-    color: rgba(0, 0, 0, .4);
-}
-/*
-#icon-fb {
-    right: 0;
-}
+    #icon-fb, #icon-inst, #icon-tw, #icon-yt {
+        font-size: 2.5em;
+    }
 
-#icon-inst {
-    right: 2em;
 }
-
-#icon-tw {
-    right: 4em;
-}
-
-#icon-yt {
-    right: 6em;
-}*/
-
-/*
-.site-nav--icon{
-    display: inline-block;
-    font-size: 1.5em;
-    margin-right: 1em;
-    width: 1.1em;
-    text-align: center;
-    color: rgba(255, 255, 255, .4);
-}*/

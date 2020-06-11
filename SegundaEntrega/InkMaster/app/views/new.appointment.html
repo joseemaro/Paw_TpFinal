@@ -1,8 +1,21 @@
-{% extends "base.html" %} {% block title %} New Appointment {% endblock %} {% block head %} {{ parent() }}
-<meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/newAp.css"> {% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }}
-<!--{{ include('session.views.html') }}-->
-{% endblock %} {% block main %}
+{% extends "base.html" %}
+{% block title %}
+    New Appointment
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
 <div id="wrapper">
     <article id="column1">
         <form class="general-form" action="/save_appointment" method="post" enctype="multipart/form-data">
@@ -57,4 +70,8 @@
         </form>
     </article>
 </div>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}
