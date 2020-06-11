@@ -18,7 +18,6 @@ class ApController extends Controller
         $session = $_SESSION;
         //recupero artista de bd
         $artists = $this->artists->listArtist();
-
         //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
         return view('new.appointment', compact('session','artists'));
     }

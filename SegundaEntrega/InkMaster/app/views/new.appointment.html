@@ -1,64 +1,47 @@
-{% extends "base.html" %}
-{% block title %}
-    New Appointment
-{% endblock %}
+{% extends "base.html" %} {% block title %} New Appointment {% endblock %} {% block head %} {{ parent() }}
+<meta name="keywords" content="PAW,2020,Templates,PHP">
+<link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+<script type="text/javascript" src="/public/js/newUser.js"></script>
+{% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }}
+<!--{{ include('session.views.html') }}-->
+{% endblock %} {% block main %} {% if not session.id_user %}
+<p>Se necesita estar logueado para poder registrar un turno</p>
+{% endif %}
 
-{% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
-    <script type="text/javascript" src="/public/js/newUser.js"></script>
-{% endblock %}
-
-{% block header %}
-    {{ include('header.views.html') }}
-    {{ include('nav.views.html') }}
-    <!--{{ include('session.views.html') }}-->
-{% endblock %}
-
-{% block main %}
-    {% if not session.id_user %}
-        <p>Se necesita estar logueado para poder registrar un turno</p>
-    {% endif %}
-
-    <form action="/save_appointment" method="post" enctype="multipart/form-data">
-        <h1> Solicitud de turno </h1>
-        <label>
+<form action="/save_appointment" method="post" enctype="multipart/form-data">
+    <h1> Solicitud de turno </h1>
+    <label>
             Profesional
             <select name="id_artist">
                 {% for artist in artists %}
                 <!-- artistas recuperados de la base -->
-                <option>{{ artist.id_user }}</option>
+                <option>{{ artist.first_name }}</option>
                 {% endfor %}
             </select>
         </label>
 
-        <label> Fecha: <input type="date" name="date" required></label>
+    <label> Fecha: <input type="date" name="date" required></label>
 
-        <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
+    <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
 
-        <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
+    <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
 
-        <section class="list-enf">
-            <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
-            <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
+    <section class="list-enf">
+        <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
+        <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
 
-            <textarea class="enf" name="text" id="boton"></textarea>
-        </section>
+        <textarea class="enf" name="text" id="boton"></textarea>
+    </section>
 
-        <section>
-            <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="http://">¿Acepta los términos y condiciones? </a></label>
-        </section>
+    <section>
+        <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="/termycond">¿Acepta los términos y condiciones? </a></label>
+    </section>
 
-        <div class="btn">
-            <input class="boton-personalizado" type="reset" value="Limpiar" /> {% if not session.id_user %}
-            <input class="boton-personalizado" type="submit" value="Enviar" disabled/> {% else %}
-            <input class="boton-personalizado" type="submit" value="Enviar" /> {% endif %}
-        </div>
-        <p class="footer-form"> Todos los campos son obligatorios </p>
-    </form>
-{% endblock %}
-
-{% block footer %}
-    {{ include('footer.views.html') }}
-{% endblock %}
+    <div class="btn">
+        <input class="boton-personalizado" type="reset" value="Limpiar" /> {% if not session.id_user %}
+        <input class="boton-personalizado" type="submit" value="Enviar" disabled/> {% else %}
+        <input class="boton-personalizado" type="submit" value="Enviar" /> {% endif %}
+    </div>
+    <p class="footer-form"> Todos los campos son obligatorios </p>
+</form>
+{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}

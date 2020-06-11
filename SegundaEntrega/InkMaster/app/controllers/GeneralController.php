@@ -49,6 +49,10 @@ class GeneralController extends Controller
         return view();#'list.appointments', compact('appointments'));
     }
 
+    public function listTerms(){
+        return view('terminosycondiciones');
+    }
+
     public function session() {
         if (isset($_SESSION["id_user"])) {
             $session = true;
