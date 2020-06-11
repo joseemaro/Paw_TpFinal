@@ -28,11 +28,11 @@ class Appointment extends Model
         return $paremeters;
     }
 
-    public function validate_local($local) { #no se si sirve de algo
+    public function validate_local($id_local) { #no se si sirve de algo
         return true;
     }
 
-    public function validate_user($user) { #no se si sirve de algo
+    public function validate_user($id_user) { #no se si sirve de algo
         return true;
     }
 
@@ -44,7 +44,7 @@ class Appointment extends Model
         return true;
     }
 
-    public function validate_artist($artist) { #verificar que ese turno este disponible para ese tatuador y si hay error subir a $this->errors
+    public function validate_artist($id_artist) { #verificar que ese turno este disponible para ese tatuador y si hay error subir a $this->errors
         return true;
     }
 
@@ -70,6 +70,9 @@ class Appointment extends Model
     public function validateInsert($parameters, $reference_image, $medical_record) {
         $boolean = $this->validateAll($parameters, $reference_image);
         if ($boolean) {
+            echo "<br>";
+            var_dump($parameters);
+            echo "<br>";
             $this->db->insert($this->table, $parameters);
             $this->loadMedicalRecord($medical_record);
 

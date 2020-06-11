@@ -1,34 +1,37 @@
 {% extends "base.html" %}
-{% block title %}
-    FAQ {% endblock %}
+
+{% block title %} FAQ {% endblock %}
+
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/faq.css">
 {% endblock %}
+
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}
 {% endblock %}
 
 {% block main %}
-<section id="wrapper">
-    <h1>Preguntas Frecuentes</h1>
-    <section>
-        <!-- query a la bd, yo cargue ejemplos para probar -->
-        {% for query in faq %}
-        <article id="column1">
-            <p class="preg">{{ query.question }}</p>
-            <p> {{ query.answer }}</p>
-        </article>
-        {% endfor %}
-        <!-- esto queda como ejemplo -->
-        <article id="column1">
-            <p class="preg">pregunta? </p> Lorem iEarum reprehenderit dignissimos n totam mam sint, consectetur, quisquam sed.
-        </article>
+    <section id="wrapper">
+        <h1>Preguntas Frecuentes</h1>
+        <section>
+            <!-- query a la bd, yo cargue ejemplos para probar -->
+            {% for query in faq %}
+            <article id="column1">
+                <p class="preg">{{ query.question }}</p>
+                <p> {{ query.answer }}</p>
+            </article>
+            {% endfor %}
+            <!-- esto queda como ejemplo -->
+            <article id="column1">
+                <p class="preg">pregunta? </p> Lorem iEarum reprehenderit dignissimos n totam mam sint, consectetur, quisquam sed.
+            </article>
+        </section>
     </section>
-</section>
 {% endblock %}
+
 {% block footer %}
     {{ include('footer.views.html') }}
 {% endblock %}

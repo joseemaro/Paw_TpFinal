@@ -61,7 +61,7 @@ class UserController extends Controller
         $session = null;
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
-        $result = $this->user->find($id_user, $password);
+        $result = $this->user->autentication($id_user, $password);
         var_dump($result);
         if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
             var_dump("se encontró el usuario, bienvenido");
