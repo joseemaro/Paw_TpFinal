@@ -42,6 +42,7 @@ textarea {
     margin: 0.5em auto;
     text-align: center;
     overflow: hidden;
+    border-radius: 1em;
 }
 
 input[type=file] {
