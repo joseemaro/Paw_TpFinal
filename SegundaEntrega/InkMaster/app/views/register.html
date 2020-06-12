@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-{% extends "base.html" %} {% block title %} Register {% endblock %} {% block head %} {{ parent() }}
+ {% extends "base.html" %} {% block title %} Register {% endblock %} {% block head %} {{ parent() }}
 <meta name="keywords" content="PAW,2020,Templates,PHP">
 <link rel="stylesheet" type="text/css" href="/public/css/newUser.css">
 <script type="text/javascript" src="/public/js/newUser.js"></script>
@@ -9,206 +8,83 @@
 <p>{{ msg }}</p>
 {% endif %}
 
-<form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
+<form action="/register2" method="post" enctype="multipart/form-data">
     <h1>Registro</h1>
 
-    <label><b>Usuario: (*)</b>
-            <input type="text" name="id_user" 
-            pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$" title="Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres"
-            required>
-        </label><br>
-
-    <label><b>Contraseña: (*)</b>
-            <input id="password" type="password" name="password" 
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Debe contener al menos un numero, una letra minuscula y una mayusucula, por lo menos 8 carateres"
-            required>
-        </label><br>
-    <!--<label><b>Confirme contraseña: </b></label><br><input type="text" name="password" required><br>-->
-
-    <label><b>Nombres: (*)</b>
-            <input type="text" name="first_name" 
-            pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios"
-            required>
-        </label><br>
-
-    <label><b>Apellidos: (*)</b>
-            <input type="text" name="last_name" 
-            pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios"
-            required>
-        </label><br>
-
-    <label><b>Fecha de nacimiento: (*)</b>
-            <input type="date" name="born" 
-            required>
-        </label><br>
-
-    <label><b>Nro de Documento: (*)</b>
-            <input type="text" name="nro_doc" 
-            pattern="^\d{8}(?:[-\s]\d{4})?$" title="El dni debe tener 8 numeros"
-            required>
-        </label><br>
-
-    <label><b>Teléfono: </b>
-            <input type="text" name="phone"
-            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="Solo se admiten numeros"
-            >
-        </label><br>
-
-    <label><b>Dirección: </b>
-            <input type="text" name="direction"
-            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios"
-            >
-        </label><br>
-
-    <label><b>Email: (*)</b>
-            <input type="text" name="email" 
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ej: ejemplo@hotmail.com"
-            required>
-        </label><br>
-
-    <label><b>Foto de perfil: </b>
-            <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
-        </label><br>
-
-    <label><b>Tatuador: </b>
-            <input type="checkbox" name="artist">
-        </label><br>
-
-    <label><b>Local: </b>
-            <input type="text" name="id_local"
-            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios"
-            >
-        </label><br>
-
-    <label><b>Descripción: </b>
-            <textarea name="txt"
-            pattern="^[a-zA-Z0-9 ]{0,100}$" title="Solo se permiten letras, numeros y espacios"
-            ></textarea>
-        </label><br>
-
-    <section>
-        <label for="pathology">Posee patologías?</label>
-        <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
-        <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt" style="display:none"></textarea>
-    </section>
-    <section class="terms">
-        <label><input type="checkbox" name="terms" id="terms"> <a class="terms" href="/term&cond">Acepto terminos y condiciones<br></a></label>
-    </section>
-
-    <a href="/login">Iniciar Sesión</a>
-
-    <input type="submit" value="Registrate" />
-    <p class="footer-form"> Los campos marcados como (*) son obligatorios </p><br>
-</form>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
-=======
-{% extends "base.html" %}
-
-{% block title %}
-    Register
-{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-    <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/newUser.css">
-    <script type="text/javascript" src="/public/js/newUser.js"></script>
-{% endblock %}
-
-{% block header %}
-    {{ include('header.views.html') }}
-    {{ include('nav.views.html') }}
-    <!--{{ include('session.views.html') }}-->
-{% endblock %}
-
-{% block main %}
-    {% if msg %}
-        <p>{{ msg }}</p>
-    {% endif %}
-
-    <form action="/register2" method="post" enctype="multipart/form-data">
-        <h1>Registro</h1>
-
-        <label> Usuario: (*)
+    <label> Usuario: (*)
             <input type="text" name="id_user" required>
         </label>
 
-        <label> Contraseña: (*)
+    <label> Contraseña: (*)
             <input id="password" type="password" name="password" required>
         </label>
 
-        <label> Confirme contraseña: (*)
+    <label> Confirme contraseña: (*)
             <input type="password" name="password" required>
         </label>
 
-        <label> Nombres: (*)
+    <label> Nombres: (*)
             <input type="text" name="first_name" required>
         </label>
 
-        <label> Apellidos: (*)
+    <label> Apellidos: (*)
             <input type="text" name="last_name" required>
         </label>
 
-        <label> Fecha de nacimiento: (*)
+    <label> Fecha de nacimiento: (*)
             <input type="date" name="born" required>
         </label>
 
-        <label> Nro de Documento: (*)
+    <label> Nro de Documento: (*)
             <input type="number" name="nro_doc" required>
         </label>
 
-        <label>Teléfono:
+    <label>Teléfono:
             <input type="tel" name="phone">
         </label>
 
-        <label> Dirección:
+    <label> Dirección:
             <input type="text" name="direction">
         </label>
 
-        <label> Email: (*)
+    <label> Email: (*)
             <input type="email" name="email" required>
         </label>
 
-        <label> Foto de perfil:
+    <label> Foto de perfil:
             <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
         </label>
 
-        <label> Local:
+    <label> Local:
             <input type="text" name="id_local">
         </label>
 
-        <section>
-            <label> ¿Posee patologías?
+    <section>
+        <label> ¿Posee patologías?
                 <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
             </label>
 
-            <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt"></textarea>
-        </section>
+        <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt"></textarea>
+    </section>
 
-        <label> Tatuador:
+    <label> Tatuador:
             <input type="checkbox" name="artist" onChange="artists(this);">
         </label>
 
-        <label id="description-artist"> Descripción:
+    <label id="description-artist"> Descripción:
             <textarea name="txt"></textarea>
         </label>
 
-        <section class="terms">
-            <label>
+    <section class="terms">
+        <label>
                 <input type="checkbox" name="terms" id="terms"> <a class="terms" target="_blank" href="/term&cond">Acepto los términos y condiciones</a>
             </label>
-        </section>
+    </section>
 
-        <input type="submit" value="Registrarse" />
+    <input type="submit" value="Registrarse" />
 
-        <a href="/login">Iniciar Sesión</a>
+    <a href="/login">Iniciar Sesión</a>
 
-        <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
-    </form>
-{% endblock %}
-
-{% block footer %}
-    {{ include('footer.views.html') }}
-{% endblock %}
->>>>>>> 1ba8b9c789caab67594b72ff923db4249fe9f04f
+    <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
+</form>
+{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %} >>>>>>> 1ba8b9c789caab67594b72ff923db4249fe9f04f
