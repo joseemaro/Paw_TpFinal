@@ -40,21 +40,21 @@
 
     <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
 
-    <section class="list-enf">
+    <section class="list-diseases">
         <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
         <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
 
-        <textarea class="enf" name="text" id="boton"></textarea>
+        <textarea class="disease" name="text" id="boton"></textarea>
     </section>
 
     <section>
-        <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="/termycond">¿Acepta los términos y condiciones? </a></label>
+        <label><input type="checkbox" name="terminos"><a class="terminos" target="_blank" href="/termycond">¿Acepta los términos y condiciones? </a></label>
     </section>
 
     <div>
-        <input class="boton-personalizado" type="reset" value="Limpiar" /> {% if not session.id_user %}
-        <input class="boton-personalizado" type="submit" value="Enviar" disabled/> {% else %}
-        <input class="boton-personalizado" type="submit" value="Enviar" /> {% endif %}
+        <input class="button-newAp" type="reset" value="Limpiar" /> {% if not session.id_user %}
+        <input class="button-newAp" type="submit" value="Enviar" disabled/> {% else %}
+        <input class="button-newAp" type="submit" value="Enviar" /> {% endif %}
     </div>
     <p class="footer-form"> Todos los campos son obligatorios <br>
         (*) Se necesita estar logueado para poder registrar un turno</p>

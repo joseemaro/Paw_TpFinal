@@ -53,13 +53,13 @@ input[type=file] {
     margin: 0.5em auto;
 }
 
-.list-enf label {
+.list-diseases label {
     width: 100%;
     margin: 0.5em auto;
     display: inline;
 }
 
-.list-enf input[type=checkbox] {
+.list-diseases input[type=checkbox] {
     display: inline;
 }
 
@@ -88,7 +88,7 @@ input[type=reset] {
     background-color: rgba(0, 0, 0, .4);
 }
 
-.boton-personalizado {
+.button-newAp {
     padding: 0.3125em 0;
     background-color: rgba(0, 0, 0, .4);
     border-color: #d8d8d8;
@@ -97,7 +97,7 @@ input[type=reset] {
     border-radius: 2.2em;
 }
 
-.enf {
+.disease {
     display:none;
 }
 
