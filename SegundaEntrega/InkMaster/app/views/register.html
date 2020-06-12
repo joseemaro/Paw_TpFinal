@@ -22,62 +22,84 @@
         <p>{{ msg }}</p>
     {% endif %}
 
-    <form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
+    <form action="/register2" method="post" enctype="multipart/form-data">
         <h1>Registro</h1>
-        <label><b>Usuario: (*)</b>
+
+        <label> Usuario: (*)
             <input type="text" name="id_user" required>
-        </label><br>
-        <label><b>Contraseña: (*)</b>
+        </label>
+
+        <label> Contraseña: (*)
             <input id="password" type="password" name="password" required>
-        </label><br>
-        <!--<label><b>Confirme contraseña: </b></label><br><input type="text" name="password" required><br>-->
-        <label><b>Nombres: (*)</b>
+        </label>
+
+        <label> Confirme contraseña: (*)
+            <input type="password" name="password" required>
+        </label>
+
+        <label> Nombres: (*)
             <input type="text" name="first_name" required>
-        </label><br>
-        <label><b>Apellidos: (*)</b>
+        </label>
+
+        <label> Apellidos: (*)
             <input type="text" name="last_name" required>
-        </label><br>
-        <label><b>Fecha de nacimiento: (*)</b>
+        </label>
+
+        <label> Fecha de nacimiento: (*)
             <input type="date" name="born" required>
-        </label><br>
-        <label><b>Nro de Documento: (*)</b>
-            <input type="text" name="nro_doc" required>
-        </label><br>
-        <label><b>Teléfono: </b>
-            <input type="text" name="phone">
-        </label><br>
-        <label><b>Dirección: </b>
+        </label>
+
+        <label> Nro de Documento: (*)
+            <input type="number" name="nro_doc" required>
+        </label>
+
+        <label>Teléfono:
+            <input type="tel" name="phone">
+        </label>
+
+        <label> Dirección:
             <input type="text" name="direction">
-        </label><br>
-        <label><b>Email: (*)</b>
-            <input type="text" name="email" required>
-        </label><br>
-        <label><b>Foto de perfil: </b>
+        </label>
+
+        <label> Email: (*)
+            <input type="email" name="email" required>
+        </label>
+
+        <label> Foto de perfil:
             <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
-        </label><br>
-        <label><b>Tatuador: </b>
-            <input type="checkbox" name="artist">
-        </label><br>
-        <label><b>Local: </b>
+        </label>
+
+        <label> Local:
             <input type="text" name="id_local">
-        </label><br>
-        <label><b>Descripción: </b>
-            <textarea name="txt"></textarea>
-        </label><br>
+        </label>
 
         <section>
-            <label for="pathology">Posee patologías?</label>
-            <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
-            <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt" style="display:none"></textarea>
+            <label> ¿Posee patologías?
+                <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
+            </label>
+
+            <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt"></textarea>
         </section>
+
+        <label> Tatuador:
+            <input type="checkbox" name="artist" onChange="artists(this);">
+        </label>
+
+        <label id="description-artist"> Descripción:
+            <textarea name="txt"></textarea>
+        </label>
+
         <section class="terms">
-            <label><input type="checkbox" name="terms" id="terms"> <a class="terms" href="/term&cond">Acepto terminos y condiciones<br></a></label>
+            <label>
+                <input type="checkbox" name="terms" id="terms"> <a class="terms" target="_blank" href="/term&cond">Acepto los términos y condiciones</a>
+            </label>
         </section>
+
+        <input type="submit" value="Registrarse" />
 
         <a href="/login">Iniciar Sesión</a>
 
-        <input type="submit" value="Registrate" />
-        <p class="footer-form"> Los campos marcados como (*) son obligatorios </p><br>
+        <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
     </form>
 {% endblock %}
 

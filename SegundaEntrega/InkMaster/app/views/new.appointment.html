@@ -8,7 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
-    <script type="text/javascript" src="/public/js/newUser.js"></script>
+    <script type="text/javascript" src="/public/js/newAp.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -22,14 +22,14 @@
     <form action="/save_appointment" method="post" enctype="multipart/form-data">
         <h1> Solicitud de turno </h1>
         <label>
-                Profesional
-                <select name="id_artist">
-                    {% for artist in artists %}
-                    <!-- artistas recuperados de la base -->
-                    <option>{{ artist.id_user }}</option>
-                    {% endfor %}
-                </select>
-            </label>
+            Profesional
+            <select name="id_artist">
+                {% for artist in artists %}
+                <!-- artistas recuperados de la base -->
+                <option>{{ artist.id_user }}</option>
+                {% endfor %}
+            </select>
+        </label>
 
         <label> Fecha: <input type="date" name="date" required></label>
 
@@ -37,15 +37,16 @@
 
         <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
 
-        <section class="list-diseases">
-            <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
-            <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
+        <section>
+            <label> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing?
+                <input name="check" type="checkbox" onChange="comprobar(this);" />
+            </label>
 
-            <textarea class="disease" name="text" id="boton"></textarea>
+            <textarea class="disease" name="text" id="pathology-txt"></textarea>
         </section>
 
         <section>
-            <label><input type="checkbox" name="terminos"> <a class="terminos" target="_blank" href="/termycond">Acepto los términos y condiciones</a></label>
+            <label><input type="checkbox" name="terms"> <a target="_blank" href="/termycond">Acepto los términos y condiciones</a></label>
         </section>
 
         <div>
