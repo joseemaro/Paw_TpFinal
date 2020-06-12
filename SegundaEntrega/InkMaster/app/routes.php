@@ -14,9 +14,7 @@ $router->get('logout', 'UserController@logOut');
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
 
-//faq
 $router->get('faq', 'GeneralController@listFaq');
 $router->get('faq.view/{id_faq}', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
 
-//terminos y condiciones
-$router->get('termycond', 'GeneralController@listTerms');
+$router->get('term&cond', 'GeneralController@listTerms');

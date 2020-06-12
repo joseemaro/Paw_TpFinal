@@ -25,8 +25,7 @@
             Profesional
             <select name="id_artist">
                 {% for artist in artists %}
-                <!-- artistas recuperados de la base -->
-                <option>{{ artist.id_user }}</option>
+                    <option>{{ artist.id_user }}</option>
                 {% endfor %}
             </select>
         </label>
@@ -39,29 +38,33 @@
 
         <section>
             <label> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing?
-                <input name="check" type="checkbox" onChange="comprobar(this);" />
+                <input name="pathology" type="checkbox" onChange="comprobar(this);" />
             </label>
 
-            <textarea class="disease" name="text" id="pathology-txt"></textarea>
+            <textarea class="disease" name="pathology-txt" id="pathology-txt"></textarea>
         </section>
 
         <section>
-            <label><input type="checkbox" name="terms"> <a target="_blank" href="/termycond">Acepto los términos y condiciones</a></label>
+            <label><input type="checkbox" name="terms"> Acepto los <a target="_blank" href="/term&cond">términos y condiciones</a></label>
         </section>
 
         <div>
             <input class="button-newAp" type="reset" value="Limpiar" />
+
             {% if not session.id_user %}
                 <input class="button-newAp" type="submit" value="Enviar" disabled/>
             {% else %}
                 <input class="button-newAp" type="submit" value="Enviar" />
             {% endif %}
         </div>
+        
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
+
         {% if not session.id_user %}
             (*) Se necesita estar logueado para poder registrar un turno<br>
             <a href="/login">Iniciar sesión/Registrarse</a>
         {% endif %}
+
     </form>
 {% endblock %}
 

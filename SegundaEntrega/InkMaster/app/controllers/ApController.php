@@ -8,6 +8,8 @@ use App\models\Local;
 
 class ApController extends Controller
 {
+    private $id_local = '1';
+
     public function __construct()
     {
         $this->appointment = new Appointment();
@@ -20,7 +22,7 @@ class ApController extends Controller
         $session = $_SESSION;
         //recupero artista de bd
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
         return view('new.appointment', compact('session','artists', 'local'));
     }
@@ -38,7 +40,7 @@ class ApController extends Controller
         $parameters["artist"] = $_POST["id_artist"];
 
         $artists = $this->artists->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
 
         $reference_image["reference_image"] = $_FILES;
 
@@ -59,8 +61,6 @@ class ApController extends Controller
     }
 
     public function listAp() {
-        $appointment = new Appointment();
-        $appointments = $appointment->all();
         return view('list.appointments', compact('appointments'));
     }
 
@@ -71,39 +71,19 @@ class ApController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('view.appointment', compact('session', 'artists', 'local'));#, compact('ap', 'diagnostico64'));
     }
 
     public function editAp() {
-        $appointment = new Appointment();
-        $ap = $appointment->findid($_GET['id']);
-        $diagnostico64 = base64_encode($ap['diagnostico']);
         return view('edit.appointment', compact('ap', 'diagnostico64'));
     }
 
     public function uptAp() {
-        $appointment = new Appointment();
-        $params = $this->comparacion();
-        $respuesta = $appointment->validarUpdate($params, $_POST['id']);
-        $errores = array_shift($respuesta);
-        if ($errores == "Correcto") {
-            $ap = $appointment->findid($_POST['id']);
-            $diagnostico64 = base64_encode($ap['diagnostico']);
-            return view('views.appointment', compact('ap', 'diagnostico64')) ;
-        }
-        elseif ($errores == "Incorrecto") {
-            return view('error.views', compact('respuesta'));
-        }
-        elseif ($errores == "Imagen Pesada") {
-            return view('error.views', compact('respuesta'));
-        }
+        return view('views.appointment', compact('ap', 'diagnostico64')) ;
     }
 
     public function delAp() {
-        $appointment = new Appointment();
-        $appointment->delete($_GET['id']);
-        $appointments = $appointment->all();
         return view('list.appointments', compact('appointments'));
     }
 

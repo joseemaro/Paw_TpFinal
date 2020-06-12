@@ -7,6 +7,8 @@ use App\models\Local;
 
 class UserController extends Controller
 {
+    private $id_local = '1';
+
     public function __construct()
     {
         $this->user = new User();
@@ -27,7 +29,7 @@ class UserController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         if ($array["status"]) {     #si salio bien la validacion
             $parameters = $array;
             return view('register', compact('session', 'artists', 'local', 'parameters'));
@@ -61,7 +63,7 @@ class UserController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('register', compact('session', 'artists', 'local'));
     }
 
@@ -69,7 +71,7 @@ class UserController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('login', compact('session', 'artists', 'local'));
     }
 
@@ -80,7 +82,7 @@ class UserController extends Controller
         $result = $this->user->autentication($id_user, $password);
         var_dump($result);
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
             var_dump("se encontró el usuario, bienvenido");
             session_start();
@@ -102,7 +104,7 @@ class UserController extends Controller
         $_SESSION = array();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('index.views', compact('session', 'artists', 'local'));
     }
 
