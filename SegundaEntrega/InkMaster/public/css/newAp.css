@@ -101,5 +101,9 @@ input[type=reset] {
     display:none;
 }
 
+p + a {
+    font-size: 1em;
+    text-decoration: none;
+}
 
 

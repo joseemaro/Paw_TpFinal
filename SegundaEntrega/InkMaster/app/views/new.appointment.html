@@ -1,11 +1,25 @@
-{% extends "base.html" %} {% block title %} New Appointment {% endblock %} {% block head %} {{ parent() }}
-<meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
-<script type="text/javascript" src="/public/js/newUser.js"></script>
-{% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }}
-<!--{{ include('session.views.html') }}-->
-{% endblock %} {% block main %} {% if not session.id_user %}
-<p>Se necesita estar logueado para poder registrar un turno</p>
+{% extends "base.html" %}
+
+{% block title %}
+    New Appointment
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+    <script type="text/javascript" src="/public/js/newUser.js"></script>
+{% endblock %}
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+{% if not session.id_user %}
+
 {% endif %}
 
 <form action="/save_appointment" method="post" enctype="multipart/form-data">
@@ -37,11 +51,17 @@
         <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="/termycond">¿Acepta los términos y condiciones? </a></label>
     </section>
 
-    <div class="btn">
+    <div>
         <input class="boton-personalizado" type="reset" value="Limpiar" /> {% if not session.id_user %}
         <input class="boton-personalizado" type="submit" value="Enviar" disabled/> {% else %}
         <input class="boton-personalizado" type="submit" value="Enviar" /> {% endif %}
     </div>
-    <p class="footer-form"> Todos los campos son obligatorios </p>
+    <p class="footer-form"> Todos los campos son obligatorios <br>
+        (*) Se necesita estar logueado para poder registrar un turno</p>
+    <a href="/login" target="_blank">Iniciar sesión/Registrarse</a>
 </form>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

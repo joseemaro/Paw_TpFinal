@@ -20,7 +20,7 @@ body {
     /*-webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;*/
     width: 100%;
-    max-width: 2000px;
+    max-width: 1920px;
     min-height: 100vh;
     margin: 0 auto;
 }
@@ -222,7 +222,7 @@ li > ul {
 }
 
 /*Para pantallas muy grandes*/
-@media screen and (min-width:2000px) {
+@media screen and (min-width:1920px) {
     header {
         width: 80%;
         margin: 0 auto;
