@@ -4,22 +4,25 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\models\Appointment;
 use App\models\User;
+use App\models\Local;
 
 class ApController extends Controller
 {
     public function __construct()
     {
         $this->appointment = new Appointment();
-        $this->artists = new User();
+        $this->user = new User();
+        $this->local = new Local();
     }
 
     public  function newAp() {
         session_start();
         $session = $_SESSION;
         //recupero artista de bd
-        $artists = $this->artists->listArtist();
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt('1');
         //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
-        return view('new.appointment', compact('session','artists'));
+        return view('new.appointment', compact('session','artists', 'local'));
     }
 
     public function saveAp ()
@@ -35,6 +38,7 @@ class ApController extends Controller
         $parameters["artist"] = $_POST["id_artist"];
 
         $artists = $this->artists->listArtist();
+        $local = $this->local->getTxt('1');
 
         $reference_image["reference_image"] = $_FILES;
 
@@ -47,10 +51,10 @@ class ApController extends Controller
 
         if ($array["status"]) {     #si salio bien la validacion
             $parameters = $array;
-            return view('view.appointment', compact('session', 'parameters'));
+            return view('view.appointment', compact('session', 'artists', 'local', 'parameters'));
         } else {
             $errors = $array;
-            return view('view.appointment', compact('session', 'errors', 'artists'));
+            return view('view.appointment', compact('session', 'artists', 'local', 'errors'));
         }
     }
 
@@ -64,7 +68,11 @@ class ApController extends Controller
         /*$appointment = new Appointment();
         $ap = $appointment->findid($_GET['id']);
         $diagnostico64 = base64_encode($ap['diagnostico']);*/
-        return view('view.appointment');#, compact('ap', 'diagnostico64'));
+        session_start();
+        $session = $_SESSION;
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt('1');
+        return view('view.appointment', compact('session', 'artists', 'local'));#, compact('ap', 'diagnostico64'));
     }
 
     public function editAp() {

@@ -1,7 +1,7 @@
 USE inkmaster_db;
 
 CREATE TABLE message (
-    id_message INT NOT NULL,
+    id_message INT NOT NULL AUTO_INCREMENT,
     id_user VARCHAR(100) NOT NULL,
     id_artist VARCHAR(100) NOT NULL,
     txt VARCHAR(300) NOT NULL,

@@ -64,7 +64,7 @@ input[type=checkbox] {
     text-align: left;
 }
 
-.enf {
+.pathology-txt {
     width: 70%;
     margin-left: 20%;
     height: 20%;
@@ -89,7 +89,7 @@ label {
     margin-right: auto;
 }
 
-.terminos {
+.terms {
     margin-left: 0%;
     padding-top: 0%;
     margin-top: 5%;

@@ -1,12 +1,18 @@
 <div id="footer">
     <p>
         <span>Acerca de nosotros</span>
-        En INK MASTER desde 2018 nos ocupados de ofrecerles contenido de calidad. <br>
+        {% if local %}
+            {{ local.txt }}<br>
+            Encontranos en {{ local.direction }}, {{ local.province }}, {{ local.country }}<br>
+            {{ local.phone }}<br>
+            {{ local.email }}<br>
+        {% endif %}
+        <!--En INK MASTER desde 2018 nos ocupados de ofrecerles contenido de calidad. <br>
         Contamos con diseños de todo tipo, incluidos tradicionales, japoneses, retratos, negros y grises, tribales y más. <br>
         Encontranos en San Martín 498, Luján, Buenos Aires (Argentina). <br>
         Teléfono: 2323550066 <br>
         Correo Electrónico: ink_master@gmail.com <br>
-        O en nuestras redes sociales Facebook, Twitter, Instagram y YouTube. <br>
+        O en nuestras redes sociales Facebook, Twitter, Instagram y YouTube. <br>-->
     </p>
     <!--<div class="social-network">
         <a href="#"><i class="fab fa-facebook" id="icon-fb"></i></a>

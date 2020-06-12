@@ -82,7 +82,8 @@ class QueryBuilder {
      * @param string $table
      */
     public function selectArtists($table) {
-        $statement = $this->pdo->prepare("select * from $table where artist = true;");
+        $statement = $this->pdo->prepare("select * from $table as u
+                                                    inner join artist as a on (u.id_user = a.id_artist);");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -90,6 +91,26 @@ class QueryBuilder {
     private function sendToLog(Exception $e) {
         if ($this->logger) {
             $this->logger->error('Error', ["Error" => $e]);
+        }
+    }
+
+    /**
+     * Finds a record into a table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function find($table, $id)
+    {
+        $sql = "select * from $table where id_local = :id;";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
         }
     }
 

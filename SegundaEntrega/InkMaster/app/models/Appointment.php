@@ -53,7 +53,7 @@ class Appointment extends Model
     }
 
     public function validateAll($parameters, $reference_image) {
-        $boolean = false;
+        $boolean = true;
         if (!empty($parameters)) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;

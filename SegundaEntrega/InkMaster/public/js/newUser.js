@@ -1,7 +1,7 @@
 function comprobar(obj) {
     if (obj.checked) {
-        document.getElementById('boton').style.display = "block";
+        document.getElementById('pathology-txt').style.display = "block";
     } else {
-        document.getElementById('boton').style.display = "none";
+        document.getElementById('pathology-txt').style.display = "none";
     }
 }

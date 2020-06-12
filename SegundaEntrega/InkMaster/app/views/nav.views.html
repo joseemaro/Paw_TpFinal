@@ -3,9 +3,9 @@
         <li> <a href="/"> <i class="fas fa-home site-nav--icon"></i> Home </a></li>
         <li id="artists"> <a href="/artists"> <i class="fas fa-paint-brush site-nav--icon"></i>  Artistas </a>
             <ul>
-                <li><a href="#">Artista 1</a></li>
-                <li><a href="#">Artista 2</a></li>
-                <li><a href="#">Artista 3</a></li>
+                {% for artist in artists %}
+                    <li><a href="#">{{ artist.id_user }}</a></li>
+                {% endfor %}
             </ul>
         </li>
         <li> <a href="/list_tattoos"> <i class="far fa-image site-nav--icon"></i> Galeria  </a></li>

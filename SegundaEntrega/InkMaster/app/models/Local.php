@@ -15,4 +15,8 @@ class Local extends Model
     protected $phone;
     protected $email;
     protected $description;
+
+    public function getTxt($id_local) {
+        return $this->db->find($this->table, $id_local);
+    }
 }

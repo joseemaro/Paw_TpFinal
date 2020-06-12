@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\models\User;
 use App\models\Tattoo;
 use App\models\FAQ;
+use App\models\Local;
 
 class GeneralController extends Controller
 {
@@ -13,12 +14,15 @@ class GeneralController extends Controller
         $this->user = new User();
         $this->faq = new FAQ();
         $this->tatto = new Tattoo();
+        $this->local = new Local();
     }
 
     public function index() {
         session_start();
         $session = $_SESSION;
-        return view('index.views', compact('session'));
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt('1');
+        return view('index.views', compact('session', 'artists', 'local'));
     }
 
     public function listTattoo() {
@@ -40,16 +44,27 @@ class GeneralController extends Controller
     public function listFaq() {
         $faq = new FAQ();
         $faq = $faq->listFaq();
-        return view('faq', compact('faq'));#'list.appointments', compact('appointments'));
+        session_start();
+        $session = $_SESSION;
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt('1');
+        return view('faq', compact('session', 'artists', 'faq', 'local'));
     }
 
     //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
     //esa vista va a mostrar la descripcion de esa pregunta
     public function viewFaq() {
+        session_start();
+        $session = $_SESSION;
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt('1');
         return view();#'list.appointments', compact('appointments'));
     }
 
     public function listTerms(){
+        session_start();
+        $session = $_SESSION;
+        $artists = $this->user->listArtist();
         return view('terminosycondiciones');
     }
 

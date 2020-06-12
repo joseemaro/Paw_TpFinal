@@ -1,7 +1,7 @@
 USE inkmaster_db;
 
 CREATE TABLE medical_record (
-    id_medical_record INT NOT NULL,
+    id_medical_record INT NOT NULL AUTO_INCREMENT,
     id_user VARCHAR(100) NOT NULL,
     considerations VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_medical_record),

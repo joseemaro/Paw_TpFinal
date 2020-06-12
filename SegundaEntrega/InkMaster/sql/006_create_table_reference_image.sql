@@ -1,11 +1,9 @@
 USE inkmaster_db;
 
-CREATE TABLE tattoo (
-    id_tattoo INT NOT NULL,
+CREATE TABLE reference_image (
+    id_reference_image INT NOT NULL AUTO_INCREMENT,
     id_appointment INT NOT NULL,
-    sector VARCHAR(20) NOT NULL,
     image MEDIUMBLOB NOT NULL,
-    txt VARCHAR(200) NOT NULL,
-    PRIMARY KEY (id_tattoo),
+    PRIMARY KEY (id_reference_image),
     FOREIGN KEY (id_appointment) REFERENCES appointment(id_appointment)
 );

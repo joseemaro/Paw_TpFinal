@@ -1,58 +1,86 @@
-{% extends "base.html" %} {% block title %} Register {% endblock %} {% block head %} {{ parent() }}
-<meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/newUser.css">
-<script type="text/javascript" src="/public/js/newUser.js"></script>
-{% endblock %} {% block header %} {{ include('header.views.html') }} {{ include('nav.views.html') }}
-<!--{{ include('session.views.html') }}-->
-{% endblock %} {% block main %} {% if msg %}
-<p>{{ msg }}</p>
-{% endif %}
+{% extends "base.html" %}
 
-<form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
-    <h1>Registro</h1>
-    <label><b>Usuario: (*)</b>
+{% block title %}
+    Register
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/newUser.css">
+    <script type="text/javascript" src="/public/js/newUser.js"></script>
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+    {% if msg %}
+        <p>{{ msg }}</p>
+    {% endif %}
+
+    <form class="general-form" action="/register2" method="post" enctype="multipart/form-data">
+        <h1>Registro</h1>
+        <label><b>Usuario: (*)</b>
             <input type="text" name="id_user" required>
         </label><br>
-    <label><b>Contraseña: (*)</b>
+        <label><b>Contraseña: (*)</b>
             <input id="password" type="password" name="password" required>
         </label><br>
-    <!--<label><b>Confirme contraseña: </b></label><br><input type="text" name="password" required><br>-->
-    <label><b>Nombres: (*)</b>
+        <!--<label><b>Confirme contraseña: </b></label><br><input type="text" name="password" required><br>-->
+        <label><b>Nombres: (*)</b>
             <input type="text" name="first_name" required>
         </label><br>
-    <label><b>Apellidos: (*)</b>
+        <label><b>Apellidos: (*)</b>
             <input type="text" name="last_name" required>
         </label><br>
-    <label><b>Edad: (*)</b>
-            <input type="text" name="age" maxlength="10" max="99" required>
+        <label><b>Fecha de nacimiento: (*)</b>
+            <input type="date" name="born" required>
         </label><br>
-    <label><b>Nro de Documento: (*)</b>
-            <input type="text" name="num_doc" required>
+        <label><b>Nro de Documento: (*)</b>
+            <input type="text" name="nro_doc" required>
         </label><br>
-    <label><b>Teléfono: </b>
+        <label><b>Teléfono: </b>
             <input type="text" name="phone">
         </label><br>
-    <label><b>Dirección: </b>
+        <label><b>Dirección: </b>
             <input type="text" name="direction">
         </label><br>
-    <label><b>Email: (*)</b>
+        <label><b>Email: (*)</b>
             <input type="text" name="email" required>
         </label><br>
-    <label><b>Foto de perfil: </b>
+        <label><b>Foto de perfil: </b>
             <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
         </label><br>
+        <label><b>Tatuador: </b>
+            <input type="checkbox" name="artist">
+        </label><br>
+        <label><b>Local: </b>
+            <input type="text" name="id_local">
+        </label><br>
+        <label><b>Descripción: </b>
+            <textarea name="txt"></textarea>
+        </label><br>
 
-    <section>
-        <label for="chec">Posee enfermedades?</label>
-        <input name="chec" type="checkbox" id="chec" onChange="comprobar(this);" />
-        <textarea class="enf" name="text" id="boton" style="display:none"></textarea>
-    </section>
-    <section class="terminos">
-        <label><input class="" type="checkbox" name="terminos" id="terminos"><a class="terminos" href="/termycond">Acepta terminos y condiciones? <br></a></label>
-    </section>
-    <a href="/login">Iniciar Sesión</a>
-    <input type="submit" value="Registrate" />
-    <p class="footer-form"> Los campos marcados como (*) son obligatorios </p><br>
+        <section>
+            <label for="pathology">Posee patologías?</label>
+            <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
+            <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt" style="display:none"></textarea>
+        </section>
+        <section class="terms">
+            <label><input type="checkbox" name="terms" id="terms"> <a class="terms" href="/term&cond">Acepto terminos y condiciones<br></a></label>
+        </section>
 
-</form>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
+        <a href="/login">Iniciar Sesión</a>
+
+        <input type="submit" value="Registrate" />
+        <p class="footer-form"> Los campos marcados como (*) son obligatorios </p><br>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

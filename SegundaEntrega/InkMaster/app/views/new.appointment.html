@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
     <script type="text/javascript" src="/public/js/newUser.js"></script>
 {% endblock %}
+
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}
@@ -18,48 +19,49 @@
 
 {% block main %}
 
-{% if not session.id_user %}
+    <form action="/save_appointment" method="post" enctype="multipart/form-data">
+        <h1> Solicitud de turno </h1>
+        <label>
+                Profesional
+                <select name="id_artist">
+                    {% for artist in artists %}
+                    <!-- artistas recuperados de la base -->
+                    <option>{{ artist.id_user }}</option>
+                    {% endfor %}
+                </select>
+            </label>
 
-{% endif %}
+        <label> Fecha: <input type="date" name="date" required></label>
 
-<form action="/save_appointment" method="post" enctype="multipart/form-data">
-    <h1> Solicitud de turno </h1>
-    <label>
-            Profesional
-            <select name="id_artist">
-                {% for artist in artists %}
-                <!-- artistas recuperados de la base -->
-                <option>{{ artist.first_name }}</option>
-                {% endfor %}
-            </select>
-        </label>
+        <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
 
-    <label> Fecha: <input type="date" name="date" required></label>
+        <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
 
-    <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
+        <section class="list-diseases">
+            <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
+            <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
 
-    <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
+            <textarea class="disease" name="text" id="boton"></textarea>
+        </section>
 
-    <section class="list-diseases">
-        <label for="check"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
-        <input name="check" type="checkbox" id="check" onChange="comprobar(this);" />
+        <section>
+            <label><input type="checkbox" name="terminos"> <a class="terminos" target="_blank" href="/termycond">Acepto los términos y condiciones</a></label>
+        </section>
 
-        <textarea class="disease" name="text" id="boton"></textarea>
-    </section>
-
-    <section>
-        <label><input type="checkbox" name="terminos"><a class="terminos" target="_blank" href="/termycond">¿Acepta los términos y condiciones? </a></label>
-    </section>
-
-    <div>
-        <input class="button-newAp" type="reset" value="Limpiar" /> {% if not session.id_user %}
-        <input class="button-newAp" type="submit" value="Enviar" disabled/> {% else %}
-        <input class="button-newAp" type="submit" value="Enviar" /> {% endif %}
-    </div>
-    <p class="footer-form"> Todos los campos son obligatorios <br>
-        (*) Se necesita estar logueado para poder registrar un turno</p>
-    <a href="/login" target="_blank">Iniciar sesión/Registrarse</a>
-</form>
+        <div>
+            <input class="button-newAp" type="reset" value="Limpiar" />
+            {% if not session.id_user %}
+                <input class="button-newAp" type="submit" value="Enviar" disabled/>
+            {% else %}
+                <input class="button-newAp" type="submit" value="Enviar" />
+            {% endif %}
+        </div>
+        <p class="footer-form"> Todos los campos son obligatorios</p><br>
+        {% if not session.id_user %}
+            (*) Se necesita estar logueado para poder registrar un turno<br>
+            <a href="/login">Iniciar sesión/Registrarse</a>
+        {% endif %}
+    </form>
 {% endblock %}
 
 {% block footer %}
