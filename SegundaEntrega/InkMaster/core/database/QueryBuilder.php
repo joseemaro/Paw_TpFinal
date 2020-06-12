@@ -37,6 +37,9 @@ class QueryBuilder {
             implode(', ', array_keys($parameters)),
             ':' . implode(', :', array_keys($parameters))
         );
+        echo "<br>";
+        var_dump($sql);
+        echo "<br>";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
