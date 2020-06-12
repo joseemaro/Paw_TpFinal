@@ -1,4 +1,4 @@
- {% extends "base.html" %} {% block title %} Register {% endblock %} {% block head %} {{ parent() }}
+{% extends "base.html" %} {% block title %} Register {% endblock %} {% block head %} {{ parent() }}
 <meta name="keywords" content="PAW,2020,Templates,PHP">
 <link rel="stylesheet" type="text/css" href="/public/css/newUser.css">
 <script type="text/javascript" src="/public/js/newUser.js"></script>
@@ -12,23 +12,35 @@
     <h1>Registro</h1>
 
     <label> Usuario: (*)
-            <input type="text" name="id_user" required>
+            <input type="text" name="id_user" 
+            pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$" title="Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres"
+            required>
         </label>
 
     <label> Contraseña: (*)
-            <input id="password" type="password" name="password" required>
+            <input id="password" type="password" name="password" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Debe contener al menos un numero, una letra minuscula y una mayusucula, por lo menos 8 carateres"
+            required>
         </label>
 
     <label> Confirme contraseña: (*)
-            <input type="password" name="password" required>
+            <input type="password" name="password" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Debe contener al menos un numero, una letra minuscula y una mayusucula, por lo menos 8 carateres"
+            required>
         </label>
 
     <label> Nombres: (*)
-            <input type="text" name="first_name" required>
+            <input type="text" name="first_name" 
+            pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios"
+            required>
         </label>
 
     <label> Apellidos: (*)
-            <input type="text" name="last_name" required>
+            <input type="text" name="last_name" 
+            pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios"
+            required>
         </label>
 
     <label> Fecha de nacimiento: (*)
@@ -36,19 +48,27 @@
         </label>
 
     <label> Nro de Documento: (*)
-            <input type="number" name="nro_doc" required>
+            <input type="number" name="nro_doc" 
+            pattern="^\d{8}(?:[-\s]\d{4})?$" title="El dni debe tener 8 numeros"
+            required>
         </label>
 
     <label>Teléfono:
-            <input type="tel" name="phone">
+            <input type="tel" name="phone"
+            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="Solo se admiten numeros"
+            >
         </label>
 
     <label> Dirección:
-            <input type="text" name="direction">
+            <input type="text" name="direction"
+            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios"
+            >
         </label>
 
     <label> Email: (*)
-            <input type="email" name="email" required>
+            <input type="email" name="email" required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Ej: ejemplo@hotmail.com"
+            >
         </label>
 
     <label> Foto de perfil:
@@ -56,7 +76,9 @@
         </label>
 
     <label> Local:
-            <input type="text" name="id_local">
+            <input type="text" name="id_local"
+            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios"
+            >
         </label>
 
     <section>
@@ -72,7 +94,9 @@
         </label>
 
     <label id="description-artist"> Descripción:
-            <textarea name="txt"></textarea>
+            <textarea name="txt"
+            pattern="^[a-zA-Z0-9 ]{0,100}$" title="Solo se permiten letras, numeros y espacios"
+            ></textarea>
         </label>
 
     <section class="terms">
@@ -87,4 +111,4 @@
 
     <p class="footer-form"> Los campos marcados como (*) son obligatorios </p>
 </form>
-{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %} >>>>>>> 1ba8b9c789caab67594b72ff923db4249fe9f04f
+{% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}
