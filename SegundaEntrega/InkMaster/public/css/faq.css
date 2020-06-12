@@ -5,6 +5,7 @@ h1 {
     font-size: larger;
     font-weight: bold;
     text-decoration: underline;
+    color: #575766;
 }
 
 #wrapper {
@@ -16,6 +17,7 @@ h1 {
 .preg {
     font-weight: bold;
     padding-bottom: 1%;
+    color: #575766;
 }
 
 a {
