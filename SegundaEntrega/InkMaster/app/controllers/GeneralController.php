@@ -9,6 +9,8 @@ use App\models\Local;
 
 class GeneralController extends Controller
 {
+    private $id_local = '1';
+
     public function __construct()
     {
         $this->user = new User();
@@ -21,7 +23,7 @@ class GeneralController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('index.views', compact('session', 'artists', 'local'));
     }
 
@@ -47,7 +49,7 @@ class GeneralController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view('faq', compact('session', 'artists', 'faq', 'local'));
     }
 
@@ -57,7 +59,7 @@ class GeneralController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        $local = $this->local->getTxt('1');
+        $local = $this->local->getTxt($this->id_local);
         return view();#'list.appointments', compact('appointments'));
     }
 
@@ -65,7 +67,7 @@ class GeneralController extends Controller
         session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
-        return view('terminosycondiciones');
+        return view('terms.and.conditions');
     }
 
     public function session() {

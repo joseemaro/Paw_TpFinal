@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login2" method="post" enctype="multipart/form-data">
+    <form action="/save_login" method="post" enctype="multipart/form-data">
         <h1>Ingresar</h1>
         <label>Usuario:</label>
         <input type="text" name="id_user" placeholder="Ingrese su usuario" required>
@@ -27,7 +27,7 @@
 
         <div id="button-form">
             <button type="submit" class="submit-btn"> Iniciar sesión </button>
-            <a class="submit-btn" href="/register">Registrarse</a>
+            <a class="submit-btn" href="/new_user">Registrarse</a>
         </div>
     </form>
 {% endblock %}

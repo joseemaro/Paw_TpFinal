@@ -16,39 +16,45 @@ class Appointment extends Model
     protected $hour;
     protected $status;
     protected $price;
+    protected $parameters = array();
     protected $errors = array();
 
-    public function loadMedicalRecord($medical_record) { #cargar en la bd los medical_record
-
-    }
-
-    public function parameters() {
-        $paremeters = array();  #cargar el array con todos los parametros, incluidos los de la clase, user y artist (creo)
-        $paremeters["status"] = true;
-        return $paremeters;
+    public function loadBD($table, $parameters) { #cargar en la bd los medical_record
+        #for
     }
 
     public function validate_local($id_local) { #no se si sirve de algo
+        $this->parameters["id_local"] = $id_local;
         return true;
     }
 
     public function validate_user($id_user) { #no se si sirve de algo
+        $this->parameters["id_user"] = $id_user;
         return true;
     }
 
     public function validate_date($date) { #solo ver formato y si hay error subir a $this->errors
+        $this->parameters["date"] = $date;
         return true;
     }
 
     public function validate_hour($hour) { #solo ver formato y si hay error subir a $this->errors
+        $this->parameters["hour"] = $hour;
         return true;
     }
 
     public function validate_artist($id_artist) { #verificar que ese turno este disponible para ese tatuador y si hay error subir a $this->errors
+        $this->parameters["id_artist"] = $id_artist;
         return true;
     }
 
-    public function validate_image($reference_image) { #no hay nada por verificar, solo hay que subir a la bd
+    public function validate_image($reference_image) { #solo verificar tamaño y extension, solo hay que subir a la bd
+        $this->loadBD("reference_image", $reference_image);
+        return true;
+    }
+
+    public function validate_medical($medical_record) { #no hay nada por verificar, solo hay que subir a la bd
+        $this->loadBD("medical_record", $medical_record);
         return true;
     }
 
@@ -73,10 +79,11 @@ class Appointment extends Model
             echo "<br>";
             var_dump($parameters);
             echo "<br>";
-            $this->db->insert($this->table, $parameters);
-            $this->loadMedicalRecord($medical_record);
+            $this->parameters["status"] = 'espera';
+            $this->db->insert($this->table, $this->parameters);
+            $this->parameters["status"] = true;
 
-            return $this->parameters();
+            return $this->parameters;
         } else {
             $this->errors["status"] = false;
 
