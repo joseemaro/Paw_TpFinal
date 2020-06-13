@@ -33,23 +33,24 @@ class ApController extends Controller
         $session = $_SESSION;
 
         $parameters = array();
-        $parameters["local"] = "1"; #recuperar los datos del local
+        $parameters["local"] = $_POST["id_local"];
         $parameters["user"] = $_SESSION["id_user"];
+        $parameters["artist"] = $_POST["id_artist"];
         $parameters["date"] = $_POST["date"];
         $parameters["hour"] = $_POST["hour"];
-        $parameters["artist"] = $_POST["id_artist"];
+        $reference_image = $_FILES;
 
-        $artists = $this->artists->listArtist();
+        $medical_record = array();
+        if (isset($_POST["pathology"])) {
+            $medical_record["pathology-text"] = $_POST["pathology-txt"];
+        }
+
+        $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
+
+        $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
 
         $reference_image["reference_image"] = $_FILES;
-
-        $medical_record = $this->medical_reference();
-        echo "medical_reference<br>";
-        var_dump($medical_record);
-        echo "<br>";
-
-        $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
 
         if ($array["status"]) {     #si salio bien la validacion
             $parameters = $array;
@@ -115,45 +116,5 @@ class ApController extends Controller
             $session = false;
         }
         return $session;
-    }
-
-    public function medical_reference() {
-        $medical_record = array();
-        if (isset($_POST["chemotherapy"])) {
-            $medical_record["chemotherapy"] = true;
-        }
-        if (isset($_POST["anemia"])) {
-            $medical_record["anemia"] = true;
-        }
-        if (isset($_POST["leukemia"])) {
-            $medical_record["leukemia"] = true;
-        }
-        if (isset($_POST["thrombocytopenia"])) {
-            $medical_record["thrombocytopenia"] = true;
-        }
-        if (isset($_POST["acne"])) {
-            $medical_record["acne"] = true;
-        }
-        if (isset($_POST["allergy"])) {
-            $medical_record["allergy"] = true;
-            $medical_record["allergy-txt"] = $_POST["allergy-txt"];
-        }
-        if (isset($_POST["G6PD_deficiency"])) {
-            $medical_record["G6PD_deficiency"] = true;
-        }
-        if (isset($_POST["diabetes"])) {
-            $medical_record["diabetes"] = true;
-        }
-        if (isset($_POST["von_willebrand"])) {
-            $medical_record["von_willebrand"] = true;
-        }
-        if (isset($_POST["hereditary_spherocytosis"])) {
-            $medical_record["hereditary_spherocytosis"] = true;
-        }
-        if (isset($_POST["hemophilia"])) {
-            $medical_record["hemophilia"] = true;
-        }
-
-        return $medical_record;
     }
 }

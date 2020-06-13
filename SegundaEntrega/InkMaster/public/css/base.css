@@ -42,8 +42,6 @@ header{
 
 footer {
     grid-area: pie;
-    background-color: var(--color-logo);
-    margin: 0;
     width: 100%;
 }
 

@@ -1,17 +1,62 @@
-<div id="footer">
-    <p>
-        <span>Acerca de nosotros</span>
-        {% if local %}
-            {{ local.txt }}<br>
-            Encontranos en {{ local.direction }}, {{ local.province }}, {{ local.country }}<br>
-            {{ local.phone }}<br>
-            {{ local.email }}<br>
-        {% endif %}
-    </p>
-    <!--<div class="social-network">
-        <a href="#"><i class="fab fa-facebook" id="icon-fb"></i></a>
-        <a href="#"><i class="fab fa-instagram" id="icon-inst"></i></a>
-        <a href="#"><i class="fab fa-twitter" id="icon-tw"></i></a>
-        <a href="#"><i class="fab fa-youtube" id="icon-yt"></i></a>
-    </div>-->
+<div class="container-footer-all">
+    <div class="container-body">
+        <div class="column1">
+            <h2> Acerca de nosotros</h2>
+            <p>
+                {% if local %}
+                {{ local.txt }}
+                {% endif %}
+            </p>
+        </div>
+        <div class="column2">
+            <h2> Redes sociales </h2>
+            <div class="row">
+                <a href="https://www.facebook.com/inkmaster/" target="_blank"><i class="fab fa-facebook"></i></a>
+                <label> Síguenos en Facebook </label>
+            </div>
+            <div class="row">
+                <a href="https://www.instagram.com/inkmaster/?hl=es-la" target="_blank"><i class="fab fa-instagram "></i></a>
+                <label> Síguenos en Instagram </label>
+            </div>
+            <div class="row">
+                <a href="https://twitter.com/inkmaster" target="_blank"><i class="fab fa-twitter"></i></a>
+                <label> Síguenos en Twitter </label>
+            </div>
+            <div class="row">
+                <a href="https://www.youtube.com/channel/UCzrh2s9Vu9wUBf2Y2iIYcgA" target="_blank"><i class="fab fa-youtube"></i></a>
+                <label> Síguenos en YouTube </label>
+            </div>
+        </div>
+        <div class="column3">
+            <h2> Información de contacto </h2>
+            <div class="row2">
+                <i class="fas fa-home"></i>
+                <label>
+                    {% if local %}
+                    Encontranos en {{ local.direction }},
+                    {{ local.province }}, {{ local.country }}
+                    {% endif %}
+                </label>
+            </div>
+            <div class="row2">
+                <i class="fas fa-mobile-alt"></i>
+                <label>
+                    {% if local %}
+                    {{ local.phone }}
+                    {% endif %}
+                </label>
+            </div>
+            <div class="row2">
+                <i class="fas fa-envelope"></i>
+                <label>
+                    {% if local %}
+                    {{ local.email }}
+                    {% endif %}
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-footer">
+    <p class="copy-right"><i class="fas fa-copyright"></i> 2020 todos los derechos reservados INKMASTER </p>
 </div>
