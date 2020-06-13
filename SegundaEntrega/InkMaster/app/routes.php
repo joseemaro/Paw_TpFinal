@@ -1,6 +1,6 @@
 <?php
 
-$router->get('/', 'GeneralController@index');
+$router->get('', 'GeneralController@index');
 
 $router->get('new_appointment', 'ApController@newAp');
 $router->post('save_appointment', 'ApController@saveAp');
