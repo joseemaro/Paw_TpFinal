@@ -1,6 +1,6 @@
 <?php
 
-$router->get('', 'GeneralController@index');
+$router->get('/', 'GeneralController@index');
 
 $router->get('new_appointment', 'ApController@newAp');
 $router->post('save_appointment', 'ApController@saveAp');
@@ -15,6 +15,6 @@ $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
 
 $router->get('faq', 'GeneralController@listFaq');
-$router->get('faq.view/{id_faq}', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
+$router->get('faq/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
 
 $router->get('term&cond', 'GeneralController@listTerms');

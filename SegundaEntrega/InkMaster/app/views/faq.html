@@ -7,8 +7,7 @@
         <!-- query a la bd, yo cargue ejemplos para probar -->
         {% for query in faq %}
         <article id="column1">
-            <a href="">
-                <!-- la idea es algo asi= "faq/{ query.id_faq }" , en el routes esta la ruta que va al controler-->
+            <a href="/faq/{{ query.id_faq }}">
                 <p class="preg">{{ query.question }}</p>
             </a>
             <p> {{ query.answer }}</p>
