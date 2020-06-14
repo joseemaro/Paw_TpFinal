@@ -31,6 +31,7 @@ class QueryBuilder {
      */
     public function insert($table, $parameters) {
         $parameters = $this->cleanParameterName($parameters);
+        $table = "inkmaster_db." . $table;
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
             $table,
@@ -57,7 +58,7 @@ class QueryBuilder {
      */
     public function autentication($id_user, $password) {
         try {
-            $statement = $this->pdo->prepare("select count(*) from user where id_user = :1 and password = :2");
+            $statement = $this->pdo->prepare("select count(*) from inkmaster_db.user where id_user = :1 and password = :2");
             $statement->bindValue(':1', $id_user);
             $statement->bindValue(':2', $password);
             $statement->execute();
@@ -74,7 +75,7 @@ class QueryBuilder {
      * @param string $table
      */
     public function selectAll($table) {
-        $statement = $this->pdo->prepare("select * from {$table}");
+        $statement = $this->pdo->prepare("select * from inkmaster_db.{$table}");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -85,7 +86,7 @@ class QueryBuilder {
      * @param string $table
      */
     public function selectArtists($table) {
-        $statement = $this->pdo->prepare("select * from $table as u
+        $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
                                                     inner join artist as a on (u.id_user = a.id_artist);");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
@@ -106,7 +107,7 @@ class QueryBuilder {
      */
     public function find($table, $id)
     {
-        $sql = "select * from $table where id_local = :id;";
+        $sql = "select * from inkmaster_db.$table where id_local = :id;";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
