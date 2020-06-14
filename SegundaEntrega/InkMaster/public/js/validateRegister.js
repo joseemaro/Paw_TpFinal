@@ -9,8 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var username = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/;
         if (username.exec(validate_username.value) || (validate_username.value === "")) {
             validate_username.style.border = "#ffffff";
+            validate_username.style.background = "#ffffff";
         } else {
-            validate_username.style.border = "#e05f5f";
+            validate_username.style.background = "#e05f5f";
         }
     });
 
@@ -20,8 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
         if (password.exec(validate_password.value) || (validate_password.value === "")) {
             validate_password.style.border = "#ffffff";
+            validate_password.style.background = "#ffffff";
         } else {
-            validate_password.style.border = "#e05f5f";
+            validate_password.style.background = "#e05f5f";
         }
     });
 
@@ -30,10 +32,11 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_confirmPassword = document.querySelector(".confirmPasswordjs");
     validate_confirmPassword.addEventListener("blur", function() {
         var password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-        if ((password.exec(validate_confirmPassword.value) && (validate_password.value == validate_confirmPassword.value)) || (validate_confirmPassword.value === "")) {
+        if (((password.exec(validate_confirmPassword.value) && (validate_password.value == validate_confirmPassword.value))) || (validate_confirmPassword.value === "")) {
             validate_password.style.border = "#ffffff";
+            validate_password.style.background = "#ffffff";
         } else {
-            validate_password.style.border = "#e05f5f";
+            validate_password.style.background = "#e05f5f";
         }
     });
 
@@ -43,8 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var name = /^[a-zA-Z ]{3,30}$/;
         if (name.exec(validate_name.value) || (validate_name.value === "")) {
             validate_name.style.border = "#ffffff";
+            validate_name.style.background = "#ffffff";
         } else {
-            validate_name.style.border = "#e05f5f";
+            validate_name.style.background = "#e05f5f";
         }
     });
 
@@ -54,8 +58,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var surname = /^[a-zA-Z ]{3,30}$/;
         if (surname.exec(validate_surname.value) || (validate_surname.value === "")) {
             validate_surname.style.border = "#ffffff";
+            validate_surname.style.background = "#ffffff";
         } else {
-            validate_surname.style.border = "#e05f5f";
+            validate_surname.style.background = "#e05f5f";
         }
     });
 
@@ -65,8 +70,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var identificationNumber = /^\d{8}(?:[-\s]\d{4})?$/;
         if (identificationNumber.exec(validate_identificationNumber.value) || (validate_identificationNumber.value === "")) {
             validate_identificationNumber.style.border = "#ffffff";
+            validate_identificationNumber.style.background = "#ffffff";
         } else {
-            validate_identificationNumber.style.border = "#e05f5f";
+            validate_identificationNumber.style.background = "#e05f5f";
         }
     });
 
@@ -76,8 +82,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var phone = /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/;
         if (phone.exec(validate_phone.value) || (validate_phone.value === "")) {
             validate_phone.style.border = "#ffffff";
+            validate_phone.style.background = "#ffffff";
         } else {
-            validate_phone.style.border = "#e05f5f";
+            validate_phone.style.background = "#e05f5f";
         }
     });
 
@@ -87,8 +94,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var address = /^[a-zA-Z0-9 ]{3,50}$/;
         if (address.exec(validate_address.value) || (validate_address.value === "")) {
             validate_address.style.border = "#ffffff";
+            validate_address.style.background = "#ffffff";
         } else {
-            validate_address.style.border = "#e05f5f";
+            validate_address.style.background = "#e05f5f";
         }
     });
 
@@ -98,8 +106,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var email = /^[a-zA-Z0-9 ]{3,50}$/;
         if (email.exec(validate_email.value) || (validate_email.value === "")) {
             validate_email.style.border = "#ffffff";
+            validate_email.style.background = "#ffffff";
         } else {
-            validate_email.style.border = "#e05f5f";
+            validate_email.style.background = "#e05f5f";
         }
     });
 
@@ -109,8 +118,21 @@ document.addEventListener("DOMContentLoaded", function() {
         var local = /^[a-zA-Z0-9 ]{3,50}$/;
         if (local.exec(validate_local.value) || (validate_local.value === "")) {
             validate_local.style.border = "#ffffff";
+            validate_local.style.background = "#ffffff";
         } else {
-            validate_local.style.border = "#e05f5f";
+            validate_local.style.background = "#e05f5f";
+        }
+    });
+
+    //validate description
+    validate_description = document.querySelector(".descriptionjs");
+    validate_description.addEventListener("blur", function() {
+        var description = /^[a-zA-Z0-9 ]{3,50}$/;
+        if (description.exec(validate_description.value) || (validate_description.value === "")) {
+            validate_description.style.border = "#ffffff";
+            validate_description.style.background = "#ffffff";
+        } else {
+            validate_description.style.background = "#e05f5f";
         }
     });
 
