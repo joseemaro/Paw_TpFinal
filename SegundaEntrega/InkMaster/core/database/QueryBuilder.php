@@ -140,6 +140,26 @@ class QueryBuilder {
     }
 
 
+        /**
+     * Finds a record into a table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function findName($table, $id)
+    {
+        $sql = "select first_name from $table where id_user = $id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
     /**
      * Limpia guiones - que puedan venir en los nombre de los parametros
      * ya que esto no funciona con PDO

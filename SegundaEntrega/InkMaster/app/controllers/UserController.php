@@ -80,11 +80,10 @@ class UserController extends Controller
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
         $result = $this->user->autentication($id_user, $password);
-        var_dump($result);
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
-            var_dump("se encontró el usuario, bienvenido");
+            $msgWelcome = "bienvenido $id_user ! ";
             session_start();
             $_SESSION["id_user"] = $id_user;
             $session = $_SESSION;
@@ -94,9 +93,9 @@ class UserController extends Controller
             //$twig = new \Twig_Environment();
             //$twig->addGlobal('session', $_SESSION);
         } else {
-            var_dump("usuario inválido");
+            $msgWelcome = "usuario inválido";
         }
-        return view('index.views', compact('session', 'artists', 'local'));
+        return view('index.views', compact('session', 'artists', 'local', 'msgWelcome'));
     }
 
     public function logOut() {

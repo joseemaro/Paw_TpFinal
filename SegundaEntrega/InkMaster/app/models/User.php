@@ -153,4 +153,8 @@ class User extends Model
     public function listArtist() {
         return $this->db->selectArtists($this->table);
     }
+
+    public function findArtist($id) {
+        return $this->db->findName($this->table, $id);
+    }
 }
