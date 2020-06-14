@@ -9,7 +9,7 @@
 <p>{{ msg }}</p>
 {% endif %}
 
-<form action="/save_user" method="post" enctype="multipart/form-data">
+<form action="/save_user" method="post" id="form" enctype="multipart/form-data">
     <h1>Registro</h1>
 
     <label> Usuario: (*)
@@ -45,7 +45,8 @@
         </label>
 
     <label> Fecha de nacimiento: (*)
-            <input type="date" name="born" required>
+            <input type="date" name="born" id="born" class="bornjs"
+            required>
         </label>
 
     <label> Nro de Documento: (*)

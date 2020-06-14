@@ -32,11 +32,13 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_confirmPassword = document.querySelector(".confirmPasswordjs");
     validate_confirmPassword.addEventListener("blur", function() {
         var password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-        if (((password.exec(validate_confirmPassword.value) && (validate_password.value == validate_confirmPassword.value))) || (validate_confirmPassword.value === "")) {
-            validate_password.style.border = "#ffffff";
-            validate_password.style.background = "#ffffff";
+        console.log(validate_confirmPassword.value);
+        console.log(validate_password.value);
+        if ((password.exec(validate_confirmPassword.value) && validate_password.value == validate_confirmPassword.value) || (validate_confirmPassword.value === "")) {
+            validate_confirmPassword.style.border = "#ffffff";
+            validate_confirmPassword.style.background = "#ffffff";
         } else {
-            validate_password.style.background = "#e05f5f";
+            validate_confirmPassword.style.background = "#e05f5f";
         }
     });
 
@@ -52,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+
+
     //validate surname 
     validate_surname = document.querySelector(".surnamejs");
     validate_surname.addEventListener("blur", function() {
@@ -61,6 +65,46 @@ document.addEventListener("DOMContentLoaded", function() {
             validate_surname.style.background = "#ffffff";
         } else {
             validate_surname.style.background = "#e05f5f";
+        }
+    });
+
+    //validate that the user is adult, that it was born at least 18 years ago
+    validate_born = document.querySelector(".bornjs");
+    validate_born.addEventListener("blur", function(event) {
+        var hoy = new Date();
+        var mes;
+        var meshoy = hoy.getMonth() + 1;
+        var diahoy = hoy.getDay();
+        if (meshoy < 10) {
+            meshoy = '0' + meshoy;
+        }
+        if (diahoy < 10) {
+            diahoy = '0' + diahoy;
+        }
+        var formato_hoy = (hoy.getFullYear() - 18) + "-" + meshoy + "-" + diahoy;
+        console.log(formato_hoy);
+        if (validate_born.value === "") {
+            validate_born.style.background = "#ffffff";
+            validate_born.style.border = "#ffffff";
+        } else if (validate_born.value > formato_hoy) {
+            validate_born.style.background = "#e05f5f";
+
+            var input = document.getElementById('born');
+            input.className = 'invalid animated shake';
+            var elem = document.createElement('div');
+            elem.id = 'notify';
+            elem.style.display = 'block';
+            elem.style.color = "#CD0808";
+            var form = document.getElementById('form');
+            form.insertBefore(elem, form.children[7]);
+            elem.textContent = '*Recuerde que si es menor debe ir acompañado de un adulto*';
+            elem.className = 'error';
+            elem.style.display = 'block';
+
+
+        } else {
+            validate_born.style.background = "#ffffff";
+            validate_born.style.border = "#ffffff";
         }
     });
 
