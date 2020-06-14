@@ -44,9 +44,9 @@ class GeneralController extends Controller
     }
 
     public function listFaq() {
+        session_start();
         $faq = new FAQ();
         $faq = $faq->listFaq();
-        session_start();
         $session = $_SESSION;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
@@ -55,12 +55,16 @@ class GeneralController extends Controller
 
     //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
     //esa vista va a mostrar la descripcion de esa pregunta
-    public function viewFaq() {
+    public function viewFaq($id_faq = null) {
         session_start();
+        /*$faq = new FAQ();
+        $faq = $faq->listFaq(); // aca va el select con where y el id
+        $faq = $faq[0];*/
         $session = $_SESSION;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
-        return view();#'list.appointments', compact('appointments'));
+        $faq = ['id' => $id_faq];
+        return view('faq.views', compact('session', 'artists', 'faq', 'local'));
     }
 
     public function listTerms(){

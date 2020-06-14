@@ -11,6 +11,7 @@ use App\Core\App;
 function view($name, $data = [])
 {
     $logger = App::get('logger');
+    $logger->debug('Vista: ', compact('name'));
     $logger->debug('Datos en la vista', $data);
 
     return App::get('twig')->render("{$name}.html", $data);

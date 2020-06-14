@@ -4,6 +4,7 @@ namespace App\Core;
 
 use Exception;
 use App\Core\Exceptions\RouteNotFoundException;
+use App\Core\Route;
 
 class Router
 {
@@ -39,7 +40,7 @@ class Router
      */
     public function get($uri, $controller)
     {
-        $this->routes['GET'][$uri] = $controller;
+        $this->addRoute($uri, 'GET', $controller);
     }
 
     /**
@@ -50,7 +51,7 @@ class Router
      */
     public function post($uri, $controller)
     {
-        $this->routes['POST'][$uri] = $controller;
+        $this->addRoute($uri, 'POST', $controller);
     }
 
     /**
@@ -59,34 +60,40 @@ class Router
      * @param string $uri
      * @param string $requestType
      */
-    public function direct($uri, $requestType)
+    public function direct($uri, $method)
     {
-        if (array_key_exists($uri, $this->routes[$requestType])) {
-            return $this->callAction(
-                ...explode('@', $this->routes[$requestType][$uri])
-            );
+        $match  = $this->resolve($uri, $method);
+        if($match) {
+            return call_user_func_array(array(new $match->class, $match->method), $match->params);
         }
-
         throw new RouteNotFoundException('No route defined for this URI.');
     }
 
-    /**
-     * Load and call the relevant controllers action.
-     *
-     * @param string $controller
-     * @param string $action
-     */
-    protected function callAction($controller, $action)
+    protected function addRoute($uri, $method, $controller)
     {
-        $controller = "App\\Controllers\\{$controller}";
-        $controller = new $controller;
+        $route = new Route;
+        $route->pattern = $uri;
+        list($route->class, $route->method) = explode('@', $controller);
+        $route->class = "App\\Controllers\\{$route->class}";
+        $this->routes[$method][$uri] = $route;
+    }
 
-        if (! method_exists($controller, $action)) {
-            throw new Exception(
-                "{$controller} does not respond to the {$action} action."
-            );
+    protected function resolve($uri, $method)
+    {
+        $matched = false;
+        foreach($this->routes[$method] as $route) {
+            if (preg_match("#^{$route->pattern}/?$#", $uri, $route->params)) {
+                $matched = true;
+                break;
+            }
         }
 
-        return $controller->$action();
+        //$route->params = array_slice($route->params, 1);
+        array_shift($route->params);
+
+        if(!$matched)
+            throw new RouteNotFoundException('No route defined for this URI.');
+
+        return $route;
     }
 }
