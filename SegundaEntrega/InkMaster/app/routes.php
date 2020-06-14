@@ -15,6 +15,6 @@ $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
 
 $router->get('faq', 'GeneralController@listFaq');
-$router->get('faq/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
+$router->get('faq2/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
 
 $router->get('term&cond', 'GeneralController@listTerms');

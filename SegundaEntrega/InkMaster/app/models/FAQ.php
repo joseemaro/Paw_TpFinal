@@ -19,4 +19,9 @@ public function listFaq() {
     return $this->db->selectAll($this->table);
 }
 
+public function find($id) {
+    $id = intval($id);
+    return $this->db->findFaq($this->table, $id);
+}
+
 }

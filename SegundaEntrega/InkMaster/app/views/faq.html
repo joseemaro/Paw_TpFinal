@@ -7,7 +7,7 @@
         <!-- query a la bd, yo cargue ejemplos para probar -->
         {% for query in faq %}
         <article id="column1">
-            <a href="/faq/{{ query.id_faq }}">
+            <a href="/faq2/{{ query.id_faq }}">
                 <p class="preg">{{ query.question }}</p>
             </a>
             <p> {{ query.answer }}</p>
@@ -20,8 +20,4 @@
             </a> Lorem iEarum reprehenderit dignissimos n totam mam sint, consectetur, quisquam sed.
         </article>
     </section>
-{% endblock %}
-
-{% block footer %}
-    {{ include('footer.views.html') }}
-{% endblock %}
+    {% endblock %} {% block footer %} {{ include('footer.views.html') }} {% endblock %}

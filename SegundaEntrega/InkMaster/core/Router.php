@@ -69,6 +69,14 @@ class Router
         throw new RouteNotFoundException('No route defined for this URI.');
     }
 
+    
+    /**
+     * Load the requested URI's associated controllers method.
+     *
+     * @param string $uri
+     * @param string $method
+     * @param string $controller
+     */
     protected function addRoute($uri, $method, $controller)
     {
         $route = new Route;

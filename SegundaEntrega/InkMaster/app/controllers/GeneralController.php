@@ -55,16 +55,15 @@ class GeneralController extends Controller
 
     //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
     //esa vista va a mostrar la descripcion de esa pregunta
-    public function viewFaq($id_faq = null) {
+    public function viewFaq($id_faq) {
         session_start();
-        /*$faq = new FAQ();
-        $faq = $faq->listFaq(); // aca va el select con where y el id
-        $faq = $faq[0];*/
         $session = $_SESSION;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
-        $faq = ['id' => $id_faq];
-        return view('faq.views', compact('session', 'artists', 'faq', 'local'));
+        $id = ['id' => $id_faq];
+        $faq = new FAQ();
+        $faq = $faq->find($id_faq); // aca va el select con where y el id
+        return view('faq.views', compact('faq'));
     }
 
     public function listTerms(){
