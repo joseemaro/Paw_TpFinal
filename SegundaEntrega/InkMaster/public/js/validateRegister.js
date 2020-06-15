@@ -54,8 +54,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-
-
     //validate surname 
     validate_surname = document.querySelector(".surnamejs");
     validate_surname.addEventListener("blur", function() {
@@ -87,7 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
         } else if (validate_born.value > formato_hoy) {
-            validate_born.style.background = "#e05f5f";
 
             var input = document.getElementById('born');
             input.className = 'invalid animated shake';
@@ -97,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
             elem.style.color = "#CD0808";
             var form = document.getElementById('form');
             form.insertBefore(elem, form.children[7]);
-            elem.textContent = '*Recuerde que si es menor debe ir acompañado de un adulto*';
+            elem.textContent = '*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*';
             elem.className = 'error';
             elem.style.display = 'block';
 

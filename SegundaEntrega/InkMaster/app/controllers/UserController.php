@@ -30,7 +30,8 @@ class UserController extends Controller
         $session = $_SESSION;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
-        if ($array["status"]) {     #si salio bien la validacion
+        $status = array_shift($array);
+        if ($status) {     #si salio bien la validacion
             $parameters = $array;
             return view('register', compact('session', 'artists', 'local', 'parameters'));
         } else {
@@ -87,11 +88,6 @@ class UserController extends Controller
             session_start();
             $_SESSION["id_user"] = $id_user;
             $session = $_SESSION;
-            //$session = $this->get('session');
-            //$session = null;
-            //$session->set('array', array('id_user' => $_SESSION["id_user"]));
-            //$twig = new \Twig_Environment();
-            //$twig->addGlobal('session', $_SESSION);
         } else {
             $msgWelcome = "usuario inválido";
         }

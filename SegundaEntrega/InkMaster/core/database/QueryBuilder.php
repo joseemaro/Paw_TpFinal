@@ -38,9 +38,6 @@ class QueryBuilder {
             implode(', ', array_keys($parameters)),
             ':' . implode(', :', array_keys($parameters))
         );
-        echo "<br>";
-        var_dump($sql);
-        echo "<br>";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
@@ -81,31 +78,25 @@ class QueryBuilder {
     }
 
     /**
-     * Finds a artist into a table.
+     * Select all artists from a database table.
      *
      * @param string $table
      */
-    public function selectArtists($table) {
+    public function listArtist($table) {
         $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
                                                     inner join artist as a on (u.id_user = a.id_artist);");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
-    private function sendToLog(Exception $e) {
-        if ($this->logger) {
-            $this->logger->error('Error', ["Error" => $e]);
-        }
-    }
-
     /**
-     * Finds a record into a table.
+     * Finds a local into from database table.
      *
      * @param string $table
      * @param integer $id
      * @return array
      */
-    public function find($table, $id)
+    public function findLocal($table, $id)
     {
         $sql = "select * from inkmaster_db.$table where id_local = :id;";
         try {
@@ -118,9 +109,9 @@ class QueryBuilder {
         }
     }
 
-    
+
     /**
-     * Finds a record into a table.
+     * Finds a faq into from database table.
      *
      * @param string $table
      * @param integer $id
@@ -128,7 +119,7 @@ class QueryBuilder {
      */
     public function findFaq($table, $id)
     {
-        $sql = "select * from $table where id_faq = $id";
+        $sql = "select * from inkmaster_db.$table where id_faq = $id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -140,16 +131,16 @@ class QueryBuilder {
     }
 
 
-        /**
-     * Finds a record into a table.
+    /**
+     * Finds a user into from database table.
      *
      * @param string $table
      * @param integer $id
      * @return array
      */
-    public function findName($table, $id)
+    public function findUser($table, $id)
     {
-        $sql = "select first_name from $table where id_user = $id";
+        $sql = "select * from inkmaster_db.$table where id_user = $id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -157,6 +148,12 @@ class QueryBuilder {
             return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             $this->sendToLog($e);
+        }
+    }
+
+    private function sendToLog(Exception $e) {
+        if ($this->logger) {
+            $this->logger->error('Error', ["Error" => $e]);
         }
     }
 
