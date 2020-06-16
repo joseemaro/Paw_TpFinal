@@ -177,4 +177,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    //validar terminos
+    validate_terms = document.querySelector(".termsjs");
+    validate_terms.addEventListener("click", function() {
+        document.form.submit.removeAttribute("disabled");
+    });
+
 });
