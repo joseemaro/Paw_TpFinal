@@ -7,6 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/list.appointments.css">
 {% endblock %}
 
 {% block header %}
@@ -18,7 +19,7 @@
     <section>
         <h1>Lista de turnos</h1>
         {% if variable.appointments %}
-            <table>
+            <table class="width200">
                 <thead>
                 <tr>
                     <th scope="col">Tatuador</th>
