@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_confirmPassword = document.querySelector(".confirmPasswordjs");
     validate_confirmPassword.addEventListener("blur", function() {
         var password = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-        console.log(validate_confirmPassword.value);
-        console.log(validate_password.value);
         if ((password.exec(validate_confirmPassword.value) && validate_password.value == validate_confirmPassword.value) || (validate_confirmPassword.value === "")) {
             validate_confirmPassword.style.border = "#ffffff";
             validate_confirmPassword.style.background = "#ffffff";
@@ -80,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
             diahoy = '0' + diahoy;
         }
         var formato_hoy = (hoy.getFullYear() - 18) + "-" + meshoy + "-" + diahoy;
-        console.log(formato_hoy);
         if (validate_born.value === "") {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
