@@ -13,6 +13,7 @@ class UserController extends Controller
     {
         $this->user = new User();
         $this->local = new Local();
+        $this->session = false;
     }
 
     public function index()
@@ -26,8 +27,7 @@ class UserController extends Controller
 
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
-        session_start();
-        $session = $_SESSION;
+        $session = $this->session;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         $status = array_shift($array);
@@ -61,16 +61,14 @@ class UserController extends Controller
     }
 
     public function register() {
-        session_start();
-        $session = $_SESSION;
+        $session = $this->session;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         return view('register', compact('session', 'artists', 'local'));
     }
 
     public function logIn() {
-        session_start();
-        $session = $_SESSION;
+        $session = $this->session;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         return view('login', compact('session', 'artists', 'local'));
@@ -87,7 +85,8 @@ class UserController extends Controller
             $msgWelcome = "bienvenido $id_user ! ";
             session_start();
             $_SESSION["id_user"] = $id_user;
-            $session = $_SESSION;
+            $this->session = true;
+            $session = $this->session;
         } else {
             $msgWelcome = "usuario inválido";
         }
@@ -97,19 +96,11 @@ class UserController extends Controller
     public function logOut() {
         session_start();
         $_SESSION = array();
-        $session = $_SESSION;
+        $this->session = false;
+        $session = $this->session;
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         return view('index.views', compact('session', 'artists', 'local'));
-    }
-
-    public function session() {
-        if (isset($_SESSION["id_user"])) {
-            $session = true;
-        } else {
-            $session = false;
-        }
-        return $session;
     }
 
     public function parameters() {

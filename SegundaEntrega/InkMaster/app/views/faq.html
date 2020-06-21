@@ -20,7 +20,7 @@
         <h1>Preguntas Frecuentes</h1>
         <section>
             <!-- query a la bd, yo cargue ejemplos para probar -->
-            {% for query in faq %}
+            {% for query in variable.faqs %}
                 <article id="column1">
                     <a href="/faq2/{{ query.id_faq }}">
                         <p class="preg">{{ query.question }}</p>

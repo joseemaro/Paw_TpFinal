@@ -17,14 +17,18 @@ class GeneralController extends Controller
         $this->faq = new FAQ();
         $this->tatto = new Tattoo();
         $this->local = new Local();
+        $this->session = false;
+    }
+
+    public function view($html, $variable) {
+        $session = $this->session();
+        $artists = $this->user->listArtist();
+        $local = $this->local->getTxt($this->id_local);
+        return view($html, compact('session', 'artists', 'local', 'variable'));
     }
 
     public function index() {
-        session_start();
-        $session = $_SESSION;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('index.views', compact('session', 'artists', 'local'));
+        return $this->view('index.views',null);
     }
 
     public function listTattoo() {
@@ -44,41 +48,33 @@ class GeneralController extends Controller
     }
 
     public function listFaq() {
-        session_start();
-        $faq = new FAQ();
-        $faq = $faq->listFaq();
-        $session = $_SESSION;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('faq', compact('session', 'artists', 'faq', 'local'));
+        $variable = array();
+        $faqs = new FAQ();
+        $variable["faqs"] = $faqs->listFaq();
+        return $this->view('faq', $variable);
     }
 
     //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
     //esa vista va a mostrar la descripcion de esa pregunta
     public function viewFaq($id_faq) {
-        session_start();
-        $session = $_SESSION;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
         $id = ['id' => $id_faq];
         $faq = new FAQ();
-        $faq = $faq->find($id_faq); // aca va el select con where y el id
-        return view('faq.views', compact('faq'));
+        $variable = array();
+        $variable["faq"] = $faq->find($id_faq); // aca va el select con where y el id
+        return $this->view('faq.views', $variable);
     }
 
     public function listTerms(){
-        session_start();
-        $session = $_SESSION;
-        $artists = $this->user->listArtist();
         return view('terms.and.conditions');
     }
 
     public function session() {
+        session_start();
         if (isset($_SESSION["id_user"])) {
-            $session = true;
+            $this->session = true;
         } else {
-            $session = false;
+            $this->session = false;
         }
-        return $session;
+        return $this->session;
     }
 }
