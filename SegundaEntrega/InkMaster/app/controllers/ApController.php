@@ -15,6 +15,7 @@ class ApController extends Controller
         $this->appointment = new Appointment();
         $this->user = new User();
         $this->local = new Local();
+        $this->generalController = new GeneralController();
     }
 
     public  function newAp() {

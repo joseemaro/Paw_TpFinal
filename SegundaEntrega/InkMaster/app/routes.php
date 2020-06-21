@@ -6,7 +6,7 @@ $router->get('new_appointment', 'ApController@newAp');
 $router->post('save_appointment', 'ApController@saveAp');
 
 $router->get('login', 'UserController@logIn');
-$router->post('save_login', 'UserController@find');
+$router->post('save_login', 'UserController@autentication');
 $router->get('new_user', 'UserController@register');
 $router->post('save_user', 'UserController@saveUser');
 $router->get('logout', 'UserController@logOut');

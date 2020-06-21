@@ -69,7 +69,9 @@ class GeneralController extends Controller
     }
 
     public function session() {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         if (isset($_SESSION["id_user"])) {
             $this->session = true;
         } else {

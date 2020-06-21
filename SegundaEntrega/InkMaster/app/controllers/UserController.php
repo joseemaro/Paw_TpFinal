@@ -3,7 +3,6 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\models\User;
-use App\models\Local;
 
 class UserController extends Controller
 {
@@ -12,7 +11,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->user = new User();
-        $this->local = new Local();
+        $this->generalController = new GeneralController();
         $this->session = false;
     }
 
@@ -20,24 +19,15 @@ class UserController extends Controller
     {
         return view();#'index.views');
     }
-
-    public function newUser() {
-        return view('register');
-    }
-
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
-        $session = $this->session;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
         $status = array_shift($array);
         if ($status) {     #si salio bien la validacion
-            $parameters = $array;
-            return view('register', compact('session', 'artists', 'local', 'parameters'));
+            $variable["parameters"] = $array;
         } else {
-            $errors = $array;
-            return view('register', compact('session', 'artists', 'local', 'errors'));
+            $variable["errors"] = $array;
         }
+        return $this->generalController->view('register', $variable);   #ver si hacer esto o mandar una view dependiendo del resultado
     }
 
     public function editUser() {
@@ -61,46 +51,33 @@ class UserController extends Controller
     }
 
     public function register() {
-        $session = $this->session;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('register', compact('session', 'artists', 'local'));
+        return $this->generalController->view('register', null);
     }
 
     public function logIn() {
-        $session = $this->session;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('login', compact('session', 'artists', 'local'));
+        return $this->generalController->view('login', null);
     }
 
-    public function find() {
+    public function autentication() {
         $session = null;
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
         $result = $this->user->autentication($id_user, $password);
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
         if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
-            $msgWelcome = "bienvenido $id_user ! ";
+            $variable["msgWelcome"] = "bienvenido $id_user ! ";
             session_start();
             $_SESSION["id_user"] = $id_user;
-            $this->session = true;
-            $session = $this->session;
         } else {
-            $msgWelcome = "usuario inválido";
+            $variable["msgWelcome"] = "usuario inválido";
         }
-        return view('index.views', compact('session', 'artists', 'local', 'msgWelcome'));
+        return $this->generalController->view('index.views', $variable);
     }
 
     public function logOut() {
         session_start();
         $_SESSION = array();
         $this->session = false;
-        $session = $this->session;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('index.views', compact('session', 'artists', 'local'));
+        return $this->generalController->view('index.views', null);
     }
 
     public function parameters() {

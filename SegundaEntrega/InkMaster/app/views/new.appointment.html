@@ -53,16 +53,16 @@
         <div>
             <input class="button-newAp" type="reset" value="Limpiar" />
 
-            {% if not session.id_user %}
-                <input class="button-newAp" type="submit" value="Enviar" disabled/>
-            {% else %}
+            {% if session %}
                 <input class="button-newAp" type="submit" value="Enviar" />
+            {% else %}
+                <input class="button-newAp" type="submit" value="Enviar" disabled/>
             {% endif %}
         </div>
 
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
 
-        {% if not session.id_user %}
+        {% if not session %}
             (*) Se necesita estar logueado para poder registrar un turno<br>
             <a href="/login">Iniciar sesión/Registrarse</a>
         {% endif %}
