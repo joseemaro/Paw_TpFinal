@@ -22,7 +22,7 @@ class GeneralController extends Controller
 
     public function view($html, $variable) {
         $session = $this->session();
-        $artists = $this->user->listArtist();
+        $artists = $this->user->listArtists($this->id_local);
         $local = $this->local->getTxt($this->id_local);
         return view($html, compact('session', 'artists', 'local', 'variable'));
     }
@@ -31,19 +31,12 @@ class GeneralController extends Controller
         return $this->view('index.views',null);
     }
 
-    public function listTattoo() {
-        return view();#'list.appointments', compact('appointments'));
+    public function listTattoos() {
+        $variable["tattoos"] = 'algun sql de recoleccion de tattoos';#$this->user->listArtists($this->generalController->getIdLocal());
+        return $this->view('list.tattoos', $variable);
     }
 
     public function viewTattoo() {
-        return view();#'list.appointments', compact('appointments'));
-    }
-
-    public function listArtist() {
-        return view();#'list.appointments', compact('appointments'));
-    }
-
-    public function viewArtist() {
         return view();#'list.appointments', compact('appointments'));
     }
 
@@ -78,5 +71,9 @@ class GeneralController extends Controller
             $this->session = false;
         }
         return $this->session;
+    }
+
+    public function getIdLocal() {
+        return $this->id_local;
     }
 }

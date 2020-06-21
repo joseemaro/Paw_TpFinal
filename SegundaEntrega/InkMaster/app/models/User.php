@@ -316,11 +316,15 @@ class User extends Model
         return $this->db->autentication($id_user, $password);
     }
 
-    public function listArtist() {
-        return $this->db->listArtist($this->table);
+    public function listArtists($id_local) {
+        return $this->db->listArtists($this->table, $id_local);
     }
 
     public function findUser($id) {
         return $this->db->findUser($this->table, $id);
+    }
+
+    public function findArtist($id) {
+        return $this->db->findArtist($this->table, $id);
     }
 }

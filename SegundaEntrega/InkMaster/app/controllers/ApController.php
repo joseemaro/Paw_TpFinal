@@ -19,51 +19,52 @@ class ApController extends Controller
     }
 
     public  function newAp() {
-        session_start();
+        /*session_start();
         $session = $_SESSION;
         //recupero artista de bd
         $artists = $this->user->listArtist();
         $local = $this->local->getTxt($this->id_local);
         //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
-        return view('new.appointment', compact('session','artists', 'local'));
+        #return view('new.appointment', compact('session','artists', 'local'));*/
+        return $this->generalController->view('new.appointment', null);
     }
 
     public function saveAp ()
     {
         session_start();
-        $session = $_SESSION;
+        if (isset($_SESSION["id_user"])) {
+            $parameters["local"] = $_POST["id_local"];
+            $parameters["user"] = $_SESSION["id_user"];
+            $parameters["artist"] = $_POST["id_artist"];
+            $parameters["date"] = $_POST["date"];
+            $parameters["hour"] = $_POST["hour"];
+            $reference_image = $_FILES;
 
-        $parameters = array();
-        $parameters["local"] = $_POST["id_local"];
-        $parameters["user"] = $_SESSION["id_user"];
-        $parameters["artist"] = $_POST["id_artist"];
-        $parameters["date"] = $_POST["date"];
-        $parameters["hour"] = $_POST["hour"];
-        $reference_image = $_FILES;
+            $medical_record = array();
+            if (isset($_POST["pathology"])) {
+                $medical_record["pathology-text"] = $_POST["pathology-txt"];
+            }
 
-        $medical_record = array();
-        if (isset($_POST["pathology"])) {
-            $medical_record["pathology-text"] = $_POST["pathology-txt"];
-        }
+            $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
 
-        $array = $this->appointment->validateInsert($parameters, $reference_image, $medical_record);
+            $reference_image["reference_image"] = $_FILES;
 
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-
-        $reference_image["reference_image"] = $_FILES;
-
-        if ($array["status"]) {     #si salio bien la validacion
-            $parameters = $array;
-            return view('view.appointment', compact('session', 'artists', 'local', 'parameters'));
+            if ($array["status"]) {     #si salio bien la validacion
+                $variable["parameters"] = $array;
+                return $this->generalController->view('view.appointment', $variable);
+            } else {
+                $variable["errors"] = $array;
+                return $this->generalController->view('errors.appointment', $variable);
+            }
         } else {
-            $errors = $array;
-            return view('view.appointment', compact('session', 'artists', 'local', 'errors'));
+            $variable["errors"] = "No se encuentra ningún usuario logueado";
+            return $this->generalController->view('errors.appointment', $variable);
         }
     }
 
     public function listAp() {
-        return view('list.appointments', compact('appointments'));
+        $variable["appointments"] = $this->appointment->listAppointments();
+        return $this->generalController->view('list.appointments', $variable);
     }
 
     public function viewAp() {

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Lista de turnos
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Lista de turnos</h1>
+        {% if variable.appointments %}
+            <table>
+                <thead>
+                <tr>
+                    <th scope="col">Tatuador</th>
+                    <th scope="col">Local</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col">Nombre del usuario</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+
+                {% for appointment in variable.appointments %}
+                    <tbody>
+                        <tr>
+                            <td>{{ appointment.id_artist }}</td>
+                            <td>{{ appointment.id_local }}</td>
+                            <td>{{ appointment.date }}</td>
+                            <td>{{ appointment.hour }}</td>
+                            <td>{{ appointment.id_user }}</td>
+                            <td>{{ appointment.phone }}</td>
+                            <td>{{ appointment.email }}</td>
+                            <td>{{ appointment.status }}</td>
+                            <td>{{ appointment.price }}</td>
+                            <td>
+                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment">
+                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                    <button class ="table-button" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
+                                </form>
+                                <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment">
+                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                    <button class ="table-button" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
+                                </form>
+                                <form method="get" id="destroy-appointment-{{ appointment.id_appointment }}" action="del_appointment" onSubmit="return confirm('Desea eliminar el turno?');">
+                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                    <button class ="table-button" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p> No hay turnos registrados hasta el momento </p>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

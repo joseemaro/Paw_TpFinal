@@ -42,12 +42,23 @@ class UserController extends Controller
         return view();#'list.appointments', compact('appointments'));
     }
 
-    public function listuser() {
-        return view();#'list.appointments', compact('appointments'));
+    public function listUsers() {
+        return view();
     }
 
     public function viewUser() {
         return view();#'list.appointments', compact('appointments'));
+    }
+
+    public function listArtists() {
+        $variable["artists"] = $this->user->listArtists($this->generalController->getIdLocal());
+        return $this->generalController->view('list.artists', $variable);
+    }
+
+    public function viewArtist() {
+        $id_artist = $_GET["id"];
+        $variable["artist"] = $this->user->findArtist($id_artist);
+        return $this->generalController->view('view.artist', $variable);
     }
 
     public function register() {

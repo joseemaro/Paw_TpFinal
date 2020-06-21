@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Lista de artistas
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
+    <section>
+        <h1>Lista de tatuadores</h1>
+        {% if variable.artists %}
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre de Tatuador</th>
+                        <th scope="col">Foto</th>
+                    </tr>
+                </thead>
+
+                {% for artist in variable.artists %}
+                    <tbody>
+                        <tr>
+                            <td>{{ artist.id_artist }}</td>
+                            <td>{{ artist.photo }}</td>
+                        </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p> No hay turnos registrados hasta el momento </p>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

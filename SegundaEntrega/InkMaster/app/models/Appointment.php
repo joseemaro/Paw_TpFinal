@@ -90,4 +90,8 @@ class Appointment extends Model
             return $this->errors;
         }
     }
+
+    public function listAppointments() {
+        return $this->db->listAppointment($this->table);
+    }
 }

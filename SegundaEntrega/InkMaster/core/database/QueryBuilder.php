@@ -59,8 +59,7 @@ class QueryBuilder {
             $statement->bindValue(':1', $id_user);
             $statement->bindValue(':2', $password);
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result;
+            return $statement->fetch(PDO::FETCH_ASSOC);;
         } catch (Exception $e) {
             $this->sendToLog($e);
         }
@@ -82,9 +81,27 @@ class QueryBuilder {
      *
      * @param string $table
      */
-    public function listArtist($table) {
-        $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
-                                                    inner join artist as a on (u.id_user = a.id_artist);");
+    public function listArtists($table, $id_local) {
+        try {
+            $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
+                                                    inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                                    where id_local = :1;");
+            $statement->bindValue(':1', $id_local);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_CLASS);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Select all appointments from a database table.
+     *
+     * @param string $table
+     */
+    public function listAppointment($table) {
+        $statement = $this->pdo->prepare("select * from inkmaster_db.$table as a
+                                                    inner join inkmaster_db.user as u on (a.id_user = u.id_user);");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
@@ -119,7 +136,7 @@ class QueryBuilder {
      */
     public function findFaq($table, $id)
     {
-        $sql = "select * from inkmaster_db.$table where id_faq = $id";
+        $sql = "select * from inkmaster_db.$table where id_faq = :id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -140,7 +157,30 @@ class QueryBuilder {
      */
     public function findUser($table, $id)
     {
-        $sql = "select * from inkmaster_db.$table where id_user = $id";
+        $sql = "select * from inkmaster_db.$table where id_user = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+
+    /**
+     * Finds a artist into from database table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function findArtist($table, $id)
+    {
+        $sql = "select * from inkmaster_db.$table as u
+                inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                where id_artist = :id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
