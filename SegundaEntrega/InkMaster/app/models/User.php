@@ -36,11 +36,9 @@ class User extends Model
                 array_push($this->return, $error);
                 $boolean = false;
             } else if ($this->validate_duplicateUser($id_user)) {
-
                 $this->parameters["id_user"] = $id_user;
                 $this->parameters_user["id_user"] = $id_user;
             }else{
-
                 $error = "El nombre de usuario no esta disponible";
                 array_push($this->return, $error);
                 $boolean = false;
@@ -50,18 +48,15 @@ class User extends Model
             array_push($this->return, $error);
             $boolean = false;
         }
-
         return $boolean;
     }
 
     public function validate_duplicateUser($id){
         $cant = $this->db->findCantUser($this->table, $id);
-
-        if ($cant == "0"){
-
+        $can = $cant['cant'];
+        if ($can == "0"){
             return true;
         }else{
-
             return false;
         }
 }
@@ -317,10 +312,9 @@ class User extends Model
         if (!empty($parameters)) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;
-                $boolean = $boolean && self::$validate($value);
+                $boolean = $boolean && self::$validate($value); //aca esta el problema, en el ultimo parametro
             }
         }
-
         return $boolean;
     }
 

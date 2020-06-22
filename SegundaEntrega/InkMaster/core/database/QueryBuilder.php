@@ -175,7 +175,7 @@ class QueryBuilder {
      */
     public function findCantUser($table, $id)
     {
-        $sql = "select count(*) from inkmaster_db.$table where id_user = :id";
+        $sql = "select count(*) as cant from inkmaster_db.$table where id_user = :id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
