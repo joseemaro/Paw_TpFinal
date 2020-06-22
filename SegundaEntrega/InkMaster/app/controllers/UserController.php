@@ -131,12 +131,12 @@ class UserController extends Controller
         }
         if (isset($_POST["artist"])) {
             $parameters["artist"] = true;
-        }
-        if (isset($_POST["id_local"])) {
-            $parameters["local"] = $_POST["id_local"];
-        }
-        if (isset($_POST["txt"])) {
-            $parameters["txt"] = $_POST["txt"];
+            if (isset($_POST["id_local"])) {
+                $parameters["local"] = $_POST["id_local"];
+            }
+            if (isset($_POST["txt"])) {
+                $parameters["txt"] = $_POST["txt"];
+            }
         }
         return $parameters;
     }
