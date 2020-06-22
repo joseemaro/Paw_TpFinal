@@ -22,13 +22,15 @@ class UserController extends Controller
 
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
-        $status = array_shift($array);
-        if ($status) {     #si salio bien la validacion
+        $status = $array[count($array)-1];
+        if ($status) {
+            #si salio bien la validacion
             $variable["parameters"] = $array;
+            return $this->generalController->view('register', $variable);   #ver si hacer esto o mandar una view dependiendo del resultado
         } else {
             $variable["errors"] = $array;
+            return $this->generalController->view('errors.register', $variable);
         }
-        return $this->generalController->view('register', $variable);   #ver si hacer esto o mandar una view dependiendo del resultado
     }
 
     public function editUser() {

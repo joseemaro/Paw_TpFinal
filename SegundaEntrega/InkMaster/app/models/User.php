@@ -35,9 +35,15 @@ class User extends Model
                 $error = "El formato de nombre de usuario ingresado es inválido";
                 array_push($this->return, $error);
                 $boolean = false;
-            } else {
+            } else if ($this->validate_duplicateUser($id_user)) {
+
                 $this->parameters["id_user"] = $id_user;
                 $this->parameters_user["id_user"] = $id_user;
+            }else{
+
+                $error = "El nombre de usuario no esta disponible";
+                array_push($this->return, $error);
+                $boolean = false;
             }
         } else {
             $error = "Se precisa que sea ingresado un nombre de usuario";
@@ -47,6 +53,18 @@ class User extends Model
 
         return $boolean;
     }
+
+    public function validate_duplicateUser($id){
+        $cant = $this->db->findCantUser($this->table, $id);
+
+        if ($cant == "0"){
+
+            return true;
+        }else{
+
+            return false;
+        }
+}
 
     public function validate_password($password) {
         $boolean = true;

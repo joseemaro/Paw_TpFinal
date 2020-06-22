@@ -165,6 +165,27 @@ class QueryBuilder {
         }
     }
 
+
+    /**
+     * Finds a user into from database table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function findCantUser($table, $id)
+    {
+        $sql = "select count(*) from inkmaster_db.$table where id_user = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
     /**
      * Finds a artist into from database table.
      *
