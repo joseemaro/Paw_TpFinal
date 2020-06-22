@@ -55,9 +55,8 @@ class QueryBuilder {
      */
     public function autentication($id_user, $password) {
         try {
-            $statement = $this->pdo->prepare("select count(*) from inkmaster_db.user where id_user = :1 and password = :2");
+            $statement = $this->pdo->prepare("select * from inkmaster_db.user where id_user = :1");
             $statement->bindValue(':1', $id_user);
-            $statement->bindValue(':2', $password);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);;
         } catch (Exception $e) {
@@ -126,7 +125,6 @@ class QueryBuilder {
         }
     }
 
-
     /**
      * Finds a faq into from database table.
      *
@@ -146,7 +144,6 @@ class QueryBuilder {
             $this->sendToLog($e);
         }
     }
-
 
     /**
      * Finds a user into from database table.
@@ -168,7 +165,6 @@ class QueryBuilder {
         }
     }
 
-
     /**
      * Finds a artist into from database table.
      *
@@ -181,6 +177,27 @@ class QueryBuilder {
         $sql = "select * from inkmaster_db.$table as u
                 inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
                 where id_artist = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Finds a artist into from database table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function existLocal($table, $id)
+    {
+        $sql = "select * from local where exists (select * from inkmaster_db.$table
+                                            where id_local = :id)";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);

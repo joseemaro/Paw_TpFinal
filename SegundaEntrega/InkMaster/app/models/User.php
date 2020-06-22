@@ -88,6 +88,14 @@ class User extends Model
                 array_push($this->return, $error);
                 $boolean = false;
             }
+            $this->parameters["password"] = password_hash($this->parameters["password"], PASSWORD_BCRYPT);
+            $this->parameters_user["password"] = $this->parameters["password"];
+            var_dump("parameters: ");
+            var_dump($this->parameters["password"]);
+            echo "<br>";
+            var_dump("parameters_user: ");
+            var_dump($this->parameters_user["password"]);
+            echo "<br>";
         } else {
             unset($this->parameters["password"]);
             unset($this->parameters_user["password"]);
@@ -264,10 +272,15 @@ class User extends Model
         return $boolean;
     }
 
-    public function validate_local($id_local) {     #revisar que sea el id de un local ya registrado
-        $this->parameters["id_local"] = $id_local;
-        $this->parameters_artist["id_local"] = $id_local;
-        return true;
+    public function validate_local($id_local) {
+        $local = $this->db->existLocal('local', $id_local);
+        if (isset($local["id_local"])) {
+            $this->parameters["id_local"] = $id_local;
+            $this->parameters_artist["id_local"] = $id_local;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function validate_txt($txt) {    #no se si no generaria inyeccion sql
@@ -276,7 +289,7 @@ class User extends Model
         return true;
     }
 
-    public function validate_pathology($pathology) {    #no se si no generaria inyeccion sql
+    public function validate_pathology($pathology) {    #no se si no generaria inyeccion sql y manipular para insertar
         $this->parameters["pathology"] = $pathology;
         return true;
     }
@@ -297,7 +310,7 @@ class User extends Model
         $boolean = $this->validateAll($parameters);
         if ($boolean) {
             $parameters_user = $this->parameters_user;
-            $this->db->insert('user', $parameters_user);
+            $this->db->insert($this->table, $parameters_user);
 
             if (isset($this->parameters_artist["id_artist"])) {
                 $parameters_artist = $this->parameters_artist;
@@ -313,7 +326,13 @@ class User extends Model
     }
 
     public function autentication($id_user, $password) {
-        return $this->db->autentication($id_user, $password);
+        $hash = $this->db->autentication($id_user, $password);
+        $verify = password_verify($password, $hash["password"]);
+        if ($verify) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function listArtists($id_local) {
@@ -326,5 +345,19 @@ class User extends Model
 
     public function findArtist($id) {
         return $this->db->findArtist($this->table, $id);
+    }
+
+    public function verifyAdult($id_user) {
+        $user = $this->db->findUser($this->table, $id_user);
+        $today = getdate();
+        $year = $today["year"] - substr($user["born"],0,4);
+        $month = $today["mon"] - substr($user["born"],5,2);
+        $day = $today["mday"] - substr($user["born"],8,2);
+
+        if (($year < 18) || ($year == 18 && $month < 0) || ($year == 18 && $month == 0 && $day < 0)) {  #si es menor de edad
+            return false;
+        } else {
+            return true;
+        }
     }
 }

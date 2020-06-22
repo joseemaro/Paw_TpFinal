@@ -19,14 +19,14 @@ class ApController extends Controller
     }
 
     public  function newAp() {
-        /*session_start();
-        $session = $_SESSION;
-        //recupero artista de bd
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        //buscar si el usuario es menor de 18 años, en tal caso que salte advertencia y mandar una variable en compact
-        #return view('new.appointment', compact('session','artists', 'local'));*/
-        return $this->generalController->view('new.appointment', null);
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
+            $variable["adult"] = $this->user->verifyAdult($_SESSION["id_user"]);
+            return $this->generalController->view('new.appointment', $variable);
+        } else {
+            return $this->generalController->view('new.appointment', null);
+        }
     }
 
     public function saveAp ()

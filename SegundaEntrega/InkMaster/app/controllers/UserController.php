@@ -19,6 +19,7 @@ class UserController extends Controller
     {
         return view();#'index.views');
     }
+
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
         $status = array_shift($array);
@@ -74,7 +75,7 @@ class UserController extends Controller
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
         $result = $this->user->autentication($id_user, $password);
-        if ($result['count(*)'] == 1) { #obvio que esto no deberian ser var_dump
+        if ($result) { #obvio que esto no deberian ser var_dump
             $variable["msgWelcome"] = "bienvenido $id_user ! ";
             session_start();
             $_SESSION["id_user"] = $id_user;
@@ -98,6 +99,9 @@ class UserController extends Controller
         }
         if (isset($_POST["password"])) {
             $parameters["password"] = $_POST["password"];
+        }
+        if (isset($_POST["confirm_password"])) {
+            $parameters["confirm_password"] = $_POST["confirm_password"];
         }
         if (isset($_POST["first_name"])) {
             $parameters["first_name"] = $_POST["first_name"];
