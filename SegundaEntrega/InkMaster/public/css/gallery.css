@@ -18,3 +18,29 @@ img {
     width: 18.75em;
     margin: 1em;
 }
+
+#warning_img {
+    text-align: center;
+    padding: 1em 0;
+}
+
+#page_navigator {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    float: right;
+}
+
+#page_navigator > ul {
+    display: flex;
+    flex-flow: row;
+    padding: 1em;
+}
+
+#page_navigator li {
+    padding: 0.5em;
+}
+
+#previous {
+    display: none;
+}

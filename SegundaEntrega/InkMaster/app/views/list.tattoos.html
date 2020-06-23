@@ -17,17 +17,26 @@
 
 {% block main %}
     <h1 id="title">INKMASTER GANG</h1>
-    <div id="container">
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-        <img src="" >
-    </div>
+    {% if (variable.tattoos)%}
+        <div id="container">
+            {% for tattoo in variable.tattoos %}
+        <!--<img src="data:image/png;base64, {{diagnostico64}}" >-->
+            {% endfor %}
+        </div>
+        {% if (variable.total_pages)%}
+            <nav id="page_navigator">
+                <ul>
+                    <li> <a href="#">Previous</a> </li>
+                    {% for i in 1..variable.total_pages %}
+                    <li> <a href="#">{{i}}</a> </li>
+                    {% endfor %}
+                    <li> <a href="#">Next</a> </li>
+                </ul>
+            </nav>
+        {% endif %}
+    {% else %}
+        <h2 id="warning_img"> No hay imágenes registrados hasta el momento </h2>
+    {% endif %}
 
 {% endblock %}
 

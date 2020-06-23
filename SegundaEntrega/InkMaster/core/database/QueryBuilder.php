@@ -165,6 +165,45 @@ class QueryBuilder {
         }
     }
 
+     /**
+        * Recovers images from database table.
+        *
+        * @param string $table
+        * @param integer $beginning
+        * @param integer $quantity
+        * @return array
+        */
+     public function getTattoos($table, $beginning, $quantity)
+     {
+        $sql = "select * from inkmaster_db.$table limit :beginning , :quantity";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":beginning", $beginning);
+            $statement->bindValue(":quantity", $quantity);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+     }
+
+     /**
+         * Counts the number of tuples in a table
+         *
+         * @param string $table
+         * @return array
+         */
+     public function countTuples($table)
+     {
+         $sql = "select count(*) from inkmaster_db.$table";
+         try {
+             $statement = $this->pdo->prepare($sql);
+             $statement->execute();
+             return $statement->fetch(PDO::FETCH_ASSOC);
+         } catch (Exception $e) {
+             $this->sendToLog($e);
+         }
+     }
 
     /**
      * Finds a user into from database table.
