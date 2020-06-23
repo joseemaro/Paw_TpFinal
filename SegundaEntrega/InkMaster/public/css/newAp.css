@@ -96,6 +96,7 @@ input[type=reset] {
     border-width: 3px;
     border-style: solid;
     border-radius: 2.2em;
+    cursor: pointer;
 }
 
 .disease {

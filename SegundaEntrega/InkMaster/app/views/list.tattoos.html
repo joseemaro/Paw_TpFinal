@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Galeria
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/gallery.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
+    <h1 id="title">INKMASTER GANG</h1>
+    <div id="container">
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+        <img src="" >
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

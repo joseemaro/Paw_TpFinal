@@ -32,7 +32,8 @@ class GeneralController extends Controller
     }
 
     public function listTattoos() {
-        $variable["tattoos"] = 'algun sql de recoleccion de tattoos';#$this->user->listArtists($this->generalController->getIdLocal());
+        //$variable["tattoos"] = 'algun sql de recoleccion de tattoos';#$this->user->listArtists($this->generalController->getIdLocal());
+        $variable = null;
         return $this->view('list.tattoos', $variable);
     }
 
