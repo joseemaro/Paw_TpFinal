@@ -41,6 +41,17 @@ img {
     padding: 0.5em;
 }
 
-#previous {
-    display: none;
+.img-btn {
+    width: 20%;
+    background-color: rgba(0, 0, 0, .4);
+    border: 0;
+    border-radius: 1em;
+    display: block;
+    margin: 1em auto;
+    padding: 1em 0;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+    text-decoration: none;
+    color: black;
 }

@@ -20,3 +20,4 @@ $router->get('faq', 'GeneralController@listFaq');
 $router->get('faq2/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
 $router->get('term&cond', 'GeneralController@listTerms');
 $router->get('gallery', 'GeneralController@listTattoos');
+$router->get('upload_photos', 'GeneralController@updPhotos');

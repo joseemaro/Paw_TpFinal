@@ -195,7 +195,7 @@ class QueryBuilder {
          */
      public function countTuples($table)
      {
-         $sql = "select count(*) from inkmaster_db.$table";
+         $sql = "select count(*) as total from inkmaster_db.$table";
          try {
              $statement = $this->pdo->prepare($sql);
              $statement->execute();

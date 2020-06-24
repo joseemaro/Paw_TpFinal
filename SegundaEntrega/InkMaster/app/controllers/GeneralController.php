@@ -31,6 +31,10 @@ class GeneralController extends Controller
         return $this->view('index.views',null);
     }
 
+    public function updPhotos() {
+        return $this->view('upload.photos', null);
+    }
+
     public function listTattoos() {
         //$variable["tattoos"] = 'algun sql de recoleccion de tattoos';#$this->user->listArtists($this->generalController->getIdLocal());
 

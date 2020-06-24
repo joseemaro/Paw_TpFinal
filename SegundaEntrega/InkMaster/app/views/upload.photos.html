@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Cargar fotos
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/upd.photos.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
+
+    <form method="post" action="/save_photos" enctype="multipart/form-data">
+        <label> Seleccionar imágenes:
+            <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg" multiple>
+        </label>
+        <input type="submit" value="Subir imágenes" />
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}
