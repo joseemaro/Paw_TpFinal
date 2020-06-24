@@ -79,7 +79,7 @@ class Appointment extends Model
             echo "<br>";
             var_dump($parameters);
             echo "<br>";
-            $this->parameters["status"] = 'espera';
+            $this->parameters["status"] = 'pendiente';
             $this->db->insert($this->table, $this->parameters);
             $this->parameters["status"] = true;
 
@@ -97,4 +97,12 @@ class Appointment extends Model
     public function listWaitingAppointments($id) {
         return $this->db->listWaitingAppointment($this->table, $id);
     }
+    public function aceptAp($id_appointment){
+        return $this->db->aceptAppointment($this->table , $id_appointment);
+    }
+    public function deleteAp($id_appointment){
+        return $this->db->deleteAppointment($this->table , $id_appointment);
+    }
+
+
 }

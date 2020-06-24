@@ -72,6 +72,26 @@ class ApController extends Controller
         return $this->generalController->view('list.appointments', $variable);
     }
 
+    public function aceptAp($id_appointment){
+        $this->appointment->aceptAp($id_appointment);
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $id =  $_SESSION["id_user"];
+        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
+        return $this->generalController->view('list.appointments', $variable);
+    }
+
+    public function delAp($id_appointment){
+        $this->appointment->deleteAp($id_appointment);
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $id =  $_SESSION["id_user"];
+        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
+        return $this->generalController->view('list.appointments', $variable);
+    }
+
     public function viewAp() {
         /*$appointment = new Appointment();
         $ap = $appointment->findid($_GET['id']);
@@ -91,9 +111,6 @@ class ApController extends Controller
         return view('views.appointment', compact('ap', 'diagnostico64')) ;
     }
 
-    public function delAp() {
-        return view('list.appointments', compact('appointments'));
-    }
 
     private function comparacion() {
         $appointment = new Appointment();

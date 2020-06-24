@@ -115,7 +115,8 @@ class QueryBuilder {
     public function listWaitingAppointment($table, $id) {
         $sql = "select * from inkmaster_db.$table as turno 
                 inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_user
-                where turno.id_artist = :id;";
+                where turno.id_artist = :id
+                and turno.status='pendiente';";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -127,6 +128,32 @@ class QueryBuilder {
         }
     }
 
+
+    /**
+     * Acept an appointment, change the status to 'aceptado'
+     *
+     * @param string $table
+     * @param integer $id_appointment
+     */
+    public function aceptAppointment($table , $id_appointment){
+        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='aceptado' WHERE id_appointment= :id ;");
+        $statement->bindValue(":id", $id_appointment);
+        $statement->execute();
+        return null;
+    }
+
+    /**
+     * anule an appointment, change the status to 'aceptado'
+     *
+     * @param string $table
+     * @param integer $id_appointment
+     */
+    public function deleteAppointment($table , $id_appointment){
+        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='anulado' WHERE id_appointment= :id ;");
+        $statement->bindValue(":id", $id_appointment);
+        $statement->execute();
+        return null;
+    }
 
 
     /**

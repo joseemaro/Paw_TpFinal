@@ -5,6 +5,9 @@ $router->get('', 'GeneralController@index');
 $router->get('new_appointment', 'ApController@newAp');
 $router->post('save_appointment', 'ApController@saveAp');
 $router->get('list_appointment', 'ApController@listAp');
+$router->get('acept_appointment/([0-9]{1,})', 'ApController@aceptAp');
+$router->get('del_appointment/([0-9]{1,})', 'ApController@delAp');
+
 
 $router->get('login', 'UserController@logIn');
 $router->post('save_login', 'UserController@autentication');
