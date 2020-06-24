@@ -105,6 +105,30 @@ class QueryBuilder {
         return $statement->fetchAll(PDO::FETCH_CLASS);
     }
 
+
+    /**
+     * Select  waiting appointments from an artist to acept or anule them
+     *
+     * @param string $table
+     * @param string $id
+     */
+    public function listWaitingAppointment($table, $id) {
+        $sql = "select * from inkmaster_db.$table as turno 
+                inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_user
+                where turno.id_artist = :id;";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            //var_dump($statement);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+
+
     /**
      * Finds a local into from database table.
      *

@@ -94,4 +94,7 @@ class Appointment extends Model
     public function listAppointments() {
         return $this->db->listAppointment($this->table);
     }
+    public function listWaitingAppointments($id) {
+        return $this->db->listWaitingAppointment($this->table, $id);
+    }
 }

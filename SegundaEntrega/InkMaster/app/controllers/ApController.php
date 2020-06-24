@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\models\Appointment;
 use App\models\User;
 use App\models\Local;
+use mysql_xdevapi\Session;
 
 class ApController extends Controller
 {
@@ -63,7 +64,11 @@ class ApController extends Controller
     }
 
     public function listAp() {
-        $variable["appointments"] = $this->appointment->listAppointments();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $id =  $_SESSION["id_user"];
+        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
         return $this->generalController->view('list.appointments', $variable);
     }
 
