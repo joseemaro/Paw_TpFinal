@@ -15,8 +15,8 @@ $router->get('new_user', 'UserController@register');
 $router->post('save_user', 'UserController@saveUser');
 $router->get('logout', 'UserController@logOut');
 $router->get('artists', 'UserController@listArtists');
-$router->get('view_artist/([a-z][0-9])', 'UserController@viewArtist');
-$router->get('view_user/([a-z][0-9])', 'UserController@viewUser');
+$router->get('view_artist/([a-zA-Z ]{1,})', 'UserController@viewArtist');
+$router->get('view_user/([a-z][0-9]{1,})', 'UserController@viewUser');
 
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
