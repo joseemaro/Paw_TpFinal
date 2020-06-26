@@ -22,9 +22,10 @@ class GeneralController extends Controller
 
     public function view($html, $variable) {
         $session = $this->session();
+        $user = $_SESSION["id_user"];
         $artists = $this->user->listArtists($this->id_local);
         $local = $this->local->getTxt($this->id_local);
-        return view($html, compact('session', 'artists', 'local', 'variable'));
+        return view($html, compact('session', 'artists', 'local', 'user', 'variable'));
     }
 
     public function index() {

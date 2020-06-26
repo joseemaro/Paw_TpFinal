@@ -128,7 +128,6 @@ class QueryBuilder {
         }
     }
 
-
     /**
      * Acept an appointment, change the status to 'aceptado'
      *

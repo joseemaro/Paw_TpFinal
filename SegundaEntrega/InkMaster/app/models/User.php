@@ -267,9 +267,30 @@ class User extends Model
     }
 
     public function validate_photo($photo) {    #revisar la extension y tamaño
-        $this->parameters["photo"] = $photo;
-        $this->parameters_user["photo"] = $photo;
-        return true;
+        var_dump($photo);
+        $boolean = true;
+        if (!empty($photo["photo"]["name"])) {
+            $extension = $photo["photo"]["type"];
+            $extension = strtolower($extension);
+            if ($extension != 'image/png' && $extension != 'image/jpg' && $extension != 'image/jpeg') {
+                $error = "Solo se permite archivos con extensión JPG y PNG.";
+                array_push($this->return, $error);
+                $boolean = false;
+            } else {
+                if ($photo["photo"]["size"] > 5000000) {
+                    $count = count($this->return);
+                    if ($count != 0) {
+                        $error = "Solo se permite archivos menores o iguales a 10 MB.";
+                        array_push($this->return, $error);
+                        $boolean = false;
+                    }
+                } else {
+                    $this->parameters["photo"] = $photo;
+                    $this->parameters_user["photo"] = $photo;
+                }
+            }
+        }
+        return $boolean;
     }
 
     public function validate_artist($artist) {

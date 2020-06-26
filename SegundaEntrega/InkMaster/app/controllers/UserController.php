@@ -126,7 +126,7 @@ class UserController extends Controller
         if (isset($_POST["email"])) {
             $parameters["email"] = $_POST["email"];
         }
-        if (isset($_POST["photo"])) {
+        if (isset($_FILES)) {
             $parameters["photo"] = $_FILES;
         }
         if (isset($_POST["artist"])) {

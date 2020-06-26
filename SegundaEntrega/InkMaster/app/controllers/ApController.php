@@ -64,43 +64,69 @@ class ApController extends Controller
     }
 
     public function listAp() {
-        if (!isset($_SESSION)) {
-            session_start();
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->isArtist($id_user)) {
+                $variable["permissions"] = true;
+                $variable["appointments"] = $this->appointment->listWaitingAppointments($id_user);
+            } elseif ($this->isAdmin($id_user)) {
+                $variable["permissions"] = true;
+                $variable["appointments"] = $this->appointment->listAppointments();
+            } else {
+                return $this->generalController->view('not_found', null);
+            }
+            return $this->generalController->view('list.appointments', $variable);
         }
-        $id =  $_SESSION["id_user"];
-        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
-        return $this->generalController->view('list.appointments', $variable);
+        return $this->generalController->view('not_found', null);
     }
 
     public function aceptAp($id_appointment){
-        $this->appointment->aceptAp($id_appointment);
-        if (!isset($_SESSION)) {
-            session_start();
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user =  $_SESSION["id_user"];
+            if ($this->isArtist($id_user)) {
+                $this->appointment->aceptAp($id_appointment);
+                $variable["permissions"] = true;
+                $variable["appointments"] = $this->appointment->listWaitingAppointments($id_user);
+                return $this->generalController->view('list.appointments', $variable);
+            } elseif ($this->isAdmin($id_user)) {
+                $variable["permissions"] = false;
+                $variable["appointments"] = $this->appointment->listAppointments();
+                return $this->generalController->view('list.appointments', $variable);
+            }
         }
-        $id =  $_SESSION["id_user"];
-        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
-        return $this->generalController->view('list.appointments', $variable);
+        return $this->generalController->view('not_found', null);
     }
 
     public function delAp($id_appointment){
-        $this->appointment->deleteAp($id_appointment);
-        if (!isset($_SESSION)) {
-            session_start();
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->isArtist($id_user)) {
+                $this->appointment->deleteAp($id_appointment);
+                $variable["appointments"] = $this->appointment->listWaitingAppointments($id_user);
+                return $this->generalController->view('list.appointments', $variable);
+            } elseif ($this->isAdmin($id_user)) {
+                $variable["permissions"] = false;
+                $variable["appointments"] = $this->appointment->listAppointments();
+                return $this->generalController->view('list.appointments', $variable);
+            }
         }
-        $id =  $_SESSION["id_user"];
-        $variable["appointments"] = $this->appointment->listWaitingAppointments($id);
-        return $this->generalController->view('list.appointments', $variable);
+        return $this->generalController->view('not_found', null);
     }
 
-    public function viewAp() {
-        /*$appointment = new Appointment();
-        $ap = $appointment->findid($_GET['id']);
-        $diagnostico64 = base64_encode($ap['diagnostico']);*/
+    public function viewAp($id_appointment) {
         session_start();
-        $session = $_SESSION;
-        $artists = $this->user->listArtist();
-        $local = $this->local->getTxt($this->id_local);
-        return view('view.appointment', compact('session', 'artists', 'local'));#, compact('ap', 'diagnostico64'));
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->isArtist($id_user) || $this->isAdmin($id_user)) {
+                $variable["permissions"] = true;
+                $variable["appointment"] = $this->appointment->viewAp($id_user);
+                return $this->generalController->view('view.appointment', $variable);
+            }
+        }
+        return $this->generalController->view('not_found', null);
     }
 
     public function editAp() {
@@ -140,5 +166,13 @@ class ApController extends Controller
             $session = false;
         }
         return $session;
+    }
+
+    public function isArtist($id_artist) {
+        return true;
+    }
+
+    public function isAdmin($id_admin) {
+        return true;
     }
 }

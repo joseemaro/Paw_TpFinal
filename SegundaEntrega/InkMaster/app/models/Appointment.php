@@ -104,5 +104,7 @@ class Appointment extends Model
         return $this->db->deleteAppointment($this->table , $id_appointment);
     }
 
-
+    public function viewAp($id_appointment, $id_artist){
+        return $this->db->findAppointment($this->table , $id_appointment);
+    }
 }
