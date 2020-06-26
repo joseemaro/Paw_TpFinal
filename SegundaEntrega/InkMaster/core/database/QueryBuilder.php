@@ -114,9 +114,9 @@ class QueryBuilder {
      */
     public function listWaitingAppointment($table, $id) {
         $sql = "select * from inkmaster_db.$table as turno 
-                inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_user
+                inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_artist
                 where turno.id_artist = :id
-                and turno.status='pendiente';";
+                and turno.status='pending';";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
@@ -129,29 +129,50 @@ class QueryBuilder {
     }
 
     /**
-     * Acept an appointment, change the status to 'aceptado'
+     * Acept an appointment, change the status to 'accepted'
      *
      * @param string $table
      * @param integer $id_appointment
      */
     public function aceptAppointment($table , $id_appointment){
-        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='aceptado' WHERE id_appointment= :id ;");
+        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='accepted' WHERE id_appointment= :id ;");
         $statement->bindValue(":id", $id_appointment);
         $statement->execute();
         return null;
     }
 
     /**
-     * anule an appointment, change the status to 'aceptado'
+     * anule an appointment, change the status to 'annulled'
      *
      * @param string $table
      * @param integer $id_appointment
      */
     public function deleteAppointment($table , $id_appointment){
-        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='anulado' WHERE id_appointment= :id ;");
+        $statement = $this->pdo->prepare("update inkmaster_db.$table set status='annulled' WHERE id_appointment= :id ;");
         $statement->bindValue(":id", $id_appointment);
         $statement->execute();
         return null;
+    }
+
+
+    /**
+     * Finds a local into from database table.
+     *
+     * @param string $table
+     * @param integer $id
+     * @return array
+     */
+    public function findAppointment($table, $id)
+    {
+        $sql = "select * from inkmaster_db.$table where id_appointment = :id;";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
     }
 
 

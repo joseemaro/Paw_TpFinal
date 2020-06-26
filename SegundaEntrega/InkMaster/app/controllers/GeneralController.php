@@ -13,6 +13,7 @@ class GeneralController extends Controller
 
     public function __construct()
     {
+        #$this->userController = new UserController();
         $this->user = new User();
         $this->faq = new FAQ();
         $this->tatto = new Tattoo();
@@ -23,6 +24,7 @@ class GeneralController extends Controller
     public function view($html, $variable) {
         $session = $this->session();
         $user = $_SESSION["id_user"];
+        //$permissions = $this->userController->is;
         $artists = $this->user->listArtists($this->id_local);
         $local = $this->local->getTxt($this->id_local);
         return view($html, compact('session', 'artists', 'local', 'user', 'variable'));

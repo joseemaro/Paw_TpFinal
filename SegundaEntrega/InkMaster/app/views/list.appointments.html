@@ -48,7 +48,7 @@
                             <td>{{ appointment.status }}</td>
                             <td>{{ appointment.price }}</td>
                             <td>
-                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment">
+                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
                                 </form>

@@ -79,7 +79,7 @@ class Appointment extends Model
             echo "<br>";
             var_dump($parameters);
             echo "<br>";
-            $this->parameters["status"] = 'pendiente';
+            $this->parameters["status"] = 'pending';
             $this->db->insert($this->table, $this->parameters);
             $this->parameters["status"] = true;
 
@@ -104,7 +104,7 @@ class Appointment extends Model
         return $this->db->deleteAppointment($this->table , $id_appointment);
     }
 
-    public function viewAp($id_appointment, $id_artist){
+    public function viewAp($id_appointment){
         return $this->db->findAppointment($this->table , $id_appointment);
     }
 }
