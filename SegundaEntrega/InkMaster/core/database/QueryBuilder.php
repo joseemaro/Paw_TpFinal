@@ -215,6 +215,7 @@ class QueryBuilder {
         }
     }
 
+
     /**
      * Finds a faq into from database table.
      *

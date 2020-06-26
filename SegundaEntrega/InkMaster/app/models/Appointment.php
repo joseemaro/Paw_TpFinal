@@ -77,7 +77,7 @@ class Appointment extends Model
         $boolean = $this->validateAll($parameters, $reference_image);
         if ($boolean) {
             echo "<br>";
-            var_dump($parameters);
+            //var_dump($parameters);
             echo "<br>";
             $this->parameters["status"] = 'pending';
             $this->db->insert($this->table, $this->parameters);

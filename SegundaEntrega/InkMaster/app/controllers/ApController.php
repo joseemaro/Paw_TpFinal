@@ -34,7 +34,9 @@ class ApController extends Controller
     {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $parameters["local"] = $_POST["id_local"];
+            $nameLocal = $this->local->getTxt($_POST["id_local"]);
+            $fullNameLocal = $nameLocal["direction"].", ".$nameLocal["province"].", ".$nameLocal["country"];
+            $parameters["local"] = $fullNameLocal;
             $parameters["user"] = $_SESSION["id_user"];
             $parameters["artist"] = $_POST["id_artist"];
             $parameters["date"] = $_POST["date"];
@@ -52,6 +54,7 @@ class ApController extends Controller
 
             if ($array["status"]) {     #si salio bien la validacion
                 $variable["parameters"] = $array;
+
                 return $this->generalController->view('view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;

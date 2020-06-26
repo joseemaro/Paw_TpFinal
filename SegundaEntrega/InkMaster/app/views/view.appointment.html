@@ -7,6 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+<link rel="stylesheet" type="text/css" href="/public/css/view.appointment.css">
 {% endblock %}
 
 {% block header %}
@@ -16,9 +17,40 @@
 {% endblock %}
 
 {% block main %}
-    {% for parameter in variable.parameters %}
-        <p>{{ parameter }}</p>
-    {% endfor %}
+
+<section>
+    <h1>Turnos registrado</h1>
+    <table class="width200">
+        <thead>
+        <tr>
+            <th scope="col">Usuario</th>
+            <th scope="col">Local</th>
+            <th scope="col">Artista</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>{{ variable.parameters["id_user"] }}</td>
+            <td>{{ variable.parameters["id_local"] }}</td>
+            <td>{{ variable.parameters["id_artist"] }}</td>
+            <td>{{ variable.parameters["date"] }}</td>
+            <td>{{ variable.parameters["hour"] }}</td>
+            <td>
+                <form method="get" id="show-appointment" action="new_appointment">
+                    <input type="hidden" name="id_appointment" value="">
+                    <button class ="table-button viewBtn" type="submit" form="show-appointment">Volver</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
 {% endblock %}
 
 {% block footer %}

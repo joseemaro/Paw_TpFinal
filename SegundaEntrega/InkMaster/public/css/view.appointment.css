@@ -1,0 +1,126 @@
+h1 {
+    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-left: 1em;
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #575766;
+}
+body {
+    margin:0;
+    padding:10px
+}
+
+tr th{
+    border: 1px solid #BABD8D;
+}
+
+tbody tr td{
+    border: 1px solid #BABD8D;
+}
+
+p {
+    margin:0 0 10px 0
+}
+
+button{
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    display: inline-block;
+    font-size: 1em;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #c7c7c7;
+    color: #202020;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.viewBtn{
+    background-color: #BE95C4;
+    color: #202020;
+}
+
+.editBtn{
+    background-color: #A17C6B;
+    color: #202020;
+}
+
+.deleteBtn{
+    background-color: #ED254E;
+    color: #202020;
+}
+
+table.width200,table.rwd_auto {
+    border:1px solid #BABD8D;
+    width:100%;
+    margin:0 0 10px 0
+}
+.width200 th,.rwd_auto th {
+    background:#BBB09B;
+    padding:5px;
+    text-align:center;
+    border:1px solid #BABD8D;
+}
+.width200 td,.rwd_auto td {
+    padding:5px;
+    text-align:center;
+    border:1px solid #BABD8D;
+}
+.width200 tr:last-child td, .rwd_auto tr:last-child td{
+    border:1px solid #BABD8D;
+}
+
+.rwd {
+    width:100%;
+    overflow:auto;
+}
+.rwd table.rwd_auto {
+    width:auto;
+    min-width:100%
+}
+.rwd_auto th,.rwd_auto td {
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px)
+{
+
+    table.width200, .width200 thead, .width200 tbody, .width200 th, .width200 td, .width200 tr { display: block; }
+
+    .width200 thead tr { position: absolute;top: -9999px;left: -9999px; }
+
+    .width200 tr { border: 1px solid #BABD8D; }
+
+    .width200 td { border: 1px solid #BABD8D;; position: relative;padding-left: 40%;text-align:left }
+
+    .width200 td:before {  position: absolute; top: 6px; left: 6px; width: 40%; padding-right: 0px; white-space: nowrap;}
+
+    .width200 td:nth-of-type(1):before { content: "Local";}
+    .width200 td:nth-of-type(2):before { content: "Usuario"; }
+    .width200 td:nth-of-type(3):before { content: "Artista"; }
+    .width200 td:nth-of-type(4):before { content: "Fecha"; }
+    .width200 td:nth-of-type(5):before { content: "Hora"; }
+
+
+    .descarto {display:none;}
+    .fontsize {font-size:10px}
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px)
+{
+    body { width: 100%; }
+    .descarto {display:none;}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-width: 768px) and (max-width: 1024px)
+{
+    body { width: 100%; }
+    .descarto {display:none;}
+    .fontsize {font-size:10px}
