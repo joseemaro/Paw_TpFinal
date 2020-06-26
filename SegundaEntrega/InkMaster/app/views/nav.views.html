@@ -14,7 +14,7 @@
         {% if session %}
             <li id="user"> <a href="#"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a></li>
                 <ul>
-                    {% if permissions %}
+                    {% if isArtist %}
                         <li> <a href="/list_appointment"><i class="fas fa-user site-nav--icon"></i> Lista de turnos </a></li>
                     {% endif %}
                     <li> <a href="/logout"><i class="fas fa-user site-nav--icon"></i> Logout </a></li>

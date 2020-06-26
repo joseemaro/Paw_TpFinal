@@ -116,11 +116,10 @@ class QueryBuilder {
         $sql = "select * from inkmaster_db.$table as turno 
                 inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_artist
                 where turno.id_artist = :id
-                and turno.status='pending';";
+                order by turno.status desc, turno.id_appointment asc;";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
-            //var_dump($statement);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -134,7 +133,7 @@ class QueryBuilder {
      * @param string $table
      * @param integer $id_appointment
      */
-    public function aceptAppointment($table , $id_appointment){
+    public function aceptAppointment($table , $id_appointment) {
         $statement = $this->pdo->prepare("update inkmaster_db.$table set status='accepted' WHERE id_appointment= :id ;");
         $statement->bindValue(":id", $id_appointment);
         $statement->execute();
@@ -147,7 +146,7 @@ class QueryBuilder {
      * @param string $table
      * @param integer $id_appointment
      */
-    public function deleteAppointment($table , $id_appointment){
+    public function deleteAppointment($table , $id_appointment) {
         $statement = $this->pdo->prepare("update inkmaster_db.$table set status='annulled' WHERE id_appointment= :id ;");
         $statement->bindValue(":id", $id_appointment);
         $statement->execute();

@@ -56,10 +56,10 @@
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button editBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
                                 </form>
-                                <!--  <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment">
+                                <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
-                                </form>-->
+                                </form>
                                 <form method="get" id="destroy-appointment-{{ appointment.id_appointment }}" action="/del_appointment/{{ appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Delete</button>
