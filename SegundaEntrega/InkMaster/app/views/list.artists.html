@@ -29,7 +29,7 @@
                 {% for artist in variable.artists %}
                     <tbody>
                         <tr>
-                            <td>{{ artist.id_artist }}</td>
+                            <td><a class="submit-btn" href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></td>
                             <td>{{ artist.photo }}</td>
                         </tr>
                     </tbody>

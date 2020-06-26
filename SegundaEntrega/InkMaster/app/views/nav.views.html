@@ -4,7 +4,7 @@
         <li id="artists"> <a href="/artists"> <i class="fas fa-paint-brush site-nav--icon"></i>  Artistas </a>
             <ul>
                 {% for artist in artists %}
-                    <li><a href="#">{{ artist.id_user }}</a></li>
+                    <li><a class="submit-btn" href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></li>
                 {% endfor %}
             </ul>
         </li>
