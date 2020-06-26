@@ -66,7 +66,7 @@ class ApController extends Controller
     public function listAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = $_SESSION["id_user"];
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
             if ($this->isArtist($id_user)) {
                 $variable["permissions"] = true;
                 $variable["appointments"] = $this->appointment->listWaitingAppointments($id_user);
@@ -84,7 +84,7 @@ class ApController extends Controller
     public function aceptAp($id_appointment){
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user =  $_SESSION["id_user"];
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
             if ($this->isArtist($id_user)) {
                 $this->appointment->aceptAp($id_appointment);
                 $variable["permissions"] = true;
@@ -102,7 +102,7 @@ class ApController extends Controller
     public function delAp($id_appointment){
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = $_SESSION["id_user"];
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
             if ($this->isArtist($id_user)) {
                 $this->appointment->deleteAp($id_appointment);
                 $variable["appointments"] = $this->appointment->listWaitingAppointments($id_user);
@@ -119,7 +119,7 @@ class ApController extends Controller
     public function viewAp($id_appointment) {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = $_SESSION["id_user"];
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
             if ($this->isArtist($id_user) || $this->isAdmin($id_user)) {
                 $variable["permissions"] = true;
                 $variable["appointment"] = $this->appointment->viewAp($id_user);
