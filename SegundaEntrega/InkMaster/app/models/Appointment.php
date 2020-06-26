@@ -94,12 +94,19 @@ class Appointment extends Model
     public function listAppointments() {
         return $this->db->listAppointment($this->table);
     }
-    public function listWaitingAppointments($id) {
-        return $this->db->listWaitingAppointment($this->table, $id);
+
+    public function listAppointmentsUser($id_user) {
+        return $this->db->listAppointmentUser($this->table, $id_user);
     }
+
+    public function listWaitingAppointments($id_artist) {
+        return $this->db->listWaitingAppointment($this->table, $id_artist);
+    }
+
     public function aceptAp($id_appointment){
         return $this->db->aceptAppointment($this->table , $id_appointment);
     }
+
     public function deleteAp($id_appointment){
         return $this->db->deleteAppointment($this->table , $id_appointment);
     }

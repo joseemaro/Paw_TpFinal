@@ -266,7 +266,7 @@ class User extends Model
         return $boolean;
     }
 
-    public function validate_photo($photo) {    #revisar la extension y tamaño
+    public function validate_photo($photo) {
         var_dump($photo);
         $boolean = true;
         if (!empty($photo["photo"]["name"])) {

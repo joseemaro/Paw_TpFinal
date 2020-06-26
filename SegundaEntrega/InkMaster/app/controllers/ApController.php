@@ -74,7 +74,7 @@ class ApController extends Controller
                 $variable["permissions"] = true;
                 $variable["appointments"] = $this->appointment->listAppointments();
             } else {
-                return $this->generalController->view('not_found', null);
+                $variable["appointments"] = $this->appointment->listAppointmentsUser($id_user);
             }
             return $this->generalController->view('list.appointments', $variable);
         }

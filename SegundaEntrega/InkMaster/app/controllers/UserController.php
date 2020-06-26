@@ -49,8 +49,18 @@ class UserController extends Controller
         return view();
     }
 
-    public function viewUser() {
-        return view();#'list.appointments', compact('appointments'));
+    public function viewUser($id_user) {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            if ($this->isAdmin($_SESSION["id_user"])) {
+                $user = $this->user->findUser($id_user);
+                $user["photo"] = base64_encode($user["photo"]);
+                $variable["user"] = $user;
+                return $this->generalController->view('view.user', $variable);
+            }
+            return $this->generalController->view('not_found', null);
+        }
+        return $this->generalController->view('not_found', null);
     }
 
     public function listArtists() {
@@ -58,8 +68,7 @@ class UserController extends Controller
         return $this->generalController->view('list.artists', $variable);
     }
 
-    public function viewArtist() {
-        $id_artist = $_GET["id"];
+    public function viewArtist($id_artist) {
         $variable["artist"] = $this->user->findArtist($id_artist);
         return $this->generalController->view('view.artist', $variable);
     }
@@ -139,5 +148,9 @@ class UserController extends Controller
             }
         }
         return $parameters;
+    }
+
+    public function isAdmin($id_user) {
+        return true;
     }
 }
