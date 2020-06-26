@@ -53,7 +53,7 @@ class QueryBuilder {
      * @param string $password
      * @return integer
      */
-    public function autentication($id_user, $password) {
+    public function autentication($id_user) {
         try {
             $statement = $this->pdo->prepare("select * from inkmaster_db.user where id_user = :1");
             $statement->bindValue(':1', $id_user);

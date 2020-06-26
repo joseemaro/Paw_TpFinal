@@ -359,7 +359,7 @@ class User extends Model
     }
 
     public function autentication($id_user, $password) {
-        $hash = $this->db->autentication($id_user, $password);
+        $hash = $this->db->autentication($id_user);
         $verify = password_verify($password, $hash["password"]);
         if ($verify) {
             return true;
@@ -373,11 +373,16 @@ class User extends Model
     }
 
     public function findUser($id) {
-        return $this->db->findUser($this->table, $id);
+        $user = $this->db->findUser($this->table, $id);
+        $user["id_user"] = str_replace("_", " ", $user["id_user"]);
+        return $user;
     }
 
     public function findArtist($id) {
-        return $this->db->findArtist($this->table, $id);
+        $artist = $this->db->findArtist($this->table, $id);
+        $artist["id_artist"] = str_replace("_", " ", $artist["id_artist"]);
+        $artist["id_user"] = str_replace("_", " ", $artist["id_user"]);
+        return $artist;
     }
 
     public function verifyAdult($id_user) {

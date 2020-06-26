@@ -23,11 +23,14 @@ class GeneralController extends Controller
 
     public function view($html, $variable) {
         $session = $this->session();
-        $user = $_SESSION["id_user"];
         $isArtist = true;
         $artists = $this->user->listArtists($this->id_local);
         $local = $this->local->getTxt($this->id_local);
-        return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'variable'));
+        if (isset($_SESSION["id_user"])) {
+            $user = $_SESSION["id_user"];
+            return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'variable'));
+        }
+        return view($html, compact('session', 'artists', 'local', 'isArtist', 'variable'));
     }
 
     public function index() {
@@ -35,6 +38,7 @@ class GeneralController extends Controller
     }
 
     public function updPhotos() {
+
         return $this->view('upload.photos', null);
     }
 
