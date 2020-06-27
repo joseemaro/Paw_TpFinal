@@ -30,7 +30,7 @@ class User extends Model
         $boolean = true;
 
         if (!empty($id_user)) {
-            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$\"";
+            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_.])$\"";
             if (!preg_match($pattern, $id_user)) {
                 $error = "El formato de nombre de usuario ingresado es inválido";
                 array_push($this->return, $error);

@@ -119,8 +119,16 @@ table.width200,table.rwd_auto {
 }
 
 /* iPads (portrait and landscape) ----------- */
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-    body { width: 100%; }
-    .descarto {display:none;}
-    .fontsize {font-size:10px}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    body {
+        width: 100%;
+    }
+
+    .descarto {
+        display: none;
+    }
+
+    .fontsize {
+        font-size: 10px
+    }
+}

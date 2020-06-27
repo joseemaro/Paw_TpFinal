@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //validate username
     validate_username = document.querySelector(".usernamejs");
     validate_username.addEventListener("blur", function() {
-        var username = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/;
+        var username = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_.])$/;
         if (username.exec(validate_username.value) || (validate_username.value === "")) {
             validate_username.style.border = "#ffffff";
             validate_username.style.background = "#ffffff";
