@@ -49,12 +49,26 @@ class GeneralController extends Controller
                 if (isset($_POST["sector"])){
                     $parameters["sector"] = $_POST["sector"];
                 }
-                if (isset($_SESSION)){
+                if (isset($_FILES)){
                     $parameters["image"] = $_FILES;
                 }
+                $parameters["txt"] = $_POST["description"];
+                var_dump($parameters);
                 $array = $this->tatto->validateInsert($parameters);
+                echo '<br>';
+                var_dump($array);
+                $status = $array[count($array)-1];
+                if ($status) {
+                    #si salio bien la validacion
+                    return $this->view('upload.photos', null);   #ver si hacer esto o mandar una view dependiendo del resultado
+                } else {
+                    $variable["errors"] = $array;
+                    return $this->view('errors.register', $variable);
+                }
             }
+            return $this->view('not_found', null);
         }
+        return $this->view('not_found', null);
     }
 
     public function listTattoos() {

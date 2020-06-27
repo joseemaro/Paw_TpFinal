@@ -18,8 +18,31 @@
 {% block main %}
 
     <form method="post" action="/save_photos" enctype="multipart/form-data">
+        <label>
+            Profesional
+            <select name="artist">
+                {% for artist in artists %}
+                <option>{{ artist.id_user }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>
+            Sector
+            <select name="sector">
+                <option>Cabeza</option>
+                <option>Espalda</option>
+                <option>Brazo</option>
+                <option>Pecho</option>
+                <option>Panza</option>
+                <option>Costillas</option>
+                <option>Pierna</option>
+                <option>Pie</option>
+                <option>Otro</option>
+            </select>
+        </label>
+        <textarea name="description"></textarea>
         <label> Seleccionar imágenes:
-            <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg" multiple>
+            <input type="file" name="image" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
         </label>
         <input type="submit" value="Subir imágenes" />
     </form>

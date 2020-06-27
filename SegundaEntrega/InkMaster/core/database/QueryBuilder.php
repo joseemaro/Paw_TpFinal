@@ -266,7 +266,8 @@ class QueryBuilder {
         */
      public function getTattoos($table, $beginning, $quantity)
      {
-        $sql = "select * from inkmaster_db.$table limit :beginning , :quantity";
+         //VER ESTO
+        $sql = "select * from inkmaster_db.$table limit $beginning , $quantity";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":beginning", $beginning);
