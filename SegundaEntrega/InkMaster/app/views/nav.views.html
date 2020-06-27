@@ -12,13 +12,14 @@
         <li> <a href="/new_appointment"> <i class="fas fa-calendar-check site-nav--icon"></i> Solicitar turno </a></li>
         <li> <a href="/faq"><i class=" far fa-question-circle site-nav--icon"></i> FAQs </a></li>
         {% if session %}
-            <li id="user"> <a href="#"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a></li>
+            <li id="user"> <a href="#"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a>
                 <ul>
                     {% if isArtist %}
                         <li> <a href="/list_appointment"><i class="fas fa-user site-nav--icon"></i> Lista de turnos </a></li>
                     {% endif %}
                     <li> <a href="/logout"><i class="fas fa-user site-nav--icon"></i> Logout </a></li>
                 </ul>
+            </li>
         {% else %}
             <li> <a href="/login"><i class="fas fa-user site-nav--icon"></i> login </a></li>
         {% endif %}
