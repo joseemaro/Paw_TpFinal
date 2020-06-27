@@ -37,8 +37,24 @@ class GeneralController extends Controller
     }
 
     public function updPhotos() {
-
         return $this->view('upload.photos', null);
+    }
+
+    public function savePhotos() {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
+            if ($this->isArtist($id_user)) {
+                $parameters["artist"] = $id_user;
+                if (isset($_POST["sector"])){
+                    $parameters["sector"] = $_POST["sector"];
+                }
+                if (isset($_SESSION)){
+                    $parameters["image"] = $_FILES;
+                }
+                $array = $this->tatto->validateInsert($parameters);
+            }
+        }
     }
 
     public function listTattoos() {
@@ -47,13 +63,12 @@ class GeneralController extends Controller
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $quantity = 9; //Cant de fotos por pág
         $beginning = ($page > 1) ? (($page * $quantity) - $quantity) : 0;
-        $tattoos = new Tattoo;
-        $totalTattoos = $tattoos->countTattoos();
+        $totalTattoos = $this->tatto->countTattoos();
         if ($totalTattoos > 0) {
             if ($totalTattoos > 9) {
                 $variable['total_pages'] = ceil($totalTattoos['total'] / $quantity);
             }
-            $variable["tattoos"] = $tattoos->getTattoos($beginning, $quantity);
+            $variable["tattoos"] = $this->tatto->getTattoos($beginning, $quantity);
         }
         return $this->view('list.tattoos', $variable);
     }
@@ -64,8 +79,7 @@ class GeneralController extends Controller
 
     public function listFaq() {
         $variable = array();
-        $faqs = new FAQ();
-        $variable["faqs"] = $faqs->listFaq();
+        $variable["faqs"] = $this->faq->listFaq();
         return $this->view('faq', $variable);
     }
 
@@ -73,9 +87,8 @@ class GeneralController extends Controller
     //esa vista va a mostrar la descripcion de esa pregunta
     public function viewFaq($id_faq) {
         $id = ['id' => $id_faq];
-        $faq = new FAQ();
         $variable = array();
-        $variable["faq"] = $faq->find($id_faq); // aca va el select con where y el id
+        $variable["faq"] = $this->faq->find($id_faq); // aca va el select con where y el id
         return $this->view('faq.views', $variable);
     }
 
@@ -97,5 +110,13 @@ class GeneralController extends Controller
 
     public function getIdLocal() {
         return $this->id_local;
+    }
+
+    public function isArtist($id_user) {
+        return true;
+    }
+
+    public function isAdmin($id_user) {
+        return true;
     }
 }

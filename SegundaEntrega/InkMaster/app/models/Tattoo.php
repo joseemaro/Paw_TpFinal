@@ -14,6 +14,10 @@ class Tattoo extends Model
     protected $image;
     protected $comment;
 
+    public function validateInsert($parameters) { #realizar las validaciones y realizar el insert
+        return $parameters;
+    }
+
     public function getTattoos($beginning, $quantity) {
         return $this->db->getTattoos($this->table, $beginning, $quantity);
     }

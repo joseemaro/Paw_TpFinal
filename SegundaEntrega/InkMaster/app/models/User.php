@@ -278,8 +278,8 @@ class User extends Model
                         $boolean = false;
                     }
                 } else {
-                    $this->parameters["photo"] = $photo;
-                    $this->parameters_user["photo"] = $photo;
+                    $this->parameters["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
+                    $this->parameters_user["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
                 }
             }
         }
