@@ -69,7 +69,6 @@ class UserController extends Controller
     }
 
     public function viewArtist($id_artist) {
-        var_dump(str_replace("_", " ", $id_artist));
         $variable["artist"] = $this->user->findArtist($id_artist);
         return $this->generalController->view('view.artist', $variable);
     }
@@ -100,7 +99,6 @@ class UserController extends Controller
     public function logOut() {
         session_start();
         $_SESSION = array();
-        $this->session = false;
         return $this->generalController->view('index.views', null);
     }
 

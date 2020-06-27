@@ -134,7 +134,7 @@ class QueryBuilder {
      */
     public function listWaitingAppointment($table, $id) {
         $sql = "select * from inkmaster_db.$table as turno 
-                inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_artist
+                inner join inkmaster_db.user as usuario on usuario.id_user=turno.id_user
                 where turno.id_artist = :id
                 order by turno.status desc, turno.id_appointment asc;";
         try {

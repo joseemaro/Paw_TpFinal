@@ -30,7 +30,7 @@ class User extends Model
         $boolean = true;
 
         if (!empty($id_user)) {
-            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_.])$\"";
+            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$\"";
             if (!preg_match($pattern, $id_user)) {
                 $error = "El formato de nombre de usuario ingresado es inválido";
                 array_push($this->return, $error);
@@ -103,12 +103,6 @@ class User extends Model
             }
             $this->parameters["password"] = password_hash($this->parameters["password"], PASSWORD_BCRYPT);
             $this->parameters_user["password"] = $this->parameters["password"];
-            var_dump("parameters: ");
-            var_dump($this->parameters["password"]);
-            echo "<br>";
-            var_dump("parameters_user: ");
-            var_dump($this->parameters_user["password"]);
-            echo "<br>";
         } else {
             unset($this->parameters["password"]);
             unset($this->parameters_user["password"]);
@@ -267,7 +261,6 @@ class User extends Model
     }
 
     public function validate_photo($photo) {
-        var_dump($photo);
         $boolean = true;
         if (!empty($photo["photo"]["name"])) {
             $extension = $photo["photo"]["type"];
@@ -358,6 +351,22 @@ class User extends Model
         return $this->return;
     }
 
+    public function replace($array) {
+
+        /*foreach ($array as $object) {
+            #$object["id_user"] = str_replace("_", " ", $object["id_user"]);
+            echo "<br>object<br>";
+            var_dump($object);
+            echo "<br>";
+            foreach ($object as $row) {
+                echo "<br>row<br>";
+                var_dump($row);
+                echo "<br>";
+            }
+        }*/
+        return $array;
+    }
+
     public function autentication($id_user, $password) {
         $hash = $this->db->autentication($id_user);
         $verify = password_verify($password, $hash["password"]);
@@ -369,7 +378,8 @@ class User extends Model
     }
 
     public function listArtists($id_local) {
-        return $this->db->listArtists($this->table, $id_local);
+        $artists = $this->db->listArtists($this->table, $id_local);
+        return $this->replace($artists);
     }
 
     public function findUser($id) {
