@@ -266,13 +266,14 @@ class QueryBuilder {
         */
      public function getTattoos($table, $beginning, $quantity)
      {
-         //VER ESTO
-        $sql = "select * from inkmaster_db.$table limit $beginning , $quantity";
+         //VER ESTO no estamos utilizando el bind porque me pone comillas y no funciona
+        $sql = "select * from inkmaster_db.$table limit :beginning , :quantity";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":beginning", $beginning);
             $statement->bindValue(":quantity", $quantity);
             $statement->execute();
+
             return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             $this->sendToLog($e);

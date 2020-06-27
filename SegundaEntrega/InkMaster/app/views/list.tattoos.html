@@ -20,7 +20,7 @@
     {% if (variable.tattoos)%}
         <div id="container">
             {% for tattoo in variable.tattoos %}
-        <!--<img src="data:image/png;base64, {{diagnostico64}}" >-->
+            <img src="data:image/png;base64, {{tattoo.image}}" >
             {% endfor %}
         </div>
         {% if (variable.total_pages)%}
@@ -28,7 +28,7 @@
                 <ul>
                     <li> <a href="#">Previous</a> </li>
                     {% for i in 1..variable.total_pages %}
-                    <li> <a href="#">{{i}}</a> </li>
+                        <li> <a href="/gallery/{{ i }}">{{i}}</a> </li>
                     {% endfor %}
                     <li> <a href="#">Next</a> </li>
                 </ul>
