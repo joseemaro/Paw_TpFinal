@@ -30,7 +30,7 @@
                     <tbody>
                         <tr>
                             <td><a class="submit-btn" href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></td>
-                            <td>{{ artist.photo }}</td>
+                            <td><img width="40%" src="data:image/jpg;base64, {{ artist.photo }}"/> </td>
                         </tr>
                     </tbody>
                 {% endfor %}

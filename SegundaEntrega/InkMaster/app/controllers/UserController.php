@@ -6,7 +6,6 @@ use App\models\User;
 
 class UserController extends Controller
 {
-    private $id_local = '1';
 
     public function __construct()
     {
@@ -139,9 +138,7 @@ class UserController extends Controller
         }
         if (isset($_POST["artist"])) {
             $parameters["artist"] = true;
-            if (isset($_POST["id_local"])) {
-                $parameters["local"] = $_POST["id_local"];
-            }
+            $parameters["local"] = $this->generalController->getIdLocal();
             if (isset($_POST["txt"])) {
                 $parameters["txt"] = $_POST["txt"];
             }

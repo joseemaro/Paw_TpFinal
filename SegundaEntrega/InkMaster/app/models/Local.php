@@ -19,4 +19,9 @@ class Local extends Model
     public function getTxt($id_local) {
         return $this->db->findLocal($this->table, $id_local);
     }
+
+    public function getLocal() {
+        $local = $this->db->selectAll($this->table);
+        return $local[0]["id_local"];
+    }
 }

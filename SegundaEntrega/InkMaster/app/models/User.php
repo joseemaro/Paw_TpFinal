@@ -353,17 +353,11 @@ class User extends Model
 
     public function replace($array) {
 
-        /*foreach ($array as $object) {
-            #$object["id_user"] = str_replace("_", " ", $object["id_user"]);
-            echo "<br>object<br>";
-            var_dump($object);
-            echo "<br>";
-            foreach ($object as $row) {
-                echo "<br>row<br>";
-                var_dump($row);
-                echo "<br>";
-            }
-        }*/
+        for ($i = 0; $i < count($array); $i++) {
+            $array[$i]["id_user"] = str_replace("_", " ", $array[$i]["id_user"]);
+            $array[$i]["id_artist"] = str_replace("_", " ", $array[$i]["id_artist"]);
+            $array[$i]["photo"] = base64_encode($array[$i]["photo"]);
+        }
         return $array;
     }
 

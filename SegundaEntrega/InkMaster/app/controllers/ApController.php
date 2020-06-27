@@ -9,13 +9,11 @@ use mysql_xdevapi\Session;
 
 class ApController extends Controller
 {
-    private $id_local = '1';
 
     public function __construct()
     {
         $this->appointment = new Appointment();
         $this->user = new User();
-        $this->local = new Local();
         $this->generalController = new GeneralController();
     }
 
@@ -23,7 +21,8 @@ class ApController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
-            $variable["adult"] = $this->user->verifyAdult($_SESSION["id_user"]);
+            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
+            $variable["adult"] = $this->user->verifyAdult($id_user);
             return $this->generalController->view('new.appointment', $variable);
         } else {
             return $this->generalController->view('new.appointment', null);
@@ -34,11 +33,9 @@ class ApController extends Controller
     {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $nameLocal = $this->local->getTxt($_POST["id_local"]);
-            $fullNameLocal = $nameLocal["direction"].", ".$nameLocal["province"].", ".$nameLocal["country"];
-            $parameters["local"] = $fullNameLocal;
-            $parameters["user"] = $_SESSION["id_user"];
-            $parameters["artist"] = $_POST["id_artist"];
+            $parameters["local"] = $this->generalController->getIdLocal();
+            $parameters["user"] = str_replace(" ", "_", $_SESSION["id_user"]);
+            $parameters["artist"] = str_replace(" ", "_", $_POST["id_artist"]);
             $parameters["date"] = $_POST["date"];
             $parameters["hour"] = $_POST["hour"];
             $reference_image = $_FILES;
@@ -53,7 +50,7 @@ class ApController extends Controller
             $reference_image["reference_image"] = $_FILES;
 
             if ($array["status"]) {     #si salio bien la validacion
-                $variable["parameters"] = $array;
+                $variable["appointment"] = $array;
 
                 return $this->generalController->view('view.appointment', $variable);
             } else {
@@ -125,7 +122,7 @@ class ApController extends Controller
             $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
             if ($this->isArtist($id_user) || $this->isAdmin($id_user)) {
                 $variable["permissions"] = true;
-                $variable["appointment"] = $this->appointment->viewAp($id_user);
+                $variable["appointment"] = $this->appointment->viewAp($id_appointment);
                 return $this->generalController->view('view.appointment', $variable);
             }
         }

@@ -72,7 +72,7 @@ class QueryBuilder {
     public function selectAll($table) {
         $statement = $this->pdo->prepare("select * from inkmaster_db.{$table}");
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -87,7 +87,7 @@ class QueryBuilder {
                                                     where id_local = :1;");
             $statement->bindValue(':1', $id_local);
             $statement->execute();
-            return $statement->fetchAll(PDO::FETCH_CLASS);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             $this->sendToLog($e);
         }
@@ -102,7 +102,7 @@ class QueryBuilder {
         $statement = $this->pdo->prepare("select * from inkmaster_db.$table as a
                                                     inner join inkmaster_db.user as u on (a.id_user = u.id_user);");
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_CLASS);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

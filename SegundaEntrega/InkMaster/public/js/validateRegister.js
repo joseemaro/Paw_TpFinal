@@ -150,18 +150,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //validate local
-    validate_local = document.querySelector(".localjs");
-    validate_local.addEventListener("blur", function() {
-        var local = /^[a-zA-Z0-9 ]{3,50}$/;
-        if (local.exec(validate_local.value) || (validate_local.value === "")) {
-            validate_local.style.border = "#ffffff";
-            validate_local.style.background = "#ffffff";
-        } else {
-            validate_local.style.background = "#e05f5f";
-        }
-    });
-
     //validate description
     validate_description = document.querySelector(".descriptionjs");
     validate_description.addEventListener("blur", function() {

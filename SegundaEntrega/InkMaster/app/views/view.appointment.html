@@ -7,7 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/view.appointment.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/view.appointment.css">
 {% endblock %}
 
 {% block header %}
@@ -33,11 +33,11 @@
 
         <tbody>
         <tr>
-            <td>{{ variable.parameters["id_user"] }}</td>
-            <td>{{ variable.parameters["id_local"] }}</td>
-            <td>{{ variable.parameters["id_artist"] }}</td>
-            <td>{{ variable.parameters["date"] }}</td>
-            <td>{{ variable.parameters["hour"] }}</td>
+            <td>{{ variable.appointment["id_user"] }}</td>
+            <td>{{ variable.appointment["id_local"] }}</td>
+            <td>{{ variable.appointment["id_artist"] }}</td>
+            <td>{{ variable.appointment["date"] }}</td>
+            <td>{{ variable.appointment["hour"] }}</td>
             <td>
                 <form method="get" id="show-appointment" action="new_appointment">
                     <input type="hidden" name="id_appointment" value="">

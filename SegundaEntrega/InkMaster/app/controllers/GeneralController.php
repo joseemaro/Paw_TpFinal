@@ -9,16 +9,15 @@ use App\models\Local;
 
 class GeneralController extends Controller
 {
-    private $id_local = '1';
 
     public function __construct()
     {
-        #$this->userController = new UserController();
         $this->user = new User();
         $this->faq = new FAQ();
         $this->tatto = new Tattoo();
         $this->local = new Local();
         $this->session = false;
+        $this->id_local = $this->local->getLocal();
     }
 
     public function view($html, $variable) {
