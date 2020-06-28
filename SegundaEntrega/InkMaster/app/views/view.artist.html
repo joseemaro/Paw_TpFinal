@@ -1,1 +1,35 @@
-<p>view_artist</p>
+{% extends "base.html" %}
+
+{% block title %}
+    Artista
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+    <section>
+        <h1>{{ variable.artist.id_user }}</h1>
+        <figure>
+            <img width="40%" src="data:image/jpg;base64, {{ variable.artist.photo }}">
+        </figure>
+        <p>{{ variable.artist.txt }}</p>
+        {% for tattoo in variable.artist.tattoos %}
+            <img src="data:image/png;base64, {{tattoo.image}}" >
+        {% endfor %}
+    </section>
+
+{% endblock %}
+
+{% block footer %}
+{{ include('footer.views.html') }}
+{% endblock %}

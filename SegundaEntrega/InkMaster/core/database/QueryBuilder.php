@@ -80,12 +80,29 @@ class QueryBuilder {
      *
      * @param string $table
      */
-    public function listArtists($table, $id_local) {
+    public function listArtists($table, $id_artist) {
         try {
             $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
                                                     inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
                                                     where id_local = :1;");
-            $statement->bindValue(':1', $id_local);
+            $statement->bindValue(':1', $id_artist);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Select all artists from a database table.
+     *
+     * @param string $table
+     */
+    public function listTattoosByArtist($table, $id_artist) {
+        try {
+            $statement = $this->pdo->prepare("select * from inkmaster_db.$table as t
+                                                    where t.id_artist = :id;");
+            $statement->bindValue(':id', $id_artist);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -124,7 +141,6 @@ class QueryBuilder {
             $this->sendToLog($e);
         }
     }
-
 
     /**
      * Select  waiting appointments from an artist to acept or anule them
@@ -173,7 +189,6 @@ class QueryBuilder {
         return null;
     }
 
-
     /**
      * Finds a local into from database table.
      *
@@ -194,7 +209,6 @@ class QueryBuilder {
         }
     }
 
-
     /**
      * Finds a local into from database table.
      *
@@ -214,7 +228,6 @@ class QueryBuilder {
             $this->sendToLog($e);
         }
     }
-
 
     /**
      * Finds a faq into from database table.

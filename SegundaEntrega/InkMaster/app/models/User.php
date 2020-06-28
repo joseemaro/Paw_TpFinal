@@ -361,6 +361,14 @@ class User extends Model
         return $array;
     }
 
+    public function encodeTattoos($tattoos) {
+        for ($i = 0; $i < count($tattoos); $i++) {
+            $tattoos[$i]["id_artist"] = str_replace("_", " ", $tattoos[$i]["id_artist"]);
+            $tattoos[$i]["image"] = base64_encode($tattoos[$i]["image"]);
+        }
+        return $tattoos;
+    }
+
     public function autentication($id_user, $password) {
         $hash = $this->db->autentication($id_user);
         $verify = password_verify($password, $hash["password"]);
@@ -384,8 +392,12 @@ class User extends Model
 
     public function findArtist($id) {
         $artist = $this->db->findArtist($this->table, $id);
-        $artist["id_artist"] = str_replace("_", " ", $artist["id_artist"]);
-        $artist["id_user"] = str_replace("_", " ", $artist["id_user"]);
+        if ($artist) {
+            $artist["id_user"] = str_replace("_", " ", $artist["id_user"]);
+            $artist["id_artist"] = str_replace("_", " ", $artist["id_artist"]);
+            $artist["photo"] = base64_encode($artist["photo"]);
+            $artist["tattoos"] = $this->encodeTattoos($this->db->listTattoosByArtist('tattoo', $id));
+        }
         return $artist;
     }
 
