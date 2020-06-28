@@ -34,6 +34,15 @@ img {
     display: block;
 }
 
+#no-artist {
+    font-weight: bold;
+    color: var(--color-logo);
+    font-size: 1.2em;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1em;
+}
+
 /* media queries */
 
 @media screen and (min-width: 400px) {

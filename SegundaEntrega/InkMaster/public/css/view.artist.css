@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+.container-artist {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#title-artist {
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+    padding: 1em 0;
+    font-weight: bold;
+    color: rgba(202,75,31,0.6);
+}
+
+figure {
+    background: whitesmoke;
+    margin: 1em auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    list-style-type: none;
+    padding: 1em;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figcaption {
+    padding: 1.25em;
+}
+
+figcaption p {
+    font-size: 100%;
+    text-align: center;
+    color: rgba(0,0,0,0.7);
+    font-weight: bold;
+}
+
+@media screen and (min-width: 400px) {
+    figure {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    figure {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    figure {
+        width: 30%;
+    }
+}
+
+.container-img-artist {
+    width: 90%;
+    margin: 1em auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container-img-artist img {
+    width: 18.75em;
+    margin: 1em;
+}
