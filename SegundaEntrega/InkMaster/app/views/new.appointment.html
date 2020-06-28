@@ -9,6 +9,7 @@
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
     <script type="text/javascript" src="/public/js/newAp.js"></script>
+    <script type="text/javascript" src="/public/js/validateAp.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -19,8 +20,11 @@
 
 {% block main %}
 
-    <form action="/save_appointment" method="post" enctype="multipart/form-data">
+    <form action="/save_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1> Solicitud de turno </h1>
+        {% if not variable.adult %}
+            <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
+        {% endif %}
         <label>
             Profesional
             <select name="id_artist">
@@ -30,7 +34,7 @@
             </select>
         </label>
 
-        <label> Fecha: <input type="date" name="date" required></label>
+        <label> Fecha: <input type="date" name="date" id="date" class="datejs" required></label>
 
         <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
 
@@ -45,14 +49,16 @@
         </section>
 
         <section>
-            <label><input type="checkbox" name="terms"> Acepto los <a target="_blank" href="/term&cond">términos y condiciones</a></label>
+            <label>
+                <input type="checkbox" class="terms termsjs" name="terms" id="terms" > Acepto los <a class="terms" target="_blank" href="/term&cond">términos y condiciones</a>
+            </label>
         </section>
 
         <div>
             <input class="button-newAp" type="reset" value="Limpiar" />
 
             {% if session %}
-                <input class="button-newAp" type="submit" value="Enviar" />
+                <input class="button-newAp" type="submit" id="send-btn" disabled value="Enviar" />
             {% else %}
                 <input class="button-newAp" type="submit" value="Enviar" disabled/>
             {% endif %}
@@ -60,10 +66,7 @@
 
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
 
-        {% if not variable.adult %}
-            <p>Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor</p>
-            <!--ver si dejar esto o hacer un cartel o de una mejor manera-->
-        {% endif %}
+
 
         {% if not session %}
             (*) Se necesita estar logueado para poder registrar un turno<br>

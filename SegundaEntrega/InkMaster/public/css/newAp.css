@@ -71,6 +71,10 @@ input[type=file] {
     }
 }
 
+.red-alert{
+    color: #A31D21;
+}
+
 .footer-form {
     border-top: 1px dashed #A31D21;
     margin-top: 2em;
