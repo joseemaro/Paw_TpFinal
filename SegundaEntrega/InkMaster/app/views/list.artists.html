@@ -7,6 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/list.artist.css">
 {% endblock %}
 
 {% block header %}
@@ -15,30 +16,25 @@
 {% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Lista de tatuadores</h1>
-        {% if variable.artists %}
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre de Tatuador</th>
-                        <th scope="col">Foto</th>
-                    </tr>
-                </thead>
-
-                {% for artist in variable.artists %}
-                    <tbody>
-                        <tr>
-                            <td><a class="submit-btn" href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></td>
-                            <td><img width="40%" src="data:image/jpg;base64, {{ artist.photo }}"/> </td>
-                        </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p> No hay turnos registrados hasta el momento </p>
-        {% endif %}
-    </section>
+    <h1 id="title">InkMaster's Team</h1>
+    {% if variable.artists %}
+        <div class="container">
+            {% for artist in variable.artists %}
+                <figure>
+                    <img src="data:image/jpg;base64, {{ artist.photo }}">
+                    <figcaption>
+                        <a href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a>
+                    </figcaption>
+                </figure>
+<!--                <div class="container-artist">-->
+<!--                    <span><a href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></span>-->
+<!--                    <img src="data:image/jpg;base64, {{ artist.photo }}"/>-->
+<!--                </div>-->
+            {% endfor %}
+        </div>
+    {% else %}
+    <p> No hay artistas registrados hasta el momento </p>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

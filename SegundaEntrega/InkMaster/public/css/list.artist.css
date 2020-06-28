@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+#title {
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+    padding: 1em 0;
+    font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+figure {
+    background: whitesmoke;
+    margin: 1em 2.5em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    list-style-type: none;
+    float: left;
+    padding: 1em;
+}
+
+figcaption {
+    padding: 1.25em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* media queries */
+
+@media screen and (min-width: 400px) {
+    figure {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    figure {
+        width: 33.333%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    figure {
+        width: 25%;
+    }
+}
