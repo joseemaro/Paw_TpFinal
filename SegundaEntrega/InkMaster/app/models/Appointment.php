@@ -114,4 +114,5 @@ class Appointment extends Model
     public function viewAp($id_appointment){
         return $this->db->findAppointment($this->table , $id_appointment);
     }
+
 }

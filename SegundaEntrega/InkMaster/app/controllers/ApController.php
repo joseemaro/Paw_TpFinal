@@ -123,6 +123,8 @@ class ApController extends Controller
             if ($this->isArtist($id_user) || $this->isAdmin($id_user)) {
                 $variable["permissions"] = true;
                 $variable["appointment"] = $this->appointment->viewAp($id_appointment);
+                $id_pacient = $variable["appointment"]["id_user"];
+                $variable["medical"] = $this->user->viewMedRec($id_pacient);
                 return $this->generalController->view('view.appointment', $variable);
             }
         }

@@ -28,6 +28,7 @@
             <th scope="col">Artista</th>
             <th scope="col">Fecha</th>
             <th scope="col">Hora</th>
+            <th scope="col">Enfermedades</th>
         </tr>
         </thead>
 
@@ -38,6 +39,8 @@
             <td>{{ variable.appointment["id_artist"] }}</td>
             <td>{{ variable.appointment["date"] }}</td>
             <td>{{ variable.appointment["hour"] }}</td>
+
+            <td>{{ variable.medical["considerations"] }}</td>
             <td>
                 <form method="get" id="show-appointment" action="new_appointment">
                     <input type="hidden" name="id_appointment" value="">

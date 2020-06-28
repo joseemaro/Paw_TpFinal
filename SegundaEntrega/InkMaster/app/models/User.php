@@ -61,6 +61,10 @@ class User extends Model
         }
 }
 
+    public function viewMedRec($id_pacient){
+       return $this->db->findMedReccord("medical_record", $id_pacient);
+    }
+
     public function validate_password($password) {
         $boolean = true;
 

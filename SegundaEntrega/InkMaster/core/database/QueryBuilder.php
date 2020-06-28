@@ -209,6 +209,7 @@ class QueryBuilder {
         }
     }
 
+
     /**
      * Finds a local into from database table.
      *
@@ -268,6 +269,26 @@ class QueryBuilder {
             $this->sendToLog($e);
         }
     }
+
+    /**
+     * Recovers medical record from database table.
+     *
+     * @param string $table
+     * @param string $id_pacient
+     * @return array
+     */
+    public function findMedReccord($table, $id_pacient){
+        $sql = "select * from inkmaster_db.$table where id_user = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id_pacient);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
 
      /**
         * Recovers images from database table.
