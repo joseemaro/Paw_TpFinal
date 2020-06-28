@@ -45,7 +45,16 @@ class UserController extends Controller
     }
 
     public function listUsers() {
-        return view();
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->isAdmin($id_user)) {
+                $variable["artists"] = $this->user->listUsers();
+                return $this->generalController->view('list.users', $variable);
+            }
+            return $this->generalController->view('not_found', null);
+        }
+        return $this->generalController->view('not_found', null);
     }
 
     public function viewUser($id_user) {

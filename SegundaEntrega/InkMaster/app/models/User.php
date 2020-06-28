@@ -354,9 +354,18 @@ class User extends Model
     public function replace($array) {
 
         for ($i = 0; $i < count($array); $i++) {
-            $array[$i]["id_user"] = str_replace("_", " ", $array[$i]["id_user"]);
-            $array[$i]["id_artist"] = str_replace("_", " ", $array[$i]["id_artist"]);
-            $array[$i]["photo"] = base64_encode($array[$i]["photo"]);
+            if (isset($array[$i]["id_user"])) {
+                $array[$i]["id_user"] = str_replace("_", " ", $array[$i]["id_user"]);
+            }
+            if (isset($array[$i]["id_artist"])) {
+                $array[$i]["id_artist"] = str_replace("_", " ", $array[$i]["id_artist"]);
+            }
+            if (isset($array[$i]["photo"])) {
+                $array[$i]["photo"] = base64_encode($array[$i]["photo"]);
+            }
+            if (isset($array[$i]["image"])) {
+                $array[$i]["image"] = base64_encode($array[$i]["image"]);
+            }
         }
         return $array;
     }
@@ -384,6 +393,11 @@ class User extends Model
         return $this->replace($artists);
     }
 
+    public function listUsers() {
+        $users = $this->db->selectAll($this->table);
+        return $this->replace($users);
+    }
+
     public function findUser($id) {
         $user = $this->db->findUser($this->table, $id);
         $user["id_user"] = str_replace("_", " ", $user["id_user"]);
@@ -396,7 +410,7 @@ class User extends Model
             $artist["id_user"] = str_replace("_", " ", $artist["id_user"]);
             $artist["id_artist"] = str_replace("_", " ", $artist["id_artist"]);
             $artist["photo"] = base64_encode($artist["photo"]);
-            $artist["tattoos"] = $this->encodeTattoos($this->db->listTattoosByArtist('tattoo', $id));
+            $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
         }
         return $artist;
     }
