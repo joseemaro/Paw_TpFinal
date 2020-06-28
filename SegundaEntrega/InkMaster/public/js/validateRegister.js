@@ -165,7 +165,12 @@ document.addEventListener("DOMContentLoaded", function() {
     //validar terminos
     validate_terms = document.querySelector(".termsjs");
     validate_terms.addEventListener("click", function() {
-        document.form.submit.removeAttribute("disabled");
+        terms = document.getElementById("btn-register");
+        if(validate_terms.checked) {
+            terms.removeAttribute("disabled");
+        }else{
+            terms.setAttribute("disabled", "");
+        }
     });
 
 });

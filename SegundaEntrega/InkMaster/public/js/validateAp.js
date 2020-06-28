@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_terms = document.querySelector(".termsjs");
     validate_terms.addEventListener("click", function() {
         terms = document.getElementById("send-btn");
-        terms.removeAttribute("disabled");
+        if (validate_terms.checked) {
+            terms.removeAttribute("disabled");
+        }else{
+            terms.setAttribute("disabled", "");
+        }
     });
 
     //validate that the appointment is in a future
