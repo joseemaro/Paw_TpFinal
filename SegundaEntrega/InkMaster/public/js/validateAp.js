@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var hoy = new Date();
         var mes;
         var meshoy = hoy.getMonth() + 1;
-        var diahoy = hoy.getDay();
+        var diahoy = hoy.getDate();
         if (meshoy < 10) {
             meshoy = '0' + meshoy;
         }
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             elem.style.display = 'block';
             elem.style.color = "#CD0808";
             var form = document.getElementById('form');
-            form.insertBefore(elem, form.children[4]);
+            form.insertBefore(elem, form.children[3]);
             elem.textContent = '*La fecha seleccionada debe ser valida*';
             elem.className = 'error';
             elem.style.display = 'block';

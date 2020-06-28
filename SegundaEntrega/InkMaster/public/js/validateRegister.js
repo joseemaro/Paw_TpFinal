@@ -68,9 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_born = document.querySelector(".bornjs");
     validate_born.addEventListener("blur", function(event) {
         var hoy = new Date();
-        var mes;
         var meshoy = hoy.getMonth() + 1;
-        var diahoy = hoy.getDay();
+        var diahoy = hoy.getDate();
         if (meshoy < 10) {
             meshoy = '0' + meshoy;
         }
