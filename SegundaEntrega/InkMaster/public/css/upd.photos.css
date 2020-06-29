@@ -11,6 +11,7 @@ form {
 
 label {
     display: block;
+    margin: 1em 1em;
 }
 
 input[type=file] {

@@ -8,6 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/upd.photos.css">
+    <script type="text/javascript" src="/public/js/upd.photos.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -42,9 +43,9 @@
         </label>
         <textarea name="description"></textarea>
         <label> Seleccionar imágenes:
-            <input type="file" name="image" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
+            <input type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
         </label>
-        <input type="submit" value="Subir imágenes" />
+        <input type="submit" disabled id="up-btn" value="Subir imágenes" />
     </form>
 
 {% endblock %}
