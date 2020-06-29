@@ -52,7 +52,7 @@ header::after{
 }
 
 /*Nav principal está pensado Mobile first*/
-.site-nav{
+.site-nav {
     top:100%;
     left:0;
     position: absolute;
@@ -61,6 +61,7 @@ header::after{
     clip-path: circle(0px at top left);
     transition: clip-path ease-in-out 700ms;
     width: 70%;
+    z-index:1;
 }
 
 /*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/

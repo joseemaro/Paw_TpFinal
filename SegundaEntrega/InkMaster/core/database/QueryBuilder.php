@@ -327,11 +327,11 @@ class QueryBuilder {
         $sql = "select * from inkmaster_db.$table limit :beginning , :quantity";
         try {
             $statement = $this->pdo->prepare($sql);
-            $statement->bindValue(":beginning", $beginning);
-            $statement->bindValue(":quantity", $quantity);
+            $statement->bindValue(":beginning", $beginning, PDO::PARAM_INT);
+            $statement->bindValue(":quantity", $quantity, PDO::PARAM_INT);
             $statement->execute();
 
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             $this->sendToLog($e);
         }

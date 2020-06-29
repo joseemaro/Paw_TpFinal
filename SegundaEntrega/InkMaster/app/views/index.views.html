@@ -7,6 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/slider.css">
 {% endblock %}
 
 {% block header %}
@@ -16,26 +17,32 @@
 {% endblock %}
 
 {% block main %}
-    <div id="container">
-        {% if variable.msgWelcome %}
-            <span><br>  {{ variable.msgWelcome }} <br></span>
-        {% endif %}
-        <span> <br> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A commodi, dolor excepturi illum necessitatibus perspiciatis quam qui quidem repellendus tenetur. Amet aut autem hic id natus quas tempore, unde veritatis?</span>
+    <div class="slide-container">
+        <div class="miSlider fade">
+            <img src="/public/css/slider/1.jpg" alt="">
+        </div>
+        <div class="miSlider fade">
+            <img src="/public/css/slider/2.jpg" alt="">
+        </div>
+        <div class="miSlider fade">
+            <img src="/public/css/slider/3.jpg" alt="">
+        </div>
+        <div class="miSlider fade">
+            <img src="/public/css/slider/4.jpg" alt="">
+        </div>
+        <div class="directions">
+            <a href="#" class="back" onclick="back(-1)">&#10094;</a>
+            <a href="#" class="next" onclick="next(1)">&#10095;</a>
+        </div>
+        <div class="bars">
+            <span class="bar active" onclick="positionSlide(1)"></span>
+            <span class="bar" onclick="positionSlide(2)"></span>
+            <span class="bar" onclick="positionSlide(3)"></span>
+            <span class="bar" onclick="positionSlide(4)"></span>
+        </div>
     </div>
+
+<script src="/public/js/slider.js"></script>
 {% endblock %}
 
 {% block footer %}
