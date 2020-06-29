@@ -105,7 +105,7 @@ table.width200,table.rwd_auto {
     .width200 td:nth-of-type(3):before { content: "Artista"; }
     .width200 td:nth-of-type(4):before { content: "Fecha"; }
     .width200 td:nth-of-type(5):before { content: "Hora"; }
-
+    .width200 td:nth-of-type(6):before { content: "Enfermedades"; }
 
     .descarto {display:none;}
     .fontsize {font-size:10px}

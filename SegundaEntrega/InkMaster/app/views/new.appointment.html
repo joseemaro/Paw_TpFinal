@@ -22,8 +22,10 @@
 
     <form action="/save_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1> Solicitud de turno </h1>
-        {% if not variable.adult %}
-            <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
+        {% if session %}
+            {% if not variable.adult %}
+                <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
+            {% endif %}
         {% endif %}
         <label>
             Profesional

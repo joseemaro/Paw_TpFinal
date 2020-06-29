@@ -42,10 +42,11 @@
 
             <td>{{ variable.medical["considerations"] }}</td>
             <td>
-                <form method="get" id="show-appointment" action="new_appointment">
+                <!--<form method="get" id="show-appointment" action="list_appointment">
                     <input type="hidden" name="id_appointment" value="">
                     <button class ="table-button viewBtn" type="submit" form="show-appointment">Volver</button>
-                </form>
+                </form>-->
+                <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
             </td>
         </tr>
         </tbody>

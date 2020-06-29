@@ -295,17 +295,17 @@ class QueryBuilder {
     }
 
     /**
-     * Recovers medical record from database table.
+     * Recovers appoinment from database table.
      *
      * @param string $table
-     * @param string $id_pacient
+     * @param string $id_ap
      * @return array
      */
-    public function findAppointment($table, $id_pacient){
-        $sql = "select * from inkmaster_db.$table where id_user = :id";
+    public function findAppointment($table, $id_ap){
+        $sql = "select * from inkmaster_db.$table where id_appointment = :id";
         try {
             $statement = $this->pdo->prepare($sql);
-            $statement->bindValue(":id", $id_pacient);
+            $statement->bindValue(":id", $id_ap);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
