@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //validar terminos
+    //validate pathologies
     validate_pathology = document.querySelector(".pathologyjs");
     validate_pathology.addEventListener("blur", function() {
         var path = /^[a-zA-Z0-9+-.: ]{3,70}$/;

@@ -84,10 +84,12 @@
 
         <section>
             <label> ¿Posee patologías?
-                <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);" />
+                <input name="pathology" type="checkbox" id="pathology" onChange="comprobar(this);"/>
             </label>
 
-            <textarea class="pathology-txt" name="pathology-txt" id="pathology-txt"></textarea>
+            <textarea class="pathology-txt pathologyjs" name="pathology-txt" id="pathology-txt"
+                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: ">
+            </textarea>
         </section>
 
         <label> Tatuador:
