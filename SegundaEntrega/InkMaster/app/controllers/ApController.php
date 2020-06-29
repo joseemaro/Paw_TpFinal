@@ -51,7 +51,8 @@ class ApController extends Controller
 
             if ($array["status"]) {     #si salio bien la validacion
                 $variable["appointment"] = $array;
-
+                $id_pacient = $variable["appointment"]["id_user"];
+                $variable["medical"] = $this->user->viewMedRec($id_pacient);
                 return $this->generalController->view('view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
