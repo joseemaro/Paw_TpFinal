@@ -47,7 +47,9 @@
                 <input name="pathology" type="checkbox" onChange="comprobar(this);" />
             </label>
 
-            <textarea class="disease" name="pathology-txt" id="pathology-txt"></textarea>
+            <textarea class="disease pathologyjs" name="pathology-txt" id="pathology-txt"
+                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:">
+            </textarea>
         </section>
 
         <section>
