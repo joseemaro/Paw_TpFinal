@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //validate description
     validate_description = document.querySelector(".descriptionjs");
     validate_description.addEventListener("blur", function() {
-        var description = /^[a-zA-Z0-9 ]{3,50}$/;
+        var description = /^[a-zA-Z0-9?!¡¿.,; ]{3,300}$/;
         if (description.exec(validate_description.value) || (validate_description.value === "")) {
             validate_description.style.border = "#ffffff";
             validate_description.style.background = "#ffffff";

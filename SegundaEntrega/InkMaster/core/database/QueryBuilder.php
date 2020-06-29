@@ -193,15 +193,20 @@ class QueryBuilder {
      * Finds a local into from database table.
      *
      * @param string $table
-     * @param integer $id
+     * @param integer $id_artist
+     * @param string $date
+     * @param string $hour
      * @return array
      */
-    public function findAppointment($table, $id)
+    public function repeatAppointment($table, $id_artist, $date, $hour)
     {
-        $sql = "select * from inkmaster_db.$table where id_appointment = :id;";
+        $sql = "select count(*) as cant from inkmaster_db.$table ap
+                where ap.id_artist = :id and ap.date = :date and ap.hour = :hour;";
         try {
             $statement = $this->pdo->prepare($sql);
-            $statement->bindValue(":id", $id);
+            $statement->bindValue(":id", $id_artist);
+            $statement->bindValue(":date", $date);
+            $statement->bindValue(":hour", $hour);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -289,6 +294,24 @@ class QueryBuilder {
         }
     }
 
+    /**
+     * Recovers medical record from database table.
+     *
+     * @param string $table
+     * @param string $id_pacient
+     * @return array
+     */
+    public function findAppointment($table, $id_pacient){
+        $sql = "select * from inkmaster_db.$table where id_user = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id_pacient);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
 
      /**
         * Recovers images from database table.

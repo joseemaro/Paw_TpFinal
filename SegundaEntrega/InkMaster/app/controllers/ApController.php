@@ -35,9 +35,9 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $parameters["local"] = $this->generalController->getIdLocal();
             $parameters["user"] = str_replace(" ", "_", $_SESSION["id_user"]);
-            $parameters["artist"] = str_replace(" ", "_", $_POST["id_artist"]);
             $parameters["date"] = $_POST["date"];
             $parameters["hour"] = $_POST["hour"];
+            $parameters["artist"] = str_replace(" ", "_", $_POST["id_artist"]);
             $reference_image = $_FILES;
 
             $medical_record = array();

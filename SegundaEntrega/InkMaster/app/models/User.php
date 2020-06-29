@@ -35,7 +35,7 @@ class User extends Model
                 $error = "El formato de nombre de usuario ingresado es inválido";
                 array_push($this->return, $error);
                 $boolean = false;
-            } else if ($this->validate_duplicateUser($id_user)) {
+            } else if (!$this->validate_duplicateUser($id_user)) {
                 $this->parameters["id_user"] = $id_user;
                 $this->parameters_user["id_user"] = $id_user;
             }else{
@@ -55,9 +55,9 @@ class User extends Model
         $cant = $this->db->findCantUser($this->table, $id);
         $can = $cant['cant'];
         if ($can == "0"){
-            return true;
-        }else{
             return false;
+        }else{
+            return true;
         }
 }
 
@@ -290,9 +290,8 @@ class User extends Model
         return $boolean;
     }
 
-    public function validate_artist($artist) {
+    public function validate_artist($artist) {  #validar si es un artista
         $boolean = true;
-
         if ($artist) {
             $this->parameters["id_artist"] = $this->parameters["id_user"];
             $this->parameters_artist["id_artist"] = $this->parameters["id_user"];
