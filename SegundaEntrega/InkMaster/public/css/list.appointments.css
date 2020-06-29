@@ -1,17 +1,13 @@
-
 h1 {
     padding-bottom: 2em;
     padding-top: 1em;
     padding-left: 1em;
     font-size: larger;
     font-weight: bold;
-    text-decoration: underline;
     color: #575766;
 }
-body {
-    margin:0;
-    padding:10px
-}
+
+
 
 tr th{
     border: 1px solid #BABD8D;
@@ -22,11 +18,10 @@ tbody tr td{
 }
 
 p {
-    margin:0 0 10px 0
+    margin:0 0 0.625em 0
 }
 
-button{
-    font-family: 'Helvetica', 'Arial', sans-serif;
+.table-button{
     display: inline-block;
     font-size: 1em;
     padding: 0.6em 0.6em;
