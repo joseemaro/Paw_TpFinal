@@ -58,6 +58,7 @@ class UserController extends Controller
     }
 
     public function viewUser($id_user) {
+        $id_user = str_replace("%20", " ", $id_user);
         session_start();
         if (isset($_SESSION["id_user"])) {
             if ($this->isAdmin($_SESSION["id_user"])) {
@@ -77,6 +78,7 @@ class UserController extends Controller
     }
 
     public function viewArtist($id_artist) {
+        $id_artist = str_replace("%20", " ", $id_artist);
         $variable["artist"] = $this->user->findArtist($id_artist);
         return $this->generalController->view('view.artist', $variable);
     }
@@ -93,7 +95,7 @@ class UserController extends Controller
         $session = null;
         $id_user = $_POST["id_user"];
         $password = $_POST["password"];
-        $result = $this->user->autentication(str_replace(" ", "_", $id_user), $password);
+        $result = $this->user->autentication($id_user, $password);
         if ($result) { #obvio que esto no deberian ser var_dump
             $variable["msgWelcome"] = "bienvenido $id_user ! ";
             session_start();
@@ -113,7 +115,7 @@ class UserController extends Controller
     public function parameters() {
         $parameters = array();
         if (isset($_POST["id_user"])) {
-            $parameters["user"] = str_replace(" ", "_", $_POST["id_user"]);
+            $parameters["user"] = $_POST["id_user"];
         }
         if (isset($_POST["password"])) {
             $parameters["password"] = $_POST["password"];

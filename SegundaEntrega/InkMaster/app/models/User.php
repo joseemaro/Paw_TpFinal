@@ -30,7 +30,7 @@ class User extends Model
         $boolean = true;
 
         if (!empty($id_user)) {
-            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$\"";
+            $pattern = "\"^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_.])$\"";
             if (!preg_match($pattern, $id_user)) {
                 $error = "El formato de nombre de usuario ingresado es inválido";
                 array_push($this->return, $error);
@@ -357,12 +357,6 @@ class User extends Model
     public function replace($array) {
 
         for ($i = 0; $i < count($array); $i++) {
-            if (isset($array[$i]["id_user"])) {
-                $array[$i]["id_user"] = str_replace("_", " ", $array[$i]["id_user"]);
-            }
-            if (isset($array[$i]["id_artist"])) {
-                $array[$i]["id_artist"] = str_replace("_", " ", $array[$i]["id_artist"]);
-            }
             if (isset($array[$i]["photo"])) {
                 $array[$i]["photo"] = base64_encode($array[$i]["photo"]);
             }
@@ -371,14 +365,6 @@ class User extends Model
             }
         }
         return $array;
-    }
-
-    public function encodeTattoos($tattoos) {
-        for ($i = 0; $i < count($tattoos); $i++) {
-            $tattoos[$i]["id_artist"] = str_replace("_", " ", $tattoos[$i]["id_artist"]);
-            $tattoos[$i]["image"] = base64_encode($tattoos[$i]["image"]);
-        }
-        return $tattoos;
     }
 
     public function autentication($id_user, $password) {
@@ -403,15 +389,12 @@ class User extends Model
 
     public function findUser($id) {
         $user = $this->db->findUser($this->table, $id);
-        $user["id_user"] = str_replace("_", " ", $user["id_user"]);
         return $user;
     }
 
     public function findArtist($id) {
         $artist = $this->db->findArtist($this->table, $id);
         if ($artist) {
-            $artist["id_user"] = str_replace("_", " ", $artist["id_user"]);
-            $artist["id_artist"] = str_replace("_", " ", $artist["id_artist"]);
             $artist["photo"] = base64_encode($artist["photo"]);
             $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
         }

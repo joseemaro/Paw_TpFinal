@@ -43,7 +43,7 @@ class GeneralController extends Controller
     public function savePhotos() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = str_replace(" ", "_", $_SESSION["id_user"]);
+            $id_user = $_SESSION["id_user"];
             if ($this->isArtist($id_user)) {
                 $parameters["artist"] = $id_user;
                 if (isset($_POST["sector"])){
