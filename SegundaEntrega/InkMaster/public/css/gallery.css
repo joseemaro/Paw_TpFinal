@@ -55,3 +55,9 @@ img {
     text-decoration: none;
     color: black;
 }
+
+.disable {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6
+}

@@ -73,13 +73,13 @@ class GeneralController extends Controller
 
     public function listTattoos() {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        var_dump($page);
-        $quantity = 3; //Cant de fotos por pág
+        $quantity = 9; //Cant de fotos por pág
         $beginning = ($page > 1) ? (($page * $quantity) - $quantity) : 0;
         $totalTattoos = $this->tatto->countTattoos();
         if ($totalTattoos > 0) {
             if ($totalTattoos > $quantity) {
-                $variable['total_pages'] = ceil($totalTattoos['total'] / $quantity);
+                $variable["total_pages"] = ceil($totalTattoos['total'] / $quantity);
+                $variable["page"] = $page;
             }
             $variable["tattoos"] = $this->tatto->getTattoos($beginning, $quantity);
         }

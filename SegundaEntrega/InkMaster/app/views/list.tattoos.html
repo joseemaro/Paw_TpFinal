@@ -26,11 +26,21 @@
         {% if (variable.total_pages)%}
             <nav id="page_navigator">
                 <ul>
-                    <li> <a href="#">Previous</a> </li>
+                    {% if (variable.page == 1) %}
+                        <li> <a href="#" class="disable";>Previous</a> </li>
+                    {% else %}
+                        <li> <a href="/gallery?page= {{variable.page-1}}">Previous</a> </li>
+                    {% endif %}
+
                     {% for i in 1..variable.total_pages %}
-                        <li> <a href="/gallery/{{ i }}">{{i}}</a> </li>
+                        <li> <a href="/gallery?page={{ i }}">{{i}}</a> </li>
                     {% endfor %}
-                    <li> <a href="#">Next</a> </li>
+
+                    {% if (variable.page == variable.total_pages) %}
+                        <li> <a href="#" class="disable">Next</a> </li>
+                    {% else %}
+                        <li> <a href="/gallery?page= {{variable.page+1}}">Next</a> </li>
+                    {% endif %}
                 </ul>
             </nav>
         {% endif %}
