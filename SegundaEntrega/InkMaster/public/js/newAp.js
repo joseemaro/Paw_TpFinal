@@ -1,7 +1,9 @@
-function comprobar(obj) {
-    if (obj.checked) {
-        document.getElementById('pathology-txt').style.display = "block";
-    } else {
-        document.getElementById('pathology-txt').style.display = "none";
-    }
-}
+document.addEventListener("DOMContentLoaded", function() {
+    function comprobar(obj) {
+        if (obj.checked) {
+            document.getElementById('pathology-txt').style.display = "block";
+        } else {
+            document.getElementById('pathology-txt').style.display = "none";
+        }
+    };
+});
