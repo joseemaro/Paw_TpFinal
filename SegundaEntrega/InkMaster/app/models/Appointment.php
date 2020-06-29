@@ -152,7 +152,7 @@ class Appointment extends Model
         }
         if ($boolean) {
             $count = $this->db->repeatAppointment($this->table, $id_artist, $this->parameters["date"], $this->parameters["hour"]);
-            if ($count > 0) {
+            if ($count["cant"] > 0) {
                 $boolean = false;
                 $error = "Ya se encuentra un turno registrado en esta fecha y horario para este artista";
                 array_push($this->return, $error);

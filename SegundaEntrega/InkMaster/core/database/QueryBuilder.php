@@ -193,14 +193,14 @@ class QueryBuilder {
      * Finds a local into from database table.
      *
      * @param string $table
-     * @param integer $id_artist
+     * @param string $id_artist
      * @param string $date
      * @param string $hour
      * @return array
      */
     public function repeatAppointment($table, $id_artist, $date, $hour)
     {
-        $sql = "select count(*) as cant from inkmaster_db.$table ap
+        $sql = "select count(*) as cant from inkmaster_db.$table as ap
                 where ap.id_artist = :id and ap.date = :date and ap.hour = :hour;";
         try {
             $statement = $this->pdo->prepare($sql);
