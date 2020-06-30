@@ -7,6 +7,7 @@
 {% block head %}
 {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/edit.user.css">
 {% endblock %}
 
 {% block header %}
@@ -16,9 +17,10 @@
 
 {% block main %}
 <section id="container-list">
-    <h1 id="title-list">Editar usuario</h1>
+
 
     <form action="/upt_user" method="post" id="form" name="form" enctype="multipart/form-data">
+        <h1 id="title-list">Editar usuario</h1>
 
         <label> Username: <input type="text" name="username" readonly value="{{ variable.user.id_user }}"></label>
 
@@ -38,7 +40,7 @@
 
         <label> Enfermedades: <input type="text" name="medical"  value="{{ variable.user.medical }}"></label>
 
-        <label> Foto de perfil
+        <label> Foto de perfil <br>
             {% if variable.user.photo %}
             <img src="data:image/png;base64, {{ variable.user['photo'] }}" style="max-width:20%;width:auto;height:auto;" >
             {% endif %}
@@ -47,9 +49,9 @@
 
 
         <div>
-            <input class="button-editAp" type="reset" value="Limpiar" />
-
             <input class="button-editAp" type="submit" id="send-btn" value="Guardar" />
+
+            <input class="button-editAp" type="reset" value="Limpiar" />
         </div>
 
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
