@@ -1,20 +1,20 @@
-h1 {
-    padding-bottom: 2em;
-    padding-top: 1em;
-    padding-left: 1em;
+#container-list {
+    padding: 1em;
+}
+
+#title-list {
+    padding-bottom: 1em;
     font-size: larger;
     font-weight: bold;
     color: #575766;
 }
 
-
-
-tr th{
-    border: 1px solid #BABD8D;
-}
-
-tbody tr td{
-    border: 1px solid #BABD8D;
+tbody,
+tr,
+td,
+th {
+    border: 1px solid #CA4B1F;
+    background: whitesmoke;
 }
 
 p {
@@ -28,73 +28,94 @@ p {
     margin-top: 0.5em;
     -webkit-appearance: none;
     appearance: none;
-    background-color: #c7c7c7;
-    color: #202020;
-    border-radius: 3px;
+    color: white;
+    border-radius: 0.1875em;
     border: none;
     cursor: pointer;
     position: relative;
+    width: 100%;
 }
 
-.viewBtn{
-    background-color: #BE95C4;
-    color: #202020;
+.acceptBtn {
+    background-color: #3C7931;
 }
 
-.editBtn{
-    background-color: #A17C6B;
-    color: #202020;
+.viewBtn,
+.editBtn {
+    background-color: #202020;
 }
 
 .deleteBtn{
-    background-color: #ED254E;
-    color: #202020;
+    background-color: #8B0000;
 }
 
-table.width200,table.rwd_auto {
-    border:1px solid #BABD8D;
+table.width200,
+table.rwd_auto {
     width:100%;
-    margin:0 0 10px 0
+    margin:0 0 0.625em 0
 }
-.width200 th,.rwd_auto th {
-    background:#BBB09B;
-    padding:5px;
+.width200 th,
+.rwd_auto th {
+    padding: 0.5em;
+    font-weight: bold;
+    text-align: center;
+}
+.width200 td,
+.rwd_auto td {
+    padding: 0.5em;
     text-align:center;
-    border:1px solid #BABD8D;
-}
-.width200 td,.rwd_auto td {
-    padding:5px;
-    text-align:center;
-    border:1px solid #BABD8D;
-}
-.width200 tr:last-child td, .rwd_auto tr:last-child td{
-    border:1px solid #BABD8D;
+    overflow: hidden;
 }
 
 .rwd {
-    width:100%;
-    overflow:auto;
+    width: 100%;
+    overflow: auto;
 }
+
 .rwd table.rwd_auto {
-    width:auto;
-    min-width:100%
+    width: auto;
+    min-width: 100%
 }
-.rwd_auto th,.rwd_auto td {
+.rwd_auto th,
+.rwd_auto td {
     white-space: nowrap;
 }
 
 @media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px)
 {
+    tbody {
+        margin-top: 1em;
+    }
 
-    table.width200, .width200 thead, .width200 tbody, .width200 th, .width200 td, .width200 tr { display: block; }
+    table.width200,
+    .width200 thead,
+    .width200 tbody,
+    .width200 th,
+    .width200 td,
+    .width200 tr {
+        display: block;
+    }
 
-    .width200 thead tr { position: absolute;top: -9999px;left: -9999px; }
+    .width200 thead tr {
+        position: absolute;
+        top: -62.4375em;
+        left: -62.4375em;
+    }
 
-    .width200 tr { border: 1px solid #BABD8D; }
+    .width200 td {
+        position: relative;
+        padding-left: 40%;
+        text-align: left
+    }
 
-    .width200 td { border: 1px solid #BABD8D;; position: relative;padding-left: 40%;text-align:left }
-
-    .width200 td:before {  position: absolute; top: 6px; left: 6px; width: 40%; padding-right: 0px; white-space: nowrap;}
+    .width200 td:before {
+        position: absolute;
+        top: 0.375em;
+        left: 0.375em;
+        width: 40%;
+        padding-right: 0;
+        white-space: nowrap;
+    }
 
     .width200 td:nth-of-type(1):before { content: "Tatuador";}
     .width200 td:nth-of-type(2):before { content: "Local"; }
@@ -107,21 +128,23 @@ table.width200,table.rwd_auto {
     .width200 td:nth-of-type(9):before { content: "Precio"; }
     .width200 td:nth-of-type(10):before { content: "Acciones"; }
 
-    .descarto {display:none;}
-    .fontsize {font-size:10px}
+    .descarto {
+        display:none;
+    }
+
+    .fontsize {
+        font-size: 0.625em
+    }
 }
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-width : 320px) and (max-width : 480px)
 {
-    body { width: 100%; }
-    .descarto {display:none;}
-}
+    .descarto {
+        display:none;
+    }
 
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-    body { width: 100%; }
-    .descarto {display:none;}
-    .fontsize {font-size:10px}
+    .fontsize {
+        font-size: 0.625em
+    }
 }

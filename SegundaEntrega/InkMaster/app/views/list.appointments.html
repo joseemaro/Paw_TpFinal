@@ -16,8 +16,8 @@
 {% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Lista de turnos</h1>
+    <section id="container-list">
+        <h1 id="title-list">Lista de turnos</h1>
         {% if variable.appointments %}
             <table class="width200">
                 <thead>
@@ -46,15 +46,19 @@
                             <td>{{ appointment.phone }}</td>
                             <td>{{ appointment.email }}</td>
                             <td>{{ appointment.status }}</td>
-                            <td>{{ appointment.price }}</td>
+                            {% if (appointment.price is null) %}
+                                <td> - </td>
+                            {% else %}
+                                <td>{{ appointment.price }}</td>
+                            {% endif %}
                             <td>
+                                <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
+                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                    <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
+                                </form>
                                 <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
-                                </form>
-                                <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
-                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                    <button class ="table-button editBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
                                 </form>
                                 <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
