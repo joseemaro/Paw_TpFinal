@@ -16,23 +16,23 @@
 {% endblock %}
 
 {% block main %}
-    <section>
-        <h1>Lista de turnos</h1>
+    <section id="container-list">
+        <h1 id="title-list">Lista de turnos</h1>
         {% if variable.appointments %}
             <table class="width200">
                 <thead>
-                <tr>
-                    <th scope="col">Tatuador</th>
-                    <th scope="col">Local</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Nombre del usuario</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Acciones</th>
-                </tr>
+                    <tr>
+                        <th scope="col">Tatuador</th>
+                        <th scope="col">Local</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Nombre del usuario</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
                 </thead>
 
                 {% for appointment in variable.appointments %}
@@ -46,15 +46,19 @@
                             <td>{{ appointment.phone }}</td>
                             <td>{{ appointment.email }}</td>
                             <td>{{ appointment.status }}</td>
-                            <td>{{ appointment.price }}</td>
-                            <td>
+                            {% if (appointment.price is null) %}
+                                <td> - </td>
+                            {% else %}
+                                <td>{{ appointment.price }}</td>
+                            {% endif %}
+                            <td id="container-forms">
+                                <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
+                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                    <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
+                                </form>
                                 <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
-                                </form>
-                                <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
-                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                    <button class ="table-button editBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
                                 </form>
                                 <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
