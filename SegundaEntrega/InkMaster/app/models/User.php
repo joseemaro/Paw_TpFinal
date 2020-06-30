@@ -414,4 +414,22 @@ class User extends Model
             return true;
         }
     }
+
+    public function isArtist($id_user, $id_local) {
+        $boolean = true;
+        $query = $this->db->query("select * from inkmaster_db.artist where id_local = :1 and id_artist = :2", [$id_local, $id_user]);
+        if (!$query) {
+            $boolean = false;
+        }
+        return $boolean;
+    }
+
+    public function isAdmin($id_user, $id_local) {
+        $boolean = true;
+        $query = $this->db->query("select * from inkmaster_db.administrator where id_local = :1 and id_administrator = :2", [$id_local, $id_user]);
+        if (!$query) {
+            $boolean = false;
+        }
+        return $boolean;
+    }
 }

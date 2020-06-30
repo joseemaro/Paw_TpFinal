@@ -50,7 +50,6 @@ class QueryBuilder {
      * Finds a record into a table.
      *
      * @param string $id_user
-     * @param string $password
      * @return integer
      */
     public function autentication($id_user) {
@@ -79,13 +78,33 @@ class QueryBuilder {
      * Select all artists from a database table.
      *
      * @param string $table
+     * @param string $id_local
      */
-    public function listArtists($table, $id_artist) {
+    public function listArtists($table, $id_local) {
         try {
             $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
                                                     inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
-                                                    where id_local = :1;");
-            $statement->bindValue(':1', $id_artist);
+                                                    where a.id_local = :1;");
+            $statement->bindValue(':1', $id_local);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Select all artists from a database table.
+     *
+     * @param string $table
+     * @param integer $id_local
+     */
+    public function listAdministrators($table, $id_local) {
+        try {
+            $statement = $this->pdo->prepare("select * from inkmaster_db.$table as u
+                                                    inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
+                                                    where a.id_local = :1;");
+            $statement->bindValue(':1', $id_local);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
@@ -131,7 +150,8 @@ class QueryBuilder {
     public function listAppointmentUser($table, $id_user) {
         $sql = "select * from inkmaster_db.$table as a
                     inner join inkmaster_db.user as u on (a.id_user = u.id_user)
-                where a.id_user = :id;";
+                where a.id_user = :id
+                order by a.status desc, a.id_appointment asc;";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id_user);
@@ -337,23 +357,47 @@ class QueryBuilder {
         }
      }
 
-     /**
-         * Counts the number of tuples in a table
-         *
-         * @param string $table
-         * @return array
-         */
-     public function countTuples($table)
-     {
-         $sql = "select count(*) as total from inkmaster_db.$table";
-         try {
-             $statement = $this->pdo->prepare($sql);
-             $statement->execute();
-             return $statement->fetch(PDO::FETCH_ASSOC);
-         } catch (Exception $e) {
-             $this->sendToLog($e);
-         }
-     }
+    /**
+     * Counts the number of tuples in a table
+     *
+     * @param string $table
+     * @return array
+     */
+    public function countTuples($table)
+    {
+        $sql = "select count(*) as total from inkmaster_db.$table";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Counts the number of tuples in a table
+     *
+     * @param string $sql
+     * @param array $parameters
+     * @return array
+     */
+    public function query($sql, $parameters = null)
+    {
+        try {
+            $statement = $this->pdo->prepare($sql);
+            if (!is_null($parameters)) {
+                for ($i = 1; $i < count($parameters)+1; $i++) {
+                    $statement->bindValue(":$i", $parameters[$i-1]);
+                }
+            }
+            var_dump($statement);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
 
     /**
      * Finds a user into from database table.

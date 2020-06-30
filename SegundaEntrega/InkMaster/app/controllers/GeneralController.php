@@ -125,11 +125,11 @@ class GeneralController extends Controller
         return $this->id_local;
     }
 
-    public function isArtist($id_user) {
-        return true;
+    public function isArtist($id_user, $id_local) {
+        return $this->user->isArtist($id_user, $id_local);
     }
 
-    public function isAdmin($id_user) {
-        return true;
+    public function isAdmin($id_user, $id_local) {
+        return $this->user->isAdmin($id_user, $id_local);
     }
 }
