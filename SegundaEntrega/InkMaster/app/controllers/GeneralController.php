@@ -14,7 +14,7 @@ class GeneralController extends Controller
     {
         $this->user = new User();
         $this->faq = new FAQ();
-        $this->tatto = new Tattoo();
+        $this->tattoo = new Tattoo();
         $this->local = new Local();
         $this->session = false;
         $this->id_local = $this->local->getLocal();
@@ -38,7 +38,14 @@ class GeneralController extends Controller
     }
 
     public function updPhotos() {
-        return $this->view('upload.photos');
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->user->havePermissions($id_user, 'tattoo.new')) {
+                return $this->view('upload.photos');
+            }
+        }
+        return $this->view('not_found');
     }
     public function updMedRec($id_user, $medical){
         return $this->user->updMedRec('medical_record' ,$id_user, $medical);
@@ -48,44 +55,36 @@ class GeneralController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            if ($this->isArtist($id_user)) {
-                $parameters["artist"] = $id_user;
-                if (isset($_POST["sector"])){
-                    $parameters["sector"] = $_POST["sector"];
+            if ($this->user->havePermissions($id_user, 'tattoo.new')) {
+                $parameters = $this->parameters();
+                if ($parameters) {
+                    $array = $this->tattoo->validateInsert($parameters);
+                } else {
+                    $array = ["No se completaron todos los campos obligatorios", false];
                 }
-                if (isset($_FILES)){
-                    $parameters["image"] = $_FILES;
-                }
-                $parameters["txt"] = $_POST["description"];
-                var_dump($parameters);
-                $array = $this->tatto->validateInsert($parameters);
-                echo '<br>';
-                var_dump($array);
                 $status = $array[count($array)-1];
-                if ($status) {
-                    #si salio bien la validacion
-                    return $this->view('upload.photos', null);   #ver si hacer esto o mandar una view dependiendo del resultado
+                if ($status) {  #si salio bien la validacion
+                    return $this->view('upload.photos');
                 } else {
                     $variable["errors"] = $array;
                     return $this->view('errors.register', $variable);
                 }
             }
-            return $this->view('not_found', null);
         }
-        return $this->view('not_found', null);
+        return $this->view('not_found');
     }
 
     public function listTattoos() {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $quantity = 9; //Cant de fotos por pág
         $beginning = ($page > 1) ? (($page * $quantity) - $quantity) : 0;
-        $totalTattoos = $this->tatto->countTattoos();
+        $totalTattoos = $this->tattoo->countTattoos();
         if ($totalTattoos > 0) {
             if ($totalTattoos > $quantity) {
                 $variable["total_pages"] = ceil($totalTattoos['total'] / $quantity);
                 $variable["page"] = $page;
             }
-            $variable["tattoos"] = $this->tatto->getTattoos($beginning, $quantity);
+            $variable["tattoos"] = $this->tattoo->getTattoos($beginning, $quantity);
         }
         return $this->view('list.tattoos', $variable);
     }
@@ -100,8 +99,6 @@ class GeneralController extends Controller
         return $this->view('faq', $variable);
     }
 
-    //la idea es pasar el id por parametro, y hacer una query que lleve a una vista
-    //esa vista va a mostrar la descripcion de esa pregunta
     public function viewFaq($id_faq) {
         $id = ['id' => $id_faq];
         $variable = array();
@@ -111,6 +108,31 @@ class GeneralController extends Controller
 
     public function listTerms(){
         return view('terms.and.conditions');
+    }
+
+    public function parameters() {
+        $boolean = true;
+        $parameters["artist"] = $_SESSION["id_user"];
+        if (isset($_POST["sector"])){
+            $parameters["sector"] = $_POST["sector"];
+        } else {
+            $boolean = false;
+        }
+        if (isset($_FILES)){
+            $parameters["image"] = $_FILES;
+        } else {
+            $boolean = false;
+        }
+        if (isset($_POST["description"])) {
+            $parameters["txt"] = $_POST["description"];
+        } else {
+            $boolean = false;
+        }
+        if ($boolean) {
+            return $parameters;
+        } else {
+            return false;
+        }
     }
 
     public function session() {

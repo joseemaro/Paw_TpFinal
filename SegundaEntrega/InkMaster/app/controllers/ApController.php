@@ -98,18 +98,29 @@ class ApController extends Controller
         return $this->generalController->view('not_found');
     }
 
-    public function uptAp($id_appointment) {
+    public function uptAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
-                #if hay nuevas imagenes de referencia
-                $reference_image = "";
-                #if hay nueva informacion medica
-                $medical_record = "";
-                #if hay un tattoo
-                $tattoo = "";
-                $array = $this->appointment->validateUpdate($id_appointment, $reference_image, $medical_record, $tattoo);
+                if (isset($_POST["reference_image"])) {
+                    $reference_image = $_FILES;
+                } else {
+                    $reference_image = null;
+                }
+                if (isset($_POST["pathology-txt"])) {
+                    $medical_record = $_POST["pathology-txt"];
+                } else {
+                    $medical_record = null;
+                }
+                if (isset($_POST["description"])) {
+                    $tattoo["image"] = $_FILES;
+                    $tattoo["sector"] = $_POST["sector"];
+                    $tattoo["txt"] = $_POST["description"];
+                } else {
+                    $tattoo = null;
+                }
+                $array = $this->appointment->validateUpdate($_POST["id_appointment"], $reference_image, $medical_record, $tattoo);
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
                     $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);

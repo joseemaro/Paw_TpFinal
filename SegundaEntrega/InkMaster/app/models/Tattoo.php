@@ -93,8 +93,8 @@ class Tattoo extends Model
 
     public function getTattoos($beginning, $quantity) {
 
-        $array = $this->db->getTattoos($this->table, $beginning, $quantity);
-//        $array = $this->db->selectAll($this->table);
+        $array = $this->db->getTattoos($this->table, $beginning, $quantity);    #probar cambiar esto por un query aca o en el mismo querybuilder
+
         for ($i = 0; $i < count($array); $i++) {
             $array[$i]["image"] = base64_encode($array[$i]["image"]);
         }

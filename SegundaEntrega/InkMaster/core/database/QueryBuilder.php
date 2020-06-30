@@ -317,7 +317,7 @@ class QueryBuilder {
      * @param integer $id
      * @return array
      */
-    public function findFaq($table, $id)
+    public function findId($table, $id)
     {
         $sql = "select * from inkmaster_db.$table where id_faq = :id";
         try {

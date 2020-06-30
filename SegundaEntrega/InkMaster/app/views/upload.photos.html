@@ -45,7 +45,12 @@
         <label> Seleccionar imágenes:
             <input type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
         </label>
-        <input type="submit" disabled id="up-btn" value="Subir imágenes" />
+
+        {% if isArtist %}
+            <input type="submit" disabled id="up-btn" value="Subir imágenes" />
+        {% else %}
+            <input type="submit" disabled value="Subir imágenes" />
+        {% endif %}
     </form>
 
 {% endblock %}

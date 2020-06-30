@@ -22,18 +22,12 @@
             <!-- query a la bd -->
             {% for query in variable.faqs %}
                 <article id="column1">
-                    <a href="/faq2/{{ query.id_faq }}">
+                    <a href="/view_faq/{{ query.id_faq }}">
                         <p class="preg">{{ query.question }}</p>
                     </a>
                     <p> {{ query.summary }}</p>
                 </article>
             {% endfor %}
-            <!--esto queda como ejemplo-->
-            <!--<article id="column1">
-                <a href="http://">
-                    <p class="preg">pregunta? </p>
-                </a> Lorem iEarum reprehenderit dignissimos n totam mam sint, consectetur, quisquam sed.
-            </article>-->
         </section>
     </section>
 {% endblock %}
