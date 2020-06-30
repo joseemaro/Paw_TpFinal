@@ -32,7 +32,6 @@ p {
     border-radius: 0.1875em;
     border: none;
     cursor: pointer;
-    position: relative;
     width: 100%;
 }
 
