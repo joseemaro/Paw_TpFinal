@@ -164,36 +164,46 @@ class Appointment extends Model
     }
 
     public function validate_image($reference_image) { #solo verificar tamaño y extension, solo hay que subir a la bd
-        $this->loadBD("reference_image", $reference_image);
+        //$this->loadBD("reference_image", $reference_image);
         return true;
-    }
-
-    public function loadBD($table, $parameters) { #cargar en la bd los medical_record
-        #for
     }
 
     public function validate_medical($medical_record) { #validar el textarea
-        $this->loadBD("medical_record", $medical_record);
+        //$this->db->insert("medical_record", $medical_record);
         return true;
     }
 
-    public function validateAll($parameters, $reference_image) {
+    public function validate_tattoo($tattoo) { #validar el tattoo
+        //$this->db->insert("tattoo", $tattoo);
+        return true;
+    }
+
+    public function update() {  #insertar medical_record, reference_images y tattoo
+
+    }
+
+    public function validateAll($parameters = null, $reference_image = null, $medical_record = null, $tattoo = null) {
         $boolean = true;
-        if (!empty($parameters)) {
+        if (!is_null($parameters)) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;
                 $boolean = $boolean && self::$validate($value);
             }
         }
-        if (!empty($parameters) && !$boolean) {
+        if (!is_null($reference_image) && !$boolean) {
             $boolean = $boolean && self::validate_image($reference_image);
         }
-
+        if (!is_null($medical_record) && !$boolean) {
+            $boolean = $boolean && self::validate_medical($medical_record);
+        }
+        if (!is_null($tattoo) && !$boolean) {
+            $boolean = $boolean && self::validate_tattoo($tattoo);
+        }
         return $boolean;
     }
 
-    public function validateInsert($parameters, $reference_image, $medical_record) {
-        $boolean = $this->validateAll($parameters, $reference_image);
+    public function validateInsert($parameters, $reference_image = null, $medical_record = null) {
+        $boolean = $this->validateAll($parameters, $reference_image, $medical_record);
         if ($boolean) {
             $this->parameters["status"] = 'pending';
             $this->db->insert($this->table, $this->parameters);
@@ -205,6 +215,38 @@ class Appointment extends Model
 
             return $this->return;
         }
+    }
+
+    public function validateUpdate($id_appointment, $reference_image = null, $medical_record = null, $tattoo = null) {
+        $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
+                                                where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
+        if ($appointment) {
+            $boolean = $this->validateAll(null, $reference_image, $medical_record, $tattoo);
+            if ($boolean) {
+                $this->update();
+                $this->parameters["status"] = true;
+
+                $this->parameters = $this->findAppointment($id_appointment);
+                return $this->parameters;
+            } else {
+                $this->return["status"] = false;
+
+                return $this->return;
+            }
+        }
+        $error = "El turno que desea modificar se encuentra anulado";
+        array_push($this->return, $error);
+        $this->return["status"] = false;
+        return $this->return;
+    }
+
+    public function encodeImages($array) {
+        for ($i = 0; $i < count($array); $i++) {
+            if (isset($array[$i]["image"])) {
+                $array[$i]["image"] = base64_encode($array[$i]["image"]);
+            }
+        }
+        return $array;
     }
 
     public function listAppointments($id_user) {
@@ -236,12 +278,23 @@ class Appointment extends Model
                                     and status = 'pending';", [$status, $id_appointment, $id_artist]);
     }
 
-    public function viewAp($id_appointment){
+    public function findAppointment($id_appointment){
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table as a
                                                 inner join inkmaster_db.user as u on (a.id_user = u.id_user)
-                                                left join inkmaster_db.tattoo as t on (a.id_appointment = t.id_appointment)
                                                 where a.id_appointment = :1;", [$id_appointment]);
-        $appointment["image"] = base64_encode($appointment["image"]);
+        $tattoo = $this->db->simpleQuery("select * from inkmaster_db.tattoo
+                                                    where id_appointment = :1;", [$id_appointment]);
+        if (isset($tattoo["image"])) {
+            $tattoo["image"] = base64_encode($tattoo["image"]);
+        }
+        if ($tattoo) {
+            $appointment["tattoo"] = $tattoo;
+        }
+        $reference_images = $this->db->query("select * from inkmaster_db.reference_image
+                                                    where id_appointment = :1;", [$id_appointment]);
+        if ($tattoo) {
+            $appointment["reference_images"] = $this->encodeImages($reference_images);
+        }
         return $appointment;
     }
 
