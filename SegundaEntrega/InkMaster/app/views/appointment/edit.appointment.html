@@ -22,6 +22,9 @@
 
     <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1> Edición de turno </h1>
+
+        <label> ID: <input type="text" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}"></label>
+
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
         {% endif %}
@@ -43,13 +46,10 @@
             <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg">
         </label>
 
-        {% if variable.appointment.medical_record %}
-            <label> Enfermedades
-                <textarea name="pathology-txt" id="pathology-txt"
-                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.medical_record }}
-                </textarea>
-            </label>
-        {% endif %}
+        <label> Enfermedades
+            <textarea name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.medical_record }}
+            </textarea>
+        </label>
 
         <label> Tattoo
             {% if variable.appointment.tattoo.image %}
@@ -57,7 +57,22 @@
                     <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
                 </figure>
             {% else %}
-                <input type="file" name="tattoo" accept="image/jpeg, image/x-png, image/x-jpg">
+                <label>Imagen: <input type="file" name="tattoo" accept="image/jpeg, image/x-png, image/x-jpg"></label>
+                <label>
+                    Sector
+                    <select name="sector">
+                        <option>Cabeza</option>
+                        <option>Espalda</option>
+                        <option>Brazo</option>
+                        <option>Pecho</option>
+                        <option>Panza</option>
+                        <option>Costillas</option>
+                        <option>Pierna</option>
+                        <option>Pie</option>
+                        <option>Otro</option>
+                    </select>
+                </label>
+                <label>Descripción: <textarea name="description"></textarea></label>
             {% endif %}
         </label>
 

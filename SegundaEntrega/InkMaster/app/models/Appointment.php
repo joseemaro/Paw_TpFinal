@@ -164,17 +164,32 @@ class Appointment extends Model
     }
 
     public function validate_image($reference_image) { #solo verificar tamaño y extension, solo hay que subir a la bd
-        //$this->loadBD("reference_image", $reference_image);
+        var_dump("entra a reference_image");
+        $parameters["id_appointment"] = $this->parameters["id_appointment"];
+        $parameters["image"] = $reference_image;
+        $this->db->insert("reference_image", $parameters);
+        $this->return["tatto"] = base64_encode($parameters["image"]);
         return true;
     }
 
     public function validate_medical($medical_record) { #validar el textarea
-        //$this->db->insert("medical_record", $medical_record);
+        var_dump("entra a medical_record");
+        $parameters["id_user"] = $this->parameters["id_user"];
+        $parameters["considerations"] = $medical_record;
+        $this->db->insert("medical_record", $parameters);
+        $this->return["medical_record"] = $parameters["considerations"];
         return true;
     }
 
     public function validate_tattoo($tattoo) { #validar el tattoo
-        //$this->db->insert("tattoo", $tattoo);
+        var_dump("entra a tattoo");
+        $parameters["id_artist"] = $this->parameters["id_artist"];
+        $parameters["id_appointment"] = $this->parameters["id_appointment"];
+        $parameters["sector"] = $tattoo["sector"];
+        $parameters["image"] = $tattoo["image"];
+        $parameters["txt"] = $tattoo["txt"];
+        $this->db->insert("tattoo", $parameters);
+        $this->return["tatto"] = base64_encode($parameters["image"]);
         return true;
     }
 
@@ -189,6 +204,8 @@ class Appointment extends Model
                 $validate = "validate_" . $parameter;
                 $boolean = $boolean && self::$validate($value);
             }
+        } else {
+            $boolean = false;
         }
         if (!is_null($reference_image) && !$boolean) {
             $boolean = $boolean && self::validate_image($reference_image);
@@ -221,7 +238,18 @@ class Appointment extends Model
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
                                                 where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
         if ($appointment) {
-            $boolean = $this->validateAll(null, $reference_image, $medical_record, $tattoo);
+            $this->parameters = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_appointment = :1", [$id_appointment]);
+            var_dump($this->parameters);
+            $boolean = true;
+            if (!is_null($reference_image) && $boolean) {
+                $boolean = $boolean && $this->validate_image($reference_image);
+            }
+            if (!is_null($medical_record) && $boolean) {
+                $boolean = $boolean && $this->validate_medical($medical_record);
+            }
+            if (!is_null($tattoo) && $boolean) {
+                $boolean = $boolean && $this->validate_tattoo($tattoo);
+            }
             if ($boolean) {
                 $this->update();
                 $this->parameters["status"] = true;
