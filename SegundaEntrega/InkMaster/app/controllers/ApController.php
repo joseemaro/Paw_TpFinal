@@ -58,10 +58,8 @@ class ApController extends Controller
                 $variable["errors"] = $array;
                 return $this->generalController->view('errors.appointment', $variable);
             }
-        } else {
-            $variable["errors"] = "No se encuentra ningún usuario logueado";
-            return $this->generalController->view('errors.appointment', $variable);
         }
+        return $this->generalController->view('not_found');
     }
 
     public function listAp() {
@@ -81,7 +79,7 @@ class ApController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            $variable["appointment"] = $this->appointment->viewAp($id_appointment);
+            $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             $variable["medical"] = $this->user->viewMedRec($variable["appointment"]["id_user"]);
             if ($this->generalController->isArtist($id_user, $this->generalController->id_local)) {
                 return $this->generalController->view('view.appointment', $variable, true);
@@ -91,12 +89,41 @@ class ApController extends Controller
         return $this->generalController->view('not_found');
     }
 
-    public function editAp() {
-        return view('edit.appointment', compact('ap', 'diagnostico64'));
+    public function editAp($id_appointment) {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
+            if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
+                return $this->generalController->view('edit.appointment', $variable, true);
+            }
+            return $this->generalController->view('view.appointment', $variable);
+        }
+        return $this->generalController->view('not_found');
     }
 
-    public function uptAp() {
-        return view('views.appointment', compact('ap', 'diagnostico64')) ;
+    public function uptAp($id_appointment) {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
+                #if hay nuevas imagenes de referencia
+                $reference_image = "";
+                #if hay nueva informacion medica
+                $medical_record = "";
+                #if hay un tattoo
+                $tattoo = "";
+                $array = $this->appointment->validateUpdate($id_appointment, $reference_image, $medical_record, $tattoo);
+                if ($array["status"]) {     #si salio bien la validacion
+                    $variable["appointment"] = $array;
+                    return $this->generalController->view('view.appointment', $variable);
+                } else {
+                    $variable["errors"] = $array;
+                    return $this->generalController->view('errors.appointment', $variable);
+                }
+            }
+        }
+        return $this->generalController->view('not_found');
     }
 
     public function aceptAp($id_appointment){

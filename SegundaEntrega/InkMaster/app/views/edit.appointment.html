@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Appointment
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+    <!--<script type="text/javascript" src="/public/js/newAp.js"></script>
+    <script type="text/javascript" src="/public/js/validateAp.js"></script>-->
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+    <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
+        <h1> Edición de turno </h1>
+        {% if (session) and (not variable.adult) %}
+            <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
+        {% endif %}
+        <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
+
+        <label> Fecha: <input type="date" name="date" readonly value="{{ variable.appointment.date }}"></label>
+
+        <label> Horario (hh:min): <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}"></label>
+
+        <label> Imágenes de referencia
+            {% if variable.appointment.reference_images %}
+                {% for reference_image in variable.appointment.reference_images %}
+                    <img src="data:image/png;base64, {{reference_image.image}}" >
+                {% endfor %}
+            {% endif %}
+            <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg">
+        </label>
+
+        {% if variable.appointment.medical_record %}
+            <textarea class="disease pathologyjs" name="pathology-txt" id="pathology-txt"
+                  pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.medical_record }}
+            </textarea>
+        {% endif %}
+
+        <label> Tattoo
+            {% if variable.appointment.tattoo.image %}
+                <figure>
+                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
+                </figure>
+            {% else %}
+                <input type="file" name="tattoo" accept="image/jpeg, image/x-png, image/x-jpg">
+            {% endif %}
+        </label>
+
+        <div>
+            <input class="button-editAp" type="reset" value="Limpiar" />
+
+            <input class="button-editAp" type="submit" id="send-btn" value="Editar" />
+        </div>
+
+        <p class="footer-form"> Todos los campos son obligatorios</p><br>
+
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}
