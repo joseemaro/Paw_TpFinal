@@ -21,7 +21,7 @@ public function listFaq() {
 
 public function find($id) {
     $id = intval($id);
-    return $this->db->findFaq($this->table, $id);
+    return $this->db->findId($this->table, $id);
 }
 
 }
