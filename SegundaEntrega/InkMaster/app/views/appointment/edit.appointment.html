@@ -25,6 +25,9 @@
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
         {% endif %}
+
+        <label> Usuario: <input type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}"></label>
+
         <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
 
         <label> Fecha: <input type="date" name="date" readonly value="{{ variable.appointment.date }}"></label>
@@ -41,9 +44,11 @@
         </label>
 
         {% if variable.appointment.medical_record %}
-            <textarea class="disease pathologyjs" name="pathology-txt" id="pathology-txt"
-                  pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.medical_record }}
-            </textarea>
+            <label> Enfermedades
+                <textarea name="pathology-txt" id="pathology-txt"
+                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.medical_record }}
+                </textarea>
+            </label>
         {% endif %}
 
         <label> Tattoo

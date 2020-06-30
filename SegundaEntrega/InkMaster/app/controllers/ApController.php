@@ -23,10 +23,9 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
             $variable["adult"] = $this->user->verifyAdult($id_user);
-            return $this->generalController->view('new.appointment', $variable);
-        } else {
-            return $this->generalController->view('new.appointment');
+            return $this->generalController->view('appointment/new.appointment', $variable);
         }
+        return $this->generalController->view('appointment/new.appointment');
     }
 
     public function saveAp ()
@@ -53,10 +52,10 @@ class ApController extends Controller
                 $variable["appointment"] = $array;
                 $id_pacient = $variable["appointment"]["id_user"];
                 $variable["medical"] = $this->user->viewMedRec($id_pacient);
-                return $this->generalController->view('view.appointment', $variable);
+                return $this->generalController->view('appointment/view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
-                return $this->generalController->view('errors.appointment', $variable);
+                return $this->generalController->view('appointment/errors.appointment', $variable);
             }
         }
         return $this->generalController->view('not_found');
@@ -68,9 +67,9 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             if ($this->generalController->isArtist($id_user, $this->generalController->id_local)) {
-                return $this->generalController->view('list.appointments', $variable, true);
+                return $this->generalController->view('appointment/list.appointments', $variable, true);
             }
-            return $this->generalController->view('list.appointments', $variable);
+            return $this->generalController->view('appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
     }
@@ -82,9 +81,9 @@ class ApController extends Controller
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             $variable["medical"] = $this->user->viewMedRec($variable["appointment"]["id_user"]);
             if ($this->generalController->isArtist($id_user, $this->generalController->id_local)) {
-                return $this->generalController->view('view.appointment', $variable, true);
+                return $this->generalController->view('appointment/view.appointment', $variable, true);
             }
-            return $this->generalController->view('view.appointment', $variable);
+            return $this->generalController->view('appointment/view.appointment', $variable);
         }
         return $this->generalController->view('not_found');
     }
@@ -95,9 +94,9 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
-                return $this->generalController->view('edit.appointment', $variable, true);
+                return $this->generalController->view('appointment/edit.appointment', $variable, true);
             }
-            return $this->generalController->view('view.appointment', $variable);
+            return $this->generalController->view('appointment/view.appointment', $variable);
         }
         return $this->generalController->view('not_found');
     }
@@ -116,10 +115,10 @@ class ApController extends Controller
                 $array = $this->appointment->validateUpdate($id_appointment, $reference_image, $medical_record, $tattoo);
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
-                    return $this->generalController->view('view.appointment', $variable);
+                    return $this->generalController->view('appointment/view.appointment', $variable);
                 } else {
                     $variable["errors"] = $array;
-                    return $this->generalController->view('errors.appointment', $variable);
+                    return $this->generalController->view('appointment/errors.appointment', $variable);
                 }
             }
         }
@@ -133,10 +132,10 @@ class ApController extends Controller
             if ($this->generalController->user->havePermissions($id_user, 'appointment.acept')) {
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
                 $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                return $this->generalController->view('list.appointments', $variable, true);
+                return $this->generalController->view('appointment/list.appointments', $variable, true);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
-            return $this->generalController->view('list.appointments', $variable);
+            return $this->generalController->view('appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
     }
@@ -148,41 +147,11 @@ class ApController extends Controller
             if ($this->generalController->user->havePermissions($id_user, 'appointment.delete')) {
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'annulled');
                 $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                return $this->generalController->view('list.appointments', $variable, true);
+                return $this->generalController->view('appointment/list.appointments', $variable, true);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
-            return $this->generalController->view('list.appointments', $variable);
+            return $this->generalController->view('appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
-    }
-
-    private function comparacion() {
-        $appointment = new Appointment();
-        $old = $appointment->findid($_POST['id']);
-        $params = array();
-        if ($old["nombre"] != $_POST["nombre"]) $params["nombre"] = $_POST["nombre"];
-        if ($old["email"] != $_POST["email"]) $params["email"] = $_POST["email"];
-        if ($old["telefono"] != $_POST["telefono"]) $params["telefono"] = $_POST["telefono"];
-        if ($old["edad"] != $_POST["edad"]) $params["edad"] = $_POST["edad"];
-        if ($old["talla_calzado"] != $_POST["talla_calzado"]) $params["talla_calzado"] = $_POST["talla_calzado"];
-        if ($old["altura"] != $_POST["altura"]) $params["altura"] = $_POST["altura"];
-        if ($old["fecha_nacimiento"] != $_POST["fecha_nacimiento"]) $params["fecha_nacimiento"] = $_POST["fecha_nacimiento"];
-        if ($_POST["color_pelo"] != null) {
-            $params["color_pelo"] = $_POST["color_pelo"];
-        }
-        if ($old["fecha_turno"] != $_POST["fecha_turno"] || $old["horario_turno"] != $_POST["horario_turno"]) {
-            $params["fecha_turno"] = $_POST["fecha_turno"];
-            $params["horario_turno"] = $_POST["horario_turno"];
-        }
-        return $params;
-    }
-
-    public function session() {
-        if (isset($_SESSION["id_user"])) {
-            $session = true;
-        } else {
-            $session = false;
-        }
-        return $session;
     }
 }

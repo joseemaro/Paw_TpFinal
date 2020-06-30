@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Turno
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/view.appointment.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+<section id="container-viewAp">
+    <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
+
+    <h1> Edición de turno </h1>
+
+    <label> Usuario: <input type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}"></label>
+
+    <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
+
+    <label> Fecha: <input type="date" name="date" readonly value="{{ variable.appointment.date }}"></label>
+
+    <label> Horario (hh:min): <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}"></label>
+
+    <label> Estado: <input type="text" name="status" readonly value="{{ variable.appointment.status }}"></label>
+
+    <label> Price: <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}"></label>
+
+    {% if variable.appointment.reference_images %}
+        <label> Imágenes de referencia
+            {% for reference_image in variable.appointment.reference_images %}
+                <img src="data:image/png;base64, {{reference_image.image}}" >
+            {% endfor %}
+        </label>
+    {% endif %}
+
+    {% if variable.appointment.medical_record %}
+        <label> Enfermedades
+            <textarea name="pathology-txt" id="pathology-txt"
+                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.medical_record }}
+            </textarea>
+        </label>
+    {% endif %}
+
+    {% if variable.appointment.tattoo.image %}
+        <label> Tattoo
+            <figure>
+                <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
+            </figure>
+        </label>
+    {% endif %}
+
+    <section>
+        {% if isArtist %}
+            {% if (variable.appointment.status == 'pending') %}
+                <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
+                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                    <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Acept</button>
+                </form>
+            {% endif %}
+            {% if (variable.appointment.status != 'annulled') %}
+            <form method="get" id="edit-appointment-{{ variable.appointment.id_appointment }}" action="/edit_appointment/{{ variable.appointment.id_appointment }}">
+                <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ variable.appointment.id_appointment }}">Edit</button>
+            </form>
+            {% endif %}
+            {% if (variable.appointment.status == 'pending') %}
+                <form method="get" id="destroy-appointment-{{ variable.appointment.id_appointment }}" action="/del_appointment/{{ variable.appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
+                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                    <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ variable.appointment.id_appointment }}">Delete</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </section>
+
+</section>
+
+
+
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}
