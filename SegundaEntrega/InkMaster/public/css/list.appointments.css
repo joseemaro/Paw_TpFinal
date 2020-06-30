@@ -52,7 +52,7 @@ p {
 table.width200,
 table.rwd_auto {
     width:100%;
-    margin:0 0 0.625em 0
+    margin:0 0 0.625em 0;
 }
 .width200 th,
 .rwd_auto th {
@@ -133,7 +133,7 @@ table.rwd_auto {
     }
 
     .fontsize {
-        font-size: 0.625em
+        font-size: 0.625em;
     }
 }
 
@@ -145,6 +145,6 @@ table.rwd_auto {
     }
 
     .fontsize {
-        font-size: 0.625em
+        font-size: 0.625em;
     }
 }

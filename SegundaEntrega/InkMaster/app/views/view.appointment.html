@@ -18,8 +18,8 @@
 
 {% block main %}
 
-<section>
-    <h1>Turno</h1>
+<section id="container-viewAp">
+    <h1 id="title-viewAp">Turno</h1>
     <table class="width200">
         <thead>
         <tr>
@@ -39,8 +39,11 @@
             <td>{{ variable.appointment["id_artist"] }}</td>
             <td>{{ variable.appointment["date"] }}</td>
             <td>{{ variable.appointment["hour"] }}</td>
-
-            <td>{{ variable.medical["considerations"] }}</td>
+            {% if (variable.medical["considerations"] is null) %}
+                <td> - </td>
+            {% else %}
+                <td>{{ variable.medical["considerations"] }}</td>
+            {% endif %}
             <td>
                 <!--<form method="get" id="show-appointment" action="list_appointment">
                     <input type="hidden" name="id_appointment" value="">
