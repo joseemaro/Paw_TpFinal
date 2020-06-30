@@ -195,9 +195,6 @@ class Appointment extends Model
     public function validateInsert($parameters, $reference_image, $medical_record) {
         $boolean = $this->validateAll($parameters, $reference_image);
         if ($boolean) {
-            echo "<br>";
-            //var_dump($parameters);
-            echo "<br>";
             $this->parameters["status"] = 'pending';
             $this->db->insert($this->table, $this->parameters);
             $this->parameters["status"] = true;
@@ -210,28 +207,42 @@ class Appointment extends Model
         }
     }
 
-    public function listAppointments() {
-        return $this->db->listAppointment($this->table);
+    public function listAppointments($id_user) {
+        $sql = "select r.id_rol from inkmaster_db.user as u
+                inner join inkmaster_db.rol_user as r on (u.id_user = r.id_user)
+                where u.id_user = :1 and u.enabled is true
+                and r.id_rol =";
+        if ($this->db->query("$sql 'artist'", [$id_user])) {
+            return $this->db->query("select * from inkmaster_db.$this->table as a 
+                                        inner join inkmaster_db.user as u on (u.id_user = a.id_user)
+                                        where a.id_artist = :1
+                                        order by a.status desc, a.date asc, a.hour asc;", [$id_user]);
+        } elseif ($this->db->query("$sql 'administrator'", [$id_user])) {
+            return $this->db->query("select * from inkmaster_db.$this->table as a
+                                        inner join inkmaster_db.user as u on (a.id_user = u.id_user)
+                                        order by a.status desc, a.date asc, a.hour asc;");
+        } elseif ($this->db->query("$sql 'user'", [$id_user])) {
+            return $this->db->query("select * from inkmaster_db.$this->table as a
+                                        inner join inkmaster_db.user as u on (a.id_user = u.id_user)
+                                        where a.id_user = :1
+                                        order by a.status desc, a.date asc, a.hour asc;", [$id_user]);
+        }
+        return null;
     }
 
-    public function listAppointmentsUser($id_user) {
-        return $this->db->listAppointmentUser($this->table, $id_user);
-    }
-
-    public function listWaitingAppointments($id_artist) {
-        return $this->db->listWaitingAppointment($this->table, $id_artist);
-    }
-
-    public function aceptAp($id_appointment){
-        return $this->db->aceptAppointment($this->table , $id_appointment);
-    }
-
-    public function deleteAp($id_appointment){
-        return $this->db->deleteAppointment($this->table , $id_appointment);
+    public function changeStatus($id_appointment, $id_artist, $status){
+        return $this->db->update("update inkmaster_db.$this->table set status = :1 
+                                    where id_appointment = :2 and id_artist = :3 
+                                    and status = 'pending';", [$status, $id_appointment, $id_artist]);
     }
 
     public function viewAp($id_appointment){
-        return $this->db->findAppointment($this->table , $id_appointment);
+        $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table as a
+                                                inner join inkmaster_db.user as u on (a.id_user = u.id_user)
+                                                left join inkmaster_db.tattoo as t on (a.id_appointment = t.id_appointment)
+                                                where a.id_appointment = :1;", [$id_appointment]);
+        $appointment["image"] = base64_encode($appointment["image"]);
+        return $appointment;
     }
 
 }

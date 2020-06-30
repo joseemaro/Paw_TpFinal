@@ -136,7 +136,8 @@ class QueryBuilder {
      */
     public function listAppointment($table) {
         $statement = $this->pdo->prepare("select * from inkmaster_db.$table as a
-                                                    inner join inkmaster_db.user as u on (a.id_user = u.id_user);");
+                                                    inner join inkmaster_db.user as u on (a.id_user = u.id_user)
+                                                    order by a.status desc, a.id_appointment asc;");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -382,6 +383,29 @@ class QueryBuilder {
      * @param array $parameters
      * @return array
      */
+    public function simpleQuery($sql, $parameters = null)
+    {
+        try {
+            $statement = $this->pdo->prepare($sql);
+            if (!is_null($parameters)) {
+                for ($i = 1; $i < count($parameters)+1; $i++) {
+                    $statement->bindValue(":$i", $parameters[$i-1]);
+                }
+            }
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Counts the number of tuples in a table
+     *
+     * @param string $sql
+     * @param array $parameters
+     * @return array
+     */
     public function query($sql, $parameters = null)
     {
         try {
@@ -391,10 +415,33 @@ class QueryBuilder {
                     $statement->bindValue(":$i", $parameters[$i-1]);
                 }
             }
-            var_dump($statement);
             $statement->execute();
-            return $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Insert a record into a table.
+     *
+     * @param string $sql
+     * @param array $parameters
+     * @return boolean
+     */
+    public function update($sql, $parameters)
+    {
+        try {
+            $statement = $this->pdo->prepare($sql);
+            if (!is_null($parameters)) {
+                for ($i = 1; $i < count($parameters)+1; $i++) {
+                    $statement->bindValue(":$i", $parameters[$i-1]);
+                }
+            }
+            $statement->execute();
+            return true;
+        } catch (Exception $e) {
+            return false;
             $this->sendToLog($e);
         }
     }

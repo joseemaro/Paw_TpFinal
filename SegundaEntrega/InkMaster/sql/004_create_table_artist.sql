@@ -5,5 +5,6 @@ CREATE TABLE artist (
     id_local INT NOT NULL,
     txt VARCHAR(300) NOT NULL,
     PRIMARY KEY (id_artist),
+    FOREIGN KEY (id_artist) REFERENCES user(id_user),
     FOREIGN KEY (id_local) REFERENCES local(id_local)
 );

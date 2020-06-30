@@ -48,7 +48,7 @@ class UserController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            if ($this->generalController->isAdmin($id_user)) {
+            if ($this->generalController->isAdministrator($id_user, $this->generalController->id_local)) {
                 $variable["artists"] = $this->user->listUsers();
                 return $this->generalController->view('list.users', $variable);
             }
@@ -61,7 +61,7 @@ class UserController extends Controller
         $id_user = str_replace("%20", " ", $id_user);
         session_start();
         if (isset($_SESSION["id_user"])) {
-            if ($this->generalController->isAdmin($_SESSION["id_user"])) {
+            if ($this->generalController->isAdministrator($_SESSION["id_user"], $this->generalController->id_local)) {
                 $user = $this->user->findUser($id_user);
                 $user["photo"] = base64_encode($user["photo"]);
                 $variable["user"] = $user;

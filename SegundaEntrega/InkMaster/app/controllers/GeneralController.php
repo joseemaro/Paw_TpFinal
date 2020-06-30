@@ -20,14 +20,14 @@ class GeneralController extends Controller
         $this->id_local = $this->local->getLocal();
     }
 
-    public function view($html, $variable) {
+    public function view($html, $variable = null, $isArtist = null) {
         $session = $this->session();
-        $isArtist = true;
         $artists = $this->user->listArtists($this->id_local);
         $local = $this->local->getTxt($this->id_local);
         if (isset($_SESSION["id_user"])) {
             $user = $_SESSION["id_user"];
-            return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'variable'));
+            $isAdministrator = $this->isAdministrator($user, $this->id_local);
+            return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'isAdministrator', 'variable'));
         }
         return view($html, compact('session', 'artists', 'local', 'isArtist', 'variable'));
     }
@@ -129,7 +129,7 @@ class GeneralController extends Controller
         return $this->user->isArtist($id_user, $id_local);
     }
 
-    public function isAdmin($id_user, $id_local) {
+    public function isAdministrator($id_user, $id_local) {
         return $this->user->isAdmin($id_user, $id_local);
     }
 }

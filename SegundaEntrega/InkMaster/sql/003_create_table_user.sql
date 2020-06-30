@@ -11,5 +11,6 @@ CREATE TABLE user (
     direction VARCHAR(100),
     email VARCHAR(100) NOT NULL,
     photo MEDIUMBLOB,
+    enabled BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (id_user)
 );

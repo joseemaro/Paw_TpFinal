@@ -338,12 +338,16 @@ class User extends Model
     public function validateInsert($parameters) {
         $boolean = $this->validateAll($parameters);
         if ($boolean) {
-            $parameters_user = $this->parameters_user;
-            $this->db->insert($this->table, $parameters_user);
+            $this->db->insert($this->table, $this->parameters_user);
+            $rol_user["id_user"] = $this->parameters_user["id_user"];
+            $rol_user["id_rol"] = "user";
+            $this->db->insert("rol_user", $rol_user);
 
             if (isset($this->parameters_artist["id_artist"])) {
-                $parameters_artist = $this->parameters_artist;
-                $this->db->insert('artist', $parameters_artist);
+                $this->db->insert('artist', $this->parameters_artist);
+                $rol_user["id_user"] = $this->parameters_artist["id_artist"];
+                $rol_user["id_rol"] = "artist";
+                $this->db->insert("rol_user", $rol_user);
             }
 
             $status = true;
@@ -417,7 +421,10 @@ class User extends Model
 
     public function isArtist($id_user, $id_local) {
         $boolean = true;
-        $query = $this->db->query("select * from inkmaster_db.artist where id_local = :1 and id_artist = :2", [$id_local, $id_user]);
+        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
+                                        inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                        where a.id_local = :1 and a.id_artist = :2
+                                        and u.enabled is true", [$id_local, $id_user]);
         if (!$query) {
             $boolean = false;
         }
@@ -426,7 +433,22 @@ class User extends Model
 
     public function isAdmin($id_user, $id_local) {
         $boolean = true;
-        $query = $this->db->query("select * from inkmaster_db.administrator where id_local = :1 and id_administrator = :2", [$id_local, $id_user]);
+        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
+                                        inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
+                                        where a.id_local = :1 and a.id_administrator = :2
+                                        and u.enabled is true", [$id_local, $id_user]);
+        if (!$query) {
+            $boolean = false;
+        }
+        return $boolean;
+    }
+
+    public function havePermissions($id_user, $id_permission) {
+        $boolean = true;
+        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
+                                        inner join inkmaster_db.rol_user as rl on (u.id_user = rl.id_user)
+                                        inner join inkmaster_db.permission_rol as pr on (rl.id_rol = pr.id_rol)
+                                        where u.id_user = :1 and pr.id_permission = :2", [$id_user, $id_permission]);
         if (!$query) {
             $boolean = false;
         }

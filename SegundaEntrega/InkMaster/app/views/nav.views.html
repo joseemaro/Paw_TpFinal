@@ -20,9 +20,10 @@
         {% if session %}
             <li id="user"> <a href="#"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a>
                 <ul>
-                    {% if isArtist %}
-                        <li> <a href="/list_appointment"><i class="fas fa-user site-nav--icon"></i> Lista de turnos </a></li>
+                    {% if isAdministrator %}
+                        <li> <a href="/new_user"><i class="fas fa-user site-nav--icon"></i> Registrar Artista </a></li>
                     {% endif %}
+                    <li> <a href="/list_appointment"><i class="fas fa-user site-nav--icon"></i> Lista de turnos </a></li>
                     <li> <a href="/logout"><i class="fas fa-user site-nav--icon"></i> Logout </a></li>
                 </ul>
             </li>
