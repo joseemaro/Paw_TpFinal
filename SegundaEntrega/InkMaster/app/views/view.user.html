@@ -56,6 +56,10 @@
             {% endif %}
             <td>
                 <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
+                <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="edit_user/{{ variable.user['id_user'] }}">
+                    <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+                    <button class ="table-button viewBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
+                </form>
             </td>
         </tr>
         </tbody>

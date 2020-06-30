@@ -18,7 +18,7 @@
         <li> <a href="/new_appointment"> <i class="fas fa-calendar-check site-nav--icon"></i> Solicitar turno </a></li>
         <li> <a href="/faq"><i class=" far fa-question-circle site-nav--icon"></i> FAQs </a></li>
         {% if session %}
-            <li id="user"> <a href="#"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a>
+            <li id="user"> <a href="/view_user/{{ user }}"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a>
                 <ul>
                     {% if isAdministrator %}
                         <li> <a href="/new_user"><i class="fas fa-user site-nav--icon"></i> Registrar Artista </a></li>
