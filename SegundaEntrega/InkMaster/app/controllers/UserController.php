@@ -52,14 +52,16 @@ class UserController extends Controller
 
     public function uptUser() {
         $id_user = $_POST['username'];
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $born = $_POST['born'];
-        $nro_doc = $_POST['nro_doc'];
-        $phone = $_POST['phone'];
-        $direction = $_POST['direction'];
-        $email = $_POST['email'];
         $medical =  $_POST['medical'];
+        //$parameters["id_user"]= $_POST['username'];
+        $parameters["first_name"]= $_POST['first_name'];
+        $parameters["last_name"]= $_POST['last_name'];
+        $parameters["born"]= $_POST['born'];
+        $parameters["nro_doc"]= $_POST['nro_doc'];
+        $parameters["phone"]= $_POST['phone'];
+        $parameters["direction"]= $_POST['direction'];
+        $parameters["email"]= $_POST['email'];
+        //foto
         /*if (isset($_FILES)) {
             $photo = $_FILES;
             if ($photo["photo"]["tmp_name"] != ''){
@@ -67,13 +69,12 @@ class UserController extends Controller
             }
         }*/
 
-        //foto
+
             if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
                 //validar campos
 
                 //actualizo campos
-
-                $this->user->updUser($id_user,$first_name,$last_name,$born,$nro_doc,$phone,$direction,$email);
+                $this->user->updateUser($id_user, $parameters);
                 if ($medical != ''){
                    $this->generalController->updMedRec($id_user, $medical);
                 }
