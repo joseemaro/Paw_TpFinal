@@ -1,1 +1,69 @@
-<p>view_user</p>
+{% extends "base.html" %}
+
+{% block title %}
+    Turno
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/view.user.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+<section id="container-viewAp">
+    <h1 id="title-viewAp">{{ variable.user["id_user"] }} </h1>
+
+    <img src="data:image/jpg;base64, {{ variable.user['photo'] }} ">
+
+    <table class="width200">
+        <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Nacimiento</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Email</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Enfermedades</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>{{ variable.user["id_user"] }}</td>
+            <td>{{ variable.user["first_name"] }}</td>
+            <td>{{ variable.user["last_name"] }}</td>
+            <td>{{ variable.user["born"] }}</td>
+            <td>{{ variable.user["phone"] }}</td>
+            <td>{{ variable.user["email"] }}</td>
+            <td>{{ variable.user["nro_doc"] }}</td>
+            <td>{{ variable.user["direction"] }}</td>
+            {% if (variable.user["medical"] is null) %}
+            <td> No tiene enfermedades </td>
+            {% else %}
+            <td>{{ variable.user["medical"] }}</td>
+            {% endif %}
+            <td>
+                <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}

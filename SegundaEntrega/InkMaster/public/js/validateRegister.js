@@ -149,18 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //validate description
-    validate_description = document.querySelector(".descriptionjs");
-    validate_description.addEventListener("blur", function() {
-        var description = /^[a-zA-Z0-9?!¡¿.,; ]{3,300}$/;
-        if (description.exec(validate_description.value) || (validate_description.value === "")) {
-            validate_description.style.border = "#ffffff";
-            validate_description.style.background = "#ffffff";
-        } else {
-            validate_description.style.background = "#e05f5f";
-        }
-    });
-
     //validar terminos
     validate_terms = document.querySelector(".termsjs");
     validate_terms.addEventListener("click", function() {
@@ -183,5 +171,19 @@ document.addEventListener("DOMContentLoaded", function() {
             validate_pathology.style.background = "#e05f5f";
         }
     });
+
+    //validate description
+    validate_description = document.querySelector(".descriptionjs");
+    validate_description.addEventListener("blur", function() {
+        var description = /^[a-zA-Z0-9?!¡¿.,; ]{3,300}$/;
+        if (description.exec(validate_description.value) || (validate_description.value === "")) {
+            validate_description.style.border = "#ffffff";
+            validate_description.style.background = "#ffffff";
+        } else {
+            validate_description.style.background = "#e05f5f";
+        }
+    });
+
+
 
 });

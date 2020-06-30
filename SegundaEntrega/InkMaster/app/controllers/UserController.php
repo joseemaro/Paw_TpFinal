@@ -64,6 +64,10 @@ class UserController extends Controller
             if ($this->generalController->isAdministrator($_SESSION["id_user"], $this->generalController->id_local)) {
                 $user = $this->user->findUser($id_user);
                 $user["photo"] = base64_encode($user["photo"]);
+                $medRec = $this->user->viewMedRec($id_user);
+                if ($medRec){
+                    $user["medical"]= $medRec["considerations"];
+                }
                 $variable["user"] = $user;
                 return $this->generalController->view('view.user', $variable);
             }

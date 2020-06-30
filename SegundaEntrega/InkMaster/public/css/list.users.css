@@ -1,0 +1,146 @@
+#container-list {
+    padding: 1em;
+}
+
+#title-list {
+    padding-bottom: 1em;
+    font-size: larger;
+    font-weight: bold;
+    color: #575766;
+}
+
+tbody,
+tr,
+td,
+th {
+    border: 1px solid #CA4B1F;
+    background: whitesmoke;
+}
+
+p {
+    margin:0 0 0.625em 0
+}
+
+.table-button{
+    display: inline-block;
+    font-size: 1em;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    -webkit-appearance: none;
+    appearance: none;
+    color: white;
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+}
+
+.acceptBtn {
+    background-color: #3C7931;
+}
+
+.viewBtn,
+.editBtn {
+    background-color: #202020;
+}
+
+.deleteBtn{
+    background-color: #8B0000;
+}
+
+table.width200,
+table.rwd_auto {
+    width:100%;
+    margin:0 0 0.625em 0;
+}
+.width200 th,
+.rwd_auto th {
+    padding: 0.5em;
+    font-weight: bold;
+    text-align: center;
+}
+.width200 td,
+.rwd_auto td {
+    padding: 0.5em;
+    text-align:center;
+    overflow: hidden;
+}
+
+.rwd {
+    width: 100%;
+    overflow: auto;
+}
+
+.rwd table.rwd_auto {
+    width: auto;
+    min-width: 100%
+}
+.rwd_auto th,
+.rwd_auto td {
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px)
+{
+    tbody {
+        margin-top: 1em;
+    }
+
+    table.width200,
+    .width200 thead,
+    .width200 tbody,
+    .width200 th,
+    .width200 td,
+    .width200 tr {
+        display: block;
+    }
+
+    .width200 thead tr {
+        position: absolute;
+        top: -62.4375em;
+        left: -62.4375em;
+    }
+
+    .width200 td {
+        position: relative;
+        padding-left: 40%;
+        text-align: left
+    }
+
+    .width200 td:before {
+        position: absolute;
+        top: 0.375em;
+        left: 0.375em;
+        width: 40%;
+        padding-right: 0;
+        white-space: nowrap;
+    }
+
+    .width200 td:nth-of-type(1):before { content: "Username";}
+    .width200 td:nth-of-type(2):before { content: "Primer nombre"; }
+    .width200 td:nth-of-type(3):before { content: "Segundo nombre"; }
+    .width200 td:nth-of-type(4):before { content: "Nacimiento"; }
+    .width200 td:nth-of-type(5):before { content: "Telefono"; }
+    .width200 td:nth-of-type(6):before { content: "Email"; }
+
+    .descarto {
+        display:none;
+    }
+
+    .fontsize {
+        font-size: 0.625em;
+    }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px)
+{
+    .descarto {
+        display:none;
+    }
+
+    .fontsize {
+        font-size: 0.625em;
+    }
+}
