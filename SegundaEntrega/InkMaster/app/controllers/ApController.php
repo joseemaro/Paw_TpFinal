@@ -52,6 +52,7 @@ class ApController extends Controller
                 $variable["appointment"] = $array;
                 $id_pacient = $variable["appointment"]["id_user"];
                 $variable["medical"] = $this->user->viewMedRec($id_pacient);
+                $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
                 return $this->generalController->view('appointment/view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
@@ -66,9 +67,6 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
-            if ($this->generalController->isArtist($id_user, $this->generalController->id_local)) {
-                return $this->generalController->view('appointment/list.appointments', $variable, true);
-            }
             return $this->generalController->view('appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
@@ -80,9 +78,7 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             $variable["medical"] = $this->user->viewMedRec($variable["appointment"]["id_user"]);
-            if ($this->generalController->isArtist($id_user, $this->generalController->id_local)) {
-                return $this->generalController->view('appointment/view.appointment', $variable, true);
-            }
+            $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
             return $this->generalController->view('appointment/view.appointment', $variable);
         }
         return $this->generalController->view('not_found');
@@ -93,8 +89,9 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
+            $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
             if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
-                return $this->generalController->view('appointment/edit.appointment', $variable, true);
+                return $this->generalController->view('appointment/edit.appointment', $variable);
             }
             return $this->generalController->view('appointment/view.appointment', $variable);
         }
@@ -115,6 +112,7 @@ class ApController extends Controller
                 $array = $this->appointment->validateUpdate($id_appointment, $reference_image, $medical_record, $tattoo);
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
+                    $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
                     return $this->generalController->view('appointment/view.appointment', $variable);
                 } else {
                     $variable["errors"] = $array;
@@ -131,8 +129,6 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.acept')) {
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
-                $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                return $this->generalController->view('appointment/list.appointments', $variable, true);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);
@@ -146,8 +142,6 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.delete')) {
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'annulled');
-                $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                return $this->generalController->view('appointment/list.appointments', $variable, true);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);

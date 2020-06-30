@@ -26,6 +26,7 @@ class GeneralController extends Controller
         $local = $this->local->getTxt($this->id_local);
         if (isset($_SESSION["id_user"])) {
             $user = $_SESSION["id_user"];
+            $isArtist = $this->isArtist($user, $this->id_local);
             $isAdministrator = $this->isAdministrator($user, $this->id_local);
             return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'isAdministrator', 'variable'));
         }
@@ -33,11 +34,11 @@ class GeneralController extends Controller
     }
 
     public function index() {
-        return $this->view('index.views',null);
+        return $this->view('index.views');
     }
 
     public function updPhotos() {
-        return $this->view('upload.photos', null);
+        return $this->view('upload.photos');
     }
 
     public function savePhotos() {
