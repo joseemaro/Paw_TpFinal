@@ -75,6 +75,60 @@ class QueryBuilder {
     }
 
     /**
+     * update an user
+     *
+     * @param string $table
+     * @param string $id_user
+     * @param string $first_name
+     * @param string $last_name
+     * @param date $born
+     * @param integer $nro_doc
+     * @param integer $phone
+     * @param string $direction
+     * @param string $email
+     *
+     */
+    public function updateUser($table,$id_user,$first_name,$last_name,$born,$nro_doc,$phone,$direction,$email){
+        try {
+            $statement = $this->pdo->prepare("update inkmaster_db.$table SET first_name = :2, last_name = :3,
+                                born = :4 , nro_doc = :5 , phone = :6 , direction = :7 , email = :8
+                                                    where id_user = :1;");
+            $statement->bindValue(':1', $id_user);
+            $statement->bindValue(':2', $first_name);
+            $statement->bindValue(':3', $last_name);
+            $statement->bindValue(':4', $born);
+            $statement->bindValue(':5', $nro_doc);
+            $statement->bindValue(':6', $phone);
+            $statement->bindValue(':7', $direction);
+            $statement->bindValue(':8', $email);
+
+            $statement->execute();
+            return null;
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Select all artists from a database table.
+     * @param string $table
+     * @param string $id_user
+     * @param string $medical
+     */
+     public function updMedRec($table, $id_user, $medical){
+         try {
+             $statement = $this->pdo->prepare("update inkmaster_db.$table SET considerations = :2                            
+                                                    where id_user = :1;");
+             $statement->bindValue(':1', $id_user);
+             $statement->bindValue(':2', $medical);
+             $statement->execute();
+             return null;
+         } catch (Exception $e) {
+             $this->sendToLog($e);
+         }
+    }
+
+    /**
      * Select all artists from a database table.
      *
      * @param string $table

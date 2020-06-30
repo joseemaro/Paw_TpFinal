@@ -32,12 +32,63 @@ class UserController extends Controller
         }
     }
 
-    public function editUser() {
-        return view();#'list.appointments', compact('appointments'));
+    public function editUser($id_user) {
+        $id_user = str_replace("%20", " ", $id_user);
+            if ($this->generalController->isAdministrator($id_user, $this->generalController->id_local)) {
+
+                $user = $this->user->findUser($id_user);
+                $user["photo"] = base64_encode($user["photo"]);
+                $medRec = $this->user->viewMedRec($id_user);
+                if ($medRec){
+                    $user["medical"]= $medRec["considerations"];
+                }
+                $variable["user"] = $user;
+                return $this->generalController->view('edit.user', $variable);
+        }else {
+
+                return $this->generalController->view('not_found', null);
+            }
     }
 
     public function uptUser() {
-        return view();#'list.appointments', compact('appointments'));
+        $id_user = $_POST['username'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $born = $_POST['born'];
+        $nro_doc = $_POST['nro_doc'];
+        $phone = $_POST['phone'];
+        $direction = $_POST['direction'];
+        $email = $_POST['email'];
+        $medical =  $_POST['medical'];
+        /*if (isset($_FILES)) {
+            $photo = $_FILES;
+            if ($photo["photo"]["tmp_name"] != ''){
+            $photo = file_get_contents($photo["photo"]["tmp_name"]);
+            }
+        }*/
+
+        //foto
+            if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
+                //validar campos
+
+                //actualizo campos
+
+                $this->user->updUser($id_user,$first_name,$last_name,$born,$nro_doc,$phone,$direction,$email);
+                if ($medical != ''){
+                   $this->generalController->updMedRec($id_user, $medical);
+                }
+                //recupero datos del user
+                    $user = $this->user->findUser($id_user);
+                    $user["photo"] = base64_encode($user["photo"]);
+                    $medRec = $this->user->viewMedRec($id_user);
+                    if ($medRec){
+                        $user["medical"]= $medRec["considerations"];
+                    }
+                    $variable["user"] = $user;
+                    return $this->generalController->view('view.user', $variable);
+        }else {
+                return $this->generalController->view('not_found');
+            }
     }
 
     public function delUser() {

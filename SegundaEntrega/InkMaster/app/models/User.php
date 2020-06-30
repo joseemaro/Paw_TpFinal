@@ -51,6 +51,14 @@ class User extends Model
         return $boolean;
     }
 
+    public function updUser($id_user,$first_name,$last_name,$born,$nro_doc,$phone,$direction,$email){
+        return $this->db->updateUser($this->table,$id_user,$first_name,$last_name,$born,$nro_doc,$phone,$direction,$email);
+    }
+
+    public function updMedRec($table ,$id_user, $medical){
+        return $this->db->updMedRec($table ,$id_user, $medical);
+    }
+
     public function validate_duplicateUser($id){
         $cant = $this->db->findCantUser($this->table, $id);
         $can = $cant['cant'];
@@ -454,4 +462,7 @@ class User extends Model
         }
         return $boolean;
     }
+
+
+
 }

@@ -40,6 +40,9 @@ class GeneralController extends Controller
     public function updPhotos() {
         return $this->view('upload.photos');
     }
+    public function updMedRec($id_user, $medical){
+        return $this->user->updMedRec('medical_record' ,$id_user, $medical);
+    }
 
     public function savePhotos() {
         session_start();

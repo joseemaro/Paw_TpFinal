@@ -20,6 +20,8 @@ $router->get('artists', 'UserController@listArtists');
 $router->get('view_artist/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@viewArtist');
 $router->get('view_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@viewUser');
 $router->get('list_users', 'UserController@listUsers');
+$router->get('edit_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@editUser');
+$router->post('upt_user', 'UserController@uptUser');
 
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
