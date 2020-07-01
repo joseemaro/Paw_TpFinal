@@ -574,6 +574,55 @@ class QueryBuilder {
         }
     }
 
+    /**
+     * delete a faq
+     *
+     * @param string $table
+     * @param integer $id
+     *
+     */
+    public function delFaq($table, $id){
+
+        $sql = "DELETE from inkmaster_db.$table
+                                            where id_faq = :id";
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+
+            $statement->execute();
+            return null;
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * update a faq
+     *
+     * @param string $table
+     * @param integer $id
+     * @param array $parameters
+     *
+     */
+    public function updFaq($table, $id, $parameters){
+        foreach ($parameters as $key => $value) {
+            $sql = sprintf(
+                "UPDATE %s SET %s=%s WHERE id_faq=%s;",
+                $table,
+                $key,
+                ':'.$key,
+                $id
+            );
+            try {
+                $statement = $this->pdo->prepare($sql);
+                $statement->execute(array($key => $value));
+                return null;
+            } catch (Exception $e) {
+                $this->sendToLog($e);
+            }
+        }
+    }
+
     private function sendToLog(Exception $e) {
         if ($this->logger) {
             $this->logger->error('Error', ["Error" => $e]);

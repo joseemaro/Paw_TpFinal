@@ -158,4 +158,59 @@ class GeneralController extends Controller
     public function isAdministrator($id_user, $id_local) {
         return $this->user->isAdmin($id_user, $id_local);
     }
+
+    public function delFaq($id_faq){
+        $this->faq->delFaq($id_faq);
+        $variable["faqs"] = $this->faq->listFaq();
+        return $this->view('faq', $variable);
+    }
+
+    public function editFaq($id_faq){
+        $variable["faq"] = $this->faq->find($id_faq);
+        return $this->view('faq.edit', $variable);
+    }
+
+    public function addFaq(){
+        return $this->view('new.faq', null);
+    }
+    public function saveFaq(){
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $id_user= $_SESSION["id_user"];
+        $parameters["answer"]= $_POST['answer'];
+        $parameters["question"]= $_POST['question'];
+        $parameters["summary"]= $_POST['summary'];
+        if ($this->user->havePermissions($id_user, 'faq.edit')) {
+
+            $this->faq->newFaq($parameters);
+
+            $variable["faqs"] =$this->faq->listFaq();
+            return $this->view('faq', $variable);
+        }else {
+            return $this->view('not_found');
+        }
+
+    }
+
+    public function updFaq(){
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        $id_user= $_SESSION["id_user"];
+        $id_faq = $_POST['id_faq'];
+        $parameters["answer"]= $_POST['answer'];
+        $parameters["question"]= $_POST['question'];
+        $parameters["summary"]= $_POST['summary'];
+        if ($this->user->havePermissions($id_user, 'faq.edit')) {
+            $this->faq->updateFaq($id_faq, $parameters);
+
+            $variable["faqs"] =$this->faq->listFaq();
+            return $this->view('faq', $variable);
+        }else {
+            return $this->view('not_found');
+        }
+
+    }
+
 }

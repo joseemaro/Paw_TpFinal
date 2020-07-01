@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    FAQ
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/faq.edit.css">
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+{% endblock %}
+
+{% block main %}
+    <section id="wrapper">
+
+
+        <form action="/save_faq" method="post" id="form" name="form" enctype="multipart/form-data">
+            <h1>Nueva Pregunta Frecuente</h1>
+
+            <label> Pregunta: <input type="text" name="question"  value="{{ variable.faq.question }}"></label>
+            <label> Respuesta: <input type="text" name="answer"  value="{{ variable.faq.answer }}"></label>
+            <label> Descripcion: <input type="text" name="summary"  value="{{ variable.faq.summary }}"></label>
+
+            <input class="button-saveFaq" type="submit" id="send-btn" value="Guardar" />
+
+        </form>
+    </section>
+{% endblock %}
+
+{% block footer %}
+{{ include('footer.views.html') }}
+{% endblock %}
