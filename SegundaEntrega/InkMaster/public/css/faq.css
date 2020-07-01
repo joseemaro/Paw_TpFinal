@@ -22,6 +22,11 @@ button {
     background-color: #202020;
 }
 
+#content{
+    padding-bottom:0.5em;
+    padding-top: 0.5em;
+}
+
 .addBtn {
     background-color: #3C7931;
 }
@@ -32,6 +37,23 @@ button {
 
 .deleteBtn {
     background-color: #8B0000;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px)
+{
+    .addBtn,
+    .editBtn,
+    .deleteBtn {
+        width: 50%;
+    }
+    .add-faq{
+        width: 50%;
+    }
+
+    .fontsize {
+        font-size: 0.625em;
+    }
 }
 
 #wrapper {
