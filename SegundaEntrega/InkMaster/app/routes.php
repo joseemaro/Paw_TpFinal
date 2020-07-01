@@ -19,6 +19,7 @@ $router->get('logout', 'UserController@logOut');
 $router->get('artists', 'UserController@listArtists');
 $router->get('view_artist/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@viewArtist');
 $router->get('view_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@viewUser');
+$router->get('del_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@delUser');
 $router->get('list_users', 'UserController@listUsers');
 $router->get('edit_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@editUser');
 $router->post('upt_user', 'UserController@uptUser');

@@ -23,7 +23,7 @@
     <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1> Edición de turno </h1>
 
-        <label> ID: <input type="text" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}"></label>
+        <label> ID: <input type="hidden" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}"></label>
 
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
