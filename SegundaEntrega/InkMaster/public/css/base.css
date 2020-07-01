@@ -179,6 +179,16 @@ nav ul li .icon-mobile {
     color: rgba(255, 255, 255, .4);
 }
 
+.submenu > a {
+    pointer-events: none;
+    cursor: default;
+}
+
+.see-all {
+    display: block;
+}
+
+
 @media screen and (max-width:700px) {
 
     .site-nav .submenu:hover .children,
@@ -246,6 +256,15 @@ nav ul li .icon-mobile {
 
     .site-nav--icon+.site-nav--icon{
         display: none;
+    }
+
+    .site-nav li.see-all {
+        display: none;
+    }
+
+    .submenu > a {
+        pointer-events: initial;
+        cursor: pointer;
     }
 
 }

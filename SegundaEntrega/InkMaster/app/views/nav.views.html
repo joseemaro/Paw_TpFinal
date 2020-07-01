@@ -7,6 +7,7 @@
                 {% for artist in artists %}
                     <li><a href="/view_artist/{{ artist.id_artist }}"><i class="fas fa-chevron-right"></i>{{ artist.id_artist }}</a></li>
                 {% endfor %}
+                <li class="see-all"><a href="/artists"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
             </ul>
         </li>
         <li class="submenu">
@@ -14,6 +15,7 @@
             <ul class="children">
                 {% if isArtist and session %}
                     <li> <a href="/upload_photos"><i class="fas fa-chevron-right"></i> Cargar fotos </a></li>
+                    <li class="see-all"> <a href="/gallery"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
                 {% endif %}
             </ul>
         </li>
