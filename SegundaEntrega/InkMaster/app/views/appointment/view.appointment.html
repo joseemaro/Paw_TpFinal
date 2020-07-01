@@ -55,18 +55,18 @@
         {% if variable.medical_record %}
             <label> Enfermedades
                 <textarea name="pathology-txt" id="pathology-txt"
-                          pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.medical_record }}
+                          pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.medical_record }}
                 </textarea>
             </label>
         {% endif %}
 
-<!--    <section >-->
-<!--        {% if variable.appointment.tattoo %}-->
-<!--            <label> Tattoo-->
-<!--                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">-->
-<!--            </label>-->
-<!--        {% endif %}-->
-<!--    </section>-->
+<!--    <section>
+            {% if variable.appointment.tattoo %}
+                <label> Tattoo
+                        <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">
+                </label>
+            {% endif %}
+        </section>-->
 
         <section>
             {% if isArtist %}
