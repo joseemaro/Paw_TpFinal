@@ -193,6 +193,10 @@ class Appointment extends Model
         return true;
     }
 
+    public function listPhotos($id_appointment){
+        $this->db->listApPhotos('reference_image', $id_appointment);
+    }
+
     public function update() {  #insertar medical_record, reference_images y tattoo
 
     }

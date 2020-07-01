@@ -119,6 +119,25 @@ class QueryBuilder {
             }
         }
     }
+    /**
+     * Select all artists from a database table.
+     *
+     * @param string $table
+     * @param integer $id_appointment
+     *
+     */
+    public function listApPhotos($table, $id_appointment){
+        try {
+            $statement = $this->pdo->prepare("select * from inkmaster_db.$table
+                                                    where id_appointment = :id;");
+            $statement->bindValue(':id', $id_appointment);
+            $statement->execute();
+            var_dump($statement);
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
 
     /**
      * Select all artists from a database table.
