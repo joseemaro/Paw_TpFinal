@@ -164,16 +164,14 @@ class Appointment extends Model
     }
 
     public function validate_image($reference_image) { #solo verificar tamaño y extension, solo hay que subir a la bd
-        var_dump("entra a reference_image");
         $parameters["id_appointment"] = $this->parameters["id_appointment"];
-        $parameters["image"] = $reference_image;
+        $parameters["image"] = file_get_contents($reference_image);
         $this->db->insert("reference_image", $parameters);
         $this->return["tatto"] = base64_encode($parameters["image"]);
         return true;
     }
 
     public function validate_medical($medical_record) { #validar el textarea
-        var_dump("entra a medical_record");
         $parameters["id_user"] = $this->parameters["id_user"];
         $parameters["considerations"] = $medical_record;
         $this->db->insert("medical_record", $parameters);
@@ -182,11 +180,10 @@ class Appointment extends Model
     }
 
     public function validate_tattoo($tattoo) { #validar el tattoo
-        var_dump("entra a tattoo");
         $parameters["id_artist"] = $this->parameters["id_artist"];
         $parameters["id_appointment"] = $this->parameters["id_appointment"];
         $parameters["sector"] = $tattoo["sector"];
-        $parameters["image"] = $tattoo["image"];
+        $parameters["image"] = file_get_contents($tattoo["image"]);
         $parameters["txt"] = $tattoo["txt"];
         $this->db->insert("tattoo", $parameters);
         $this->return["tatto"] = base64_encode($parameters["image"]);
@@ -256,9 +253,9 @@ class Appointment extends Model
             }
             if ($boolean) {
                 $this->update();
-                $this->parameters["status"] = true;
 
                 $this->parameters = $this->findAppointment($id_appointment);
+                $this->parameters["status"] = true;
                 return $this->parameters;
             } else {
                 $this->return["status"] = false;

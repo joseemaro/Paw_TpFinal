@@ -19,113 +19,113 @@ class UserController extends Controller
         return view();#'index.views');
     }
 
+    public function register() {
+        return $this->generalController->view('register');
+    }
+
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
         $status = $array[count($array)-1];
-        if ($status) {
-            #si salio bien la validacion
+        if ($status) {  #si salio bien la validacion
             $variable["parameters"] = $array;
-            return $this->generalController->view('register', $variable);   #ver si hacer esto o mandar una view dependiendo del resultado
+            return $this->generalController->view('register', $variable);
         } else {
             $variable["errors"] = $array;
             return $this->generalController->view('errors.register', $variable);
         }
     }
 
-    public function editUser($id_user) {
-        $id_user = str_replace("%20", " ", $id_user);
-            if ($this->generalController->isAdministrator($id_user, $this->generalController->id_local)) {
-
-                $user = $this->user->findUser($id_user);
-                $user["photo"] = base64_encode($user["photo"]);
-                $medRec = $this->user->viewMedRec($id_user);
-                if ($medRec){
-                    $user["medical"]= $medRec["considerations"];
-                }
-                $variable["user"] = $user;
-                return $this->generalController->view('edit.user', $variable);
-        }else {
-
-                return $this->generalController->view('not_found', null);
-            }
+    public function logIn() {
+        session_start();
+        if (!isset($_SESSION["id_user"])) {
+            return $this->generalController->view('login');
+        }
+        return $this->generalController->view('not_found');
     }
 
-    public function uptUser() {
-        $id_user = $_POST['username'];
-        $medical =  $_POST['medical'];
-        //$parameters["id_user"]= $_POST['username'];
-        $parameters["first_name"]= $_POST['first_name'];
-        $parameters["last_name"]= $_POST['last_name'];
-        $parameters["born"]= $_POST['born'];
-        $parameters["nro_doc"]= $_POST['nro_doc'];
-        $parameters["phone"]= $_POST['phone'];
-        $parameters["direction"]= $_POST['direction'];
-        $parameters["email"]= $_POST['email'];
-        //foto
-        /*if (isset($_FILES)) {
-            $photo = $_FILES;
-            if ($photo["photo"]["tmp_name"] != ''){
-            $photo = file_get_contents($photo["photo"]["tmp_name"]);
+    public function autentication() {
+        session_start();
+        if (!isset($_SESSION["id_user"])) {
+            $id_user = $_POST["id_user"];
+            $password = $_POST["password"];
+            $result = $this->user->autentication($id_user, $password);
+            if ($result) {
+                $variable["msgWelcome"] = "bienvenido $id_user ! ";
+                $_SESSION["id_user"] = $id_user;
+            } else {
+                $variable["msgWelcome"] = "usuario inválido";
             }
-        }*/
-
-
-            if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
-                //validar campos
-
-                //actualizo campos
-                $this->user->updateUser($id_user, $parameters);
-                if ($medical != ''){
-                   $this->generalController->updMedRec($id_user, $medical);
-                }
-                //recupero datos del user
-                    $user = $this->user->findUser($id_user);
-                    $user["photo"] = base64_encode($user["photo"]);
-                    $medRec = $this->user->viewMedRec($id_user);
-                    if ($medRec){
-                        $user["medical"]= $medRec["considerations"];
-                    }
-                    $variable["user"] = $user;
-                    return $this->generalController->view('view.user', $variable);
-        }else {
-                return $this->generalController->view('not_found');
-            }
+            return $this->generalController->view('index.views', $variable);
+        }
+        return $this->generalController->view('not_found');
     }
 
-    public function delUser() {
-        return view();#'list.appointments', compact('appointments'));
+    public function logOut() {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $_SESSION = array();
+            return $this->generalController->view('index.views');
+        }
+        return $this->generalController->view('index.views');
     }
 
     public function listUsers() {
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            if ($this->generalController->isAdministrator($id_user, $this->generalController->id_local)) {
+            if ($this->generalController->user->havePermissions($id_user, 'user.list')) {
                 $variable["artists"] = $this->user->listUsers();
                 return $this->generalController->view('list.users', $variable);
             }
-            return $this->generalController->view('not_found', null);
         }
-        return $this->generalController->view('not_found', null);
+        return $this->generalController->view('not_found');
     }
 
-    public function viewUser($id_user) {
-        $id_user = str_replace("%20", " ", $id_user);
+    public function viewUser($id_user_v) {
+        $id_user_v = str_replace("%20", " ", $id_user_v);
         session_start();
         if (isset($_SESSION["id_user"])) {
-            if ($this->generalController->isAdministrator($_SESSION["id_user"], $this->generalController->id_local)) {
-                $user = $this->user->findUser($id_user);
-                $user["photo"] = base64_encode($user["photo"]);
-                $medRec = $this->user->viewMedRec($id_user);
-                if ($medRec){
-                    $user["medical"]= $medRec["considerations"];
-                }
+            $id_user = $_SESSION["id_user"];
+            if ($this->generalController->user->havePermissions($id_user, 'user.view')) {
+                $user = $this->user->findUser($id_user_v);
                 $variable["user"] = $user;
                 return $this->generalController->view('view.user', $variable);
             }
-            return $this->generalController->view('not_found', null);
         }
-        return $this->generalController->view('not_found', null);
+        return $this->generalController->view('not_found');
+    }
+
+    public function editUser($id_user_v) {
+        $id_user_v = str_replace("%20", " ", $id_user_v);
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
+                $user = $this->user->findUser($id_user_v);
+                $variable["user"] = $user;
+                return $this->generalController->view('edit.user', $variable);
+            }
+        }
+        return $this->generalController->view('not_found');
+    }
+
+    public function uptUser() {
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
+                $parameters = $this->comparacion($id_user);
+                $this->user->validateUpdate($id_user, $parameters);
+                $user = $this->user->findUser($id_user);
+                $variable["user"] = $user;
+                return $this->generalController->view('view.user', $variable);
+            }
+        }
+        return $this->generalController->view('not_found');
+    }
+
+    public function delUser() {
+        return view();#'list.appointments', compact('appointments'));
     }
 
     public function listArtists() {
@@ -139,81 +139,42 @@ class UserController extends Controller
         return $this->generalController->view('view.artist', $variable);
     }
 
-    public function register() {
-        return $this->generalController->view('register', null);
-    }
-
-    public function logIn() {
-        return $this->generalController->view('login', null);
-    }
-
-    public function autentication() {
-        $session = null;
-        $id_user = $_POST["id_user"];
-        $password = $_POST["password"];
-        $result = $this->user->autentication($id_user, $password);
-        if ($result) { #obvio que esto no deberian ser var_dump
-            $variable["msgWelcome"] = "bienvenido $id_user ! ";
-            session_start();
-            $_SESSION["id_user"] = $id_user;
-        } else {
-            $variable["msgWelcome"] = "usuario inválido";
+    public function comparacion($id_user) {
+        $old = $this->user->findUser($id_user);
+        if ($old["first_name"] != $_POST["first_name"]) $parameters["first_name"] = $_POST["first_name"];
+        if ($old["last_name"] != $_POST["last_name"]) $parameters["last_name"] = $_POST["last_name"];
+        if ($old["born"] != $_POST["born"]) $parameters["born"] = $_POST["born"];
+        if ($old["nro_doc"] != $_POST["nro_doc"]) $parameters["nro_doc"] = $_POST["nro_doc"];
+        if ($old["phone"] != $_POST["phone"]) $parameters["phone"] = $_POST["phone"];
+        if ($old["direction"] != $_POST["direction"]) $parameters["direction"] = $_POST["direction"];
+        if ($old["email"] != $_POST["email"]) $parameters["email"] = $_POST["email"];
+        if (isset($_FILES)) $parameters["photo"] = $_FILES;
+        if ($old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
+        if (isset($_POST["artist"])) {
+            $parameters["artist"] = true;
+            if ($old["txt"] != $_POST["txt"]) $parameters["txt"] = $_POST["txt"];
         }
-        return $this->generalController->view('index.views', $variable);
-    }
-
-    public function logOut() {
-        session_start();
-        $_SESSION = array();
-        return $this->generalController->view('index.views', null);
     }
 
     public function parameters() {
         $parameters = array();
-        if (isset($_POST["id_user"])) {
-            $parameters["user"] = $_POST["id_user"];
-        }
-        if (isset($_POST["password"])) {
-            $parameters["password"] = $_POST["password"];
-        }
-        if (isset($_POST["confirm_password"])) {
-            $parameters["confirm_password"] = $_POST["confirm_password"];
-        }
-        if (isset($_POST["first_name"])) {
-            $parameters["first_name"] = $_POST["first_name"];
-        }
-        if (isset($_POST["last_name"])) {
-            $parameters["last_name"] = $_POST["last_name"];
-        }
-        if (isset($_POST["born"])) {
-            $parameters["born"] = $_POST["born"];
-        }
-        if (isset($_POST["nro_doc"])) {
-            $parameters["nro_doc"] = $_POST["nro_doc"];
-        }
-        if (isset($_POST["phone"])) {
-            $parameters["phone"] = $_POST["phone"];
-        }
-        if (isset($_POST["direction"])) {
-            $parameters["direction"] = $_POST["direction"];
-        }
-        if (isset($_POST["email"])) {
-            $parameters["email"] = $_POST["email"];
-        }
-        if (isset($_FILES)) {
-            $parameters["photo"] = $_FILES;
-        }
+        if (isset($_POST["id_user"])) $parameters["user"] = $_POST["id_user"];
+        if (isset($_POST["password"])) $parameters["password"] = $_POST["password"];
+        if (isset($_POST["confirm_password"])) $parameters["confirm_password"] = $_POST["confirm_password"];
+        if (isset($_POST["first_name"])) $parameters["first_name"] = $_POST["first_name"];
+        if (isset($_POST["last_name"])) $parameters["last_name"] = $_POST["last_name"];
+        if (isset($_POST["born"])) $parameters["born"] = $_POST["born"];
+        if (isset($_POST["nro_doc"])) $parameters["nro_doc"] = $_POST["nro_doc"];
+        if (isset($_POST["phone"])) $parameters["phone"] = $_POST["phone"];
+        if (isset($_POST["direction"])) $parameters["direction"] = $_POST["direction"];
+        if (isset($_POST["email"])) $parameters["email"] = $_POST["email"];
+        if (isset($_FILES)) $parameters["photo"] = $_FILES;
+        if (isset($_POST["pathology"])) $parameters["pathology"] = $_POST["pathology"];
         if (isset($_POST["artist"])) {
             $parameters["artist"] = true;
             $parameters["local"] = $this->generalController->getIdLocal();
-            if (isset($_POST["txt"])) {
-                $parameters["txt"] = $_POST["txt"];
-            }
+            if (isset($_POST["txt"])) $parameters["txt"] = $_POST["txt"];
         }
         return $parameters;
-    }
-
-    public function isAdmin($id_user) {
-        return true;
     }
 }

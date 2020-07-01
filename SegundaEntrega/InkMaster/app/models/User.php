@@ -51,11 +51,6 @@ class User extends Model
         return $boolean;
     }
 
-
-    public function updateUser($id_user, $parameters){
-        return $this->db->updUser($this->table, $id_user, $parameters);
-    }
-
     public function updMedRec($table ,$id_user, $medical){
         return $this->db->updMedRec($table ,$id_user, $medical);
     }
@@ -69,10 +64,6 @@ class User extends Model
         }else{
             return true;
         }
-}
-
-    public function viewMedRec($id_pacient){
-       return $this->db->findMedReccord("medical_record", $id_pacient);
     }
 
     public function validate_password($password) {
@@ -368,6 +359,27 @@ class User extends Model
         return $this->return;
     }
 
+    public function validateUpdate($id_user, $parameters = null){
+        $boolean = $this->validateAll($parameters);
+        if ($boolean) {
+            $this->db->updateUser($this->table, $this->parameters_user);
+
+            if (isset($this->parameters_artist["id_artist"])) {
+                #hacer update para artistas
+                /*$this->db->insert('artist', $this->parameters_artist);
+                $rol_user["id_user"] = $this->parameters_artist["id_artist"];
+                $rol_user["id_rol"] = "artist";
+                $this->db->insert("rol_user", $rol_user);*/
+            }
+
+            $status = true;
+        } else {
+            $status = false;
+        }
+        array_push($this->return, $status);
+        return $this->return;
+    }
+
     public function replace($array) {
 
         for ($i = 0; $i < count($array); $i++) {
@@ -401,8 +413,17 @@ class User extends Model
         return $this->replace($users);
     }
 
-    public function findUser($id) {
-        $user = $this->db->findUser($this->table, $id);
+    public function findUser($id_user) {
+        $user = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
+                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist) 
+                                        where id_user = :1", [$id_user]);
+        $user["photo"] = base64_encode($user["photo"]);
+        $medical_record = $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
+        if ($medical_record) {
+            $user["pathology"] = $medical_record["considerations"];
+        } else {
+            $user["pathology"] = "-";
+        }
         return $user;
     }
 
@@ -413,6 +434,10 @@ class User extends Model
             $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
         }
         return $artist;
+    }
+
+    public function findMedRec($id_user){
+        return $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", $id_user);
     }
 
     public function verifyAdult($id_user) {

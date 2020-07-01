@@ -75,7 +75,6 @@ class ApController extends Controller
     public function viewAp($id_appointment) {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = $_SESSION["id_user"];
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             $medical = $this->user->viewMedRec($variable["appointment"]["id_user"]);
             if ($medical) {
