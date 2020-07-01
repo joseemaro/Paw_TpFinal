@@ -28,32 +28,36 @@ class ApController extends Controller
         return $this->generalController->view('appointment/new.appointment');
     }
 
-    public function saveAp ()
-    {
+    public function saveAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
             #if por si no estan completos los post y files
             $parameters["local"] = $this->generalController->getIdLocal();
             $parameters["user"] = $_SESSION["id_user"];
-            $parameters["date"] = $_POST["date"];
-            $parameters["hour"] = $_POST["hour"];
-            $parameters["artist"] = $_POST["id_artist"];
-            $reference_images = $_FILES;
-            #var_dump($_FILES["reference_image"]);
+            if (isset($_POST["date"])) {
+                $parameters["date"] = $_POST["date"];
+            }
+            if (isset($_POST["hour"])) {
+                $parameters["hour"] = $_POST["hour"];
+            }
+            if (isset($_POST["id_artist"])) {
+                $parameters["artist"] = $_POST["id_artist"];
+            }
+            if (isset($_FILES["reference_image"])) {
+                $parameters["reference_images"]["reference_image"] = $_FILES;
+            }
 
             $medical_record = array();
             if (isset($_POST["pathology"])) {
-                $medical_record["pathology-text"] = $_POST["pathology-txt"];
+                $parameters["medical_record"] = $_POST["pathology-txt"];
             }
 
-            $array = $this->appointment->validateInsert($parameters, $reference_images, $medical_record);
+            $array = $this->appointment->validateInsert($parameters, $medical_record);
 
             $reference_image["reference_image"] = $_FILES;
 
             if ($array["status"]) {     #si salio bien la validacion
                 $variable["appointment"] = $array;
-                $id_pacient = $variable["appointment"]["id_user"];
-                //$variable["medical"] = $this->user->viewMedRec($id_pacient);
                 $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
                 return $this->generalController->view('appointment/view.appointment', $variable);
             } else {
@@ -110,8 +114,8 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
-                if (isset($_POST["reference_image"])) {
-                    $reference_image = $_FILES;
+                if (isset($_FILES["reference_image"])) {
+                    $reference_image["reference_image"] = $_FILES;
                 } else {
                     $reference_image = null;
                 }
@@ -120,14 +124,7 @@ class ApController extends Controller
                 } else {
                     $medical_record = null;
                 }
-                if (isset($_POST["description"])) {
-                    $tattoo["image"] = $_FILES;
-                    $tattoo["sector"] = $_POST["sector"];
-                    $tattoo["txt"] = $_POST["description"];
-                } else {
-                    $tattoo = null;
-                }
-                $array = $this->appointment->validateUpdate($_POST["id_appointment"], $reference_image, $medical_record, $tattoo);
+                $array = $this->appointment->validateUpdate($_POST["id_appointment"], $reference_image, $medical_record);
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
                     $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);

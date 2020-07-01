@@ -20,6 +20,7 @@ class Appointment extends Model
     protected $return = array();
     protected $reference_images = array();
     protected $tattoo;
+    protected $medical_record = array();
 
     public function validate_local($id_local) {
         $boolean = false;
@@ -165,7 +166,8 @@ class Appointment extends Model
         return $boolean;
     }
 
-    public function validate_image($reference_images) { #solo verificar tamaño y extension, solo hay que subir a la bd
+    public function validate_reference_images($reference_images) {
+        $reference_images = $reference_images["reference_image"];
         $boolean = true;
 
         for ($i = 0; $i < count($reference_images["reference_image"]["name"]); $i++) {
@@ -203,11 +205,9 @@ class Appointment extends Model
         return $array_images;
     }
 
-    public function validate_medical($medical_record) { #validar el textarea
-        /*$parameters["id_user"] = $this->parameters["id_user"];
-        $parameters["considerations"] = $medical_record;
-        #$this->db->insert("medical_record", $parameters);
-        #$this->return["medical_record"] = $parameters["considerations"];*/
+    public function validate_medical_record($medical_record) {
+        $this->medical_record["considerations"] = addslashes($medical_record);
+        $this->medical_record["id_user"] = $this->parameters["id_user"];
         return true;
     }
 
@@ -222,14 +222,6 @@ class Appointment extends Model
         return true;
     }
 
-    public function listPhotos($id_appointment){
-        $this->db->listApPhotos('reference_image', $id_appointment);
-    }
-
-    public function update() {  #insertar medical_record, reference_images y tattoo
-
-    }
-
     public function validateAll($parameters = null, $reference_images = null, $medical_record = null, $tattoo = null) {
         $boolean = true;
         if (!is_null($parameters)) {
@@ -240,32 +232,37 @@ class Appointment extends Model
         } else {
             $boolean = false;
         }
-        if ((!is_null($reference_images)) && ($boolean)) {
-            $boolean = $boolean && self::validate_image($reference_images);
+        /*if ((isset($reference_images)) && ($boolean)) {
+            $boolean = $boolean && self::validate_reference_images($reference_images);
         }
         if ((!is_null($medical_record)) && ($boolean)) {
-            $boolean = $boolean && self::validate_medical($medical_record);
+            $boolean = $boolean && self::validate_medical_record($medical_record);
         }
         if ((!is_null($tattoo)) && ($boolean)) {
             $boolean = $boolean && self::validate_tattoo($tattoo);
-        }
+        }*/
         return $boolean;
     }
 
-    public function validateInsert($parameters, $reference_images = null, $medical_record = null) {
-        $boolean = $this->validateAll($parameters, $reference_images, $medical_record);
+    public function validateInsert($parameters) {
+        $boolean = $this->validateAll($parameters);
         if ($boolean) {
             $this->parameters["status"] = 'pending';
             $this->db->insert($this->table, $this->parameters);
             $this->parameters["status"] = true;
-            $id_appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_artist = :1 and date = :2 and hour = :3", [$this->parameters["id_artist"], $this->parameters["date"], $this->parameters["hour"]]);
-            foreach ($this->reference_images as $image) {
-                $parameters_reference_image["id_appointment"] = $id_appointment["id_appointment"];
-                $parameters_reference_image["image"] = $image;
-                echo "<br>";
-                $this->db->insert("reference_image", $parameters_reference_image);
+            if (isset($parameters["reference_images"])){
+                $id_appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_artist = :1 and date = :2 and hour = :3", [$this->parameters["id_artist"], $this->parameters["date"], $this->parameters["hour"]]);
+                foreach ($this->reference_images as $image) {
+                    $parameters_reference_image["id_appointment"] = $id_appointment["id_appointment"];
+                    $parameters_reference_image["image"] = $image;
+                    $this->db->insert("reference_image", $parameters_reference_image);
+                }
+                $this->parameters["reference_images"] = $this->encode_images();
             }
-            $this->parameters["reference_images"] = $this->encode_images();
+            if (isset($parameters["medical_record"])) {
+                $this->db->insert("medical_record", $this->medical_record);
+                $this->parameters["medical_record"] = $parameters["medical_record"];
+            }
 
             return $this->parameters;
         } else {
@@ -275,26 +272,46 @@ class Appointment extends Model
         }
     }
 
-    public function validateUpdate($id_appointment, $reference_image = null, $medical_record = null, $tattoo = null) {
+    public function validateUpdate($id_appointment, $reference_image = null, $medical_record = null) {
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
                                                 where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
         if ($appointment) {
-            $this->parameters = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_appointment = :1", [$id_appointment]);
-            var_dump($this->parameters);
             $boolean = true;
             if (!is_null($reference_image) && $boolean) {
-                $boolean = $boolean && $this->validate_image($reference_image);
+                $boolean = $boolean && $this->validate_reference_images($reference_image);
             }
             if (!is_null($medical_record) && $boolean) {
-                $boolean = $boolean && $this->validate_medical($medical_record);
-            }
-            if (!is_null($tattoo) && $boolean) {
-                $boolean = $boolean && $this->validate_tattoo($tattoo);
+                $boolean = $boolean && $this->validate_medical_record($medical_record);
             }
             if ($boolean) {
-                $this->update();
-
+                if (!is_null($reference_image)){
+                    foreach ($this->reference_images as $image) {
+                        $parameters_reference_image["id_appointment"] = $id_appointment;
+                        $parameters_reference_image["image"] = $image;
+                        $this->db->insert("reference_image", $parameters_reference_image);
+                    }
+                    /*if ($this->parameters["reference_images"]) {
+                        $encode_images = $this->encode_images();
+                        $appointment_images = $this->parameters["reference_images"];
+                        array_push($appointment_images,$encode_images);
+                        $this->parameters
+                    } else {
+                        $this->parameters["reference_images"] = $this->encode_images();
+                    }*/
+                }
+                if (!is_null($medical_record)) {
+                    $this->medical_record["id_user"] = $appointment["id_user"];
+                    $this->medical_record["considerations"] = $medical_record;
+                    $this->db->insert("medical_record", $this->medical_record);
+                    /*if ($this->parameters["medical_record"]) {
+                        $this->parameters["medical_record"] = $this->parameters["medical_record"] . $medical_record;
+                    } else {
+                        $this->parameters["medical_record"] = $medical_record;
+                    }*/
+                }
                 $this->parameters = $this->findAppointment($id_appointment);
+                var_dump(count($this->parameters["reference_images"]));
+
                 $this->parameters["status"] = true;
                 return $this->parameters;
             } else {
@@ -364,6 +381,17 @@ class Appointment extends Model
             }
             $appointment["reference_images"] = $this->encode_images();
         }
+
+        $medical_records = $this->db->query("select * from inkmaster_db.medical_record
+                                                    where id_user = :1;", [$appointment["id_user"]]);
+        if ($medical_records) {
+            $medical_record_return = "";
+            foreach ($medical_records as $medical_record) {
+                $medical_record_return = $medical_record_return . $medical_record["considerations"];
+            }
+            $appointment["medical_record"] = $medical_record_return;
+        }
+
         return $appointment;
     }
 

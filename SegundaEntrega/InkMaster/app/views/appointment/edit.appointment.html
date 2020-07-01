@@ -23,7 +23,7 @@
     <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1> Edición de turno </h1>
 
-        <label> ID: <input type="hidden" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}"></label>
+        <input type="hidden" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}">
 
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
@@ -40,10 +40,10 @@
         <label> Imágenes de referencia
             {% if variable.appointment.reference_images %}
                 {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image.image}}" >
+                    <img src="data:image/png;base64, {{reference_image}}" >
                 {% endfor %}
             {% endif %}
-            <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg">
+            <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple>
         </label>
 
         <label> Enfermedades
@@ -51,7 +51,7 @@
             </textarea>
         </label>
 
-        <label> Tattoo
+        <!--<label> Tattoo
             {% if variable.appointment.tattoo.image %}
                 <figure>
                     <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
@@ -74,7 +74,7 @@
                 </label>
                 <label>Descripción: <textarea name="description"></textarea></label>
             {% endif %}
-        </label>
+        </label>-->
 
         <div>
             <input class="button-editAp" type="reset" value="Limpiar" />
