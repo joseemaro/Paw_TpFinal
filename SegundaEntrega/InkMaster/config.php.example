@@ -2,6 +2,25 @@
 
 use Monolog\Logger as MonologLogger;
 
+$db = getenv('DATABASE_URL');
+if ($db) {
+    $dbopts = parse_url($db);
+    $dbopts['dsn'] = sprintf(
+        $dsn_template,
+        'pgsql',
+        $dbopts["host"],
+        $dbopts["port"],
+        ltrim($dbopts["path"],'/')
+    );
+} else {
+    $dbopts = [
+        "name" => 'inkmaster_db',
+        "username" => 'root',
+        "password" => '',
+        "dsn" => 'mysql:host=127.0.0.1',
+    ]
+}
+
 return [
     'database' => [
         'name' => 'inkmaster_db',
