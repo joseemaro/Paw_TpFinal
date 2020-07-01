@@ -605,6 +605,7 @@ class QueryBuilder {
      *
      */
     public function updFaq($table, $id, $parameters){
+
         foreach ($parameters as $key => $value) {
             $sql = sprintf(
                 "UPDATE %s SET %s=%s WHERE id_faq=%s;",
@@ -615,6 +616,7 @@ class QueryBuilder {
             );
             try {
                 $statement = $this->pdo->prepare($sql);
+
                 $statement->execute(array($key => $value));
                 return null;
             } catch (Exception $e) {

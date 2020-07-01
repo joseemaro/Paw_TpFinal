@@ -203,6 +203,7 @@ class GeneralController extends Controller
         $parameters["question"]= $_POST['question'];
         $parameters["summary"]= $_POST['summary'];
         if ($this->user->havePermissions($id_user, 'faq.edit')) {
+
             $this->faq->updateFaq($id_faq, $parameters);
 
             $variable["faqs"] =$this->faq->listFaq();

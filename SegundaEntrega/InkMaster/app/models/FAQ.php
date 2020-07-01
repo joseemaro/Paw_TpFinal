@@ -33,6 +33,7 @@ public function newFaq($parameters){
 }
 
 public function updateFaq($id_faq,$parameters){
+
     return $this->db->updFaq($this->table, $id_faq, $parameters);
 }
 
