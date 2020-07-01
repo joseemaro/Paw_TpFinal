@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //validate question
     validate_question = document.querySelector(".questionjs");
     validate_question.addEventListener("blur", function() {
-        var question = /^[a-zA-Z0-9?!¡¿.,; ]{3,300}$/;
+        var question = /^[a-zA-Z0-9?!¡¿.,; ]{3,100}$/;
         if (question.exec(validate_question.value) || (validate_question.value === "")) {
             console.log("question");
             validate_question.style.border = "#ffffff";

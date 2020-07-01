@@ -8,6 +8,7 @@ FAQ
 {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/faq.edit.css">
+    <script type="text/javascript" src="/public/js/validateNewFaq.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -24,10 +25,18 @@ FAQ
 
             <h1>Editar Faq</h1>
 
-            <label> ID: <input type="text" name="id_faq" readonly value="{{ variable.faq.id_faq }}"></label>
-            <label> Pregunta: <input type="text" name="question"  value="{{ variable.faq.question }}"></label>
-            <label> Respuesta: <input type="text" name="answer"  value="{{ variable.faq.answer }}"></label>
-            <label> Descripcion: <input type="text" name="summary"  value="{{ variable.faq.summary }}"></label>
+                <label> ID: <input type="text" name="id_faq" readonly value="{{ variable.faq.id_faq }}"></label>
+
+                <label> Pregunta: <input type="text" name="question" class="questionjs" required value="{{ variable.faq.question }}"
+                                         pattern="^[a-zA-Z0-9?!¡¿.,; ]{3,100}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+                </label>
+
+                <label> Respuesta: <input type="text" name="answer" class="answerjs" required value="{{ variable.faq.answer }}"
+                                          pattern="^[a-zA-Z0-9?!¡¿.,; ]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+                </label>
+                <label> Descripcion: <input type="text" name="summary" class="descriptionjs" required value="{{ variable.faq.summary }}"
+                                            pattern="^[a-zA-Z0-9?!¡¿.,; ]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+                </label>
 
                 <input class="button-editFaq" type="submit" id="send-btn" value="Guardar" />
 
