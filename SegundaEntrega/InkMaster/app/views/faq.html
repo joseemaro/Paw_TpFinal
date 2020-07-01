@@ -19,11 +19,12 @@
     <section id="wrapper">
         <h1>Preguntas Frecuentes</h1>
 
-
-        <form method="get" id="add-faq" action="/add_faq">
-            <input type="hidden" name="add_faq" value="add_faq">
-            <button class ="table-button addBtn" type="submit" form="add-faq">Nueva Pregunta</button>
-        </form>
+        {% if isAdministrator %}
+            <form method="get" id="add-faq" action="/add_faq">
+                <input type="hidden" name="add_faq" value="add_faq">
+                <button class ="table-button addBtn" type="submit" form="add-faq">Nueva Pregunta</button>
+            </form>
+        {% endif %}
 
         <section id="content">
             <!-- query a la bd -->
@@ -35,17 +36,20 @@
                         </a>
                         <p> {{ query.answer }}</p>
                     </section>
-                    <section>
-                        <form method="get" id="edit-faq-{{ query.id_faq }}" action="edit_faq/{{ query.id_faq }}">
-                            <input type="hidden" name="id_faq" value={{ query.id_faq }}>
-                            <button class ="table-button editBtn" type="submit" form="edit-faq-{{ query.id_faq }}">Edit</button>
-                        </form>
 
-                        <form method="get" id="destroy-faq-{{ query.id_faq }}" action="/del_faq/{{ query.id_faq }}" onSubmit="return confirm('Desea eliminar la pregunta?');">
-                            <input type="hidden" name="id_faq" value={{ query.id_faq }}>
-                            <button class ="table-button deleteBtn" type="submit" form="destroy-faq-{{ query.id_faq }}">Delete</button>
-                        </form>
-                    </section>
+                    {% if isAdministrator %}
+                        <section>
+                            <form method="get" id="edit-faq-{{ query.id_faq }}" action="edit_faq/{{ query.id_faq }}">
+                                <input type="hidden" name="id_faq" value={{ query.id_faq }}>
+                                <button class ="table-button editBtn" type="submit" form="edit-faq-{{ query.id_faq }}">Edit</button>
+                            </form>
+
+                            <form method="get" id="destroy-faq-{{ query.id_faq }}" action="/del_faq/{{ query.id_faq }}" onSubmit="return confirm('Desea eliminar la pregunta?');">
+                                <input type="hidden" name="id_faq" value={{ query.id_faq }}>
+                                <button class ="table-button deleteBtn" type="submit" form="destroy-faq-{{ query.id_faq }}">Delete</button>
+                            </form>
+                        </section>
+                    {% endif %}
 
                 </article>
             {% endfor %}
