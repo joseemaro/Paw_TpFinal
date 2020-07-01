@@ -51,12 +51,11 @@
         <label> Price:
             <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}">
         </label>
-        <img src="data:image/png;base64, {{variable.appointment.photo}}" >
 
         {% if variable.appointment.reference_images %}
             <label> Imágenes de referencia
                 {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image.image}}" >
+                    <img src="data:image/png;base64, {{reference_image}}" >
                 {% endfor %}
             </label>
         {% endif %}
@@ -69,10 +68,10 @@
             </label>
         {% endif %}
 
-        {% if variable.appointment.tattoo.image %}
+        {% if variable.appointment.tattoo %}
             <label> Tattoo
                 <figure>
-                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
+                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">
                 </figure>
             </label>
         {% endif %}

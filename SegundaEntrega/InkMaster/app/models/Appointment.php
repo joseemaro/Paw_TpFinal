@@ -19,6 +19,7 @@ class Appointment extends Model
     protected $parameters = array();
     protected $return = array();
     protected $reference_images = array();
+    protected $tattoo;
 
     public function validate_local($id_local) {
         $boolean = false;
@@ -188,33 +189,36 @@ class Appointment extends Model
                     array_push($this->reference_images, $reference_image);
                 }
             }
-            #$this->db->insert("reference_image", $parameters);
-            $array_images = array();
-            foreach ($this->reference_images as $reference_image) {
-                $reference_image = base64_encode($reference_image);
-                array_push($array_images, $reference_image);
-            }
-            $this->return["reference_images"] = $array_images;
         }
+
         return $boolean;
     }
 
+    public function encode_images() {
+        $array_images = array();
+        foreach ($this->reference_images as $reference_image) {
+            $reference_image = base64_encode($reference_image);
+            array_push($array_images, $reference_image);
+        }
+        return $array_images;
+    }
+
     public function validate_medical($medical_record) { #validar el textarea
-        $parameters["id_user"] = $this->parameters["id_user"];
+        /*$parameters["id_user"] = $this->parameters["id_user"];
         $parameters["considerations"] = $medical_record;
         #$this->db->insert("medical_record", $parameters);
-        $this->return["medical_record"] = $parameters["considerations"];
+        #$this->return["medical_record"] = $parameters["considerations"];*/
         return true;
     }
 
     public function validate_tattoo($tattoo) { #validar el tattoo
-        $parameters["id_artist"] = $this->parameters["id_artist"];
+        /*$parameters["id_artist"] = $this->parameters["id_artist"];
         $parameters["id_appointment"] = $this->parameters["id_appointment"];
         $parameters["sector"] = $tattoo["sector"];
         $parameters["image"] = file_get_contents($tattoo["image"]);
         $parameters["txt"] = $tattoo["txt"];
         #$this->db->insert("tattoo", $parameters);
-        $this->return["tatto"] = base64_encode($parameters["image"]);
+        #$this->return["tatto"] = base64_encode($parameters["image"]);*/
         return true;
     }
 
@@ -261,6 +265,7 @@ class Appointment extends Model
                 echo "<br>";
                 $this->db->insert("reference_image", $parameters_reference_image);
             }
+            $this->parameters["reference_images"] = $this->encode_images();
 
             return $this->parameters;
         } else {
@@ -349,15 +354,15 @@ class Appointment extends Model
         $tattoo = $this->db->simpleQuery("select * from inkmaster_db.tattoo
                                                     where id_appointment = :1;", [$id_appointment]);
         if (isset($tattoo["image"])) {
-            $tattoo["image"] = base64_encode($tattoo["image"]);
+            $appointment["tattoo"] = base64_encode($tattoo["image"]);
         }
-        if ($tattoo) {
-            $appointment["tattoo"] = $tattoo;
-        }
-        $reference_images = $this->db->query("select * from inkmaster_db.reference_image
+        $reference_images = $this->db->query("select image from inkmaster_db.reference_image
                                                     where id_appointment = :1;", [$id_appointment]);
-        if ($tattoo) {
-            $appointment["reference_images"] = $this->encodeImages($reference_images);
+        if ($reference_images) {
+            foreach ($reference_images as $reference_image) {
+                array_push($this->reference_images, $reference_image["image"]);
+            }
+            $appointment["reference_images"] = $this->encode_images();
         }
         return $appointment;
     }

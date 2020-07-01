@@ -79,6 +79,7 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
             #$medical = $this->user->viewMedRec($variable["appointment"]["id_user"]);
+            $medical = false;
             if ($medical) {
                 $variable["medical_record"] = $medical["considerations"];
             }else{
