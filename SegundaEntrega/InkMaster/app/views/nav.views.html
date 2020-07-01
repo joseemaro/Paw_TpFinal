@@ -1,30 +1,33 @@
 <nav id="site-nav" class="site-nav">
     <ul>
         <li> <a href="/"> <i class="fas fa-home site-nav--icon"></i> Home </a></li>
-        <li id="artists"> <a href="/artists"> <i class="fas fa-paint-brush site-nav--icon"></i>  Artistas </a>
-            <ul>
+        <li id="artists" class="submenu">
+            <a href="/artists"> <i class="fas fa-paint-brush site-nav--icon"></i>  Artistas <i class="icon-mobile fas fa-chevron-down site-nav--icon"></i></a>
+            <ul class="children">
                 {% for artist in artists %}
-                    <li><a href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a></li>
+                    <li><a href="/view_artist/{{ artist.id_artist }}"><i class="fas fa-chevron-right"></i>{{ artist.id_artist }}</a></li>
                 {% endfor %}
             </ul>
         </li>
-        <li> <a href="/gallery"> <i class="far fa-image site-nav--icon"></i> Galeria  </a>
-            <ul>
+        <li class="submenu">
+            <a href="/gallery"> <i class="far fa-image site-nav--icon"></i> Galeria </a>
+            <ul class="children">
                 {% if isArtist and session %}
-                    <li> <a href="/upload_photos"> Cargar fotos </a></li>
+                    <li> <a href="/upload_photos"><i class="fas fa-chevron-right"></i> Cargar fotos </a></li>
                 {% endif %}
             </ul>
         </li>
         <li> <a href="/new_appointment"> <i class="fas fa-calendar-check site-nav--icon"></i> Solicitar turno </a></li>
         <li> <a href="/faq"><i class=" far fa-question-circle site-nav--icon"></i> FAQs </a></li>
         {% if session %}
-            <li id="user"> <a href="/view_user/{{ user }}"><i class="fas fa-user site-nav--icon"></i> {{ user }} </a>
-                <ul>
+            <li class="submenu">
+                <a href="/view_user/{{ user }}"><i class="fas fa-user site-nav--icon"></i> {{ user }} <i class="icon-mobile fas fa-chevron-down site-nav--icon"></i></a>
+                <ul class="children">
                     {% if isAdministrator %}
-                        <li> <a href="/new_user"><i class="fas fa-user site-nav--icon"></i> Registrar Artista </a></li>
+                        <li> <a href="/new_user"><i class="fas fa-chevron-right"></i> Registrar Artista </a></li>
                     {% endif %}
-                    <li> <a href="/list_appointment"><i class="fas fa-user site-nav--icon"></i> Lista de turnos </a></li>
-                    <li> <a href="/logout"><i class="fas fa-user site-nav--icon"></i> Logout </a></li>
+                    <li> <a href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos </a></li>
+                    <li> <a href="/logout"><i class="fas fa-chevron-right"></i> Logout </a></li>
                 </ul>
             </li>
         {% else %}
