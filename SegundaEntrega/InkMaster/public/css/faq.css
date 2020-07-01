@@ -8,6 +8,32 @@ h1 {
     color: #575766;
 }
 
+button {
+    display: inline-block;
+    font-size: 80%;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    appearance: none;
+    color: white;
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    background-color: #202020;
+}
+
+.addBtn {
+    background-color: #3C7931;
+}
+
+.editBtn{
+    background-color: #BFB5AF;
+}
+
+.deleteBtn {
+    background-color: #8B0000;
+}
+
 #wrapper {
     width: 80%;
     margin: 0 auto;
