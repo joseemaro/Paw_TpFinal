@@ -124,6 +124,7 @@ nav ul li .icon-mobile {
 .menu_toggle{
     position: absolute;
     left: 0.5em;
+    top: 0.5em;
     padding: 0.5em;
 }
 

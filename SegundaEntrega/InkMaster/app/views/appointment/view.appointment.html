@@ -52,14 +52,6 @@
             <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}">
         </label>
 
-        {% if variable.appointment.reference_images %}
-            <label> Imágenes de referencia
-                {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image}}" >
-                {% endfor %}
-            </label>
-        {% endif %}
-
         {% if variable.medical_record %}
             <label> Enfermedades
                 <textarea name="pathology-txt" id="pathology-txt"
@@ -68,38 +60,51 @@
             </label>
         {% endif %}
 
-        {% if variable.appointment.tattoo %}
-            <label> Tattoo
-                <figure>
-                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">
-                </figure>
-            </label>
-        {% endif %}
+<!--    <section >-->
+<!--        {% if variable.appointment.tattoo %}-->
+<!--            <label> Tattoo-->
+<!--                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">-->
+<!--            </label>-->
+<!--        {% endif %}-->
+<!--    </section>-->
+
+        <section>
+            {% if isArtist %}
+
+                {% if (variable.appointment.status == 'pending') %}
+                    <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
+                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                        <button class ="acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Acept</button>
+                    </form>
+                {% endif %}
+                {% if (variable.appointment.status != 'annulled') %}
+                <form method="get" id="edit-appointment-{{ variable.appointment.id_appointment }}" action="/edit_appointment/{{ variable.appointment.id_appointment }}">
+                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                    <button class ="editBtn" type="submit" form="edit-appointment-{{ variable.appointment.id_appointment }}">Edit</button>
+                </form>
+                {% endif %}
+                {% if (variable.appointment.status == 'pending') %}
+                    <form method="get" id="destroy-appointment-{{ variable.appointment.id_appointment }}" action="/del_appointment/{{ variable.appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
+                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                        <button class ="deleteBtn" type="submit" form="destroy-appointment-{{ variable.appointment.id_appointment }}">Delete</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+
+        </section>
     </section>
 
-    <section>
-        {% if isArtist %}
-
-            {% if (variable.appointment.status == 'pending') %}
-                <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
-                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                    <button class ="acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Acept</button>
-                </form>
-            {% endif %}
-            {% if (variable.appointment.status != 'annulled') %}
-            <form method="get" id="edit-appointment-{{ variable.appointment.id_appointment }}" action="/edit_appointment/{{ variable.appointment.id_appointment }}">
-                <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                <button class ="editBtn" type="submit" form="edit-appointment-{{ variable.appointment.id_appointment }}">Edit</button>
-            </form>
-            {% endif %}
-            {% if (variable.appointment.status == 'pending') %}
-                <form method="get" id="destroy-appointment-{{ variable.appointment.id_appointment }}" action="/del_appointment/{{ variable.appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
-                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                    <button class ="deleteBtn" type="submit" form="destroy-appointment-{{ variable.appointment.id_appointment }}">Delete</button>
-                </form>
-            {% endif %}
+    <section id="container-imgAp">
+        {% if variable.appointment.reference_images %}
+            <h1 class="title-imgAp">Imágenes de referencia</h1>
+                <div id="container-all-img">
+                    {% for reference_image in variable.appointment.reference_images %}
+                    <img src="data:image/png;base64, {{reference_image}}" >
+                    {% endfor %}
+                </div>
+        {% else %}
+            <h1 class="title-imgAp">No hay imágenes de referencia</h1>
         {% endif %}
-
     </section>
 
 </section>
