@@ -117,12 +117,16 @@ class UserController extends Controller
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
                 $parameters = $this->comparacion($id_user);
-                $this->user->validateUpdate($id_user, $parameters);
-                $user = $this->user->findUser($id_user);
-                #echo "user<br>";
-                #var_dump($user);
-                $variable["user"] = $user;
-                return $this->generalController->view('view.user', $variable);
+                $array = $this->user->validateUpdate($id_user, $parameters);
+                $status = $array[count($array)-1];
+                if ($status) {  #si salio bien la validacion
+                    $user = $this->user->findUser($id_user);
+                    $variable["user"] = $user;
+                    return $this->generalController->view('view.user', $variable);
+                } else {
+                    $variable["errors"] = $array;
+                    return $this->generalController->view('errors.register', $variable);
+                }
             }
         }
         return $this->generalController->view('not_found');

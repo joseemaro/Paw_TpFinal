@@ -327,7 +327,7 @@ class User extends Model
         if (!empty($parameters)) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;
-                $boolean = $boolean && self::$validate($value); //aca esta el problema, en el ultimo parametro
+                $boolean = $boolean && self::$validate($value);
             }
         }
         return $boolean;
