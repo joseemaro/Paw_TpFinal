@@ -25,7 +25,7 @@ FAQ
 
             <h1>Editar Faq</h1>
 
-                <label> ID: <input type="text" name="id_faq" readonly value="{{ variable.faq.id_faq }}"></label>
+                <input type="hidden" name="id_faq" readonly value="{{ variable.faq.id_faq }}">
 
                 <label> Pregunta: <input type="text" name="question" class="questionjs" required value="{{ variable.faq.question }}"
                                          pattern="^[a-zA-Z0-9?!¡¿.,; ]{3,100}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">

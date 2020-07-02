@@ -76,7 +76,7 @@ class GeneralController extends Controller
 
     public function listTattoos() {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $quantity = 9; //Cant de fotos por pág
+        $quantity = 6; //Cant de fotos por pág
         $beginning = ($page > 1) ? (($page * $quantity) - $quantity) : 0;
         $totalTattoos = $this->tattoo->countTattoos();
         if ($totalTattoos > 0) {
@@ -100,9 +100,8 @@ class GeneralController extends Controller
     }
 
     public function viewFaq($id_faq) {
-        $id = ['id' => $id_faq];
         $variable = array();
-        $variable["faq"] = $this->faq->find($id_faq); // aca va el select con where y el id
+        $variable["faq"] = $this->faq->find($id_faq);
         return $this->view('faq.views', $variable);
     }
 
