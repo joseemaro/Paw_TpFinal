@@ -32,7 +32,7 @@ p {
     border-radius: 0.1875em;
     border: none;
     cursor: pointer;
-    position: relative;
+    /*position: relative;*/
     width: 100%;
 }
 
@@ -118,8 +118,8 @@ table.rwd_auto {
     }
 
     .width200 td:nth-of-type(1):before { content: "Username";}
-    .width200 td:nth-of-type(2):before { content: "Primer nombre"; }
-    .width200 td:nth-of-type(3):before { content: "Segundo nombre"; }
+    .width200 td:nth-of-type(2):before { content: "Nombre"; }
+    .width200 td:nth-of-type(3):before { content: "Apellido"; }
     .width200 td:nth-of-type(4):before { content: "Nacimiento"; }
     .width200 td:nth-of-type(5):before { content: "Telefono"; }
     .width200 td:nth-of-type(6):before { content: "Email"; }

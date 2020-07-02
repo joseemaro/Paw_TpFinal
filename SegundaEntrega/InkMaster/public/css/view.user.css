@@ -1,171 +1,120 @@
-#container-viewAp {
+* {
+    box-sizing: border-box;
+}
+
+#container-viewUser {
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-flow: column;
+}
+
+#title-viewUser,
+#title-local {
+    color: #575766;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+#personal-data,
+#local-data,
+#container-button {
+    width: 100%;
+}
+
+#container-button {
     padding: 1em;
 }
 
-#title-viewAp {
-    padding-bottom: 1em;
-    font-size: larger;
-    font-weight: bold;
-    color: #575766;
+#container-viewUser label {
+    display: block;
+    padding: 0.5em 0;
+    text-align: center;
 }
 
-tbody,
-tr,
-td,
-th {
-    border: 1px solid #CA4B1F;
-    background: whitesmoke;
+#personal-data{
+    overflow: scroll;
+    height: 100vh;
 }
 
-p {
-    margin:0 0 0.625em 0
+#container-viewUser label input,
+#container-viewUser label textarea {
+    display: block;
+    width: 100%;
+    margin: 0.3em auto;
+    padding: 0.2em;
+    height: 5vh;
+    border: 1px solid var(--color-logo);
+    text-align: left;
+    background-color: whitesmoke;
+    border-radius: 0.3125em;
+    font-size: 100%;
 }
 
-button {
+.backBtn,
+.editBtn,
+.deleteBtn {
     display: inline-block;
-    font-size: 1em;
+    font-size: 100%;
     padding: 0.6em 0.6em;
     margin-top: 0.5em;
-    -webkit-appearance: none;
     appearance: none;
     color: white;
     border-radius: 0.1875em;
     border: none;
     cursor: pointer;
-    position: relative;
     width: 100%;
-}
-
-.viewBtn{
     background-color: #202020;
 }
 
-table.width200,
-table.rwd_auto {
-    width:100%;
-    margin:0 0 0.625em 0;
+.deleteBtn {
+    background-color: #8B0000;
 }
 
-.width200 th,
-.rwd_auto th {
-    padding: 0.5em;
-    font-weight: bold;
-    text-align: center;
+figure {
+    background: whitesmoke;
+    margin: 1em auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    list-style-type: none;
+    padding: 1em;
+    width: 50%;
 }
 
-.width200 td,
-.rwd_auto td {
-    padding: 0.5em;
-    text-align: center;
-    overflow: hidden;
+figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-.rwd {
-    width: 00%;
-    overflow: auto;
-}
+@media screen and (min-width:700px){
 
-.rwd table.rwd_auto {
-    width: auto;
-    min-width: 100%
-}
-
-.rwd_auto th,
-.rwd_auto td {
-    white-space: nowrap;
-}
-
-@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px)
-{
-    tbody {
-        margin-top: 1em;
+    #container-viewUser {
+        flex-flow: row;
     }
 
-    table.width200,
-    .width200 thead,
-    .width200 tbody,
-    .width200 th,
-    .width200 td,
-    .width200 tr {
+    #personal-data{
+        width: 50%;
+    }
+
+    #local-data {
+        width: 50%;
+    }
+
+    #container-viewUser label input,
+    #container-viewUser label textarea{
+        width: 60%;
+    }
+
+    .backBtn,
+    .editBtn,
+    .deleteBtn {
         display: block;
-    }
-
-    .width200 thead tr {
-        position: absolute;
-        top: -62.4375em;
-        left: -62.4375em;
-    }
-
-    .width200 td {
-        position: relative;
-        padding-left: 40%;
-        text-align: left
-    }
-
-    .width200 td:before {
-        position: absolute;
-        top: 0.375em;
-        left: 0.375em;
-        width: 40%;
-        padding-right: 0;
-        white-space: nowrap;
-    }
-
-    .width200 td:nth-of-type(1):before { content: "Username";}
-    .width200 td:nth-of-type(2):before { content: "Nombre"; }
-    .width200 td:nth-of-type(3):before { content: "Apellido"; }
-    .width200 td:nth-of-type(4):before { content: "Nacimiento"; }
-    .width200 td:nth-of-type(5):before { content: "Telefono"; }
-    .width200 td:nth-of-type(6):before { content: "Email"; }
-    .width200 td:nth-of-type(7):before { content: "DNI"; }
-    .width200 td:nth-of-type(8):before { content: "Direccion"; }
-    .width200 td:nth-of-type(9):before { content: "Enfermedades"; }
-
-
-    .descarto {
-        display:none;
-    }
-
-    .fontsize {
-        font-size: 0.625em;
+        width: 30%;
+        margin-top: 0.5em;
+        margin-left: 10%;
     }
 }
 
-img{
-    max-width:20%;
-    width:auto;
-    height:auto;
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-width : 320px) and (max-width : 480px)
-{
-    .descarto {
-        display:none;
-    }
-    img{
-        max-width:50%;
-        width:auto;
-        height:auto;
-    }
-
-}
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-
-    .descarto {
-        display: none;
-    }
-
-    .fontsize {
-        font-size: 0.625em;
-    }
-
-    img{
-        max-width:50%;
-        width:auto;
-        height:auto;
-    }
-}
 
