@@ -152,8 +152,8 @@ class UserController extends Controller
         if ($old["phone"] != $_POST["phone"]) $parameters["phone"] = $_POST["phone"];
         if ($old["direction"] != $_POST["direction"]) $parameters["direction"] = $_POST["direction"];
         if ($old["email"] != $_POST["email"]) $parameters["email"] = $_POST["email"];
-        if (isset($_FILES)) $parameters["photo"] = $_FILES;
-        if ($old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
+        if (isset($_FILES["photo_edit"])) $parameters["photo"] = $_FILES["photo_edit"];
+        if (!empty($_POST["pathology"]) && $old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
         if (isset($_POST["artist"]) || isset($_POST["txt"])) {
             $parameters["artist"] = true;
             if ($old["txt"] != $_POST["txt"]) $parameters["txt"] = $_POST["txt"];

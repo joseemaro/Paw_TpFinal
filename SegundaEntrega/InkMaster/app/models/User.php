@@ -357,14 +357,15 @@ class User extends Model
     }
 
     public function validateUpdate($id_user, $parameters){
+        $this->parameters["id_user"] = $id_user;
         $boolean = $this->validateAll($parameters);
         $count = count($parameters);
-        $medical_record = isset($parameters["medical_record"]);
-        $artist = isset($parameters["id_artist"]);
+        $medical_record = isset($parameters["pathology"]);
+        $artist = isset($parameters["artist"]);
         if ($boolean) {
             if ($medical_record) {
                 $count = $count - 1;
-                $medical_record = $this->db->simpleQuery("select * from inkmaster_db.medical_record where id_user = :1", $id_user);
+                $medical_record = $this->db->simpleQuery("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
                 if ($medical_record) {
                     $this->db->update("update inkmaster_db.medical_record set considerations = :1 
                                     where id_user = :2;", [$medical_record, $parameters["id_artist"]]);
@@ -376,23 +377,19 @@ class User extends Model
             }
             if ($artist) {
                 $count = $count - 2;
-                $artist = $this->db->simpleQuery("select * from inkmaster_db.artist where id_artist = :1", $id_user);
+                $artist = $this->db->simpleQuery("select * from inkmaster_db.artist where id_artist = :1", [$id_user]);
                 if ($artist) {
                     $this->db->update("update inkmaster_db.artist set txt = :1
-                                    where id_artist = :2;", [$parameters["txt"], $parameters["id_artist"]]);
+                                    where id_artist = :2;", [$parameters["txt"], $id_user]);
                 } else {
-                    $parameters_artist["id_artist"] = $parameters["id_artist"];
+                    $parameters_artist["id_artist"] = $id_user;
                     $parameters_artist["txt"] = $parameters["txt"];
                     $parameters_artist["id_local"] = $parameters["id_local"];
                     $this->db->insert('artist', $parameters_artist);
                 }
             }
             if ($count > 0) {
-                #$photo = $this->parameters_user["photo"];
-                #$this->parameters_user["photo"] = null;
                 $this->db->genericUpdate($this->table, $id_user, $this->parameters_user);
-                #$this->db->update("update inkmaster_db.$this->table set photo = :1
-                #                    where id_artist = :2;", [$photo, $id_user]);
             }
 
             $status = true;

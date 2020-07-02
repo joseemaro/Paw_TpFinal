@@ -44,10 +44,11 @@
             {% if variable.user.photo %}
                 <img src="data:image/png;base64, {{ variable.user.photo }}" alt="foto de perfil del usuario">
             {% endif %}
-            <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
+            <input type="file" name="photo_edit" accept="image/jpeg, image/x-png, image/x-jpg">
         </label>
 
         {% if variable.user.id_artist %}
+            <input type="hidden" name="txt"  value="{{ variable.user.id_artist }}">
             <label> Descripción: <input type="text" name="txt"  value="{{ variable.user.txt }}"></label>
         {% endif %}
 

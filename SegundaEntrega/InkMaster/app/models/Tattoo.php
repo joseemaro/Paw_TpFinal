@@ -79,9 +79,6 @@ class Tattoo extends Model
         $boolean = $this->validateAll($parameters);
         $this->parameters["id_artist"] = $parameters["artist"];
         if ($boolean) {
-            var_dump($this->parameters["id_artist"]);
-            var_dump($this->parameters["sector"]);
-            var_dump($this->parameters["txt"]);
             $this->db->insert($this->table, $this->parameters);
             $status = true;
         } else {
