@@ -99,7 +99,7 @@
             <h1 class="title-imgAp">Imágenes de referencia</h1>
                 <div id="container-all-img">
                     {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image}}" >
+                    <img src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
                     {% endfor %}
                 </div>
         {% else %}

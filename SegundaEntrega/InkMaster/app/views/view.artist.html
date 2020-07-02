@@ -22,7 +22,7 @@
         <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
         <figure>
             {% if variable.artist.photo %}
-                <img src="data:image/jpg;base64, {{ variable.artist.photo }}">
+                <img src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">
             {% endif %}
             <figcaption>
                 <p id="description-artist">{{ variable.artist.txt }}</p>
@@ -31,7 +31,7 @@
     </div>
     <div class="container-img-artist">
         {% for tattoo in variable.artist.tattoos %}
-            <img src="data:image/png;base64, {{tattoo.image}}" >
+            <img src="data:image/png;base64, {{tattoo.image}}" alt="">
         {% endfor %}
     </div>
 

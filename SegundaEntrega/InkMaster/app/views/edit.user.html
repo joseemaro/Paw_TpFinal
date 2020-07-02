@@ -42,7 +42,7 @@
 
         <label> Foto de perfil <br>
             {% if variable.user.photo %}
-                <img src="data:image/png;base64, {{ variable.user.photo }}" >
+                <img src="data:image/png;base64, {{ variable.user.photo }}" alt="foto de perfil del usuario">
             {% endif %}
             <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
         </label>

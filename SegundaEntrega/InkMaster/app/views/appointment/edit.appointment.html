@@ -40,7 +40,7 @@
         <label> Imágenes de referencia
             {% if variable.appointment.reference_images %}
                 {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image}}" >
+                    <img src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
                 {% endfor %}
             {% endif %}
             <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple>
