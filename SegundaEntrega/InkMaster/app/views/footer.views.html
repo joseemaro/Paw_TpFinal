@@ -1,11 +1,18 @@
 <div class="container-footer-all">
     <div class="container-body">
-        <div class="column1">
-            <h2> Acerca de nosotros</h2>
-            <p>
+        <div class="column1" itemscope itemtype="http://schema.org/TattooParlor">
+            <h2 itemprop="name"> INKMASTER </h2>
+            <p itemprop="description">
                 {% if local %}
                     {{ local.txt }}
                 {% endif %}
+            </p>
+            <p> Horarios de atención: Lunes a viernes de 8:00 a 17:00
+                <meta itemprop="openingHours" content="Mo-Fr 08:00-17:00"/>
+            </p>
+            <p>
+                <meta itemprop="paymentAccepted" content="Cash, Credit Card, Debit Card"/>
+                Aceptamos: efectivo, tarjetas de débito y crédito
             </p>
         </div>
         <div class="column2">
@@ -27,30 +34,32 @@
                 <label> Síguenos en YouTube </label>
             </div>
         </div>
-        <div class="column3">
+        <div class="column3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
             <h2> Información de contacto </h2>
             <div class="row2">
                 <i class="fas fa-home"></i>
                 <label>
                     {% if local %}
-                        Encontranos en {{ local.direction }},
-                        {{ local.province }}, {{ local.country }}
+                        Encontranos en <span itemprop="streetAddress"> {{ local.direction }},</span>
+                        <span itemprop="postalCode">6700</span>
+                        <span itemprop="addressRegion">{{ local.province }}</span>,
+                        <span itemprop="addressCountry">{{ local.country }} </span>
                     {% endif %}
                 </label>
             </div>
-            <div class="row2">
+            <div class="row2" itemscope itemtype="https://schema.org/ContactPoint">
                 <i class="fas fa-mobile-alt"></i>
                 <label>
                     {% if local %}
-                        {{ local.phone }}
+                        <span itemprop="telephone"> {{ local.phone }} </span>
                     {% endif %}
                 </label>
             </div>
-            <div class="row2">
+            <div class="row2" itemscope itemtype="https://schema.org/ContactPoint">
                 <i class="fas fa-envelope"></i>
                 <label>
                     {% if local %}
-                        {{ local.email }}
+                        <span itemprop="email">{{ local.email }} </span>
                     {% endif %}
                 </label>
             </div>
