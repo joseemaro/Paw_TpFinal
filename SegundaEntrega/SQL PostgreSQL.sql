@@ -64,7 +64,7 @@ CREATE TABLE inkmaster_db.tattoo (
     image BYTEA NOT NULL,
     txt VARCHAR(200) NOT NULL,
     PRIMARY KEY (id_tattoo),
-    FOREIGN KEY (id_artist) REFERENCES artist(id_artist),
+    FOREIGN KEY (id_artist) REFERENCES inkmaster_db.artist(id_artist),
     FOREIGN KEY (id_appointment) REFERENCES inkmaster_db.appointment(id_appointment)
 );
 

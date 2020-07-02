@@ -14,11 +14,6 @@ class UserController extends Controller
         $this->session = false;
     }
 
-    public function index()
-    {
-        return view();#'index.views');
-    }
-
     public function register() {
         return $this->generalController->view('register');
     }
@@ -158,8 +153,6 @@ class UserController extends Controller
         if ($old["direction"] != $_POST["direction"]) $parameters["direction"] = $_POST["direction"];
         if ($old["email"] != $_POST["email"]) $parameters["email"] = $_POST["email"];
         if (isset($_FILES)) $parameters["photo"] = $_FILES;
-        #var_dump($_FILES);
-        #echo "<br>";
         if ($old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
         if (isset($_POST["artist"]) || isset($_POST["txt"])) {
             $parameters["artist"] = true;

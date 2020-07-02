@@ -31,7 +31,6 @@ class ApController extends Controller
     public function saveAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            #if por si no estan completos los post y files
             $parameters["local"] = $this->generalController->getIdLocal();
             $parameters["user"] = $_SESSION["id_user"];
             if (isset($_POST["date"])) {
@@ -53,8 +52,6 @@ class ApController extends Controller
             }
 
             $array = $this->appointment->validateInsert($parameters, $medical_record);
-
-            $reference_image["reference_image"] = $_FILES;
 
             if ($array["status"]) {     #si salio bien la validacion
                 $variable["appointment"] = $array;
