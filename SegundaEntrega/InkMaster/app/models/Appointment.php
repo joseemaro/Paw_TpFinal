@@ -211,18 +211,7 @@ class Appointment extends Model
         return true;
     }
 
-    public function validate_tattoo($tattoo) { #validar el tattoo
-        /*$parameters["id_artist"] = $this->parameters["id_artist"];
-        $parameters["id_appointment"] = $this->parameters["id_appointment"];
-        $parameters["sector"] = $tattoo["sector"];
-        $parameters["image"] = file_get_contents($tattoo["image"]);
-        $parameters["txt"] = $tattoo["txt"];
-        #$this->db->insert("tattoo", $parameters);
-        #$this->return["tatto"] = base64_encode($parameters["image"]);*/
-        return true;
-    }
-
-    public function validateAll($parameters = null, $reference_images = null, $medical_record = null, $tattoo = null) {
+    public function validateAll($parameters = null) {
         $boolean = true;
         if (!is_null($parameters)) {
             foreach ($parameters as $parameter => $value) {
@@ -232,15 +221,6 @@ class Appointment extends Model
         } else {
             $boolean = false;
         }
-        /*if ((isset($reference_images)) && ($boolean)) {
-            $boolean = $boolean && self::validate_reference_images($reference_images);
-        }
-        if ((!is_null($medical_record)) && ($boolean)) {
-            $boolean = $boolean && self::validate_medical_record($medical_record);
-        }
-        if ((!is_null($tattoo)) && ($boolean)) {
-            $boolean = $boolean && self::validate_tattoo($tattoo);
-        }*/
         return $boolean;
     }
 
@@ -290,27 +270,12 @@ class Appointment extends Model
                         $parameters_reference_image["image"] = $image;
                         $this->db->insert("reference_image", $parameters_reference_image);
                     }
-                    /*if ($this->parameters["reference_images"]) {
-                        $encode_images = $this->encode_images();
-                        $appointment_images = $this->parameters["reference_images"];
-                        array_push($appointment_images,$encode_images);
-                        $this->parameters
-                    } else {
-                        $this->parameters["reference_images"] = $this->encode_images();
-                    }*/
                 }
                 if (!is_null($medical_record)) {
                     $this->medical_record["id_user"] = $appointment["id_user"];
-                    $this->medical_record["considerations"] = $medical_record;
                     $this->db->insert("medical_record", $this->medical_record);
-                    /*if ($this->parameters["medical_record"]) {
-                        $this->parameters["medical_record"] = $this->parameters["medical_record"] . $medical_record;
-                    } else {
-                        $this->parameters["medical_record"] = $medical_record;
-                    }*/
                 }
                 $this->parameters = $this->findAppointment($id_appointment);
-                var_dump(count($this->parameters["reference_images"]));
 
                 $this->parameters["status"] = true;
                 return $this->parameters;

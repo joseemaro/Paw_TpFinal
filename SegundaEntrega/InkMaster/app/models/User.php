@@ -318,7 +318,7 @@ class User extends Model
     }
 
     public function validate_pathology($pathology) {    #no se si no generaria inyeccion sql y manipular para insertar
-        $this->parameters["medical_record"] = $pathology;
+        $this->parameters["medical_record"] = addslashes($pathology);
         return true;
     }
 

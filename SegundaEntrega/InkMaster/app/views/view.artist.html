@@ -21,7 +21,9 @@
     <div class="container-artist">
         <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
         <figure>
-            <img src="data:image/jpg;base64, {{ variable.artist.photo }}">
+            {% if variable.artist.photo %}
+                <img src="data:image/jpg;base64, {{ variable.artist.photo }}">
+            {% endif %}
             <figcaption>
                 <p id="description-artist">{{ variable.artist.txt }}</p>
             </figcaption>
