@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Turno
+    Usuario
 {% endblock %}
 
 {% block head %}
@@ -21,54 +21,68 @@
 <section id="container-viewAp">
     <h1 id="title-viewAp">{{ variable.user["id_user"] }} </h1>
 
-    <img src="data:image/jpg;base64, {{ variable.user['photo'] }} ">
+    {% if variable.user.photo %}
+        <img src="data:image/jpg;base64, {{ variable.user['photo'] }} ">
+    {% endif %}
 
-    <table class="width200">
-        <thead>
-        <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Nacimiento</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Email</th>
-            <th scope="col">DNI</th>
-            <th scope="col">Direccion</th>
-            <th scope="col">Enfermedades</th>
-        </tr>
-        </thead>
+    <label> Nombre de usuario:
+        <input type="text" name="id_user" readonly value="{{ variable.user.id_user }}">
+    </label>
 
-        <tbody>
-        <tr>
-            <td>{{ variable.user["id_user"] }}</td>
-            <td>{{ variable.user["first_name"] }}</td>
-            <td>{{ variable.user["last_name"] }}</td>
-            <td>{{ variable.user["born"] }}</td>
-            <td>{{ variable.user["phone"] }}</td>
-            <td>{{ variable.user["email"] }}</td>
-            <td>{{ variable.user["nro_doc"] }}</td>
-            <td>{{ variable.user["direction"] }}</td>
-            {% if (variable.user["medical"] is null) %}
-                <td> No tiene enfermedades </td>
-            {% else %}
-                <td>{{ variable.user["medical"] }}</td>
-            {% endif %}
-            <td>
-                <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
-                {% if variable.user.id_user == user %}
-                    <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="edit_user/{{ variable.user['id_user'] }}">
-                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                        <button class ="table-button viewBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
-                    </form>
-                    <form method="get" id="delete-user-{{ variable.user['id_user'] }}" action="del_user/{{ variable.user['id_user'] }}">
-                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                        <button class ="table-button viewBtn" type="submit" form="delete-user-{{ variable.user['id_user'] }}">Edit</button>
-                    </form>
-                {% endif %}
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <label> Nombre:
+        <input type="text" name="first_name" readonly value="{{ variable.user.first_name }}">
+    </label>
+
+    <label> Apellido:
+        <input type="text" name="last_name" readonly value="{{ variable.user.last_name }}">
+    </label>
+
+    <label> Nacimiento:
+        <input type="date" name="born" readonly value="{{ variable.user.born }}">
+    </label>
+
+    <label> Nro de documento:
+        <input type="number" name="nro_doc" readonly value="{{ variable.user.nro_doc }}">
+    </label>
+
+    <label> Teléfono:
+        <input type="tel" name="phone" readonly value="{{ variable.user.phone }}">
+    </label>
+
+    <label> Dirección:
+        <input type="text" name="direction" readonly value="{{ variable.user.direction }}">
+    </label>
+
+    <label> Email:
+        <input type="email" name="email" readonly value="{{ variable.user.email }}">
+    </label>
+
+    {% if (variable.user.medical_record) %}
+        <label> Enfermedades:
+            <textarea name="pathology-txt" readonly > {{ variable.user.medical_record }} </textarea>
+        </label>
+    {% endif %}
+
+    {% if (variable.user.id_artist) %}
+        <label> Local:
+            <input type="text" name="local" readonly value="{{ variable.user.local }}">
+        </label>
+        <label> Descripción:
+            <textarea name="txt" readonly> {{ variable.user.txt }} </textarea>
+        </label>
+    {% endif %}
+
+    <button class ="table-button viewBtn" type="submit" onclick="history.back()">Volver</button>
+    {% if variable.user.id_user == user %}
+        <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="/edit_user/{{ variable.user['id_user'] }}">
+            <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+            <button class ="table-button viewBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
+        </form>
+        <form method="get" id="delete-user-{{ variable.user['id_user'] }}" action="/del_user/{{ variable.user['id_user'] }}">
+            <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+            <button class ="table-button viewBtn" type="submit" form="delete-user-{{ variable.user['id_user'] }}">Delete</button>
+        </form>
+    {% endif %}
 </section>
 
 {% endblock %}

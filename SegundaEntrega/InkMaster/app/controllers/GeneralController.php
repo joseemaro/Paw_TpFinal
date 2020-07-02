@@ -26,8 +26,8 @@ class GeneralController extends Controller
         $local = $this->local->getTxt($this->id_local);
         if (isset($_SESSION["id_user"])) {
             $user = $_SESSION["id_user"];
-            $isArtist = $this->isArtist($user, $this->id_local);
-            $isAdministrator = $this->isAdministrator($user, $this->id_local);
+            $isArtist = $this->isArtist($user);
+            $isAdministrator = $this->isAdministrator($user);
             return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'isAdministrator', 'variable'));
         }
         return view($html, compact('session', 'artists', 'local', 'isArtist', 'variable'));
@@ -151,12 +151,12 @@ class GeneralController extends Controller
         return $this->id_local;
     }
 
-    public function isArtist($id_user, $id_local) {
-        return $this->user->isArtist($id_user, $id_local);
+    public function isArtist($id_user) {
+        return $this->user->isArtist($id_user, $this->id_local);
     }
 
-    public function isAdministrator($id_user, $id_local) {
-        return $this->user->isAdmin($id_user, $id_local);
+    public function isAdministrator($id_user) {
+        return $this->user->isAdmin($id_user, $this->id_local);
     }
 
     public function delFaq($id_faq){

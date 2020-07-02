@@ -87,9 +87,11 @@ class UserController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'user.view')) {
-                $user = $this->user->findUser($id_user_v);
-                $variable["user"] = $user;
-                return $this->generalController->view('view.user', $variable);
+                if ($this->generalController->isAdministrator($id_user) || $id_user_v == $id_user) {
+                    $user = $this->user->findUser($id_user_v);
+                    $variable["user"] = $user;
+                    return $this->generalController->view('view.user', $variable);
+                }
             }
         }
         return $this->generalController->view('not_found');

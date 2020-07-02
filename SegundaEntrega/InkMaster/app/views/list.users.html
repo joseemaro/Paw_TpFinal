@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Lista de turnos
+    Lista de usuarios
 {% endblock %}
 
 {% block head %}
@@ -22,13 +22,13 @@
         <table class="width200">
             <thead>
                 <tr>
-                    <th scope="col">Username</th>
+                    <th scope="col">Nombre de usuario</th>
                     <th scope="col">Primer nombre</th>
                     <th scope="col">Segundo nombre</th>
                     <th scope="col">Nacimiento</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">Email</th>
-                    <!--<th scope="col">Artist</th>-->
+                    <th scope="col">Artista</th>
                 </tr>
             </thead>
 
@@ -41,11 +41,11 @@
                         <td>{{ user.born }}</td>
                         <td>{{ user.phone }}</td>
                         <td>{{ user.email }}</td>
-                        <!--{% if user.id_artist %}
+                        {% if user.id_artist %}
                             <td>true</td>
                         {% else %}
                             <td>false</td>
-                        {% endif %}-->
+                        {% endif %}
                         <td>
                             <form method="get" id="show-user-{{ user.id_user }}" action="view_user/{{ user.id_user }}">
                                 <input type="hidden" name="id_user" value={{ user.id_user }}>

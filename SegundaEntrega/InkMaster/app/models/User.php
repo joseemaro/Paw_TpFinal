@@ -409,13 +409,18 @@ class User extends Model
     }
 
     public function listUsers() {
-        $users = $this->db->selectAll($this->table);
+        $users = $this->db->query("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt
+                                    from inkmaster_db.$this->table as u
+                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                        left join inkmaster_db.local as l on (a.id_local = l.id_local)
+                                        order by id_artist asc, id_user asc");
         return $this->replace($users);
     }
 
     public function findUser($id_user) {
-        $user = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
-                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist) 
+        $user = $this->db->simpleQuery("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt from inkmaster_db.$this->table as u
+                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                        left join inkmaster_db.local as l on (a.id_local = l.id_local)
                                         where id_user = :1", [$id_user]);
         $user["photo"] = base64_encode($user["photo"]);
         $medical_record = $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
