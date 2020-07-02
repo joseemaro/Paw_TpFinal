@@ -68,15 +68,15 @@
     </section>
 
     <section id="local-data">
-    {% if (variable.user.id_artist) %}
-        <h2 id="title-local">Datos del local</h2>
-        <label> Local:
-            <input type="text" name="local" readonly value="{{ variable.user.local }}">
-        </label>
-        <label> Descripción:
-            <textarea name="txt" readonly> {{ variable.user.txt }} </textarea>
-        </label>
-    {% endif %}
+        {% if (variable.user.id_artist) %}
+            <h2 id="title-local">Datos como artista</h2>
+            <label> Local de atención:
+                <input type="text" name="local" readonly value="{{ variable.user.local }}">
+            </label>
+            <label> Descripción:
+                <textarea name="txt" readonly> {{ variable.user.txt }} </textarea>
+            </label>
+        {% endif %}
     </section>
 </section>
 

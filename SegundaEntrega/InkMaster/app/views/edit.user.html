@@ -42,11 +42,14 @@
 
         <label> Foto de perfil <br>
             {% if variable.user.photo %}
-            <img src="data:image/png;base64, {{ variable.user['photo'] }}" style="max-width:20%;width:auto;height:auto;" >
+                <img src="data:image/png;base64, {{ variable.user.photo }}" >
             {% endif %}
             <input type="file" name="photo" accept="image/jpeg, image/x-png, image/x-jpg">
         </label>
 
+        {% if variable.user.id_artist %}
+            <label> Descripción: <input type="text" name="txt"  value="{{ variable.user.txt }}"></label>
+        {% endif %}
 
         <div>
             <input class="button-editAp" type="submit" id="send-btn" value="Guardar" />

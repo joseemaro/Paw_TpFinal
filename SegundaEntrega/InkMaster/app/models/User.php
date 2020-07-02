@@ -276,12 +276,9 @@ class User extends Model
                 $boolean = false;
             } else {
                 if ($photo["photo"]["size"] > 5000000) {
-                    $count = count($this->return);
-                    if ($count != 0) {
-                        $error = "Solo se permite archivos menores o iguales a 10 MB.";
-                        array_push($this->return, $error);
-                        $boolean = false;
-                    }
+                    $error = "Solo se permite archivos menores o iguales a 5 MB.";
+                    array_push($this->return, $error);
+                    $boolean = false;
                 } else {
                     $this->parameters["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
                     $this->parameters_user["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
@@ -321,7 +318,7 @@ class User extends Model
     }
 
     public function validate_pathology($pathology) {    #no se si no generaria inyeccion sql y manipular para insertar
-        $this->parameters["pathology"] = $pathology;
+        $this->parameters["medical_record"] = $pathology;
         return true;
     }
 
@@ -359,17 +356,43 @@ class User extends Model
         return $this->return;
     }
 
-    public function validateUpdate($id_user, $parameters = null){
+    public function validateUpdate($id_user, $parameters){
         $boolean = $this->validateAll($parameters);
+        $count = count($parameters);
+        $medical_record = isset($parameters["medical_record"]);
+        $artist = isset($parameters["id_artist"]);
         if ($boolean) {
-            $this->db->updateUser($this->table, $this->parameters_user);
-
-            if (isset($this->parameters_artist["id_artist"])) {
-                #hacer update para artistas
-                /*$this->db->insert('artist', $this->parameters_artist);
-                $rol_user["id_user"] = $this->parameters_artist["id_artist"];
-                $rol_user["id_rol"] = "artist";
-                $this->db->insert("rol_user", $rol_user);*/
+            if ($medical_record) {
+                $count = $count - 1;
+                $medical_record = $this->db->simpleQuery("select * from inkmaster_db.medical_record where id_user = :1", $id_user);
+                if ($medical_record) {
+                    $this->db->update("update inkmaster_db.medical_record set considerations = :1 
+                                    where id_user = :2;", [$medical_record, $parameters["id_artist"]]);
+                } else {
+                    $parameters_medical["id_user"] = $id_user;
+                    $parameters_medical["considerations"] = $parameters["medical_record"];
+                    $this->db->insert('medical_record', $parameters_medical);
+                }
+            }
+            if ($artist) {
+                $count = $count - 2;
+                $artist = $this->db->simpleQuery("select * from inkmaster_db.artist where id_artist = :1", $id_user);
+                if ($artist) {
+                    $this->db->update("update inkmaster_db.artist set txt = :1
+                                    where id_artist = :2;", [$parameters["txt"], $parameters["id_artist"]]);
+                } else {
+                    $parameters_artist["id_artist"] = $parameters["id_artist"];
+                    $parameters_artist["txt"] = $parameters["txt"];
+                    $parameters_artist["id_local"] = $parameters["id_local"];
+                    $this->db->insert('artist', $parameters_artist);
+                }
+            }
+            if ($count > 0) {
+                #$photo = $this->parameters_user["photo"];
+                #$this->parameters_user["photo"] = null;
+                $this->db->genericUpdate($this->table, $id_user, $this->parameters_user);
+                #$this->db->update("update inkmaster_db.$this->table set photo = :1
+                #                    where id_artist = :2;", [$photo, $id_user]);
             }
 
             $status = true;

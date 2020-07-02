@@ -119,6 +119,8 @@ class UserController extends Controller
                 $parameters = $this->comparacion($id_user);
                 $this->user->validateUpdate($id_user, $parameters);
                 $user = $this->user->findUser($id_user);
+                #echo "user<br>";
+                #var_dump($user);
                 $variable["user"] = $user;
                 return $this->generalController->view('view.user', $variable);
             }
@@ -142,6 +144,7 @@ class UserController extends Controller
     }
 
     public function comparacion($id_user) {
+        $parameters = array();
         $old = $this->user->findUser($id_user);
         if ($old["first_name"] != $_POST["first_name"]) $parameters["first_name"] = $_POST["first_name"];
         if ($old["last_name"] != $_POST["last_name"]) $parameters["last_name"] = $_POST["last_name"];
@@ -151,11 +154,14 @@ class UserController extends Controller
         if ($old["direction"] != $_POST["direction"]) $parameters["direction"] = $_POST["direction"];
         if ($old["email"] != $_POST["email"]) $parameters["email"] = $_POST["email"];
         if (isset($_FILES)) $parameters["photo"] = $_FILES;
+        #var_dump($_FILES);
+        #echo "<br>";
         if ($old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
-        if (isset($_POST["artist"])) {
+        if (isset($_POST["artist"]) || isset($_POST["txt"])) {
             $parameters["artist"] = true;
             if ($old["txt"] != $_POST["txt"]) $parameters["txt"] = $_POST["txt"];
         }
+        return $parameters;
     }
 
     public function parameters() {

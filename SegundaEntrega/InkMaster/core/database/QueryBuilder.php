@@ -512,6 +512,32 @@ class QueryBuilder {
     }
 
     /**
+     * Insert a record into a table.
+     *
+     * @param string $table
+     * @param $id
+     * @param array $parameters
+     */
+    public function genericUpdate($table, $id, $parameters)
+    {
+        foreach ($parameters as $key => $value) {
+            $sql = sprintf(
+                "UPDATE %s SET %s=%s WHERE id=%s;",
+                $table,
+                $key,
+                ':'.$key,
+                $id
+            );
+            try {
+                $statement = $this->pdo->prepare($sql);
+                $statement->execute(array($key => $value));
+            } catch (Exception $e) {
+                $this->sendToLog($e);
+            }
+        }
+    }
+
+    /**
      * Finds a user into from database table.
      *
      * @param string $table
@@ -562,8 +588,8 @@ class QueryBuilder {
      */
     public function existLocal($table, $id)
     {
-        $sql = "select * from local where exists (select * from inkmaster_db.$table
-                                            where id_local = :id)";
+        $sql = "select * from inkmaster_db.$table
+                    where id_local = :id";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":id", $id);
