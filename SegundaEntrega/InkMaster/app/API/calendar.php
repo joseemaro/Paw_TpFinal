@@ -16,7 +16,6 @@ class calendar extends Model
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     include_once './vendor/google/apiclient/vendor/autoload.php';
-    include_once './vendor/google/auth/vendor/autoload.php';
 
 
     //configurar variable de entorno / set enviroment variable
