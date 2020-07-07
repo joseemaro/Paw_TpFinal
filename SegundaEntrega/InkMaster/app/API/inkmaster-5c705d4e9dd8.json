@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "inkmaster",
+  "private_key_id": "5c705d4e9dd80c504274daa0fd58fa4b023e8591",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCFuMQPIiQqThen\ndMlnLeI69FvNxLdFIJBkJ0jIyYylOGgQg27K5V7CFhXm8P9kZuzPyw6PAoYi8Yfn\nbX9OsyuC2h5U/XMb4Y8oBAo4lTcHF69c7UYDjpVlO2cIaZ2SH1g6Tz13xQKtLPy0\nSXBcrQ6oJHHqYlQ6eLGFHdAF7Q6NzvpAcJP0H7aWk499xfvoy6YWpgy9X9BZ3eCc\nT9z16PzPtCabqifaGh8+3eNhdthm3QBUtn5b3dMvExPfqyMu4IYLvilbts1es/qn\nrFLkUB7Xr/Oy7MEXIILF+RICE7XnqorekyQWyaNZX2oWDnguWYQV160cuth5x9bg\n3HVmIk0/AgMBAAECggEAAUoe2eaCYsYOBFdj+dK/c8IXgIx9F/WQbubSFN2ctZst\npbsevmYn28dKvsdkLxuu/PIAWfC0SnH51YmAyMmBiemAkWFAUuyB7OjdEF6gATmB\nP2wqWK5vUmKYQ8SA+H/E4gsRlK4ZsIHWjgaHRt2EXqq7Tn9UQJwZWidHckcu9L8e\nqRpq+tVU4QK9Es+bszr18APp5WPtiIa51Qo0L09OUi5Zqev1f1aQ8viX8N6fiRrl\nYq94P6/HTLseH1wBDz6DPrVduimPdrk0ApFoIYtf0+1o/ohxPU8CKcqKUT1X/Ib1\n5xyJsJe6tKm8fgOIadSFx1J/IW+5AB5sm+fl5/rsgQKBgQC63P5WiEXA0w8CMKr/\nJMtEP6qtPDWHKJmaRcE2SLdoewRK5KwA0Sj3JurYZ27T056Jw5Qq/TLS11qTZGmr\nC7c7vd85UUUrmjR8GMZfOzoRiLUjjKUjGAchy4YoE+83aZvcA1sL6R6edXJagrvj\nMcEwMU/mexPGhUWFyQRo83MmaQKBgQC3MmbdUc0dUkFHAK1pywZj3/QeKo2OrevT\nZR/6UQunK+ihRom6wz7P+ijzs1JiqPFNa4WXwxzUY7QbBbxwVy7DVBq15xY9Mme0\nHobiQzXmtI3h/s/Pg9wF65TlKJvlbkgHIYWKwigQErv8O9GZS5u6CBCA/NnuX63E\nzroma93xZwKBgCA3Z7Y9imEjQkwrXd/dVRowK9nwLn5d9pWNfzE/ujdONkA/SpRd\ne0WZNRYYRxhIPOYdjRcYTkHhlSEiR8GQpIetRaYZJ+bLkE7w6oqSqIFLY4d8gSAa\nzWf7MecJAM457AAzp+fWykuhjhSiw4f5FQidB9yBzbgFVCYrsRHzHyA5AoGAOABe\nVZWmACqe7deVK1v27h0OARK9Bzq/dnXZWqnfyBCyImrvu3nn/6fXUPgmXSaL7UDL\nK+NnMr3v1rrgKe9cyjUxnR2xPK/l57fVP+GP3qCfJtDAMg16+wxTDeJmFbKqrhNf\nQVWs7YzsjmSy5Auq5SmF8ghZjncNJbaUTR54UE0CgYB0uuUwX8lDW6lBUD70ksi1\n2TvexwDWQyboaopHa5HLvQ09M+awpOJVc2GEL24J0DgSN2+DB/SyO2iNxVyKBK26\n1iBPXmwpYnj83iwKR751xqvJbTNdsQzBeyl+KGASj8s62Zg2A9NYh7Ag9r/aCOXh\nCxJIFgYilFj1fGTQzqw0OA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "inkmaster@inkmaster.iam.gserviceaccount.com",
+  "client_id": "106696550926801452287",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/inkmaster%40inkmaster.iam.gserviceaccount.com"
+}

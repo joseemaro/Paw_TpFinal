@@ -11,7 +11,8 @@
     "require": {
         "monolog/monolog": "^1.23",
         "twig/twig": "^2.0",
-        "csanquer/pdo-service-provider": "~1.1dev"
+        "csanquer/pdo-service-provider": "~1.1dev",
+        "google/apiclient": "^2.0"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

@@ -6,6 +6,7 @@ use App\models\Appointment;
 use App\models\User;
 use App\models\Local;
 use mysql_xdevapi\Session;
+use App\googleAPI\calendar;
 
 class ApController extends Controller
 {
@@ -15,6 +16,7 @@ class ApController extends Controller
         $this->appointment = new Appointment();
         $this->user = new User();
         $this->generalController = new GeneralController();
+        $this->calendar = new calendar();
     }
 
     public  function newAp() {
@@ -23,6 +25,9 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
             $variable["adult"] = $this->user->verifyAdult($id_user);
+
+            $this->calendar->add_turno_calendar();
+
             return $this->generalController->view('appointment/new.appointment', $variable);
         }
         return $this->generalController->view('appointment/new.appointment');
