@@ -15,13 +15,12 @@ class calendar extends Model
     $link_event = '';
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
-    include_once './vendor/google/apiclient/vendor/autoload.php';
-
-
+    $filename = 'inkmaster-5c705d4e9dd8.json';
+    $pathname = realpath(join('/', [__DIR__, $filename]));
     //configurar variable de entorno / set enviroment variable
-    putenv('GOOGLE_APPLICATION_CREDENTIALS="inkmaster-5c705d4e9dd8.json"');
+    putenv("GOOGLE_APPLICATION_CREDENTIALS=$pathname");
 
-    $client = new Google_Client();
+    $client = new \Google_Client();
     $client->useApplicationDefaultCredentials();
     $client->setScopes(['https://www.googleapis.com/auth/calendar']);
 
@@ -29,11 +28,11 @@ class calendar extends Model
     $id_calendar = '2kh2fa1hufh640kggiaja7at10@group.calendar.google.com';//
 
 
-    $datetime_start = new DateTime('2020-09-11 17:00');
-    $datetime_end = new DateTime('2020-09-11 17:00');
+    $datetime_start = new \DateTime('2020-09-11 17:00');
+    $datetime_end = new \DateTime('2020-09-11 17:00');
 
     //aumentamos una hora a la hora inicial/ add 1 hour to start date
-    $time_end = $datetime_end->add(new DateInterval('PT1H'));
+    $time_end = $datetime_end->add(new \DateInterval('PT1H'));
 
     //datetime must be format RFC3339
     $time_start = $datetime_start->format(\DateTime::RFC3339);
@@ -44,7 +43,7 @@ class calendar extends Model
     try {
 
         //instanciamos el servicio
-        $calendarService = new Google_Service_Calendar($client);
+        $calendarService = new \Google_Service_Calendar($client);
 
 
         //parámetros para buscar eventos en el rango de las fechas del nuevo evento
@@ -57,7 +56,7 @@ class calendar extends Model
             'timeMax' => $time_end,
         );
 
-        //obtener eventos 
+        //obtener eventos
         $events = $calendarService->events->listEvents($id_calendar, $optParams);
 
         //obtener número de eventos / get how many events exists in the given dates
@@ -66,17 +65,17 @@ class calendar extends Model
         //crear evento si no hay eventos / create event only if there is no event in the given dates
         if ($cont_events == 0) {
 
-            $event = new Google_Service_Calendar_Event();
+            $event = new \Google_Service_Calendar_Event();
             $event->setSummary('Cita con el paciente ' . $nombre);
             $event->setDescription('Revisión , Tratamiento');
 
             //fecha inicio
-            $start = new Google_Service_Calendar_EventDateTime();
+            $start = new \Google_Service_Calendar_EventDateTime();
             $start->setDateTime($time_start);
             $event->setStart($start);
 
             //fecha fin
-            $end = new Google_Service_Calendar_EventDateTime();
+            $end = new \Google_Service_Calendar_EventDateTime();
             $end->setDateTime($time_end);
             $event->setEnd($end);
 
