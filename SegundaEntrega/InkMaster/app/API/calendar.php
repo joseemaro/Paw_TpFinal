@@ -8,11 +8,14 @@ class calendar extends Model
 {
 
 
-    public function add_turno_calendar()
+    public function add_turno_calendar($user,$date,$hour,$artist,$link)
     {
-    $m = ''; //for error messages
-    $id_event = ''; //id event created
-    $link_event = '';
+        $m["error"] = ''; //for error messages
+        $m["ok"] = ''; //for link event
+        $id_event = ''; //id event created
+        $link_event = '';
+
+    $fulldate = $date." ".$hour;
 
     date_default_timezone_set('America/Argentina/Buenos_Aires');
     $filename = 'inkmaster-5c705d4e9dd8.json';
@@ -25,13 +28,16 @@ class calendar extends Model
     $client->setScopes(['https://www.googleapis.com/auth/calendar']);
 
     //define id calendario
-    $id_calendar = '2kh2fa1hufh640kggiaja7at10@group.calendar.google.com';//
+    //$id_calendar = '2kh2fa1hufh640kggiaja7at10@group.calendar.google.com';//
+    $id_calendar = $link;
+
+    //$datetime_start = new \DateTime('2020-07-11 18:50');
+    //$datetime_end = new \DateTime('2020-07-11 18:50');
+            $datetime_start = new \DateTime($fulldate);
+            $datetime_end = new \DateTime($fulldate);
 
 
-    $datetime_start = new \DateTime('2020-09-11 17:00');
-    $datetime_end = new \DateTime('2020-09-11 17:00');
-
-    //aumentamos una hora a la hora inicial/ add 1 hour to start date
+        //aumentamos una hora a la hora inicial/ add 1 hour to start date
     $time_end = $datetime_end->add(new \DateInterval('PT1H'));
 
     //datetime must be format RFC3339
@@ -39,7 +45,7 @@ class calendar extends Model
     $time_end = $time_end->format(\DateTime::RFC3339);
 
 
-    $nombre =' ramonn ';
+    $nombre = $user;
     try {
 
         //instanciamos el servicio
@@ -66,8 +72,8 @@ class calendar extends Model
         if ($cont_events == 0) {
 
             $event = new \Google_Service_Calendar_Event();
-            $event->setSummary('Cita con el paciente ' . $nombre);
-            $event->setDescription('Revisión , Tratamiento');
+            $event->setSummary('Turno con el paciente ' . $nombre);
+            $event->setDescription('Tatuaje');
 
             //fecha inicio
             $start = new \Google_Service_Calendar_EventDateTime();
@@ -82,23 +88,25 @@ class calendar extends Model
 
             $createdEvent = $calendarService->events->insert($id_calendar, $event);
             $id_event = $createdEvent->getId();
-            var_dump($id_event);
             $link_event = $createdEvent->gethtmlLink();
-            var_dump($link_event);
+            $m["ok"] = $link_event;
+            return $m;
 
         } else {
-            $m = "Hay " . $cont_events . " eventos en ese rango de fechas";
+            $m["error"] = "Hay " . $cont_events . " eventos en ese rango de fechas";
+            return $m;
         }
 
 
     } catch (Google_Service_Exception $gs) {
 
-        $m = json_decode($gs->getMessage());
-        $m = $m->error->message;
+        $m["error"] = json_decode($gs->getMessage());
+        $m["error"] = $m->error->message;
+        return $m;
 
     } catch (Exception $e) {
-        $m = $e->getMessage();
-
+        $m["error"] = $e->getMessage();
+        return $m;
     }
     }
 }

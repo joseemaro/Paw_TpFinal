@@ -26,7 +26,7 @@ class ApController extends Controller
             #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
             $variable["adult"] = $this->user->verifyAdult($id_user);
 
-            $this->calendar->add_turno_calendar();
+            //$this->calendar->add_turno_calendar();
 
             return $this->generalController->view('appointment/new.appointment', $variable);
         }
@@ -58,9 +58,11 @@ class ApController extends Controller
 
             $array = $this->appointment->validateInsert($parameters, $medical_record);
 
-            if ($array["status"]) {     #si salio bien la validacion
+            if ($array["status"]) {     //si salio bien la validacion
+
                 $variable["appointment"] = $array;
                 $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
+
                 return $this->generalController->view('appointment/view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
@@ -74,8 +76,14 @@ class ApController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            $variable["appointments"] = $this->appointment->listAppointments($id_user);
-            return $this->generalController->view('appointment/list.appointments', $variable);
+            if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
+                $variable["appointments"] = $this->appointment->listAppointments($id_user);
+                $variable["link"] ="https://calendar.google.com/calendar/r";
+                return $this->generalController->view('appointment/list.appointments', $variable);
+            }else{
+                return $this->generalController->view('not_found');
+            }
+
         }
         return $this->generalController->view('not_found');
     }
@@ -145,7 +153,21 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.acept')) {
-                $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
+                //guardar en el calendar
+                $array = $this->appointment->findAppointment($id_appointment);
+                $link = $this->appointment->findCalendar($array["id_artist"]);
+
+
+                $m = $this->calendar->add_turno_calendar($array["id_user"],$array["date"],$array["hour"],$array["id_artist"],$link["link"]);
+                if ($m["ok"] != ''){
+                    //si salio bien el registro del turno en calendar
+                    //$variable["appointment"]["link"] = $m["ok"];
+                    $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
+                }else{
+                    //si hubo error en el calendar
+                    $variable["errors"] = $m["error"];
+                    return $this->generalController->view('appointment/errors.appointment', $variable);
+                }
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);

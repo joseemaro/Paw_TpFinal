@@ -48,6 +48,21 @@ p {
     background-color: #8B0000;
 }
 
+.calendarBtn{
+    display: inline-block;
+    font-size: 1em;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    background-color: #5B85AA;
+}
+
 table.width200,
 table.rwd_auto {
     width:100%;

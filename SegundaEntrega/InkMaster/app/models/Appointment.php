@@ -329,6 +329,12 @@ class Appointment extends Model
                                     and status = 'pending';", [$status, $id_appointment, $id_artist]);
     }
 
+    public function findCalendar($id_artist){
+        $tattoo = $this->db->simpleQuery("select * from inkmaster_db.calendar_link
+                                                    where id_artist = :1;", [$id_artist]);
+        return $tattoo;
+    }
+
     public function findAppointment($id_appointment){
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table as a
                                                 inner join inkmaster_db.user as u on (a.id_user = u.id_user)

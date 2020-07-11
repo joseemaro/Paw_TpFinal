@@ -19,6 +19,13 @@
     <section id="container-list">
         <h1 id="title-list">Lista de turnos</h1>
         {% if variable.appointments %}
+
+        {% if variable.link %}
+        <form method="get" action="{{ variable.link }}">
+            <button class ="calendarBtn" type="submit">Google calendar</button>
+        </form>
+        {% endif %}
+
             <table class="width200">
                 <thead>
                 <tr>
