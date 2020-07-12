@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //validate email
     validate_email = document.querySelector(".emailjs");
     validate_email.addEventListener("blur", function() {
-        var email = /^[a-zA-Z0-9 ]{3,50}$/;
+        var email = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if (email.exec(validate_email.value) || (validate_email.value === "")) {
             validate_email.style.border = "#ffffff";
             validate_email.style.background = "#ffffff";
