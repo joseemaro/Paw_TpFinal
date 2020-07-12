@@ -67,13 +67,13 @@
                                         </form>
                                     {% endif %}
                                 {% endif %}
-                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="view_appointment/{{ appointment.id_appointment }}">
+                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="/view_appointment/{{ appointment.id_appointment }}">
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
                                 </form>
                                 {% if isArtist %}
                                     {% if (appointment.status != 'annulled') %}
-                                        <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="edit_appointment/{{ appointment.id_appointment }}">
+                                        <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="/edit_appointment/{{ appointment.id_appointment }}">
                                             <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                             <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
                                         </form>

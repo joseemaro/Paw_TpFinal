@@ -335,6 +335,11 @@ class Appointment extends Model
         return $tattoo;
     }
 
+    public function insertLink($id_appointment,$link,$id){
+        return $this->db->update("update inkmaster_db.$this->table set link = :1, id_calendar = :2
+                                    where id_appointment = :3 ;", [$link,$id, $id_appointment]);
+    }
+
     public function findAppointment($id_appointment){
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table as a
                                                 inner join inkmaster_db.user as u on (a.id_user = u.id_user)

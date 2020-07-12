@@ -12,6 +12,7 @@ class calendar extends Model
     {
         $m["error"] = ''; //for error messages
         $m["ok"] = ''; //for link event
+        $m["id_calendar"] = ''; //for id calendar
         $id_event = ''; //id event created
         $link_event = '';
 
@@ -80,6 +81,8 @@ class calendar extends Model
             $start->setDateTime($time_start);
             $event->setStart($start);
 
+
+
             //fecha fin
             $end = new \Google_Service_Calendar_EventDateTime();
             $end->setDateTime($time_end);
@@ -88,9 +91,11 @@ class calendar extends Model
 
             $createdEvent = $calendarService->events->insert($id_calendar, $event);
             $id_event = $createdEvent->getId();
+            $m["id_calendar"] = $id_event;
             $link_event = $createdEvent->gethtmlLink();
             $m["ok"] = $link_event;
             return $m;
+
 
         } else {
             $m["error"] = "Hay " . $cont_events . " eventos en ese rango de fechas";
@@ -108,6 +113,15 @@ class calendar extends Model
         $m["error"] = $e->getMessage();
         return $m;
     }
+    }
+
+    public function deleteCalendar($link,$event){
+        $client = new \Google_Client();
+        $client->useApplicationDefaultCredentials();
+        $client->setScopes(['https://www.googleapis.com/auth/calendar']);
+        $id_calendar = $link;
+        $calendarService = new \Google_Service_Calendar($client);
+        $calendarService->events->delete($id_calendar, $event);
     }
 }
 

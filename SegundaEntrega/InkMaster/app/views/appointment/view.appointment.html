@@ -28,6 +28,12 @@
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
         {% endif %}
 
+        {% if variable.appointment.link %}
+        <form method="get" action="{{ variable.appointment.link }}">
+            <button class ="calendarBtn" type="submit">Google calendar</button>
+        </form>
+        {% endif %}
+
         <label> Usuario:
             <input type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}">
         </label>

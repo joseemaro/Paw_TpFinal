@@ -39,7 +39,7 @@
 
                     {% if isAdministrator %}
                         <section>
-                            <form method="get" id="edit-faq-{{ query.id_faq }}" action="edit_faq/{{ query.id_faq }}">
+                            <form method="get" id="edit-faq-{{ query.id_faq }}" action="/edit_faq/{{ query.id_faq }}">
                                 <input type="hidden" name="id_faq" value={{ query.id_faq }}>
                                 <button class ="table-button editBtn" type="submit" form="edit-faq-{{ query.id_faq }}">Edit</button>
                             </form>

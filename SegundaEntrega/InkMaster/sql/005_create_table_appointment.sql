@@ -9,6 +9,8 @@ CREATE TABLE appointment (
     hour TIME NOT NULL,
     status VARCHAR(100) NOT NULL,
     price DOUBLE,
+    link VARCHAR(200),
+    id_calendar VARCHAR(200),
     PRIMARY KEY (id_appointment),
     FOREIGN KEY (id_local) REFERENCES local(id_local),
     FOREIGN KEY (id_user) REFERENCES user(id_user),

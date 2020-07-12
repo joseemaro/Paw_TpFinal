@@ -162,6 +162,7 @@ class ApController extends Controller
                 if ($m["ok"] != ''){
                     //si salio bien el registro del turno en calendar
                     //$variable["appointment"]["link"] = $m["ok"];
+                    $this->appointment->insertLink($id_appointment,$m["ok"],$m["id_calendar"]);
                     $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
                 }else{
                     //si hubo error en el calendar
@@ -181,6 +182,9 @@ class ApController extends Controller
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.delete')) {
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'annulled');
+                $artist = $this->appointment->findCalendar($id_user);
+                $ap = $this->appointment->findAppointment($id_appointment);
+                $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);
