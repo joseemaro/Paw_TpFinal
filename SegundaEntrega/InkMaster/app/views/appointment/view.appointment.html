@@ -79,7 +79,7 @@
 
                 {% if (variable.appointment.status == 'pending') %}
                     <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
-                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                        <input type="hidden" name="id_appointment" value={{ variable.appointment.id_appointment }}>
                         <button class ="acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Acept</button>
                     </form>
                 {% endif %}

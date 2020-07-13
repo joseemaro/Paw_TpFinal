@@ -401,7 +401,6 @@ class User extends Model
     }
 
     public function replace($array) {
-
         for ($i = 0; $i < count($array); $i++) {
             if (isset($array[$i]["photo"])) {
                 $array[$i]["photo"] = base64_encode($array[$i]["photo"]);
@@ -444,6 +443,7 @@ class User extends Model
                                         where id_user = :1", [$id_user]);
         $user["photo"] = base64_encode($user["photo"]);
         $medical_record = $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
+        $medical_record = $medical_record[0];
         if ($medical_record) {
             $user["pathology"] = $medical_record["considerations"];
         } else {

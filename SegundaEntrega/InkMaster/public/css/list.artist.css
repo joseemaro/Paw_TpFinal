@@ -43,6 +43,24 @@ img {
     padding: 1em;
 }
 
+.artistBtn{
+    display: inline-block;
+    font-size: 1.1em;
+    font-family: Didot LT STD;
+    font-style: italic;
+    font-weight: bold;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    background-color: #e63946;
+}
+
 /* media queries */
 
 @media screen and (min-width: 400px) {

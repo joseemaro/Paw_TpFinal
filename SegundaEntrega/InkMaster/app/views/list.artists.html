@@ -25,7 +25,9 @@
                         <img src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista">
                     {% endif %}
                     <figcaption>
-                        <a href="/view_artist/{{ artist.id_artist }}">{{ artist.id_artist }}</a>
+                        <form method="get" action="/view_artist/{{ artist.id_artist }}">
+                            <button class ="artistBtn" type="submit">{{ artist.id_artist }}</button>
+                        </form>
                     </figcaption>
                 </figure>
             {% endfor %}

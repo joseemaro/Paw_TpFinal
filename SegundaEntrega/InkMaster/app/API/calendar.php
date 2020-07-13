@@ -38,8 +38,8 @@ class calendar extends Model
             $datetime_end = new \DateTime($fulldate);
 
 
-        //aumentamos una hora a la hora inicial/ add 1 hour to start date
-    $time_end = $datetime_end->add(new \DateInterval('PT1H'));
+        //aumentamos una hora a la hora inicial/ add 15 minutes to start date
+    $time_end = $datetime_end->add(new \DateInterval('PT15M'));
 
     //datetime must be format RFC3339
     $time_start = $datetime_start->format(\DateTime::RFC3339);
