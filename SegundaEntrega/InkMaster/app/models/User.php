@@ -24,6 +24,7 @@ class User extends Model
     protected $parameters;
     protected $parameters_user;
     protected $parameters_artist;
+    protected $parameters_calendar;
     protected $return = array();
 
     public function validate_user($id_user) {
@@ -293,6 +294,7 @@ class User extends Model
         if ($artist) {
             $this->parameters["id_artist"] = $this->parameters["id_user"];
             $this->parameters_artist["id_artist"] = $this->parameters["id_user"];
+            $this->parameters_calendar["id_artist"] = $this->parameters["id_user"];
         } else {
             $boolean = false;
         }
@@ -322,6 +324,30 @@ class User extends Model
         return true;
     }
 
+    public function validate_link($link){
+        $boolean = true;
+
+        if (!empty($link)) {
+            $pattern = "\"^[a-zA-Z0-9@., ]{3,100}$\"";
+            if (!preg_match($pattern, $link))
+            {
+                $error = "El formato del link ingresado es inválido";
+                array_push($this->return, $error);
+                $boolean = false;
+            } else
+                {
+                $this->parameters["link"] = $link;
+                $this->parameters_calendar["link"] = $link;
+            }
+        } else {
+            $error = "Se precisa que sea ingresada un link de google calendar";
+            array_push($this->return, $error);
+            $boolean = false;
+        }
+
+        return $boolean;
+    }
+
     public function validateAll($parameters) {
         $boolean = true;
         if (!empty($parameters)) {
@@ -346,6 +372,10 @@ class User extends Model
                 $rol_user["id_user"] = $this->parameters_artist["id_artist"];
                 $rol_user["id_rol"] = "artist";
                 $this->db->insert("rol_user", $rol_user);
+            }
+
+            if (isset($this->parameters_calendar["id_artist"])) {
+                $this->db->insert('calendar_link', $this->parameters_calendar);
             }
 
             $status = true;

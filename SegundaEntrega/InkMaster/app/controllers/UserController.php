@@ -50,7 +50,7 @@ class UserController extends Controller
             } else {
                 $variable["msgWelcome"] = "usuario inválido";
             }
-            return $this->generalController->view('index.views', $variable);
+            return $this->generalController->view('/index.views', $variable);
         }
         return $this->generalController->view('not_found');
     }
@@ -179,6 +179,7 @@ class UserController extends Controller
             $parameters["artist"] = true;
             $parameters["local"] = $this->generalController->getIdLocal();
             if (isset($_POST["txt"])) $parameters["txt"] = $_POST["txt"];
+            if (isset($_POST["id_calendar"])) $parameters["link"] = $_POST["id_calendar"];
         }
         return $parameters;
     }

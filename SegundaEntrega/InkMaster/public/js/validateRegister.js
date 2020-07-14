@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+
     //validar terminos
     validate_terms = document.querySelector(".termsjs");
     validate_terms.addEventListener("click", function() {
@@ -181,6 +182,18 @@ document.addEventListener("DOMContentLoaded", function() {
             validate_description.style.background = "#ffffff";
         } else {
             validate_description.style.background = "#e05f5f";
+        }
+    });
+
+    //validate calendar
+    validate_calendar = document.querySelector(".calendarjs");
+    validate_calendar.addEventListener("blur", function() {
+        var calendar = /^[a-zA-Z0-9@., ]{3,100}$/;
+        if (calendar.exec(validate_calendar.value) || (validate_calendar.value === "")) {
+            validate_calendar.style.border = "#ffffff";
+            validate_calendar.style.background = "#ffffff";
+        } else {
+            validate_calendar.style.background = "#e05f5f";
         }
     });
 
