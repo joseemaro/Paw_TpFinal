@@ -22,8 +22,8 @@ class UserController extends Controller
         $array = $this->user->validateInsert($this->parameters());
         $status = $array[count($array)-1];
         if ($status) {  #si salio bien la validacion
-            $variable["parameters"] = $array;
-            return $this->generalController->view('register', $variable);
+            //$variable["parameters"] = $array;
+            return $this->generalController->view('login');
         } else {
             $variable["errors"] = $array;
             return $this->generalController->view('errors.register', $variable);

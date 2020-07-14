@@ -22,14 +22,11 @@ class ApController extends Controller
     public  function newAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $variable["session"] = true;
-            $id_user = $_SESSION["id_user"];
-            #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
-            $variable["adult"] = $this->user->verifyAdult($id_user);
-
-            //$this->calendar->add_turno_calendar();
-
-            return $this->generalController->view('appointment/new.appointment', $variable);
+                $variable["session"] = true;
+                $id_user = $_SESSION["id_user"];
+                #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
+                $variable["adult"] = $this->user->verifyAdult($id_user);
+                return $this->generalController->view('appointment/new.appointment', $variable);
         }else{
 
             $variable["session"] = false;
@@ -68,7 +65,13 @@ class ApController extends Controller
                 $variable["appointment"] = $array;
                 $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
 
-                return $this->generalController->view('appointment/view.appointment', $variable);
+
+                if ($this->generalController->user->havePermissions($_SESSION["id_user"], 'appointment.acept'))
+                {
+                    return $this->generalController->view('/appointment/view.new.appointment', $variable);
+                }else{
+                    return $this->generalController->view('appointment/view.appointment', $variable);
+                }
             } else {
                 $variable["errors"] = $array;
                 return $this->generalController->view('appointment/errors.appointment', $variable);
