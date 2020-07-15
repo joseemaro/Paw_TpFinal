@@ -194,6 +194,7 @@ class QueryBuilder {
         }
     }
 
+
     /**
      * Select all appointments from a database table.
      *

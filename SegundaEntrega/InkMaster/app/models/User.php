@@ -486,7 +486,7 @@ class User extends Model
         $artist = $this->db->findArtist($this->table, $id);
         if ($artist) {
             $artist["photo"] = base64_encode($artist["photo"]);
-            $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
+           $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
         }
         return $artist;
     }

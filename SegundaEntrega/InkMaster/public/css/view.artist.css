@@ -1,10 +1,14 @@
+
+
 * {
     box-sizing: border-box;
 }
 
 .container-artist {
-    width: 80%;
+    background-color: #E2E2DC;
+    width: 90%;
     margin: 0 auto;
+    padding-bottom: 1em;
 }
 
 #title-artist {
@@ -14,7 +18,20 @@
     padding: 1em 0;
     font-weight: bold;
     color: rgba(202,75,31,0.6);
+    text-decoration: none;
 }
+
+#title-artist:hover{
+    text-decoration: underline;
+}
+
+#title-artist{
+    transition-property: text-decoration;
+    transition-duration: 5s;
+    transition-timing-function: ease;
+    transition-delay: 5s;
+}
+
 
 figure {
     background: whitesmoke;
@@ -25,11 +42,17 @@ figure {
 }
 
 figure img {
-    max-width: 100%;
+    max-width: 90%;
+    margin: auto auto;
     height: auto;
     display: block;
 }
 
+figure img:hover {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 figcaption {
     padding: 1.25em;
 }
@@ -40,6 +63,7 @@ figcaption p {
     color: rgba(0,0,0,0.7);
     font-weight: bold;
 }
+
 
 @media screen and (min-width: 400px) {
     figure {
@@ -69,5 +93,10 @@ figcaption p {
 
 .container-img-artist img {
     width: 18.75em;
+    margin: 1em;
+}
+
+.container-img-artist img:hover {
+    width: 20em;
     margin: 1em;
 }

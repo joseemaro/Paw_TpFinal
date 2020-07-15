@@ -8,6 +8,8 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/view.artist.css">
+    <script type="text/javascript" src="/public/js/view.artist.js"></script>
+
 {% endblock %}
 
 {% block header %}
@@ -19,7 +21,10 @@
 {% block main %}
 
     <div class="container-artist">
-        <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
+
+        <section id="example">
+            <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
+        </section>
         <figure>
             {% if variable.artist.photo %}
                 <img src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">

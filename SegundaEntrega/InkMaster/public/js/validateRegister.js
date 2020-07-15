@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
     validate_address = document.querySelector(".addressjs");
     validate_address.addEventListener("blur", function() {
         var address = /^[a-zA-Z0-9 ]{3,50}$/;
+        /*var address = /^[a-zA-Z0-9À-ÿ\u00f1\u00d1\u00E0-\u00FC ]{3,50}$/;*/
         if (address.exec(validate_address.value) || (validate_address.value === "")) {
             validate_address.style.border = "#ffffff";
             validate_address.style.background = "#ffffff";
