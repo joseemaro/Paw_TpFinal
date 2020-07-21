@@ -42,7 +42,7 @@ class GeneralController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->user->havePermissions($id_user, 'tattoo.new')) {
-                return $this->view('upload.photos');
+                return $this->view('tattoo/upload.tattoos');
             }
         }
         return $this->view('not_found');
@@ -64,7 +64,7 @@ class GeneralController extends Controller
                 }
                 $status = $array[count($array)-1];
                 if ($status) {  #si salio bien la validacion
-                    return $this->view('upload.photos');
+                    return $this->view('tattoo/upload.tattoos');
                 } else {
                     $variable["errors"] = $array;
                     return $this->view('errors.register', $variable);
@@ -85,8 +85,17 @@ class GeneralController extends Controller
                 $variable["page"] = $page;
             }
             $variable["tattoos"] = $this->tattoo->getTattoos($beginning, $quantity);
+            return $this->view('tattoo/list.tattoos', $variable);
+        } else {
+            session_start();
+            if (isset($_SESSION["id_user"])) {
+                $id_user = $_SESSION["id_user"];
+                if ($this->generalController->user->havePermissions($id_user, 'tattoo.new')) {
+                    return $this->view('tattoo/upload.tattoos');
+                }
+            }
         }
-        return $this->view('list.tattoos', $variable);
+        return $this->view('tattoo/list.tattoos');
     }
 
     public function viewTattoo() {
@@ -96,13 +105,13 @@ class GeneralController extends Controller
     public function listFaq() {
         $variable = array();
         $variable["faqs"] = $this->faq->listFaq();
-        return $this->view('faq', $variable);
+        return $this->view('faq/list.faqs', $variable);
     }
 
     public function viewFaq($id_faq) {
         $variable = array();
         $variable["faq"] = $this->faq->find($id_faq);
-        return $this->view('faq.views', $variable);
+        return $this->view('faq/view.faq', $variable);
     }
 
     public function listTerms(){
@@ -161,17 +170,18 @@ class GeneralController extends Controller
     public function delFaq($id_faq){
         $this->faq->delFaq($id_faq);
         $variable["faqs"] = $this->faq->listFaq();
-        return $this->view('faq', $variable);
+        return $this->view('faq/list.faqs', $variable);
     }
 
     public function editFaq($id_faq){
         $variable["faq"] = $this->faq->find($id_faq);
-        return $this->view('faq.edit', $variable);
+        return $this->view('faq/edit.faq', $variable);
     }
 
     public function addFaq(){
-        return $this->view('new.faq', null);
+        return $this->view('faq/new.faq', null);
     }
+
     public function saveFaq(){
         session_start();
         if (isset($_SESSION["id_user"])) {
@@ -184,7 +194,7 @@ class GeneralController extends Controller
                 $this->faq->newFaq($parameters);
 
                 $variable["faqs"] =$this->faq->listFaq();
-                return $this->view('faq', $variable);
+                return $this->view('faq/list.faqs', $variable);
             }
         }
         return $this->view('not_found');
@@ -202,7 +212,7 @@ class GeneralController extends Controller
                 $this->faq->updateFaq($id_faq, $parameters);
 
                 $variable["faqs"] =$this->faq->listFaq();
-                return $this->view('faq', $variable);
+                return $this->view('faq/list.faqs', $variable);
             }
         }
         return $this->view('not_found');

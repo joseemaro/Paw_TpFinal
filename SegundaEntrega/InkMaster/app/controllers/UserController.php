@@ -70,7 +70,7 @@ class UserController extends Controller
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'user.list')) {
                 $variable["artists"] = $this->user->listUsers();
-                return $this->generalController->view('list.users', $variable);
+                return $this->generalController->view('user/list.users', $variable);
             }
         }
         return $this->generalController->view('not_found');
@@ -85,7 +85,7 @@ class UserController extends Controller
                 if ($this->generalController->isAdministrator($id_user) || $id_user_v == $id_user) {
                     $user = $this->user->findUser($id_user_v);
                     $variable["user"] = $user;
-                    return $this->generalController->view('view.user', $variable);
+                    return $this->generalController->view('user/view.user', $variable);
                 }
             }
         }
@@ -100,7 +100,7 @@ class UserController extends Controller
             if ($this->generalController->user->havePermissions($id_user, 'user.edit')) {
                 $user = $this->user->findUser($id_user_v);
                 $variable["user"] = $user;
-                return $this->generalController->view('edit.user', $variable);
+                return $this->generalController->view('user/edit.user', $variable);
             }
         }
         return $this->generalController->view('not_found');
@@ -117,7 +117,7 @@ class UserController extends Controller
                 if ($status) {  #si salio bien la validacion
                     $user = $this->user->findUser($id_user);
                     $variable["user"] = $user;
-                    return $this->generalController->view('view.user', $variable);
+                    return $this->generalController->view('user/view.user', $variable);
                 } else {
                     $variable["errors"] = $array;
                     return $this->generalController->view('errors.register', $variable);
@@ -133,13 +133,13 @@ class UserController extends Controller
 
     public function listArtists() {
         $variable["artists"] = $this->user->listArtists($this->generalController->getIdLocal());
-        return $this->generalController->view('list.artists', $variable);
+        return $this->generalController->view('artist/list.artists', $variable);
     }
 
     public function viewArtist($id_artist) {
         $id_artist = str_replace("%20", " ", $id_artist);
         $variable["artist"] = $this->user->findArtist($id_artist);
-        return $this->generalController->view('view.artist', $variable);
+        return $this->generalController->view('artist/view.artist', $variable);
     }
 
     public function comparacion($id_user) {

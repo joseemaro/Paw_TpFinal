@@ -473,8 +473,8 @@ class User extends Model
                                         where id_user = :1", [$id_user]);
         $user["photo"] = base64_encode($user["photo"]);
         $medical_record = $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
-        $medical_record = $medical_record[0];
         if ($medical_record) {
+            $medical_record = $medical_record[0];
             $user["pathology"] = $medical_record["considerations"];
         } else {
             $user["pathology"] = "-";
