@@ -154,7 +154,10 @@ class Appointment extends Model
             }
         }
         if ($boolean) {
-            $count = $this->db->repeatAppointment($this->table, $id_artist, $this->parameters["date"], $this->parameters["hour"]);
+            $count = $this->db->simpleQuery("select count(*) as cant from inkmaster_db.$this->table as ap
+                                                where ap.id_artist = :1 and ap.date = :2 and ap.hour = :3;",
+                                            [$id_artist, $this->parameters["date"], $this->parameters["hour"]]);
+            //$count = $this->db->repeatAppointment($this->table, $id_artist, $this->parameters["date"], $this->parameters["hour"]);
             if ($count["cant"] > 0) {
                 $boolean = false;
                 $error = "Ya se encuentra un turno registrado en esta fecha y horario para este artista";

@@ -57,8 +57,8 @@ class User extends Model
     }
 
 
-    public function validate_duplicateUser($id){
-        $cant = $this->db->findCantUser($this->table, $id);
+    public function validate_duplicateUser($id_user){
+        $cant = $this->db->simpleQuery("select count(*) as cant from inkmaster_db.$this->table where id_user = :1", [$id_user]);
         $can = $cant['cant'];
         if ($can == "0"){
             return false;
@@ -303,7 +303,8 @@ class User extends Model
     }
 
     public function validate_local($id_local) {
-        $local = $this->db->existLocal('local', $id_local);
+        $local = $this->db->simpleQuery("select * from inkmaster_db.local
+                                            where id_local = :id", [$id_local]);
         if (isset($local["id_local"])) {
             $this->parameters["id_local"] = $id_local;
             $this->parameters_artist["id_local"] = $id_local;
@@ -453,7 +454,9 @@ class User extends Model
     }
 
     public function listArtists($id_local) {
-        $artists = $this->db->listArtists($this->table, $id_local);
+        $artists = $this->db->query("select * from inkmaster_db.$this->table as u
+                                        inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                        where a.id_local = :1;", [$id_local]);
         return $this->replace($artists);
     }
 
@@ -482,11 +485,14 @@ class User extends Model
         return $user;
     }
 
-    public function findArtist($id) {
-        $artist = $this->db->findArtist($this->table, $id);
+    public function findArtist($id_artist) {
+        $artist = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
+                                            inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+                                            where id_artist = :1", [$id_artist]);
         if ($artist) {
             $artist["photo"] = base64_encode($artist["photo"]);
-           $artist["tattoos"] = $this->replace($this->db->listTattoosByArtist('tattoo', $id));
+            $artist["tattoos"] = $this->replace($this->db->query("select * from inkmaster_db.tattoo as t
+                                                                    where t.id_artist = :1;", [$id_artist]));
         }
         return $artist;
     }
@@ -496,7 +502,7 @@ class User extends Model
     }
 
     public function verifyAdult($id_user) {
-        $user = $this->db->findUser($this->table, $id_user);
+        $user = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_user = :1", [$id_user]);
         $today = getdate();
         $year = $today["year"] - substr($user["born"],0,4);
         $month = $today["mon"] - substr($user["born"],5,2);

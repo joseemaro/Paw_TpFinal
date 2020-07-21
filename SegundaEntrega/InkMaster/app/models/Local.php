@@ -17,7 +17,7 @@ class Local extends Model
     protected $description;
 
     public function getTxt($id_local) {
-        return $this->db->findLocal($this->table, $id_local);
+        return $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_local = :1;", [$id_local]);
     }
 
     public function getLocal() {
