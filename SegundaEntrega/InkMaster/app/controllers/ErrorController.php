@@ -14,6 +14,7 @@ class ErrorController extends Controller
         return view('not_found');
     }
 
+
     /**
      * Show the Error 500 page
      */

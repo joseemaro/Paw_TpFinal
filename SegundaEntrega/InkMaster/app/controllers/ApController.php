@@ -89,9 +89,12 @@ class ApController extends Controller
                 $variable["link"] ="https://calendar.google.com/calendar/r";
                 return $this->generalController->view('appointment/list.appointments', $variable);
             }else{
-                return $this->generalController->view('not_found');
+                $variable["appointments"] = $this->appointment->listAppointments($id_user);
+                $variable["link"] =false;
+                return $this->generalController->view('appointment/list.appointments', $variable);
             }
-
+        }else{
+            return $this->generalController->view('not_found');
         }
         return $this->generalController->view('not_found');
     }
@@ -123,6 +126,18 @@ class ApController extends Controller
                 return $this->generalController->view('appointment/edit.appointment', $variable);
             }
             return $this->generalController->view('appointment/view.appointment', $variable);
+        }
+        return $this->generalController->view('not_found');
+    }
+
+    public function cancelAp($id_appointment){
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            $this->appointment->cancelAp($id_appointment);
+            $variable["appointments"] = $this->appointment->listAppointments($id_user);
+            $variable["link"] =false;
+            return $this->generalController->view('appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
     }

@@ -332,6 +332,11 @@ class Appointment extends Model
                                     and status = 'pending';", [$status, $id_appointment, $id_artist]);
     }
 
+    public function cancelAp($id_appointment){
+        return $this->db->update("update inkmaster_db.$this->table set status = :1 
+                                    where id_appointment = :2;", ['annulled', $id_appointment]);
+    }
+
     public function findCalendar($id_artist){
         $tattoo = $this->db->simpleQuery("select * from inkmaster_db.calendar_link
                                                     where id_artist = :1;", [$id_artist]);

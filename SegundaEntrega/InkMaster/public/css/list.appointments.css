@@ -39,6 +39,10 @@ p {
     background-color: #3C7931;
 }
 
+.cancelBtn{
+    background-color: #3C7931;
+}
+
 .viewBtn,
 .editBtn {
     background-color: #202020;

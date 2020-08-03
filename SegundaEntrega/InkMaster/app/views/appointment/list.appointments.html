@@ -59,6 +59,9 @@
                                 <td>{{ appointment.price }}</td>
                             {% endif %}
                             <td>
+
+
+
                                 {% if isArtist %}
                                     {% if (appointment.status == 'pending') %}
                                         <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
@@ -84,6 +87,15 @@
                                             <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Delete</button>
                                         </form>
                                     {% endif %}
+                                {% endif %}
+
+                                {% if variable.link == false %}
+                                {% if (appointment.status != 'annulled') %}
+                                    <form method="get" id="cancel-appointment-{{ appointment.id_appointment }}" action="/cancel_appointment/{{ appointment.id_appointment }}">
+                                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                        <button class ="table-button cancelBtn" type="submit" form="cancel-appointment-{{ appointment.id_appointment }}">Cancel</button>
+                                    </form>
+                                {% endif %}
                                 {% endif %}
                             </td>
                         </tr>
