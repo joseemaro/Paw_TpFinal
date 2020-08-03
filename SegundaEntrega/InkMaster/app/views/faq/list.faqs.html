@@ -30,11 +30,11 @@
             <!-- query a la bd -->
             {% for query in variable.faqs %}
                 <article id="column1">
-                    <section>
+                    <section itemscope>
                         <a href="/view_faq/{{ query.id_faq }}">
-                            <p class="preg">{{ query.question }}</p>
+                            <p itemprop="name" class="preg">{{ query.question }}</p>
                         </a>
-                        <p> {{ query.answer }}</p>
+                        <p itemprop="description"> {{ query.answer }}</p>
                     </section>
 
                     {% if isAdministrator %}
