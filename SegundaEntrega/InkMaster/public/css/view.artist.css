@@ -48,11 +48,6 @@ figure img {
     display: block;
 }
 
-figure img:hover {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
 figcaption {
     padding: 1.25em;
 }
@@ -93,10 +88,5 @@ figcaption p {
 
 .container-img-artist img {
     width: 18.75em;
-    margin: 1em;
-}
-
-.container-img-artist img:hover {
-    width: 20em;
     margin: 1em;
 }
