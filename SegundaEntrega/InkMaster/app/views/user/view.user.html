@@ -60,9 +60,9 @@
                 <input type="email" name="email" readonly value="{{ variable.user.email }}">
             </label>
 
-            {% if (variable.user.medical_record) %}
+            {% if (variable.user.considerations) %}
                 <label> Enfermedades:
-                    <textarea name="pathology-txt" readonly > {{ variable.user.medical_record }} </textarea>
+                    <textarea name="pathology-txt" readonly > {{ variable.user.considerations }} </textarea>
                 </label>
             {% endif %}
         </section>

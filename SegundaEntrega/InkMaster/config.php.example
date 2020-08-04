@@ -18,7 +18,7 @@ if ($db) {
     $dbopts = [
         "user" => 'root',
         "pass" => '',
-        "dsn" => 'mysql:host=127.0.0.1;dbname=inkmaster_db',
+        "dsn" => 'mysql:host=127.0.0.1;dbname=inkmaster_db;charset=utf8',
     ];
 }
 

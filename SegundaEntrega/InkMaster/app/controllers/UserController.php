@@ -153,7 +153,7 @@ class UserController extends Controller
         if ($old["direction"] != $_POST["direction"]) $parameters["direction"] = $_POST["direction"];
         if ($old["email"] != $_POST["email"]) $parameters["email"] = $_POST["email"];
         if (isset($_FILES["photo_edit"])) $parameters["photo"] = $_FILES["photo_edit"];
-        if (!empty($_POST["pathology"]) && $old["pathology"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
+        if (!empty($_POST["pathology"]) && $old["considerations"] != $_POST["pathology"]) $parameters["pathology"] = $_POST["pathology"];
         if (isset($_POST["artist"]) || isset($_POST["txt"])) {
             $parameters["artist"] = true;
             if ($old["txt"] != $_POST["txt"]) $parameters["txt"] = $_POST["txt"];
@@ -174,7 +174,7 @@ class UserController extends Controller
         if (isset($_POST["direction"])) $parameters["direction"] = $_POST["direction"];
         if (isset($_POST["email"])) $parameters["email"] = $_POST["email"];
         if (isset($_FILES)) $parameters["photo"] = $_FILES;
-        if (isset($_POST["pathology"])) $parameters["pathology"] = $_POST["pathology"];
+        if (($_POST["pathology"])) $parameters["pathology"] = $_POST["pathology-txt"];
         if (isset($_POST["artist"])) {
             $parameters["artist"] = true;
             $parameters["local"] = $this->generalController->getIdLocal();
