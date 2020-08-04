@@ -20,7 +20,7 @@
     {% if (variable.tattoos)%}
         <div id="container">
             {% for tattoo in variable.tattoos %}
-                <img src="data:image/png;base64, {{tattoo.image}}" alt="Imagen de exhibición">
+                <img class="zoom" src="data:image/png;base64, {{tattoo.image}}" alt="Imagen de exhibición">
             {% endfor %}
         </div>
         {% if (variable.total_pages)%}
