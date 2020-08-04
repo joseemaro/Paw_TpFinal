@@ -25,6 +25,7 @@ class User extends Model
     protected $parameters_user;
     protected $parameters_artist;
     protected $parameters_calendar;
+    protected $parameters_medical;
     protected $return = array();
 
     public function validate_user($id_user) {
@@ -39,6 +40,7 @@ class User extends Model
             } else if (!$this->validate_duplicateUser($id_user)) {
                 $this->parameters["id_user"] = $id_user;
                 $this->parameters_user["id_user"] = $id_user;
+                $this->parameters_medical["id_user"] = $id_user;
             }else{
                 $error = "El nombre de usuario no esta disponible";
                 array_push($this->return, $error);
@@ -322,6 +324,7 @@ class User extends Model
 
     public function validate_pathology($pathology) {    #no se si no generaria inyeccion sql y manipular para insertar
         $this->parameters["medical_record"] = addslashes($pathology);
+        $this->parameters_medical["considerations"] = addslashes($pathology);
         return true;
     }
 
@@ -379,6 +382,10 @@ class User extends Model
                 $this->db->insert('calendar_link', $this->parameters_calendar);
             }
 
+            if (isset($this->parameters_medical["considerations"])) {
+                $this->db->insert('medical_record', $this->parameters_medical);
+            }
+
             $status = true;
         } else {
             $status = false;
@@ -399,10 +406,10 @@ class User extends Model
                 $medical_record = $this->db->simpleQuery("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
                 if ($medical_record) {
                     $this->db->update("update inkmaster_db.medical_record set considerations = :1 
-                                    where id_user = :2;", [$medical_record, $parameters["id_artist"]]);
+                                    where id_user = :2;", [$this->parameters_medical["considerations"], $id_user]);
                 } else {
                     $parameters_medical["id_user"] = $id_user;
-                    $parameters_medical["considerations"] = $parameters["medical_record"];
+                    $parameters_medical["considerations"] = $parameters["pathology"];
                     $this->db->insert('medical_record', $parameters_medical);
                 }
             }
@@ -470,17 +477,17 @@ class User extends Model
     }
 
     public function findUser($id_user) {
-        $user = $this->db->simpleQuery("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt from inkmaster_db.$this->table as u
+        $user = $this->db->simpleQuery("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt, m.considerations
+                                        from inkmaster_db.$this->table as u
                                         left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
                                         left join inkmaster_db.local as l on (a.id_local = l.id_local)
-                                        where id_user = :1", [$id_user]);
-        $user["photo"] = base64_encode($user["photo"]);
-        $medical_record = $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
-        if ($medical_record) {
-            $medical_record = $medical_record[0];
-            $user["pathology"] = $medical_record["considerations"];
-        } else {
-            $user["pathology"] = "-";
+                                        left join inkmaster_db.medical_record as m on (u.id_user = m.id_user)
+                                        where u.id_user = :1", [$id_user]);
+        if (!is_null($user["photo"])) {
+            $user["photo"] = base64_encode($user["photo"]);
+        }
+        if (is_null($user["considerations"])) {
+            $user["considerations"] = "-";
         }
         return $user;
     }

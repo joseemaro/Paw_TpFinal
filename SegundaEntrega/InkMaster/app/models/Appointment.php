@@ -208,9 +208,8 @@ class Appointment extends Model
         return $array_images;
     }
 
-    public function validate_medical_record($medical_record) {
-        $this->medical_record["considerations"] = addslashes($medical_record);
-        $this->medical_record["id_user"] = $this->parameters["id_user"];
+    public function validate_txt($txt) {
+        $this->parameters["txt"] = addslashes($txt);
         return true;
     }
 
@@ -242,10 +241,6 @@ class Appointment extends Model
                 }
                 $this->parameters["reference_images"] = $this->encode_images();
             }
-            if (isset($parameters["medical_record"])) {
-                $this->db->insert("medical_record", $this->medical_record);
-                $this->parameters["medical_record"] = $parameters["medical_record"];
-            }
 
             return $this->parameters;
         } else {
@@ -255,7 +250,7 @@ class Appointment extends Model
         }
     }
 
-    public function validateUpdate($id_appointment, $reference_image = null, $medical_record = null) {
+    public function validateUpdate($id_appointment, $reference_image = null, $txt = null) {
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
                                                 where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
         if ($appointment) {
@@ -263,8 +258,8 @@ class Appointment extends Model
             if (!is_null($reference_image) && $boolean) {
                 $boolean = $boolean && $this->validate_reference_images($reference_image);
             }
-            if (!is_null($medical_record) && $boolean) {
-                $boolean = $boolean && $this->validate_medical_record($medical_record);
+            if (!is_null($txt) && $boolean) {
+                $boolean = $boolean && $this->validate_txt($txt);
             }
             if ($boolean) {
                 if (!is_null($reference_image)){
@@ -274,9 +269,9 @@ class Appointment extends Model
                         $this->db->insert("reference_image", $parameters_reference_image);
                     }
                 }
-                if (!is_null($medical_record)) {
-                    $this->medical_record["id_user"] = $appointment["id_user"];
-                    $this->db->insert("medical_record", $this->medical_record);
+                if (!is_null($this->parameters["txt"])) {
+                    $this->db->update("update inkmaster_db.$this->table set txt = :1
+                                    where id_appointment = :2;", [$this->parameters["txt"], $id_appointment]);
                 }
                 $this->parameters = $this->findAppointment($id_appointment);
 
@@ -308,19 +303,18 @@ class Appointment extends Model
                 inner join inkmaster_db.rol_user as r on (u.id_user = r.id_user)
                 where u.id_user = :1 and u.enabled is true
                 and r.id_rol =";
+        $query = "select *, 
+                    case when CURDATE() <= date-2 then true 
+                    else false end as edit
+                    from inkmaster_db.$this->table as a
+                    inner join inkmaster_db.user as u on (u.id_user = a.id_user)";
         if ($this->db->query("$sql 'artist'", [$id_user])) {
-            return $this->db->query("select * from inkmaster_db.$this->table as a 
-                                        inner join inkmaster_db.user as u on (u.id_user = a.id_user)
-                                        where a.id_artist = :1
+            return $this->db->query("$query where a.id_artist = :1
                                         order by a.status desc, a.date asc, a.hour asc;", [$id_user]);
         } elseif ($this->db->query("$sql 'administrator'", [$id_user])) {
-            return $this->db->query("select * from inkmaster_db.$this->table as a
-                                        inner join inkmaster_db.user as u on (a.id_user = u.id_user)
-                                        order by a.status desc, a.date asc, a.hour asc;");
+            return $this->db->query("$query order by a.status desc, a.date asc, a.hour asc;");
         } elseif ($this->db->query("$sql 'user'", [$id_user])) {
-            return $this->db->query("select * from inkmaster_db.$this->table as a
-                                        inner join inkmaster_db.user as u on (a.id_user = u.id_user)
-                                        where a.id_user = :1
+            return $this->db->query("$query where a.id_user = :1
                                         order by a.status desc, a.date asc, a.hour asc;", [$id_user]);
         }
         return null;
@@ -364,16 +358,6 @@ class Appointment extends Model
                 array_push($this->reference_images, $reference_image["image"]);
             }
             $appointment["reference_images"] = $this->encode_images();
-        }
-
-        $medical_records = $this->db->query("select * from inkmaster_db.medical_record
-                                                    where id_user = :1;", [$appointment["id_user"]]);
-        if ($medical_records) {
-            $medical_record_return = "";
-            foreach ($medical_records as $medical_record) {
-                $medical_record_return = $medical_record_return . $medical_record["considerations"];
-            }
-            $appointment["medical_record"] = $medical_record_return;
         }
 
         return $appointment;

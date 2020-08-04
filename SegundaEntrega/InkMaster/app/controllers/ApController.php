@@ -22,13 +22,12 @@ class ApController extends Controller
     public  function newAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-                $variable["session"] = true;
-                $id_user = $_SESSION["id_user"];
-                #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
-                $variable["adult"] = $this->user->verifyAdult($id_user);
-                return $this->generalController->view('appointment/new.appointment', $variable);
+            $variable["session"] = true;
+            $id_user = $_SESSION["id_user"];
+            #buscar si el usuario es menor de 18 años, en tal caso enviar advertencia
+            $variable["adult"] = $this->user->verifyAdult($id_user);
+            return $this->generalController->view('appointment/new.appointment', $variable);
         }else{
-
             $variable["session"] = false;
             return $this->generalController->view('appointment/new.appointment',$variable);
         }
@@ -49,29 +48,20 @@ class ApController extends Controller
             if (isset($_POST["id_artist"])) {
                 $parameters["artist"] = $_POST["id_artist"];
             }
+            #var_dump(($_FILES["reference_image"]));
             if (isset($_FILES["reference_image"])) {
                 $parameters["reference_images"]["reference_image"] = $_FILES;
             }
-
-            $medical_record = array();
             if (isset($_POST["pathology"])) {
-                $parameters["medical_record"] = $_POST["pathology-txt"];
+                $parameters["txt"] = $_POST["pathology-txt"];
             }
 
-            $array = $this->appointment->validateInsert($parameters, $medical_record);
+            $array = $this->appointment->validateInsert($parameters);
 
             if ($array["status"]) {     //si salio bien la validacion
-
                 $variable["appointment"] = $array;
                 $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
-
-
-                if ($this->generalController->user->havePermissions($_SESSION["id_user"], 'appointment.acept'))
-                {
-                    return $this->generalController->view('/appointment/view.new.appointment', $variable);
-                }else{
-                    return $this->generalController->view('appointment/view.appointment', $variable);
-                }
+                return $this->generalController->view('appointment/view.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
                 return $this->generalController->view('appointment/errors.appointment', $variable);
@@ -84,15 +74,15 @@ class ApController extends Controller
         session_start();
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
-            if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
+            #if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
                 $variable["appointments"] = $this->appointment->listAppointments($id_user);
                 $variable["link"] ="https://calendar.google.com/calendar/r";
                 return $this->generalController->view('appointment/list.appointments', $variable);
-            }else{
+            /*}else{
                 $variable["appointments"] = $this->appointment->listAppointments($id_user);
                 $variable["link"] =false;
                 return $this->generalController->view('appointment/list.appointments', $variable);
-            }
+            }*/
         }else{
             return $this->generalController->view('not_found');
         }
@@ -152,8 +142,8 @@ class ApController extends Controller
                 } else {
                     $reference_image = null;
                 }
-                if (isset($_POST["pathology-txt"])) {
-                    $medical_record = $_POST["pathology-txt"];
+                if (isset($_POST["txt"])) {
+                    $medical_record = $_POST["txt"];
                 } else {
                     $medical_record = null;
                 }
