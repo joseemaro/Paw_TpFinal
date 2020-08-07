@@ -200,7 +200,7 @@ nav ul li .icon-mobile {
 }
 
 /*Versión del nav escritorio*/
-@media screen and (min-width:700px){
+@media screen and (min-width:1050px){
     /*Esto hace que desaparezca la "hamburguesa"*/
     .menu_toggle{
         display: none;
