@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,700&display=swap";
 * {
     box-sizing: border-box;
 }
@@ -28,29 +30,10 @@
     padding: 1em;
 }
 
-#container-viewUser label {
-    display: block;
-    padding: 0.5em 0;
-    text-align: center;
-}
 
 #personal-data{
-    overflow: scroll;
-    height: 100vh;
-}
-
-#container-viewUser label input,
-#container-viewUser label textarea {
-    display: block;
-    width: 100%;
-    margin: 0.3em auto;
-    padding: 0.2em;
-    height: 5vh;
-    border: 1px solid var(--color-logo);
-    text-align: left;
-    background-color: whitesmoke;
-    border-radius: 0.3125em;
-    font-size: 100%;
+    overflow: visible;
+    height: 100%;
 }
 
 .backBtn,
@@ -67,6 +50,11 @@
     cursor: pointer;
     width: 100%;
     background-color: #202020;
+}
+
+.editBtn{
+    background-color: #7FB685;
+    color: black;
 }
 
 .deleteBtn {
@@ -128,9 +116,58 @@ figure img {
     .deleteBtn {
         display: block;
         width: 30%;
-        margin-top: 0.5em;
+        margin-top: 0.7em;
         margin-left: 10%;
     }
 }
+p{
+    font-family: 'Lora', serif;
+    font-style: normal;
+    font-weight: bold;
+}
+label{
+    font-family: 'Lora', serif;
+    font-weight: lighter;
+    font-style: italic;
+}
+h1,h2 {
+    font-family: 'Lora', serif;
+}
+
+p{
+    font-family: 'Lora', serif;
+    font-style: normal;
+    font-weight: bold;
+}
+label{
+    font-family: 'Lora', serif;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+
+
+#lista5 {
+    list-style: none;
+    padding: 0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+#lista5 ol {
+    margin: 0 0 0 3em;
+}
+
+
+#lista5 {
+    list-style-type: none;
+    padding: 0;
+}
+
+#lista5 > li{
+    position: relative;
+    padding: 1em;
+    background-color: #eaeaea;
+}
+
 
 
