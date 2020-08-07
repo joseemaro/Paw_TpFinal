@@ -85,7 +85,8 @@ class UserController extends Controller
                 if ($this->generalController->isAdministrator($id_user) || $id_user_v == $id_user) {
                     $user = $this->user->findUser($id_user_v);
                     $variable["user"] = $user;
-                    return $this->generalController->view('user/view.user', $variable);
+                    /*return $this->generalController->view('user/view.user', $variable);*/
+                    return $this->generalController->view('user/view.user2', $variable);
                 }
             }
         }

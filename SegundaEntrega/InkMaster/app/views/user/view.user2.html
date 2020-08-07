@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+Usuario
+{% endblock %}
+
+{% block head %}
+{{ parent() }}
+<meta name="keywords" content="PAW,2020,Templates,PHP">
+<link rel="stylesheet" type="text/css" href="/public/css/view.user.css">
+{% endblock %}
+
+{% block header %}
+{{ include('header.views.html') }}
+{{ include('nav.views.html') }}
+<!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+<section id="container-viewUser">
+
+    <section id="personal-data">
+        <h1 id="title-viewUser">{{ variable.user["id_user"] }} </h1>
+
+        {% if variable.user.photo %}
+        <figure>
+            <img class="zoom" src="data:image/jpg;base64, {{ variable.user['photo'] }} " alt="Foto de perfil de usuario">
+        </figure>
+        {% endif %}
+
+        <section id="container-button">
+            <button class ="backBtn" type="submit" onclick="history.back()">Volver</button>
+            {% if variable.user.id_user == user %}
+            <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="/edit_user/{{ variable.user['id_user'] }}">
+                <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+                <button class ="editBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
+            </form>
+            {% endif %}
+        </section>
+
+    </section>
+
+    <section id="local-data">
+        <ol id="lista5">
+            <li>
+                <p>Nombre de usuario:
+                    <label>{{ variable.user.id_user }}</label>
+                </p>
+            </li>
+            <li>
+                <p>Nombre:
+                    <label>{{ variable.user.first_name }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Apellido:
+                    <label>{{ variable.user.last_name }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Nacimiento:
+                    <label>{{ variable.user.born }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Nro de documento:
+                    <label>{{ variable.user.nro_doc }}</label>
+                </p>
+            </li>
+
+            <li>
+                <p> Teléfono:
+                    <label>{{ variable.user.phone }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Dirección:
+                    <label>{{ variable.user.direction }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Email:
+                    <label>{{ variable.user.email }}</label>
+                </p>
+            </li>
+
+            {% if (variable.user.considerations) %}
+            <li>
+                <p> Enfermedades:
+                    <label>{{ variable.user.considerations }}</label>
+                </p>
+            </li>
+            {% endif %}
+
+            {% if (variable.user.id_artist) %}
+                <h2 id="title-local">Datos como artista</h2>
+            <li>
+                <p>  Local de atención:
+                    <label>{{ variable.user.local }}</label>
+                </p>
+            </li>
+            <li>
+                <p> Descripción:
+                    <label>{{ variable.user.txt }}</label>
+                </p>
+            </li>
+            {% endif %}
+        </ol>
+    </section>
+
+</section>
+
+
+
+{% endblock %}
+
+{% block footer %}
+{{ include('footer.views.html') }}
+{% endblock %}
