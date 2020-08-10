@@ -79,7 +79,7 @@
         {% if variable.user.id_artist %}
             <input type="hidden" name="txt"  value="{{ variable.user.id_artist }}">
             <label> Descripción: <input type="text" name="txt" class="descriptionjs" value="{{ variable.user.txt }}"
-                                        pattern="^[a-zA-Z0-9?!¡¿.,; ]{0,10}$" title="Solo se permiten letras, numeros y espacios"
+                                        pattern="^[a-zA-Z0-9?!¡¿.,; ]{3,300}$" title="Solo se permiten letras, numeros y espacios"
             ><span id="description-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
             </label>
         {% endif %}
