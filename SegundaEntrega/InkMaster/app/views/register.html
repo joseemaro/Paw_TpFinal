@@ -27,54 +27,71 @@
         <h1>Registro</h1>
 
         <label> Usuario: (*)
-            <input type="text" name="id_user" class="usernamejs"
+            <input type="text" name="id_user" id="user" class="usernamejs"
             pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_. ])$" title="Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres"
             required>
+            <span id="user-invalid" style="display: none">Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres</span>
         </label>
 
         <label> Contraseña: (*)
             <input id="password" type="password" name="password" class="passwordjs"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Debe contener al menos un numero, una letra minuscula y una mayusucula, por lo menos 8 carateres" required>
+            <span id="pass" style="display: none">Debe contener al menos un numero, una letra minuscula y una mayusucula, por lo menos 8 carateres</span>
         </label>
 
         <label> Confirme contraseña: (*)
             <input type="password" name="confirm_password" class="confirmPasswordjs"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Reescriba la contraseña previamente ingresada" required>
+            <span id="pass-invalid" style="display: none">Las contraseñas no coinciden</span>
+
         </label>
 
         <label> Nombres: (*)
             <input type="text" name="first_name" class="namejs"
             pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios" required>
+            <span id="name-invalid" style="display: none">Solo se permiten letras y espacios</span>
+
         </label>
 
         <label> Apellidos: (*)
             <input type="text" name="last_name" class="surnamejs"
             pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios" required>
+            <span id="surname-invalid" style="display: none">Solo se permiten letras y espacios</span>
+
         </label>
 
         <label> Fecha de nacimiento: (*)
             <input type="date" name="born" id="born" class="bornjs" required>
+            <span id="born-invalid" style="display: none">Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor</span>
+
         </label>
 
         <label> Nro de Documento: (*)
             <input type="number" name="nro_doc" class="identificationNumberjs"
             pattern="^\d{8}(?:[-\s]\d{4})?$" title="El dni debe tener 8 digitos" required>
+            <span id="dni-invalid" style="display: none">El dni debe tener 8 digitos</span>
+
         </label>
 
         <label>Teléfono:
             <input type="tel" name="phone" class="phonejs"
-            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="Solo se admiten numeros">
+            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="El numero ingresado no coincide con el formato local">
+            <span id="tel-invalid" style="display: none">El numero ingresado no coincide con el formato local</span>
+
         </label>
 
         <label> Dirección:
             <input type="text" name="direction" class="addressjs"
             pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios">
+            <span id="dir-invalid" style="display: none">Solo se permiten letras, numeros y espacios</span>
+
         </label>
 
         <label> Email: (*)
             <input type="email" name="email" required class="emailjs">
+            <span id="email-invalid" style="display: none">El formato de mail ingresado no es correcto</span>
             <!--  pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" title="Ej: ejemplo@hotmail.com"> -->
         </label>
 
@@ -90,6 +107,8 @@
             <textarea class="pathology-txt pathologyjs" name="pathology-txt" id="pathology-txt"
                       pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: ">
             </textarea>
+            <span id="pathology-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
+
         </section>
 
         {% if isAdministrator %}
@@ -100,11 +119,14 @@
             <label id="description-artist"> Descripción:
                 <textarea name="txt" class="descriptionjs"
                 pattern="^[a-zA-Z0-9?!¡¿.,; ]{0,10}$" title="Solo se permiten letras, numeros y espacios"></textarea>
+                <span id="description-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
+
             </label>
 
             <label id="calendar-id" style="display: none"> ID Google Calendar:
                 <input type="text" name="id_calendar" class="calendarjs"
                        pattern="^[a-zA-Z0-9@., ]{3,100}$" title="Ingrese el ID del calendario del artista">
+                <span id="calendar-invalid" style="display: none">Ingrese el ID correcto del calendario del artista</span>
             </label>
         {% endif %}
 

@@ -10,8 +10,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if (username.exec(validate_username.value) || (validate_username.value === "")) {
             validate_username.style.border = "#ffffff";
             validate_username.style.background = "#ffffff";
+            var pass = document.getElementById("user-invalid");
+            pass.style.display= "none";
+
         } else {
             validate_username.style.background = "#e05f5f";
+
+            var pass = document.getElementById("user-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
+
+            var text = document.getElementById("textt");
+            text.removeAttribute("disabled");
         }
     });
 
@@ -22,8 +32,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if (password.exec(validate_password.value) || (validate_password.value === "")) {
             validate_password.style.border = "#ffffff";
             validate_password.style.background = "#ffffff";
+
+            var pass = document.getElementById("pass");
+            pass.style.display= "none";
+
         } else {
             validate_password.style.background = "#e05f5f";
+
+            var pass = document.getElementById("pass");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
+
+
         }
     });
 
@@ -35,8 +55,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if ((password.exec(validate_confirmPassword.value) && validate_password.value == validate_confirmPassword.value) || (validate_confirmPassword.value === "")) {
             validate_confirmPassword.style.border = "#ffffff";
             validate_confirmPassword.style.background = "#ffffff";
+            var pass = document.getElementById("pass-invalid");
+            pass.style.display= "none";
         } else {
             validate_confirmPassword.style.background = "#e05f5f";
+            var pass = document.getElementById("pass-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
+
         }
     });
 
@@ -47,8 +73,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (name.exec(validate_name.value) || (validate_name.value === "")) {
             validate_name.style.border = "#ffffff";
             validate_name.style.background = "#ffffff";
+            var pass = document.getElementById("name-invalid");
+            pass.style.display= "none";
         } else {
             validate_name.style.background = "#e05f5f";
+            var pass = document.getElementById("name-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -59,8 +90,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (surname.exec(validate_surname.value) || (validate_surname.value === "")) {
             validate_surname.style.border = "#ffffff";
             validate_surname.style.background = "#ffffff";
+            var pass = document.getElementById("surname-invalid");
+            pass.style.display= "none";
         } else {
             validate_surname.style.background = "#e05f5f";
+            var pass = document.getElementById("surname-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -80,24 +116,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if (validate_born.value === "") {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
+            var pass = document.getElementById("born-invalid");
+            pass.style.display= "none";
         } else if (validate_born.value > formato_hoy) {
-
-            var input = document.getElementById('born');
-            input.className = 'invalid animated shake';
-            var elem = document.createElement('div');
-            elem.id = 'notify';
-            elem.style.display = 'block';
-            elem.style.color = "#CD0808";
-            var form = document.getElementById('form');
-            form.insertBefore(elem, form.children[7]);
-            elem.textContent = '*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*';
-            elem.className = 'error';
-            elem.style.display = 'block';
-
+            var pass = document.getElementById("born-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
 
         } else {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
+            var pass = document.getElementById("born-invalid");
+            pass.style.display= "none";
         }
     });
 
@@ -108,8 +138,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (identificationNumber.exec(validate_identificationNumber.value) || (validate_identificationNumber.value === "")) {
             validate_identificationNumber.style.border = "#ffffff";
             validate_identificationNumber.style.background = "#ffffff";
+            validate_identificationNumber.style.background = "#e05f5f";
+            var pass = document.getElementById("dni-invalid");
+            pass.style.display= "none";
         } else {
             validate_identificationNumber.style.background = "#e05f5f";
+            var pass = document.getElementById("dni-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -120,8 +156,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (phone.exec(validate_phone.value) || (validate_phone.value === "")) {
             validate_phone.style.border = "#ffffff";
             validate_phone.style.background = "#ffffff";
+            var pass = document.getElementById("tel-invalid");
+            pass.style.display= "none";
         } else {
             validate_phone.style.background = "#e05f5f";
+            var pass = document.getElementById("tel-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -133,8 +174,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (address.exec(validate_address.value) || (validate_address.value === "")) {
             validate_address.style.border = "#ffffff";
             validate_address.style.background = "#ffffff";
+            var pass = document.getElementById("dir-invalid");
+            pass.style.display= "none";
         } else {
             validate_address.style.background = "#e05f5f";
+            var pass = document.getElementById("dir-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -145,8 +191,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (email.exec(validate_email.value) || (validate_email.value === "")) {
             validate_email.style.border = "#ffffff";
             validate_email.style.background = "#ffffff";
+            var pass = document.getElementById("email-invalid");
+            pass.style.display= "none";
         } else {
             validate_email.style.background = "#e05f5f";
+            var pass = document.getElementById("email-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -169,8 +220,14 @@ document.addEventListener("DOMContentLoaded", function() {
         if (path.exec(validate_pathology.value) || (validate_pathology.value === "")) {
             validate_pathology.style.border = "#ffffff";
             validate_pathology.style.background = "#ffffff";
+            var pass = document.getElementById("pathology-invalid");
+            pass.style.display= "none";
+
         } else {
             validate_pathology.style.background = "#e05f5f";
+            var pass = document.getElementById("pathology-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -181,8 +238,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (description.exec(validate_description.value) || (validate_description.value === "")) {
             validate_description.style.border = "#ffffff";
             validate_description.style.background = "#ffffff";
+            var pass = document.getElementById("description-invalid");
+            pass.style.display= "none";
         } else {
             validate_description.style.background = "#e05f5f";
+            var pass = document.getElementById("description-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -193,8 +255,13 @@ document.addEventListener("DOMContentLoaded", function() {
         if (calendar.exec(validate_calendar.value) || (validate_calendar.value === "")) {
             validate_calendar.style.border = "#ffffff";
             validate_calendar.style.background = "#ffffff";
+            var pass = document.getElementById("calendar-invalid");
+            pass.style.display= "none";
         } else {
             validate_calendar.style.background = "#e05f5f";
+            var pass = document.getElementById("calendar-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
