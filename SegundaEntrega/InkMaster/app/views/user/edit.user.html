@@ -8,6 +8,7 @@
 {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/user/edit.user.css">
+    <script type="text/javascript" src="/public/js/validateEditUser.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -22,23 +23,51 @@
     <form action="/upt_user" method="post" id="form" name="form" enctype="multipart/form-data">
         <h1 id="title-list">Editar usuario</h1>
 
-        <label> Username: <input type="text" name="username" readonly value="{{ variable.user.id_user }}"></label>
+        <label> Username: <input type="text" name="username" class="usernamejs" readonly value="{{ variable.user.id_user }}"
+                                 pattern="^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9. ]+(?<![_. ])$" title="Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres"
+                                 required
+        ><span id="user-invalid" style="display: none">Solo se permiten letras/numeros/guion bajo/puntos, entre 8-20 caracteres</span>
+        </label>
 
-        <label> Nombre: <input type="text" name="first_name"  value="{{ variable.user.first_name }}"></label>
+        <label> Nombre: <input type="text" name="first_name" class="namejs" value="{{ variable.user.first_name }}"
+                               pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios" required
+        ><span id="name-invalid" style="display: none">Solo se permiten letras y espacios</span>
+        </label>
 
-        <label> Apellido: <input type="text" name="last_name"  value="{{ variable.user.last_name }}"></label>
+        <label> Apellido: <input type="text" name="last_name" class="surnamejs" value="{{ variable.user.last_name }}"
+                                 pattern="^[a-zA-Z ]{3,30}$" title="Solo se permiten letras y espacios" required>
+            <span id="surname-invalid" style="display: none">Solo se permiten letras y espacios</span>
+        </label>
 
-        <label> Fecha Nac.: <input type="date" name="born" value="{{ variable.user.born }}"></label>
+        <label> Fecha Nac.: <input type="date" name="born" class="bornjs" value="{{ variable.user.born }}"
+                                  required>
+            <span id="born-invalid" style="display: none">Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor</span>
+        </label>
 
-        <label> Telefono: <input type="tel" name="phone"  value="{{ variable.user.phone }}"></label>
+        <label> Telefono: <input type="tel" name="phone" class="phonejs" value="{{ variable.user.phone }}"
+                                 pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="El numero ingresado no coincide con el formato local"
+        ><span id="tel-invalid" style="display: none">El numero ingresado no coincide con el formato local</span>
+        </label>
 
-        <label> Email: <input type="email" name="email"  value="{{ variable.user.email }}"></label>
+        <label> Email: <input type="email" name="email" class="emailjs" value="{{ variable.user.email }}"
+                              required>
+            <span id="email-invalid" style="display: none">El formato de mail ingresado no es correcto</span>
+        </label>
 
-        <label> DNI: <input type="text" name="nro_doc"  value="{{ variable.user.nro_doc }}"></label>
+        <label> DNI: <input type="text" name="nro_doc" class="identificationNumberjs" value="{{ variable.user.nro_doc }}"
+                            pattern="^\d{8}(?:[-\s]\d{4})?$" title="El dni debe tener 8 digitos" required
+        ><span id="dni-invalid" style="display: none">El dni debe tener 8 digitos</span>
+        </label>
 
-        <label> Direccion: <input type="text" name="direction"  value="{{ variable.user.direction }}"></label>
+        <label> Direccion: <input type="text" name="direction" class="addressjs" value="{{ variable.user.direction }}"
+                                  pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios"
+        ><span id="dir-invalid" style="display: none">Solo se permiten letras, numeros y espacios</span>
+        </label>
 
-        <label> Enfermedades: <input type="text" name="pathology"  value="{{ variable.user.considerations }}"></label>
+        <label> Enfermedades: <input type="text" name="pathology" class="pathology-txt pathologyjs"  value="{{ variable.user.considerations }}"
+                                     pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: "
+        ><span id="pathology-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
+        </label>
 
         <label> Foto de perfil <br>
             {% if variable.user.photo %}
@@ -49,7 +78,10 @@
 
         {% if variable.user.id_artist %}
             <input type="hidden" name="txt"  value="{{ variable.user.id_artist }}">
-            <label> Descripción: <input type="text" name="txt"  value="{{ variable.user.txt }}"></label>
+            <label> Descripción: <input type="text" name="txt" class="descriptionjs" value="{{ variable.user.txt }}"
+                                        pattern="^[a-zA-Z0-9?!¡¿.,; ]{0,10}$" title="Solo se permiten letras, numeros y espacios"
+            ><span id="description-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
+            </label>
         {% endif %}
 
         <div>

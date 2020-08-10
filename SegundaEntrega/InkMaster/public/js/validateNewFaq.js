@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("question");
             validate_question.style.border = "#ffffff";
             validate_question.style.background = "#ffffff";
+            var pass = document.getElementById("question-invalid");
+            pass.style.display= "none";
         } else {
             validate_question.style.background = "#e05f5f";
+            var pass = document.getElementById("question-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -25,8 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("answer");
             validate_answer.style.border = "#ffffff";
             validate_answer.style.background = "#ffffff";
+            var pass = document.getElementById("answer-invalid");
+            pass.style.display= "none";
         } else {
             validate_answer.style.background = "#e05f5f";
+            var pass = document.getElementById("answer-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
@@ -39,8 +49,13 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("ke");
             validate_description.style.border = "#ffffff";
             validate_description.style.background = "#ffffff";
+            var pass = document.getElementById("summary-invalid");
+            pass.style.display= "none";
         } else {
             validate_description.style.background = "#e05f5f";
+            var pass = document.getElementById("summary-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
         }
     });
 
