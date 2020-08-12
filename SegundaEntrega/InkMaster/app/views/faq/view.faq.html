@@ -17,15 +17,14 @@
 
 {% block main %}
     <section id="wrapper">
-        <br>
-        <br>
-        <br>
         <section>
             <article id="column1">
-                <h1>Preguntas Frecuentes</h1>
+                <a href="/faq">
+                    <h1>Preguntas Frecuentes</h1>
+                </a>
                 <p class="preg"> {{ variable.faq.question }} </p>
-                <p> {{ variable.faq.answer }} </p>
-                <p> {{ variable.faq.summary }} </p>
+                <p class="answer"> {{ variable.faq.answer }} </p>
+                <p class="summary"> {{ variable.faq.summary }} </p>
             </article>
         </section>
     </section>
