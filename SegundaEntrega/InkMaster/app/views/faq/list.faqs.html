@@ -34,7 +34,7 @@
                         <a href="/view_faq/{{ query.id_faq }}">
                             <p itemprop="name" class="preg">{{ query.question }}</p>
                         </a>
-                        <p itemprop="description"> {{ query.answer }}</p>
+                        <p class="answer" itemprop="description"> {{ query.answer }}</p>
                     </section>
 
                     {% if isAdministrator %}
