@@ -34,18 +34,21 @@ CREATE TABLE inkmaster_db.artist (
 );
 
 CREATE TABLE inkmaster_db.appointment (
-    id_appointment SERIAL NOT NULL,
+    id_appointment INT NOT NULL AUTO_INCREMENT,
     id_local INT NOT NULL,
     id_user VARCHAR(100) NOT NULL,
     id_artist VARCHAR(100) NOT NULL,
     date DATE NOT NULL,
     hour TIME NOT NULL,
     status VARCHAR(100) NOT NULL,
-    price DOUBLE PRECISION,
+    price DOUBLE,
+    link VARCHAR(200),
+    id_calendar VARCHAR(100),
+    txt VARCHAR(100),
     PRIMARY KEY (id_appointment),
-    FOREIGN KEY (id_local) REFERENCES inkmaster_db.local(id_local),
-    FOREIGN KEY (id_user) REFERENCES inkmaster_db.user(id_user),
-    FOREIGN KEY (id_artist) REFERENCES inkmaster_db.artist(id_artist)
+    FOREIGN KEY (id_local) REFERENCES local(id_local),
+    FOREIGN KEY (id_user) REFERENCES user(id_user),
+    FOREIGN KEY (id_artist) REFERENCES artist(id_artist)
 );
 
 CREATE TABLE inkmaster_db.reference_image (
@@ -129,6 +132,13 @@ CREATE TABLE inkmaster_db.rol_user (
     PRIMARY KEY (id_rol_user),
     FOREIGN KEY (id_rol) REFERENCES inkmaster_db.rol(id_rol),
     FOREIGN KEY (id_user) REFERENCES inkmaster_db.user(id_user)
+);
+
+CREATE TABLE calendar_link (
+    id_artist VARCHAR(100) NOT NULL,
+    link VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id_artist),
+    FOREIGN KEY (id_artist) REFERENCES artist(id_artist)
 );
 
 insert into inkmaster_db.local (country, province, direction, phone, email, txt) values
