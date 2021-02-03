@@ -8,7 +8,8 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/artist/view.artist.css">
-    <script type="text/javascript" src="/public/js/view.artist.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
+    <script type="text/javascript" src="/public/js/modal.images.js"></script>
 
 {% endblock %}
 
@@ -27,7 +28,13 @@
         </section>
         <figure>
             {% if variable.artist.photo %}
-                <img class="zoom" src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">
+                <img class="zoom" id="myImg" src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
             {% endif %}
             <figcaption>
                 <p id="description-artist">{{ variable.artist.txt }}</p>
