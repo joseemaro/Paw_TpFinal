@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/artist/view.artist.css">
     <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
     <script type="text/javascript" src="/public/js/modal.images.js"></script>
+    
 
 {% endblock %}
 
@@ -43,7 +44,7 @@
     </div>
     <div class="container-img-artist">
         {% for tattoo in variable.artist.tattoos %}
-            <img class="zoom" src="data:image/png;base64, {{tattoo.image}}" alt="">
+            <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="">
         {% endfor %}
     </div>
 
