@@ -8,8 +8,8 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/appointment/view.appointment.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
-    <script type="text/javascript" src="/public/js/modal.images.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
+    <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -101,19 +101,19 @@
 
         </section>
     </section>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
     <section id="container-imgAp">
         {% if variable.appointment.reference_images %}
             <h1 class="title-imgAp">Imágenes de referencia</h1>
                 <div id="container-all-img">
                     {% for reference_image in variable.appointment.reference_images %}
-                    <img id="myImg" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal">
-                        <span class="close">&times;</span>
-                        <img class="modal-content" id="img01">
-                        <div id="caption"></div>
-                    </div>
+                    <img class="myImg" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
                     {% endfor %}
                 </div>
         {% else %}

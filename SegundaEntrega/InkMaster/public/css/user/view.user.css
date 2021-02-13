@@ -20,6 +20,9 @@
     padding-bottom: 0.5em;
 }
 
+#local-data{
+    margin-top: 3rem;
+}
 #personal-data,
 #local-data,
 #container-button {

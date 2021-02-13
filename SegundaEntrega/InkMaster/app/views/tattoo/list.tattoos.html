@@ -8,8 +8,8 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/tattoo/gallery.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
-    <script type="text/javascript" src="/public/js/modal.images.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
+    <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -21,14 +21,14 @@
     <h1 id="title">INKMASTER GANG</h1>
     {% if (variable.tattoos)%}
         <div id="container">
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
             {% for tattoo in variable.tattoos %}
-                <img id="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="Imagen de exhibición">
-                <!-- The Modal -->
-                <div id="myModal" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="img01">
-                    <div id="caption"></div>
-                </div>
+                <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="Imagen de exhibición">
             {% endfor %}
         </div>
         {% if (variable.total_pages)%}
