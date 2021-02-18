@@ -128,8 +128,25 @@ class UserController extends Controller
         return $this->generalController->view('not_found');
     }
 
-    public function delUser() {
-        return view();#'list.appointments', compact('appointments'));
+    public function delUser($id_user_v) {
+
+        $id_user_v = str_replace("%20", " ", $id_user_v);
+        session_start();
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+            if ($this->generalController->user->havePermissions($id_user, 'user.delete')) {
+                if ($this->generalController->isAdministrator($id_user) || $id_user_v == $id_user) {
+                    $status = $this->user->deleteUser($id_user);
+                    if ($status == false) {  #si salio bien la validacion
+                        return $this->generalController->view('/index.views');
+                    } else {
+                        $variable["errors"] = $status;
+                        return $this->generalController->view('errors.register', $variable);
+                    }
+                }
+            }
+        }
+        return $this->generalController->view('not_found');
     }
 
     public function listArtists() {

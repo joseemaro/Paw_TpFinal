@@ -43,6 +43,12 @@ Usuario
                 <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
                 <button class ="editBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
             </form>
+            
+            <form method="get" id="del-user-{{ variable.user['id_user'] }}" action="/del_user/{{ variable.user['id_user'] }}">
+                <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+                <button class ="deleteBtn" type="submit" form="del-user-{{ variable.user['id_user'] }}">Borrar Usuario</button>
+            </form>
+            
             {% endif %}
         </section>
 

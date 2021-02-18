@@ -4,6 +4,7 @@ namespace App\models;
 
 use App\Core\Model;
 use App\Core\App;
+use App\googleAPI\calendar;
 
 class User extends Model
 {
@@ -27,6 +28,31 @@ class User extends Model
     protected $parameters_calendar;
     protected $parameters_medical;
     protected $return = array();
+
+
+    public function deleteUser($id_user_v) {
+        $gCalendar = new Calendar();
+
+        #anulo turnos
+        $turnos = $this->db->simpleQuery("update inkmaster_db.appointment set status = :1 
+        where id_user = :2;", ['annulled', $id_user_v]);
+        #elimino user
+        $turnos = $this->db->simpleQuery("update inkmaster_db.$this->table set enabled = :1 
+        where id_user = :2;", [0, $id_user_v]);
+
+        $result = $this->db->query("SELECT appointment.id_calendar as id_c,calendar_link.link as link_c FROM inkmaster_db.appointment INNER JOIN inkmaster_db.calendar_link 
+        on appointment.id_artist=calendar_link.id_artist WHERE appointment.id_user='$id_user_v'");
+
+        if ($result){
+            foreach($result as $fila){
+                if ($fila["id_c"]!= null){
+                    $gCalendar->deleteCalendar($fila["link_c"],$fila["id_c"]);   
+                }          
+            }
+        }             
+        return $turnos;
+
+    }
 
     public function validate_user($id_user) {
         $boolean = true;
@@ -557,7 +583,5 @@ class User extends Model
         }
         return $boolean;
     }
-
-
 
 }

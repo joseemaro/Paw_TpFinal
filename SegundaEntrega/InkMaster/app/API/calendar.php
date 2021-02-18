@@ -116,6 +116,12 @@ class calendar extends Model
     }
 
     public function deleteCalendar($link,$event){
+
+        $filename = 'inkmaster-5c705d4e9dd8.json';
+        $pathname = realpath(join('/', [__DIR__, $filename]));
+        //configurar variable de entorno / set enviroment variable
+        putenv("GOOGLE_APPLICATION_CREDENTIALS=$pathname");
+
         $client = new \Google_Client();
         $client->useApplicationDefaultCredentials();
         $client->setScopes(['https://www.googleapis.com/auth/calendar']);
