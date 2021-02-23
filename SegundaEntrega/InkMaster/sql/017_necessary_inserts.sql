@@ -49,3 +49,7 @@ insert into `permission_rol` (`id_permission_rol`, `id_permission`, `id_rol`) va
 /*necesario que se cree un usuario con nombre de usuario "Administrador"*/
 insert into `administrator` (`id_administrator`, `id_local`) values
 ('Administrador', 1);
+
+insert into `rol_user` (`id_rol`, `id_user`) values
+('user', 'Administrator'),
+('administrador', 'Administrator');

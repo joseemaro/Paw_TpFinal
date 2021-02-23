@@ -20,8 +20,12 @@ img {
 }
 
 #warning_img {
+    font-weight: bold;
+    color: var(--color-logo);
+    font-size: 1.2em;
     text-align: center;
-    padding: 1em 0;
+    text-transform: uppercase;
+    padding: 1em;
 }
 
 #page_navigator {

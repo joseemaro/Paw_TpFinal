@@ -59,7 +59,7 @@
                                 <td>{{ appointment.price }}</td>
                             {% endif %}
                             <td>
-                                {% if isArtist and appointment.edit %}
+                                {% if isArtist %}
                                     {% if (appointment.status == 'pending') %}
                                         <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
                                             <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>

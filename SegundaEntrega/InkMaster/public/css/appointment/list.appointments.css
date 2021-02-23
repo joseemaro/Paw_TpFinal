@@ -18,7 +18,13 @@ th {
 }
 
 p {
-    margin:0 0 0.625em 0
+    margin: 0 0 0.625em 0;
+    font-weight: bold;
+    color: var(--color-logo);
+    font-size: 1.2em;
+    text-align: -webkit-left;
+    text-transform: uppercase;
+    padding: 1em
 }
 
 .table-button{
