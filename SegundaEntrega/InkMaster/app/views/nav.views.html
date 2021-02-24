@@ -25,12 +25,12 @@
             <li class="submenu">
                 <a href="/view_user/{{ user }}"><i class="fas fa-user site-nav--icon"></i> {{ user }} <i class="icon-mobile fas fa-chevron-down site-nav--icon"></i></a>
                 <ul class="children">
+                    <li> <a href="/view_user/{{ user }}"><i class="fas fa-chevron-right"></i> Perfil </a></li>
                     {% if isAdministrator %}
                         <li> <a href="/new_user"><i class="fas fa-chevron-right"></i> Registrar Artista </a></li>
                         <li> <a href="/add_faq"><i class="fas fa-chevron-right"></i> Registrar FAQ </a></li>
                         <li> <a href="/list_users"><i class="fas fa-chevron-right"></i> Lista de usuarios </a></li>
                     {% endif %}
-                    <li> <a href="/view_user/{{ user }}"><i class="fas fa-chevron-right"></i> Perfil </a></li>
                     <li> <a href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos </a></li>
                     <li> <a href="/logout"><i class="fas fa-chevron-right"></i> Logout </a></li>
                 </ul>

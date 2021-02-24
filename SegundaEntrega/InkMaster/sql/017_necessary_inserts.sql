@@ -22,7 +22,8 @@ insert into `permission` (`id_permission`, `txt`) values
 ('artist.delete', 'Deshabilitar a un artista'),
 ('tattoo.new', 'Añadir la imagen de un nuevo tattoo'),
 ('faq.new', 'Crear una nueva pregunta frecuente'),
-('faq.edit', 'Editar una pregunta frecuente');
+('faq.edit', 'Editar una pregunta frecuente'),
+('faq.delete', 'Eliminar una pregunta frecuente');
 
 insert into `rol` (`id_rol`, `txt`) values
 ('user', 'Rol de usuario'),
@@ -37,14 +38,15 @@ insert into `permission_rol` (`id_permission_rol`, `id_permission`, `id_rol`) va
 (5, 'artist.delete', 'administrator'),
 (6, 'faq.new', 'administrator'),
 (7, 'faq.edit', 'administrator'),
-(8, 'appointment.acept', 'artist'),
-(9, 'appointment.edit', 'artist'),
-(10, 'appointment.delete', 'artist'),
-(11, 'artist.edit', 'artist'),
-(12, 'tattoo.new', 'artist'),
-(13, 'user.edit', 'user'),
-(14, 'user.delete', 'user'),
-(15, 'user.view', 'user');
+(8, 'faq.delete', 'administrator'),
+(9, 'appointment.acept', 'artist'),
+(10, 'appointment.edit', 'artist'),
+(11, 'appointment.delete', 'artist'),
+(12, 'artist.edit', 'artist'),
+(13, 'tattoo.new', 'artist'),
+(14, 'user.edit', 'user'),
+(15, 'user.delete', 'user'),
+(16, 'user.view', 'user');
 
 /*necesario que se cree un usuario con nombre de usuario "Administrador"*/
 insert into `administrator` (`id_administrator`, `id_local`) values
