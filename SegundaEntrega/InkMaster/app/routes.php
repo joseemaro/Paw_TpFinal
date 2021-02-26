@@ -27,6 +27,7 @@ $router->post('upt_user', 'UserController@uptUser');
 
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
+$router->get('control', 'UserController@control');
 
 $router->get('faq', 'GeneralController@listFaq');
 $router->get('view_faq/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler

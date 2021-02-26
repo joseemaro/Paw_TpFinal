@@ -12,12 +12,13 @@ class UserController extends Controller
         $this->user = new User();
         $this->generalController = new GeneralController();
         $this->session = false;
+
     }
 
     public function register() {
         return $this->generalController->view('register');
     }
-
+/*
     public function saveUser() {
         $array = $this->user->validateInsert($this->parameters());
         $status = $array[count($array)-1];
@@ -26,6 +27,18 @@ class UserController extends Controller
             return $this->generalController->view('login');
         } else {
             $variable["errors"] = $array;
+            return $this->generalController->view('errors.register', $variable);
+        }
+    }
+*/
+    public function saveUser() {
+        $bool = $this->user->validateInsert($this->parameters());
+        $status = $bool;
+        if ($status) {  #si salio bien la validacion
+            //$variable["parameters"] = $array;
+            return $this->generalController->view('login');
+        } else {
+            $variable["errors"] = $bool;
             return $this->generalController->view('errors.register', $variable);
         }
     }
@@ -201,4 +214,6 @@ class UserController extends Controller
         }
         return $parameters;
     }
+
+   
 }

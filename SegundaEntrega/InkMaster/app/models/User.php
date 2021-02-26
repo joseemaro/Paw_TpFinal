@@ -319,7 +319,7 @@ class User extends Model
 
     public function validate_artist($artist) {  #validar si es un artista
         $boolean = true;
-        if ($artist) {
+        if ($artist != null) {
             $this->parameters["id_artist"] = $this->parameters["id_user"];
             $this->parameters_artist["id_artist"] = $this->parameters["id_user"];
             $this->parameters_calendar["id_artist"] = $this->parameters["id_user"];
@@ -332,7 +332,7 @@ class User extends Model
 
     public function validate_local($id_local) {
         $local = $this->db->simpleQuery("select * from inkmaster_db.local
-                                            where id_local = :id", [$id_local]);
+                                            where id_local = :1", [$id_local]);
         if (isset($local["id_local"])) {
             $this->parameters["id_local"] = $id_local;
             $this->parameters_artist["id_local"] = $id_local;
@@ -387,6 +387,7 @@ class User extends Model
             }
         }
         return $boolean;
+
     }
 
     public function validateInsert($parameters) {
