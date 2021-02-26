@@ -36,7 +36,13 @@ class UserController extends Controller
         $status = $bool;
         if ($status) {  #si salio bien la validacion
             //$variable["parameters"] = $array;
-            return $this->generalController->view('login');
+            session_start();
+            if (isset($_SESSION["id_user"])) {
+                return $this->generalController->view('/index.views');
+            }else{
+                $_SESSION = array();
+                return $this->generalController->view('login');
+            }
         } else {
             $variable["errors"] = $bool;
             return $this->generalController->view('errors.register', $variable);
