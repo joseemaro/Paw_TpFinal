@@ -34,8 +34,13 @@ class User extends Model
         $gCalendar = new Calendar();
 
         #anulo turnos
+        $today = getdate();
+        $year = $today["year"];
+        $month = $today["mon"];
+        $day = $today["mday"];
+        $today = $year . "-" . $month . "-" . $day;
         $turnos = $this->db->simpleQuery("update inkmaster_db.appointment set status = :1 
-        where id_user = :2;", ['annulled', $id_user_v]);
+        where id_user = :2 and date >= :3", ['annulled', $id_user_v, $today]);
         #elimino user
         $turnos = $this->db->simpleQuery("update inkmaster_db.$this->table set enabled = :1 
         where id_user = :2;", [0, $id_user_v]);
@@ -481,7 +486,12 @@ class User extends Model
         $hash = $this->db->autentication($id_user);
         $verify = password_verify($password, $hash["password"]);
         if ($verify) {
-            return true;
+            $enabled = $this->isEnabled($id_user);
+            if ($enabled){
+                return true;
+            }else{
+                return false;
+            }           
         } else {
             return false;
         }
@@ -490,7 +500,7 @@ class User extends Model
     public function listArtists($id_local) {
         $artists = $this->db->query("select * from inkmaster_db.$this->table as u
                                         inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
-                                        where a.id_local = :1;", [$id_local]);
+                                        where a.id_local = :1 and u.enabled=1;", [$id_local]);
         return $this->replace($artists);
     }
 
@@ -567,6 +577,15 @@ class User extends Model
                                         inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
                                         where a.id_local = :1 and a.id_administrator = :2
                                         and u.enabled is true", [$id_local, $id_user]);
+        if (!$query) {
+            $boolean = false;
+        }
+        return $boolean;
+    }
+
+    public function isEnabled($id_user){
+        $boolean = true;
+        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_user = :1 and enabled =1", [$id_user]);
         if (!$query) {
             $boolean = false;
         }

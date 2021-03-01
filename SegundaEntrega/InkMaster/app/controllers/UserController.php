@@ -157,6 +157,7 @@ class UserController extends Controller
                 if ($this->generalController->isAdministrator($id_user) || $id_user_v == $id_user) {
                     $status = $this->user->deleteUser($id_user);
                     if ($status == false) {  #si salio bien la validacion
+                        $_SESSION = array();
                         return $this->generalController->view('/index.views');
                     } else {
                         $variable["errors"] = $status;
