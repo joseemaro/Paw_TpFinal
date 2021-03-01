@@ -509,6 +509,7 @@ class User extends Model
                                     from inkmaster_db.$this->table as u
                                         left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
                                         left join inkmaster_db.local as l on (a.id_local = l.id_local)
+                                        where u.enabled =1
                                         order by id_artist asc, id_user asc");
         return $this->replace($users);
     }
@@ -519,7 +520,7 @@ class User extends Model
                                         left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
                                         left join inkmaster_db.local as l on (a.id_local = l.id_local)
                                         left join inkmaster_db.medical_record as m on (u.id_user = m.id_user)
-                                        where u.id_user = :1", [$id_user]);
+                                        where u.id_user = :1 and u.enabled=1", [$id_user]);
         if (!is_null($user["photo"])) {
             $user["photo"] = base64_encode($user["photo"]);
         }
