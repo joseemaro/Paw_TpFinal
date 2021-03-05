@@ -26,6 +26,16 @@
             </form>
         {% endif %}
 
+        <section class="select-bar">
+            <label for="faqs">Filtrar por:  </label>
+            <select name="faqs" id="faqs" class="styled-select">
+                <option value="MorePopular">Mas populares</option>
+                <option value="LessPopular">Menos populares</option>
+                <option value="MoreRecent">Mas Recientes</option>
+                <option value="LessRecent">Menos recientes</option>
+            </select>
+        </section>
+
         <section id="content">
             <!-- query a la bd -->
             {% for query in variable.faqs %}

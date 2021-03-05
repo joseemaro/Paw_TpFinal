@@ -110,6 +110,7 @@ class GeneralController extends Controller
 
     public function viewFaq($id_faq) {
         $variable = array();
+        $this->faq->newVisit($id_faq);
         $variable["faq"] = $this->faq->find($id_faq);
         return $this->view('faq/view.faq', $variable);
     }
