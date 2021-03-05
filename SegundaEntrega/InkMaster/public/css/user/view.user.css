@@ -31,6 +31,7 @@
 
 #container-button {
     padding: 1em;
+    margin-left: 25%;
 }
 
 
@@ -71,12 +72,14 @@ figure {
     list-style-type: none;
     padding: 1em;
     width: 50%;
+    
 }
 
 figure img {
     max-width: 100%;
     height: auto;
     display: block;
+    margin-left: 15%;
 }
 
 .zoom{
@@ -94,6 +97,26 @@ figure img {
     -webkit-transform : scale(2);   /* Chrome - Safari */
     -o-transform : scale(2);        /* Opera */
 }
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 320px) and (max-width : 480px)
+{
+    figure img {
+        margin-left: 1%;
+    }   
+    #container-button {
+        margin-left: 1%;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px)
+{
+    figure img {
+        margin-left: 1%;
+    }   
+    #container-button {
+        margin-left: 25%;
+    } 
+}
+
 
 @media screen and (min-width:700px){
 
