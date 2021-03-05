@@ -137,7 +137,7 @@ class UserController extends Controller
                 if ($status) {  #si salio bien la validacion
                     $user = $this->user->findUser($id_user);
                     $variable["user"] = $user;
-                    return $this->generalController->view('user/view.user', $variable);
+                    return $this->generalController->view('user/view.user2', $variable);
                 } else {
                     $variable["errors"] = $array;
                     return $this->generalController->view('errors.register', $variable);
