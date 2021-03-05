@@ -77,14 +77,14 @@
 
         <label>Teléfono:
             <input type="tel" name="phone" class="phonejs"
-            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="El numero ingresado no coincide con el formato local">
+            pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="El numero ingresado no coincide con el formato local" required>
             <span id="tel-invalid" style="display: none">El numero ingresado no coincide con el formato local</span>
 
         </label>
 
         <label> Dirección:
             <input type="text" name="direction" class="addressjs"
-            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios">
+            pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios" required>
             <span id="dir-invalid" style="display: none">Solo se permiten letras, numeros y espacios</span>
 
         </label>
@@ -118,14 +118,14 @@
 
             <label id="description-artist"> Descripción:
                 <textarea name="txt" class="descriptionjs" id="txt"
-                pattern="^[a-zA-Z0-9?!¡¿.,; ]{0,10}$" title="Solo se permiten letras, numeros y espacios"></textarea>
+                pattern="^[a-zA-Z0-9?!¡¿.,; ]{0,10}$" title="Solo se permiten letras, numeros y espacios" required></textarea>
                 <span id="description-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
 
             </label>
 
             <label id="calendar-id" style="display: none"> ID Google Calendar:
                 <input type="text" name="id_calendar" class="calendarjs" id="id_calendar"
-                       pattern="^[a-zA-Z0-9@., ]{3,100}$" title="Ingrese el ID del calendario del artista">
+                       pattern="^[a-zA-Z0-9@., ]{3,100}$" title="Ingrese el ID del calendario del artista" required>
                 <span id="calendar-invalid" style="display: none">Ingrese el ID correcto del calendario del artista</span>
             </label>
         {% endif %}
