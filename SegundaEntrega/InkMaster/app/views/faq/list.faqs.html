@@ -7,7 +7,10 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/faqFilter.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/css/faq/faq.css">
+
 {% endblock %}
 
 {% block header %}
@@ -28,11 +31,11 @@
 
         <section class="select-bar">
             <label for="faqs">Filtrar por:  </label>
-            <select name="faqs" id="faqs" class="styled-select">
-                <option value="MorePopular">Mas populares</option>
-                <option value="LessPopular">Menos populares</option>
+            <select name="faqs" id="faqs" class="styled-select" onchange="getFaqs(this.value)">
                 <option value="MoreRecent">Mas Recientes</option>
                 <option value="LessRecent">Menos recientes</option>
+                <option value="MorePopular">Mas populares</option>
+                <option value="LessPopular">Menos populares</option>
             </select>
         </section>
 
@@ -40,15 +43,18 @@
             <!-- query a la bd -->
             {% for query in variable.faqs %}
                 <article id="column1">
-                    <section itemscope>
+                    <section id="section-del" itemscope>
                         <a href="/view_faq/{{ query.id_faq }}">
                             <p itemprop="name" class="preg">{{ query.question }}</p>
                         </a>
                         <p class="answer" itemprop="description"> {{ query.answer }}</p>
                     </section>
 
+
+                    </tbody>
+
                     {% if isAdministrator %}
-                        <section>
+                        <section id="section2-del">
                             <form method="get" id="edit-faq-{{ query.id_faq }}" action="/edit_faq/{{ query.id_faq }}">
                                 <input type="hidden" name="id_faq" value={{ query.id_faq }}>
                                 <button class ="table-button editBtn" type="submit" form="edit-faq-{{ query.id_faq }}">Edit</button>
@@ -62,8 +68,10 @@
                     {% endif %}
 
                 </article>
+            
             {% endfor %}
         </section>
+                <div id="datos"></div>
     </section>
 {% endblock %}
 

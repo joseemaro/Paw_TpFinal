@@ -37,6 +37,7 @@ $router->post('upd_faq', 'GeneralController@updFaq');
 $router->get('add_faq', 'GeneralController@addFaq');
 $router->post('save_faq', 'GeneralController@saveFaq');
 
+
 $router->get('term&cond', 'GeneralController@listTerms');
 $router->get('gallery', 'GeneralController@listTattoos');
 $router->get('gallery/([0-9]{1,})', 'GeneralController@listTattoos');

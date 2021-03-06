@@ -84,6 +84,7 @@ CREATE TABLE inkmaster_db.faq (
     question VARCHAR(100) NOT NULL,
     answer VARCHAR(300) NOT NULL,
     summary VARCHAR(300) NOT NULL,
+    visits int not null,
     PRIMARY KEY (id_faq)
 );
 
