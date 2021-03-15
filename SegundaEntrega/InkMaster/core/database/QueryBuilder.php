@@ -232,6 +232,33 @@ class QueryBuilder {
         }
     }
 
+        /**
+     * update a record into user table.
+     *
+     * @param string $table
+     * @param $id
+     * @param array $parameters
+     */
+    public function userUpdate($table, $id, $parameters)
+    {
+        foreach ($parameters as $key => $value) {
+            $sql = sprintf(
+                "UPDATE %s SET %s=%s WHERE id_user='%s';",
+                $table,
+                $key,
+                ':'.$key,
+                $id
+            );
+            try {
+                $statement = $this->pdo->prepare($sql);
+                $statement->execute(array($key => $value));
+            } catch (Exception $e) {
+                $this->sendToLog($e);
+            }
+        }
+    }
+
+
     /**
      * delete a faq
      *

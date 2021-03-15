@@ -64,10 +64,19 @@
         ><span id="dir-invalid" style="display: none">Solo se permiten letras, numeros y espacios</span>
         </label>
 
-        <label> Enfermedades: <input type="text" name="pathology" class="pathology-txt pathologyjs"  value="{{ variable.user.considerations }}"
-                                     pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: "
+        {% if variable.user.considerations != "-" %}
+            <label> Enfermedades: <input type="text" name="pathology" class="pathology-txt pathologyjs"  value="{{ variable.user.considerations }}"
+                                        pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: "
+            ><span id="pathology-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
+            </label>
+        {% endif %}
+
+        {% if variable.user.considerations == "" %}
+        <label> Enfermedades: <input type="text" name="pathology" class="pathology-txt pathologyjs"  value=""
+                                    pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.: "
         ><span id="pathology-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y +-.: </span>
         </label>
+        {% endif %}
 
         <label> Foto de perfil <br>
             {% if variable.user.photo %}

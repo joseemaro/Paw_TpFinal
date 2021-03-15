@@ -459,7 +459,8 @@ class User extends Model
                 }
             }
             if ($count > 0) {
-                $this->db->genericUpdate($this->table, $id_user, $this->parameters_user);
+                //$this->db->genericUpdate($this->table, $id_user, $this->parameters_user);
+                $this->db->userUpdate($this->table, $id_user, $this->parameters_user);
             }
 
             $status = true;
