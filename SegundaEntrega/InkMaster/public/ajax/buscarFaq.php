@@ -28,7 +28,8 @@
 	session_start();
 
     if ($resultado->num_rows>0) {
-    	$salida.="<section id='content'>";
+    	$salida.="<section id='content'>
+		";
 
     	while ($fila = $resultado->fetch_assoc()) {
     		$salida.="
@@ -42,13 +43,15 @@
 			</tbody>";
 
 			$admin= false;
+			$aux = false;
 			if (isset($_SESSION["id_user"])) {
 				$admin = "select * from inkmaster_db.user as u
 				inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
 				where a.id_local =1 and a.id_administrator =" . $_SESSION["id_user"] . "
 				and u.enabled is true";
+				$aux = $conn->query($admin);
 			}
-			if ($admin){
+			if ($aux){
 				$salida.= "<section id='section2-del'>
 				<form method='get' id='edit-faq-".$fila['id_faq']."' action='/edit_faq/".$fila['id_faq']."'>
 					<input type='hidden' name='id_faq' value=".$fila['id_faq'].">
@@ -60,11 +63,15 @@
 					<button class ='table-button deleteBtn' type='submit' form='destroy-faq-".$fila['id_faq']."'>Delete</button>
 				</form>
 			</section>
-			</article>
+		
 			";
 			}
+			$salida.= "
+			</article>
+			";
 		};
 		$salida.= "
+		</article>
 		</section>";
     }else{
     	$salida.="NO HAY DATOS :(";

@@ -146,31 +146,26 @@ figure img {
         margin-left: 10%;
     }
 }
-p{
+
+h1 {
+    font-family: 'Lora', serif;
+}
+
+.h2-form{
+    font-family: 'Lora', serif;
+}
+
+li p{
     font-family: 'Lora', serif;
     font-style: normal;
     font-weight: bold;
 }
-label{
+
+.l-form{
     font-family: 'Lora', serif;
     font-weight: lighter;
     font-style: italic;
 }
-h1,h2 {
-    font-family: 'Lora', serif;
-}
-
-p{
-    font-family: 'Lora', serif;
-    font-style: normal;
-    font-weight: bold;
-}
-label{
-    font-family: 'Lora', serif;
-    font-weight: lighter;
-    font-style: italic;
-}
-
 
 
 #lista5 {
