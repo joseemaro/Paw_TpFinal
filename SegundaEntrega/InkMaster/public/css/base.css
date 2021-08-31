@@ -207,7 +207,7 @@ nav ul li .icon-mobile {
     }
 
     .site-nav{
-        position: static;
+        /* position: static; */
         width: 100%;
         clip-path: initial;
         display: flex;

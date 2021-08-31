@@ -190,7 +190,6 @@ li p{
 }
 
 #lista5 > li{
-    position: relative;
     padding: 1em;
     background-color: #eaeaea;
 }
