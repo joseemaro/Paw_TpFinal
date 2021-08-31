@@ -22,9 +22,9 @@
     {% if (variable.tattoos)%}
         <div id="container">
             <!-- The Modal -->
-            <div id="myModal" class="modal">
+            <div id="myModal" class="modal close">
                 <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
+                <img class="modal-content" onClick="if(event.stopPropagation){event.stopPropagation();}event.cancelBubble=true;" id="img01">
                 <div id="caption"></div>
             </div>
             {% for tattoo in variable.tattoos %}
