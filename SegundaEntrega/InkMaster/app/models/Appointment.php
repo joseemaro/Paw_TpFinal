@@ -170,8 +170,9 @@ class Appointment extends Model
     }
 
     public function validate_reference_images($reference_images) {
-        $reference_images = $reference_images["reference_image"];
-        $boolean = true;
+        if (isset($reference_images["reference_image"])){
+            $reference_images = $reference_images["reference_image"];
+            $boolean = true;
 
         for ($i = 0; $i < count($reference_images["reference_image"]["name"]); $i++) {
             $extension = $reference_images["reference_image"]["type"][$i];
@@ -195,6 +196,10 @@ class Appointment extends Model
                 }
             }
         }
+        }else{
+            $boolean = false;
+        }
+        
 
         return $boolean;
     }
