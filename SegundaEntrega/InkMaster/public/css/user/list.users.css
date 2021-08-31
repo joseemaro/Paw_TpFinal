@@ -49,6 +49,11 @@ p {
     background-color: #8B0000;
 }
 
+.viewBtn:hover{
+    background-color: rgb(66, 66, 66);
+    transition:  0.5s ease-in-out;
+}
+
 table.width200,
 table.rwd_auto {
     width:100%;

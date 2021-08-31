@@ -81,6 +81,12 @@ input[type=submit] {
     cursor: pointer;
 }
 
+input[type=submit]:hover{
+    background-color: #A31D21;
+    border-color: #020202;
+    transition:  0.5s ease-in-out;
+}
+
 a {
     text-decoration: none;
 }

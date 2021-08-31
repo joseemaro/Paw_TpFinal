@@ -41,6 +41,7 @@ button {
     margin-left: 40%;
 }
 
+
 .editBtn{
     margin-top: 1em;
     background-color: #475B63;
@@ -51,6 +52,12 @@ button {
 .deleteBtn {
     background-color: #8B0000;
     width: 10%;
+}
+
+
+button:hover{
+    opacity: 0.8;
+    transition:  0.5s ease-in-out;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

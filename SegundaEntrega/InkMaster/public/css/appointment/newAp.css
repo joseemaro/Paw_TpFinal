@@ -50,8 +50,8 @@ input[type=file] {
     box-shadow: none;
     display:block;
     height: 3em;
-    width: 80%;
-    margin: 0.5em auto;
+/*     width: 80%;
+    margin: 0.5em auto; */
 }
 
 .list-diseases label {
@@ -103,6 +103,12 @@ input[type=reset] {
     cursor: pointer;
 }
 
+.button-newAp:hover{
+    background-color: #A31D21;
+    border-color: #020202;
+    transition:  0.5s ease-in-out;
+}
+
 .disease {
     display:none;
 }
@@ -111,5 +117,12 @@ p + a {
     font-size: 1em;
     text-decoration: none;
 }
+
+input[type="file"] {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin: auto 20%;
+    width: 100%;
+  }
 
 

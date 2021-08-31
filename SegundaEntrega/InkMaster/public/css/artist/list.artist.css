@@ -65,6 +65,11 @@ img {
     background-color: #e63946;
 }
 
+.artistBtn:hover{
+    background-color: rgb(199, 27, 27);
+    transition:  0.5s ease-in-out;
+}
+
 /* media queries */
 
 @media screen and (min-width: 400px) {

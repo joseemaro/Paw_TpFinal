@@ -57,6 +57,11 @@ label {
     font-size: 1em;
 }
 
+.submit-btn:hover{
+        background-color: #A31D21;
+        transition:  0.5s ease-in-out;
+}
+
 
 
 @media screen and (min-width:1000px) {
