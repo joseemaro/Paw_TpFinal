@@ -68,8 +68,10 @@ class UserController extends Controller
                 $_SESSION["id_user"] = $id_user;
             } else {
                 $variable["msgWelcome"] = "usuario inválido";
+                return $this->generalController->view('/login.error');
             }
             return $this->generalController->view('/index.views', $variable);
+            
         }
         return $this->generalController->view('not_found');
     }

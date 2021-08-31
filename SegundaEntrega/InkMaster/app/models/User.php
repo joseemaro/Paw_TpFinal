@@ -449,8 +449,8 @@ class User extends Model
                 $count = $count - 2;
                 $artist = $this->db->simpleQuery("select * from inkmaster_db.artist where id_artist = :1", [$id_user]);
                 if ($artist) {
-                    $this->db->update("update inkmaster_db.artist set txt = :1
-                                    where id_artist = :2;", [$parameters["txt"], $id_user]);
+                        $this->db->update("update inkmaster_db.artist set txt = :1
+                        where id_artist = :2;", [$parameters["txt"], $id_user]);
                 } else {
                     $parameters_artist["id_artist"] = $id_user;
                     $parameters_artist["txt"] = $parameters["txt"];
@@ -485,7 +485,24 @@ class User extends Model
 
     public function autentication($id_user, $password) {
         $hash = $this->db->autentication($id_user);
-        $verify = password_verify($password, $hash["password"]);
+
+        if (!is_null($hash)){
+            $enabled = $this->isEnabled($id_user);
+            if ($enabled){
+                $verify = password_verify($password, $hash["password"]);
+                if($verify){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+        
+/*         $verify = password_verify($password, $hash["password"]);
         if ($verify) {
             $enabled = $this->isEnabled($id_user);
             if ($enabled){
@@ -495,7 +512,7 @@ class User extends Model
             }           
         } else {
             return false;
-        }
+        } */
     }
 
     public function listArtists($id_local) {

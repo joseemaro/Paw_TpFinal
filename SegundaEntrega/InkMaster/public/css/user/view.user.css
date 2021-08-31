@@ -20,6 +20,10 @@
     padding-bottom: 0.5em;
 }
 
+#title-viewUser{
+    padding-top: 2rem;
+}
+
 #local-data{
     margin-top: 3rem;
 }

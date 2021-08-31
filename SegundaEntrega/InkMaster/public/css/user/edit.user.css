@@ -80,7 +80,7 @@ input[type=reset] {
     cursor: pointer;
 }
 
-img{
+.img-profile{
     width: 60%;
     height:auto;
 }

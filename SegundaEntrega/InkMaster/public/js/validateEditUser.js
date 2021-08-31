@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (identificationNumber.exec(validate_identificationNumber.value) || (validate_identificationNumber.value === "")) {
             validate_identificationNumber.style.border = "#ffffff";
             validate_identificationNumber.style.background = "#ffffff";
-            validate_identificationNumber.style.background = "#e05f5f";
+            /* validate_identificationNumber.style.background = "#e05f5f"; */
             var pass = document.getElementById("dni-invalid");
             pass.style.display= "none";
         } else {
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //validate calendar
+/*     //validate calendar
     validate_calendar = document.querySelector(".calendarjs");
     validate_calendar.addEventListener("blur", function() {
         var calendar = /^[a-zA-Z0-9@., ]{3,100}$/;
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "block";
             pass.style.color= "#CD0808";
         }
-    });
+    }); */
 
 
 
