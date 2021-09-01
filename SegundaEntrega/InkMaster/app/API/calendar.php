@@ -128,6 +128,7 @@ class calendar extends Model
         $id_calendar = $link;
         $calendarService = new \Google_Service_Calendar($client);
         $calendarService->events->delete($id_calendar, $event);
+        
     }
 }
 

@@ -197,7 +197,8 @@ class ApController extends Controller
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'annulled');
                 $artist = $this->appointment->findCalendar($id_user);
                 $ap = $this->appointment->findAppointment($id_appointment);
-                $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]);
+                /* $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]); */
+                $this->calendar->deleteCalendar($artist["link"],$ap["link"]);
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);
