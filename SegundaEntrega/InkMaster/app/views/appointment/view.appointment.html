@@ -31,7 +31,7 @@
         {% endif %}
 
         {% if variable.appointment.link %}
-        <form method="get" action="{{ variable.appointment.link }}">
+        <form method="get" action="{{ variable.appointment.link }}" target="_blank">
             <button class ="calendarBtn" type="submit">Google calendar</button>
         </form>
         {% endif %}

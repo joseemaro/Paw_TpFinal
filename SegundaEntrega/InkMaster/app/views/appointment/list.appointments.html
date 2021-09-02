@@ -21,7 +21,7 @@
         {% if variable.appointments %}
 
         {% if variable.link and (isArtist or isAdministrator) %}
-            <form method="get" action="{{ variable.link }}">
+            <form method="get" action="{{ variable.link }} " target="_blank">
                 <button class ="calendarBtn" type="submit">Google calendar</button>
             </form>
         {% endif %}
