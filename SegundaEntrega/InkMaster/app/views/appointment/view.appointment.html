@@ -56,9 +56,16 @@
             <input type="text" name="status" readonly value="{{ variable.appointment.status }}">
         </label>
 
+        {% if (variable.appointment.price is null) %}
         <label> Price:
-            <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}">
+            <input type="text" name="price" readonly value="-">
         </label>
+        {% else %}
+            <label> Price:
+                <input type="text" name="price" readonly value="{{ variable.appointment.price }}">
+            </label>
+        {% endif %}
+
 
         {% if variable.appointment.txt %}
             <label> Enfermedades

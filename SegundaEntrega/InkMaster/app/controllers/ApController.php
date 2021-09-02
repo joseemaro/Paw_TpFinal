@@ -61,7 +61,7 @@ class ApController extends Controller
             if ($array["status"]) {     //si salio bien la validacion
                 $variable["appointment"] = $array;
                 $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
-                return $this->generalController->view('appointment/view.appointment', $variable);
+                return $this->generalController->view('appointment/view.new.appointment', $variable);
             } else {
                 $variable["errors"] = $array;
                 return $this->generalController->view('appointment/errors.appointment', $variable);
