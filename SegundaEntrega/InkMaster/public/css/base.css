@@ -31,6 +31,7 @@ nav {
 
 main {
     grid-area: principal;
+    height: fit-content;
 }
 
 header{
