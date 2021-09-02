@@ -125,6 +125,10 @@ table.rwd_auto {
 
 @media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px)
 {
+    .calendarBtn{
+        width: 30%;
+    }
+    
     tbody {
         margin-top: 1em;
     }
@@ -184,6 +188,10 @@ table.rwd_auto {
 {
     .descarto {
         display:none;
+    }
+
+    .calendarBtn{
+        width: 30%;
     }
 
     .fontsize {
