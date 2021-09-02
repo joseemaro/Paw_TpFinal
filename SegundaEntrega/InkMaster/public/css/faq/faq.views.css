@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500;700&family=Rowdies:wght@300&display=swap');
 h1 {
-    padding-top: 2.5em;
+    padding-top: 3em;
     padding-bottom: 1.5em;
     padding-left: 1em;
     font-size: 1.5em;
     font-weight: bold;
     text-decoration: underline;
     text-decoration-color: #575766;
-    color: #575766;
-    background-color: #C5C0C0;
+    color: #343a40;
+    background-color: #dee2e6;
+    border-radius: 0.8em;
     font-family: 'Oswald', sans-serif;
 }
 h1:hover{
@@ -29,6 +30,7 @@ p{
 a {
     color: black;
     text-decoration: none;
+    padding-bottom: 1em;
 }
 
 a:hover {
@@ -47,7 +49,7 @@ article {
 
 #column1 {
     width: 100%;
-    background-color: #f7ede2;
+    background-color: #e9ecef;
 }
 
 .preg {
@@ -55,7 +57,7 @@ article {
     font-weight: bold;
     padding-top: 2em;
     padding-bottom: 1%;
-    color: #575766;
+    color: #343a40;
 }
 .answer{
     padding-bottom: 1em;
