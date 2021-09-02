@@ -150,9 +150,7 @@ article {
     padding: 1.5%;
 }
 
-label{
-    font-weight: bold;
-}
+
 
 @media only screen and (min-width : 320px) and (max-width : 480px)
 {
