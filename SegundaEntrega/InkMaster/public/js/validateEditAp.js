@@ -4,16 +4,63 @@ var window = window || {},
 document.addEventListener("DOMContentLoaded", function() {
 
     
-    //validate pathologies
-    validate_pathology = document.querySelector(".pathologyjs");
-    validate_pathology.addEventListener("blur", function() {
-        var path = /^[a-zA-Z0-9+-.: ]{3,70}$/;
-        if (path.exec(validate_pathology.value) || (validate_pathology.value === "")) {
-            validate_pathology.style.border = "#ffffff";
-            validate_pathology.style.background = "#ffffff";
+    //validate that the appointment is in a future
+    validate_date = document.querySelector(".datejs");
+    validate_date.addEventListener("blur", function(event) {
+        var hoy = new Date();
+        var mes;
+        var meshoy = hoy.getMonth() + 1;
+        var diahoy = hoy.getDate();
+        if (meshoy < 10) {
+            meshoy = '0' + meshoy;
+        }
+        if (diahoy < 10) {
+            diahoy = '0' + diahoy;
+        }
+        var formato_hoy = hoy.getFullYear() + "-" + meshoy + "-" + diahoy;
+
+        if (validate_date.value === "") {
+            validate_date.style.background = "#ffffff";
+            validate_date.style.border = "#ffffff";
+        } else if (validate_date.value < formato_hoy) {
+            validate_date.style.background = "#e05f5f";
+            validate_date.style.border = "#e05f5f";
+            var input = document.getElementById('date');
+            var elem = document.createElement('div');
+            elem.id = 'notify';
+            elem.style.display = 'block';
+            elem.style.color = "#CD0808";
+            var form = document.getElementById('form');
+            form.insertBefore(elem, form.children[5]);
+            elem.textContent = '*La fecha seleccionada debe ser valida*';
+            elem.className = 'error';
+            elem.style.display = 'block';
+
         } else {
-            validate_pathology.style.background = "#e05f5f";
+            validate_date.style.background = "#ffffff";
+            validate_date.style.border = "#ffffff";
         }
     });
+
+        //validate hour
+        validate_hour = document.querySelector(".hourjs");
+        validate_hour.addEventListener("blur", function() {
+            var hour=/^([0][9]|[1][0-7])[\:]([0-5][0-9])[\:]*([0-5][0-9])*$/;
+            if (hour.exec(validate_hour.value) || (validate_hour.value === "")) {
+                validate_hour.style.border = "#ffffff";
+                validate_hour.style.background = "#ffffff";
+                var pass = document.getElementById("hour-invalid");
+                pass.style.display= "none";
+            } else {
+                validate_hour.style.background = "#e05f5f";
+                var pass = document.getElementById("hour-invalid");
+                pass.style.display= "block";
+                pass.style.color= "#CD0808";
+            }
+        });
+
+    
+
+
 
 });

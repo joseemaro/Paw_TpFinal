@@ -33,9 +33,11 @@
 
         <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
 
-        <label> Fecha: <input type="date" name="date"  value="{{ variable.appointment.date }}"></label>
+        <label> Fecha: <input type="date" name="date" class="datejs" value="{{ variable.appointment.date }}"></label>
 
-        <label> Horario (hh:min): <input type="time" name="hour" value="{{ variable.appointment.hour }}"></label>
+        <label> Horario (hh:min): <input type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
+            <span id="hour-invalid" style="display: none">no esta dentro del hoario de atencion</span>
+        </label>
 
         <label> Imágenes de referencia
             {% if variable.appointment.reference_images %}
