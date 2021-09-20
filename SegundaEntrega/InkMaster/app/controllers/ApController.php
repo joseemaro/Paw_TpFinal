@@ -137,17 +137,17 @@ class ApController extends Controller
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->generalController->user->havePermissions($id_user, 'appointment.edit')) {
-                if (isset($_FILES["reference_image"])) {
-                    $reference_image["reference_image"] = $_FILES;
+                if (isset($_POST["date"])) {
+                    $date = $_POST["date"];
                 } else {
-                    $reference_image = null;
+                    $date = null;
                 }
-                if (isset($_POST["txt"])) {
-                    $medical_record = $_POST["txt"];
+                if (isset($_POST["hour"])) {
+                    $hour = $_POST["hour"];
                 } else {
-                    $medical_record = null;
+                    $hour = null;
                 }
-                $array = $this->appointment->validateUpdate($_POST["id_appointment"], $reference_image, $medical_record);
+                $array = $this->appointment->validateUpdate($_POST["id_appointment"], $date, $hour);
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
                     $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
@@ -198,7 +198,7 @@ class ApController extends Controller
                 $artist = $this->appointment->findCalendar($id_user);
                 $ap = $this->appointment->findAppointment($id_appointment);
                 /* $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]); */
-                $this->calendar->deleteCalendar($artist["link"],$ap["link"]);
+                /* $this->calendar->deleteCalendar($artist["link"],$ap["link"]); */
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->generalController->view('appointment/list.appointments', $variable);

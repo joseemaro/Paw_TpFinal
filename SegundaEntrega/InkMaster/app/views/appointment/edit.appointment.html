@@ -8,8 +8,8 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/appointment/newAp.css">
-    <!--<script type="text/javascript" src="/public/js/newAp.js"></script>
-    <script type="text/javascript" src="/public/js/validateAp.js"></script>-->
+  <!--   <script type="text/javascript" src="/public/js/newAp.js"></script> -->
+    <script type="text/javascript" src="/public/js/validateEditAp.js"></script> 
 {% endblock %}
 
 {% block header %}
@@ -33,48 +33,25 @@
 
         <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
 
-        <label> Fecha: <input type="date" name="date" readonly value="{{ variable.appointment.date }}"></label>
+        <label> Fecha: <input type="date" name="date"  value="{{ variable.appointment.date }}"></label>
 
-        <label> Horario (hh:min): <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}"></label>
+        <label> Horario (hh:min): <input type="time" name="hour" value="{{ variable.appointment.hour }}"></label>
 
         <label> Imágenes de referencia
             {% if variable.appointment.reference_images %}
                 {% for reference_image in variable.appointment.reference_images %}
-                    <img src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
+                    <img class="img-edit" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
                 {% endfor %}
             {% endif %}
-            <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple>
+           <!--  <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple> -->
         </label>
 
-        <label> Enfermedades
-            <textarea name="txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}
-            </textarea>
-        </label>
-
-        <!--<label> Tattoo
-            {% if variable.appointment.tattoo.image %}
-                <figure>
-                    <img src="data:image/jpg;base64, {{ variable.appointment.tattoo.image }}">
-                </figure>
-            {% else %}
-                <label>Imagen: <input type="file" name="tattoo" accept="image/jpeg, image/x-png, image/x-jpg"></label>
-                <label>
-                    Sector
-                    <select name="sector">
-                        <option>Cabeza</option>
-                        <option>Espalda</option>
-                        <option>Brazo</option>
-                        <option>Pecho</option>
-                        <option>Panza</option>
-                        <option>Costillas</option>
-                        <option>Pierna</option>
-                        <option>Pie</option>
-                        <option>Otro</option>
-                    </select>
-                </label>
-                <label>Descripción: <textarea name="description"></textarea></label>
-            {% endif %}
-        </label>-->
+        {% if  variable.appointment.txt %}
+            <label> Enfermedades
+                <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}
+                </textarea>
+            </label>
+        {% endif %}
 
         <div>
             <input class="button-editAp" type="reset" value="Limpiar" />

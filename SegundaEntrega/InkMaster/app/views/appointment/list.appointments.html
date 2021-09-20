@@ -71,7 +71,8 @@
                                     <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
                                     <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
                                 </form>
-                                {% if appointment.edit%}
+
+                                {% if isArtist %}
                                     {% if (appointment.status != 'annulled') %}
                                         <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="/edit_appointment/{{ appointment.id_appointment }}">
                                             <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
@@ -86,14 +87,6 @@
                                     {% endif %}
                                 {% endif %}
 
-                                {% if variable.link == false %}
-                                {% if (appointment.status != 'annulled') %}
-                                    <form method="get" id="cancel-appointment-{{ appointment.id_appointment }}" action="/cancel_appointment/{{ appointment.id_appointment }}">
-                                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                        <button class ="table-button cancelBtn" type="submit" form="cancel-appointment-{{ appointment.id_appointment }}">Cancel</button>
-                                    </form>
-                                {% endif %}
-                                {% endif %}
                             </td>
                         </tr>
                     </tbody>

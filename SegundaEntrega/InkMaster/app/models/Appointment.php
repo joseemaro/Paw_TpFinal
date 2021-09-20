@@ -118,6 +118,24 @@ class Appointment extends Model
             array_push($this->return, $error);
         } else {
             if (!preg_match($pattern, $hour)) {
+                /* $error = "La hora ingresada está fuera del horario laboral"; */
+                $error = $hour;
+                array_push($this->return, $error);
+            } else {
+                $this->parameters["hour"] = $hour;
+                $boolean = true;
+            }
+        }
+        return $boolean;
+    }
+    public function validate_hour_edit($hour) {
+        $boolean = false;
+        $pattern="/^([0][9]|[1][0-7])[\:]([0-5][0-9])[\:]*([0-5][0-9])*$/";
+        if (empty($hour)) {
+            $error = "No se ha indicado el horario del turno";
+            array_push($this->return, $error);
+        } else {
+            if (!preg_match($pattern, $hour)) {
                 $error = "La hora ingresada está fuera del horario laboral";
                 array_push($this->return, $error);
             } else {
@@ -127,6 +145,7 @@ class Appointment extends Model
         }
         return $boolean;
     }
+
 
     public function validate_artist($id_artist) {
         $boolean = false;
@@ -179,7 +198,7 @@ class Appointment extends Model
             $extension = strtolower($extension);
             if ($extension != 'image/png' && $extension != 'image/jpg' && $extension != 'image/jpeg') {
                 $name = $reference_images["reference_image"]["name"][$i];
-                $error = "Solo se permite archivos con extensión JPG y PNG, el cual el archivo $name no cumple";
+                $error = "Solo se permite archivos con extensión JPG y PNG, el cual el archivo $name no cumple"; 
                 array_push($this->return, $error);
                 $boolean = false;
             } else {
@@ -255,28 +274,25 @@ class Appointment extends Model
         }
     }
 
-    public function validateUpdate($id_appointment, $reference_image = null, $txt = null) {
+    public function validateUpdate($id_appointment, $date , $hour) {
         $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
                                                 where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
         if ($appointment) {
             $boolean = true;
-            if (!is_null($reference_image) && $boolean) {
-                $boolean = $boolean && $this->validate_reference_images($reference_image);
+            if (!is_null($date) && $boolean) {
+                $boolean = $boolean && $this->validate_date($date);
             }
-            if (!is_null($txt) && $boolean) {
-                $boolean = $boolean && $this->validate_txt($txt);
+            if (!is_null($hour) && $boolean) {
+                $boolean = $boolean && $this->validate_hour_edit($hour);
             }
             if ($boolean) {
-                if (!is_null($reference_image)){
-                    foreach ($this->reference_images as $image) {
-                        $parameters_reference_image["id_appointment"] = $id_appointment;
-                        $parameters_reference_image["image"] = $image;
-                        $this->db->insert("reference_image", $parameters_reference_image);
-                    }
+                if (isset($this->parameters["date"])) {
+                    $this->db->update("update inkmaster_db.$this->table set date = :1
+                                    where id_appointment = :2;", [$this->parameters["date"], $id_appointment]);
                 }
-                if (!is_null($this->parameters["txt"])) {
-                    $this->db->update("update inkmaster_db.$this->table set txt = :1
-                                    where id_appointment = :2;", [$this->parameters["txt"], $id_appointment]);
+                if (isset($this->parameters["hour"])) {
+                    $this->db->update("update inkmaster_db.$this->table set hour = :1
+                                    where id_appointment = :2;", [$this->parameters["hour"], $id_appointment]);
                 }
                 $this->parameters = $this->findAppointment($id_appointment);
 

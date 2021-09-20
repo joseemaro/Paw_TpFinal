@@ -3,17 +3,6 @@ var window = window || {},
     console = console || {};
 document.addEventListener("DOMContentLoaded", function() {
 
-    //validar terminos
-    validate_terms = document.querySelector(".termsjs");
-    validate_terms.addEventListener("click", function() {
-        terms = document.getElementById("send-btn");
-        if (validate_terms.checked) {
-            terms.removeAttribute("disabled");
-        }else{
-            terms.setAttribute("disabled", "");
-        }
-    });
-
     //validate that the appointment is in a future
     validate_date = document.querySelector(".datejs");
     validate_date.addEventListener("blur", function(event) {
@@ -63,5 +52,16 @@ document.addEventListener("DOMContentLoaded", function() {
             validate_pathology.style.background = "#e05f5f";
         }
     });
+
+        //validar terminos
+        validate_terms = document.querySelector(".termsjs");
+        validate_terms.addEventListener("click", function() {
+            terms = document.getElementById("send-btn");
+            if (validate_terms.checked) {
+                terms.removeAttribute("disabled");
+            }else{
+                terms.setAttribute("disabled", "");
+            }
+        });
 
 });
