@@ -85,13 +85,15 @@ input[type=file] {
 input[type=submit] {
     margin: 1em auto;
     width: 40%;
+    background-color: #A31D21;
 }
 
 input[type=reset] {
     margin: 1em auto;
     width: 40%;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(156, 114, 114, 0.4);
 }
+
 
 .button-newAp {
     padding: 0.3125em 0;
@@ -106,6 +108,25 @@ input[type=reset] {
 .button-newAp:hover{
     background-color: #A31D21;
     border-color: #020202;
+    transition:  0.5s ease-in-out;
+}
+
+.button-editAp{
+    display: inline-block;
+    font-size: 1em;
+    padding: 0.6em 0.6em;
+    margin-top: 0.5em;
+    -webkit-appearance: none;
+    appearance: none;
+    color: rgb(0, 0, 0);
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button-editAp:hover{
+    opacity: 0.8;
     transition:  0.5s ease-in-out;
 }
 

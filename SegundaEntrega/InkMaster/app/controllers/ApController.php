@@ -151,20 +151,22 @@ class ApController extends Controller
                 if ($array["status"]) {     #si salio bien la validacion
                     $variable["appointment"] = $array;
                     $variable["adult"] = $this->user->verifyAdult($variable["appointment"]["id_user"]);
-                    /* delete calendar */
+
                     $artist = $this->appointment->findCalendar($variable["appointment"]["id_user"]);
                     $ap = $this->appointment->findAppointment($_POST["id_appointment"]);
-                    $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]);
 
-
-                    /* calendar */
-                    $array = $this->appointment->findAppointment($_POST["id_appointment"]);
-                    $link = $this->appointment->findCalendar($array["id_artist"]);
-                    $m = $this->calendar->add_turno_calendar($array["id_user"],$date,$hour,$array["id_artist"],$link["link"]);
-                    if ($m["ok"] != ''){
-                        $this->appointment->insertLink($_POST["id_appointment"],$m["ok"],$m["id_calendar"]);
+                    if (isset($ap["id_calendar"])){
+                        /* delete calendar */
+                        $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]);
+                        /* calendar */
+                        $array = $this->appointment->findAppointment($_POST["id_appointment"]);
+                        $link = $this->appointment->findCalendar($array["id_artist"]);
+                        $m = $this->calendar->add_turno_calendar($array["id_user"],$date,$hour,$array["id_artist"],$link["link"]);
+                        if ($m["ok"] != ''){
+                            $this->appointment->insertLink($_POST["id_appointment"],$m["ok"],$m["id_calendar"]);
+                        }
+                        /*  */
                     }
-                    /*  */
 
                     return $this->generalController->view('appointment/view.appointment', $variable);
                 } else {
