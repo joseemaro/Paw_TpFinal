@@ -301,21 +301,21 @@ class User extends Model
 
     public function validate_photo($photo) {
         $boolean = true;
-        if (!empty($photo["photo"]["name"])) {
-            $extension = $photo["photo"]["type"];
+        if (!empty($photo["name"])) {
+            $extension = $photo["type"];
             $extension = strtolower($extension);
             if ($extension != 'image/png' && $extension != 'image/jpg' && $extension != 'image/jpeg') {
                 $error = "Solo se permite archivos con extensión JPG y PNG.";
                 array_push($this->return, $error);
                 $boolean = false;
             } else {
-                if ($photo["photo"]["size"] > 5000000) {
+                if ($photo["size"] > 5000000) {
                     $error = "Solo se permite archivos menores o iguales a 5 MB.";
                     array_push($this->return, $error);
                     $boolean = false;
                 } else {
-                    $this->parameters["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
-                    $this->parameters_user["photo"] = file_get_contents($photo["photo"]["tmp_name"]);
+                    $this->parameters["photo"] = file_get_contents($photo["tmp_name"]);
+                    $this->parameters_user["photo"] = file_get_contents($photo["tmp_name"]);
                 }
             }
         }
@@ -385,7 +385,8 @@ class User extends Model
 
     public function validateAll($parameters) {
         $boolean = true;
-        if (!empty($parameters)) {
+        $count = count($parameters);
+        if ( $count > 1 || ( $count = 1 && !empty( $parameters['photo']['name'] ) ) ) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;
                 $boolean = $boolean && self::$validate($value);
@@ -458,7 +459,7 @@ class User extends Model
                     $this->db->insert('artist', $parameters_artist);
                 }
             }
-            if ($count > 0) {
+            if ( $count > 1 || ( $count = 1 && !empty( $parameters['photo']['name'] ) ) ) {
                 //$this->db->genericUpdate($this->table, $id_user, $this->parameters_user);
                 $this->db->userUpdate($this->table, $id_user, $this->parameters_user);
             }

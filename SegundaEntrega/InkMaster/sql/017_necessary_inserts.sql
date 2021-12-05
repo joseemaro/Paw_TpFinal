@@ -54,4 +54,4 @@ insert into `administrator` (`id_administrator`, `id_local`) values
 
 insert into `rol_user` (`id_rol`, `id_user`) values
 ('user', 'Administrator'),
-('administrador', 'Administrator');
+('administrator', 'Administrator');
