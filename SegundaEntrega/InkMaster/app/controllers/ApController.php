@@ -201,6 +201,7 @@ class ApController extends Controller
                 }
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
+            $variable["link"] ="https://calendar.google.com/calendar/r";
             return $this->generalController->view('/appointment/list.appointments', $variable);
         }
         return $this->generalController->view('not_found');
