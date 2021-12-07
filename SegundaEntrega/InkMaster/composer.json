@@ -12,7 +12,8 @@
         "monolog/monolog": "^1.23",
         "twig/twig": "^2.0",
         "csanquer/pdo-service-provider": "~1.1dev",
-        "google/apiclient": "^2.0"
+        "google/apiclient": "^2.0",
+        "vlucas/phpdotenv": "^5.2"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*"

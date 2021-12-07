@@ -1,8 +1,8 @@
 <?php
-	$servername = "127.0.0.1";
-    $username = "root";
-  	$password = "";
-  	$dbname = "inkmaster_db";
+    $servername = $_ENV['DB_HOST'].":".$_ENV['DB_PORT'];
+    $username = $_ENV['DB_USER'];
+  	$password = $_ENV['DB_PASSWD'];
+  	$dbname = $_ENV['DB_NAME'];
 
 	$conn = new mysqli($servername, $username, $password, $dbname);
       if($conn->connect_error){

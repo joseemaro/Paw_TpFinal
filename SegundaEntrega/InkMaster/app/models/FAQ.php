@@ -8,7 +8,7 @@ use App\Core\App;
 
 class FAQ extends Model
 {
-    protected $database = 'inkmaster_db';
+    protected $database = DB_NAME;
     protected $table = 'faq';
     protected $id;
     protected $question;

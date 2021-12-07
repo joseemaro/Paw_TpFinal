@@ -8,7 +8,7 @@ use App\googleAPI\calendar;
 
 class User extends Model
 {
-    protected $database = 'inkmaster_db';
+    protected $database = DB_NAME;
     protected $table = 'user';
     protected $id;
     protected $password;
