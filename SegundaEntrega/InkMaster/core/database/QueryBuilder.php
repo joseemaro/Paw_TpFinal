@@ -13,7 +13,7 @@ class QueryBuilder {
      */
     protected $pdo;
 
-    protected $database = 'inkmaster_wzbdev_com';
+    protected $database = 'inkmaster_db';
 
     /**
      * Create a new QueryBuilder instance.

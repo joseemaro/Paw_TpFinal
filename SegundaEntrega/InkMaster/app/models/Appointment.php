@@ -7,7 +7,7 @@ use App\Core\App;
 
 class Appointment extends Model
 {
-    protected $database = 'inkmaster_wzbdev_com';
+    protected $database = 'inkmaster_db';
     protected $table = 'appointment';
     protected $id;
     protected $local;

@@ -45,11 +45,11 @@
 			$admin= false;
 			$aux = false;
 			if (isset($_SESSION["id_user"])) {
-/* 				$admin = "select * from inkmaster_db.user as u
-				inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
+/* 				$admin = "select * from $dbname.user as u
+				inner join $dbname.administrator as a on (u.id_user = a.id_administrator)
 				where a.id_local =1 and a.id_administrator =" . $_SESSION["id_user"] . "
 				and u.enabled is true"; */
-				$admin = "select * from inkmaster_db.administrator as u
+				$admin = "select * from $dbname.administrator as u
 				where u.id_administrator ='" . $_SESSION["id_user"] . "'";
 				$aux = $conn->query($admin);
 

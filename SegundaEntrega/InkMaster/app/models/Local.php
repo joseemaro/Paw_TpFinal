@@ -7,7 +7,7 @@ use App\Core\App;
 
 class Local extends Model
 {
-    protected $database = 'inkmaster_wzbdev_com';
+    protected $database = 'inkmaster_db';
     protected $table = 'local';
     protected $id;
     protected $direction;

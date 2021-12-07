@@ -8,7 +8,7 @@ use App\googleAPI\calendar;
 
 class User extends Model
 {
-    protected $database = 'inkmaster_wzbdev_com';
+    protected $database = 'inkmaster_db';
     protected $table = 'user';
     protected $id;
     protected $password;
@@ -614,8 +614,6 @@ class User extends Model
     }
 
     public function havePermissions($id_user, $id_permission) {
-        $db = getenv('DATABASE_URL');
-        var_dump($db);
         $boolean = true;
         $query = $this->db->simpleQuery("select * from $this->database.$this->table as u
                                         inner join $this->database.rol_user as rl on (u.id_user = rl.id_user)
