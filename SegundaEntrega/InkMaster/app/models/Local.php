@@ -7,6 +7,7 @@ use App\Core\App;
 
 class Local extends Model
 {
+    protected $database = 'inkmaster_wzbdev_com';
     protected $table = 'local';
     protected $id;
     protected $direction;
@@ -17,7 +18,7 @@ class Local extends Model
     protected $description;
 
     public function getTxt($id_local) {
-        return $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_local = :1;", [$id_local]);
+        return $this->db->simpleQuery("select * from $this->database.$this->table where id_local = :1;", [$id_local]);
     }
 
     public function getLocal() {

@@ -8,6 +8,7 @@ use App\googleAPI\calendar;
 
 class User extends Model
 {
+    protected $database = 'inkmaster_wzbdev_com';
     protected $table = 'user';
     protected $id;
     protected $password;
@@ -39,13 +40,13 @@ class User extends Model
         $month = $today["mon"];
         $day = $today["mday"];
         $today = $year . "-" . $month . "-" . $day;
-        $turnos = $this->db->simpleQuery("update inkmaster_db.appointment set status = :1 
+        $turnos = $this->db->simpleQuery("update $this->database.appointment set status = :1 
         where id_user = :2 and date >= :3", ['annulled', $id_user_v, $today]);
         #elimino user
-        $turnos = $this->db->simpleQuery("update inkmaster_db.$this->table set enabled = :1 
+        $turnos = $this->db->simpleQuery("update $this->database.$this->table set enabled = :1 
         where id_user = :2;", [0, $id_user_v]);
 
-        $result = $this->db->query("SELECT appointment.id_calendar as id_c,calendar_link.link as link_c FROM inkmaster_db.appointment INNER JOIN inkmaster_db.calendar_link 
+        $result = $this->db->query("SELECT appointment.id_calendar as id_c,calendar_link.link as link_c FROM $this->database.appointment INNER JOIN $this->database.calendar_link 
         on appointment.id_artist=calendar_link.id_artist WHERE appointment.id_user='$id_user_v'");
 
         if ($result){
@@ -91,7 +92,7 @@ class User extends Model
 
 
     public function validate_duplicateUser($id_user){
-        $cant = $this->db->simpleQuery("select count(*) as cant from inkmaster_db.$this->table where id_user = :1", [$id_user]);
+        $cant = $this->db->simpleQuery("select count(*) as cant from $this->database.$this->table where id_user = :1", [$id_user]);
         $can = $cant['cant'];
         if ($can == "0"){
             return false;
@@ -336,7 +337,7 @@ class User extends Model
     }
 
     public function validate_local($id_local) {
-        $local = $this->db->simpleQuery("select * from inkmaster_db.local
+        $local = $this->db->simpleQuery("select * from $this->database.local
                                             where id_local = :1", [$id_local]);
         if (isset($local["id_local"])) {
             $this->parameters["id_local"] = $id_local;
@@ -436,9 +437,9 @@ class User extends Model
         if ($boolean) {
             if ($medical_record) {
                 $count = $count - 1;
-                $medical_record = $this->db->simpleQuery("select * from inkmaster_db.medical_record where id_user = :1", [$id_user]);
+                $medical_record = $this->db->simpleQuery("select * from $this->database.medical_record where id_user = :1", [$id_user]);
                 if ($medical_record) {
-                    $this->db->update("update inkmaster_db.medical_record set considerations = :1 
+                    $this->db->update("update $this->database.medical_record set considerations = :1 
                                     where id_user = :2;", [$this->parameters_medical["considerations"], $id_user]);
                 } else {
                     $parameters_medical["id_user"] = $id_user;
@@ -448,9 +449,9 @@ class User extends Model
             }
             if ($artist) {
                 $count = $count - 2;
-                $artist = $this->db->simpleQuery("select * from inkmaster_db.artist where id_artist = :1", [$id_user]);
+                $artist = $this->db->simpleQuery("select * from $this->database.artist where id_artist = :1", [$id_user]);
                 if ($artist) {
-                        $this->db->update("update inkmaster_db.artist set txt = :1
+                        $this->db->update("update $this->database.artist set txt = :1
                         where id_artist = :2;", [$parameters["txt"], $id_user]);
                 } else {
                     $parameters_artist["id_artist"] = $id_user;
@@ -517,17 +518,17 @@ class User extends Model
     }
 
     public function listArtists($id_local) {
-        $artists = $this->db->query("select * from inkmaster_db.$this->table as u
-                                        inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+        $artists = $this->db->query("select * from $this->database.$this->table as u
+                                        inner join $this->database.artist as a on (u.id_user = a.id_artist)
                                         where a.id_local = :1 and u.enabled=1;", [$id_local]);
         return $this->replace($artists);
     }
 
     public function listUsers() {
         $users = $this->db->query("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt
-                                    from inkmaster_db.$this->table as u
-                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
-                                        left join inkmaster_db.local as l on (a.id_local = l.id_local)
+                                    from $this->database.$this->table as u
+                                        left join $this->database.artist as a on (u.id_user = a.id_artist)
+                                        left join $this->database.local as l on (a.id_local = l.id_local)
                                         where u.enabled =1
                                         order by id_artist asc, id_user asc");
         return $this->replace($users);
@@ -535,10 +536,10 @@ class User extends Model
 
     public function findUser($id_user) {
         $user = $this->db->simpleQuery("select u.*, a.id_artist, concat(l.direction, ', ', l.province, ', ', l.country) as 'local', a.txt, m.considerations
-                                        from inkmaster_db.$this->table as u
-                                        left join inkmaster_db.artist as a on (u.id_user = a.id_artist)
-                                        left join inkmaster_db.local as l on (a.id_local = l.id_local)
-                                        left join inkmaster_db.medical_record as m on (u.id_user = m.id_user)
+                                        from $this->database.$this->table as u
+                                        left join $this->database.artist as a on (u.id_user = a.id_artist)
+                                        left join $this->database.local as l on (a.id_local = l.id_local)
+                                        left join $this->database.medical_record as m on (u.id_user = m.id_user)
                                         where u.id_user = :1 and u.enabled=1", [$id_user]);
         if (!is_null($user["photo"])) {
             $user["photo"] = base64_encode($user["photo"]);
@@ -550,23 +551,23 @@ class User extends Model
     }
 
     public function findArtist($id_artist) {
-        $artist = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
-                                            inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+        $artist = $this->db->simpleQuery("select * from $this->database.$this->table as u
+                                            inner join $this->database.artist as a on (u.id_user = a.id_artist)
                                             where id_artist = :1", [$id_artist]);
         if ($artist) {
             $artist["photo"] = base64_encode($artist["photo"]);
-            $artist["tattoos"] = $this->replace($this->db->query("select * from inkmaster_db.tattoo as t
+            $artist["tattoos"] = $this->replace($this->db->query("select * from $this->database.tattoo as t
                                                                     where t.id_artist = :1;", [$id_artist]));
         }
         return $artist;
     }
 
     public function findMedRec($id_user){
-        return $this->db->query("select * from inkmaster_db.medical_record where id_user = :1", $id_user);
+        return $this->db->query("select * from $this->database.medical_record where id_user = :1", $id_user);
     }
 
     public function verifyAdult($id_user) {
-        $user = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_user = :1", [$id_user]);
+        $user = $this->db->simpleQuery("select * from $this->database.$this->table where id_user = :1", [$id_user]);
         $today = getdate();
         $year = $today["year"] - substr($user["born"],0,4);
         $month = $today["mon"] - substr($user["born"],5,2);
@@ -581,8 +582,8 @@ class User extends Model
 
     public function isArtist($id_user, $id_local) {
         $boolean = true;
-        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
-                                        inner join inkmaster_db.artist as a on (u.id_user = a.id_artist)
+        $query = $this->db->simpleQuery("select * from $this->database.$this->table as u
+                                        inner join $this->database.artist as a on (u.id_user = a.id_artist)
                                         where a.id_local = :1 and a.id_artist = :2
                                         and u.enabled is true", [$id_local, $id_user]);
         if (!$query) {
@@ -593,8 +594,8 @@ class User extends Model
 
     public function isAdmin($id_user, $id_local) {
         $boolean = true;
-        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
-                                        inner join inkmaster_db.administrator as a on (u.id_user = a.id_administrator)
+        $query = $this->db->simpleQuery("select * from $this->database.$this->table as u
+                                        inner join $this->database.administrator as a on (u.id_user = a.id_administrator)
                                         where a.id_local = :1 and a.id_administrator = :2
                                         and u.enabled is true", [$id_local, $id_user]);
         if (!$query) {
@@ -605,7 +606,7 @@ class User extends Model
 
     public function isEnabled($id_user){
         $boolean = true;
-        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_user = :1 and enabled =1", [$id_user]);
+        $query = $this->db->simpleQuery("select * from $this->database.$this->table where id_user = :1 and enabled =1", [$id_user]);
         if (!$query) {
             $boolean = false;
         }
@@ -613,10 +614,12 @@ class User extends Model
     }
 
     public function havePermissions($id_user, $id_permission) {
+        $db = getenv('DATABASE_URL');
+        var_dump($db);
         $boolean = true;
-        $query = $this->db->simpleQuery("select * from inkmaster_db.$this->table as u
-                                        inner join inkmaster_db.rol_user as rl on (u.id_user = rl.id_user)
-                                        inner join inkmaster_db.permission_rol as pr on (rl.id_rol = pr.id_rol)
+        $query = $this->db->simpleQuery("select * from $this->database.$this->table as u
+                                        inner join $this->database.rol_user as rl on (u.id_user = rl.id_user)
+                                        inner join $this->database.permission_rol as pr on (rl.id_rol = pr.id_rol)
                                         where u.id_user = :1 and pr.id_permission = :2", [$id_user, $id_permission]);
         if (!$query) {
             $boolean = false;

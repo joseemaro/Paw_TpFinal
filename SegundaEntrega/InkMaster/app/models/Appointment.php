@@ -7,6 +7,7 @@ use App\Core\App;
 
 class Appointment extends Model
 {
+    protected $database = 'inkmaster_wzbdev_com';
     protected $table = 'appointment';
     protected $id;
     protected $local;
@@ -173,7 +174,7 @@ class Appointment extends Model
             }
         }
         if ($boolean) {
-            $count = $this->db->simpleQuery("select count(*) as cant from inkmaster_db.$this->table as ap
+            $count = $this->db->simpleQuery("select count(*) as cant from $this->database.$this->table as ap
                                                 where ap.id_artist = :1 and ap.date = :2 and ap.hour = :3;",
                                             [$id_artist, $this->parameters["date"], $this->parameters["hour"]]);
             //$count = $this->db->repeatAppointment($this->table, $id_artist, $this->parameters["date"], $this->parameters["hour"]);
@@ -257,7 +258,7 @@ class Appointment extends Model
             $this->db->insert($this->table, $this->parameters);
             $this->parameters["status"] = true;
             if (isset($parameters["reference_images"])){
-                $id_appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_artist = :1 and date = :2 and hour = :3", [$this->parameters["id_artist"], $this->parameters["date"], $this->parameters["hour"]]);
+                $id_appointment = $this->db->simpleQuery("select * from $this->database.$this->table where id_artist = :1 and date = :2 and hour = :3", [$this->parameters["id_artist"], $this->parameters["date"], $this->parameters["hour"]]);
                 foreach ($this->reference_images as $image) {
                     $parameters_reference_image["id_appointment"] = $id_appointment["id_appointment"];
                     $parameters_reference_image["image"] = $image;
@@ -275,7 +276,7 @@ class Appointment extends Model
     }
 
     public function validateUpdate($id_appointment, $date , $hour) {
-        $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table
+        $appointment = $this->db->simpleQuery("select * from $this->database.$this->table
                                                 where id_appointment = :1 and status <> 'annulled';", [$id_appointment]);
         if ($appointment) {
             $boolean = true;
@@ -287,11 +288,11 @@ class Appointment extends Model
             }
             if ($boolean) {
                 if (isset($this->parameters["date"])) {
-                    $this->db->update("update inkmaster_db.$this->table set date = :1
+                    $this->db->update("update $this->database.$this->table set date = :1
                                     where id_appointment = :2;", [$this->parameters["date"], $id_appointment]);
                 }
                 if (isset($this->parameters["hour"])) {
-                    $this->db->update("update inkmaster_db.$this->table set hour = :1
+                    $this->db->update("update $this->database.$this->table set hour = :1
                                     where id_appointment = :2;", [$this->parameters["hour"], $id_appointment]);
                 }
                 $this->parameters = $this->findAppointment($id_appointment);
@@ -320,15 +321,15 @@ class Appointment extends Model
     }
 
     public function listAppointments($id_user) {
-        $sql = "select r.id_rol from inkmaster_db.user as u
-                inner join inkmaster_db.rol_user as r on (u.id_user = r.id_user)
+        $sql = "select r.id_rol from $this->database.user as u
+                inner join $this->database.rol_user as r on (u.id_user = r.id_user)
                 where u.id_user = :1 and u.enabled is true
                 and r.id_rol =";
         $query = "select *, 
                     case when CURDATE() <= date-2 then true 
                     else false end as edit
-                    from inkmaster_db.$this->table as a
-                    inner join inkmaster_db.user as u on (u.id_user = a.id_user)";
+                    from $this->database.$this->table as a
+                    inner join $this->database.user as u on (u.id_user = a.id_user)";
         if ($this->db->query("$sql 'artist'", [$id_user])) {
             return $this->db->query("$query where a.id_artist = :1
                                         order by a.status desc, a.date asc, a.hour asc;", [$id_user]);
@@ -342,37 +343,37 @@ class Appointment extends Model
     }
 
     public function changeStatus($id_appointment, $id_artist, $status){
-        return $this->db->update("update inkmaster_db.$this->table set status = :1 
+        return $this->db->update("update $this->database.$this->table set status = :1 
                                     where id_appointment = :2 and id_artist = :3 
                                     and status = 'pending';", [$status, $id_appointment, $id_artist]);
     }
 
     public function cancelAp($id_appointment){
-        return $this->db->update("update inkmaster_db.$this->table set status = :1 
+        return $this->db->update("update $this->database.$this->table set status = :1 
                                     where id_appointment = :2;", ['annulled', $id_appointment]);
     }
 
     public function findCalendar($id_artist){
-        $tattoo = $this->db->simpleQuery("select * from inkmaster_db.calendar_link
+        $tattoo = $this->db->simpleQuery("select * from $this->database.calendar_link
                                                     where id_artist = :1;", [$id_artist]);
         return $tattoo;
     }
 
     public function insertLink($id_appointment,$link,$id){
-        return $this->db->update("update inkmaster_db.$this->table set link = :1, id_calendar = :2
+        return $this->db->update("update $this->database.$this->table set link = :1, id_calendar = :2
                                     where id_appointment = :3 ;", [$link,$id, $id_appointment]);
     }
 
     public function findAppointment($id_appointment){
-        $appointment = $this->db->simpleQuery("select * from inkmaster_db.$this->table as a
-                                                inner join inkmaster_db.user as u on (a.id_user = u.id_user)
+        $appointment = $this->db->simpleQuery("select * from $this->database.$this->table as a
+                                                inner join $this->database.user as u on (a.id_user = u.id_user)
                                                 where a.id_appointment = :1;", [$id_appointment]);
-        $tattoo = $this->db->simpleQuery("select * from inkmaster_db.tattoo
+        $tattoo = $this->db->simpleQuery("select * from $this->database.tattoo
                                                     where id_appointment = :1;", [$id_appointment]);
         if (isset($tattoo["image"])) {
             $appointment["tattoo"] = base64_encode($tattoo["image"]);
         }
-        $reference_images = $this->db->query("select image from inkmaster_db.reference_image
+        $reference_images = $this->db->query("select image from $this->database.reference_image
                                                     where id_appointment = :1;", [$id_appointment]);
         if ($reference_images) {
             foreach ($reference_images as $reference_image) {

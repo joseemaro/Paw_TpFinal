@@ -8,6 +8,7 @@ use App\Core\App;
 
 class FAQ extends Model
 {
+    protected $database = 'inkmaster_wzbdev_com';
     protected $table = 'faq';
     protected $id;
     protected $question;
@@ -20,12 +21,12 @@ public function listFaq() {
 }
 
 public function newVisit($id_faq){
-    return $this->db->simpleQuery("update inkmaster_db.$this->table set visits=visits+1 where id_faq = :1", [ $id_faq]);
+    return $this->db->simpleQuery("update $this->database.$this->table set visits=visits+1 where id_faq = :1", [ $id_faq]);
 }
 
 public function find($id_faq) {
     $id_faq = intval($id_faq);
-    return $this->db->simpleQuery("select * from inkmaster_db.$this->table where id_faq = :1", [$id_faq]);
+    return $this->db->simpleQuery("select * from $this->database.$this->table where id_faq = :1", [$id_faq]);
 }
 
 public function delFaq($id){

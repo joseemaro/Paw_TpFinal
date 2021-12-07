@@ -13,6 +13,8 @@ class QueryBuilder {
      */
     protected $pdo;
 
+    protected $database = 'inkmaster_wzbdev_com';
+
     /**
      * Create a new QueryBuilder instance.
      *
@@ -31,7 +33,7 @@ class QueryBuilder {
      */
     public function insert($table, $parameters) {
         $parameters = $this->cleanParameterName($parameters);
-        $table = "inkmaster_db." . $table;
+        $table = "$this->database." . $table;
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
             $table,
@@ -54,7 +56,7 @@ class QueryBuilder {
      */
     public function autentication($id_user) {
         try {
-            $statement = $this->pdo->prepare("select * from inkmaster_db.user where id_user = :1");
+            $statement = $this->pdo->prepare("select * from $this->database.user where id_user = :1");
             $statement->bindValue(':1', $id_user);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);;
@@ -69,7 +71,7 @@ class QueryBuilder {
      * @param string $table
      */
     public function selectAll($table) {
-        $statement = $this->pdo->prepare("select * from inkmaster_db.{$table}");
+        $statement = $this->pdo->prepare("select * from $this->database.{$table}");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -83,7 +85,7 @@ class QueryBuilder {
      */
      public function updMedRec($table, $id_user, $medical){
          try {
-             $statement = $this->pdo->prepare("update inkmaster_db.$table SET considerations = :2                            
+             $statement = $this->pdo->prepare("update $this->database.$table SET considerations = :2                            
                                                     where id_user = :1;");
              $statement->bindValue(':1', $id_user);
              $statement->bindValue(':2', $medical);
@@ -105,7 +107,7 @@ class QueryBuilder {
      public function getTattoos($table, $beginning, $quantity)
      {
          //VER ESTO no estamos utilizando el bind porque me pone comillas y no funciona
-        $sql = "select * from inkmaster_db.$table limit :beginning , :quantity";
+        $sql = "select * from $this->database.$table limit :beginning , :quantity";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(":beginning", $beginning, PDO::PARAM_INT);
@@ -126,7 +128,7 @@ class QueryBuilder {
      */
     public function countTuples($table)
     {
-        $sql = "select count(*) as total from inkmaster_db.$table";
+        $sql = "select count(*) as total from $this->database.$table";
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute();
@@ -268,7 +270,7 @@ class QueryBuilder {
      */
     public function delFaq($table, $id){
 
-        $sql = "DELETE from inkmaster_db.$table
+        $sql = "DELETE from $this->database.$table
                                             where id_faq = :id";
         try {
             $statement = $this->pdo->prepare($sql);
