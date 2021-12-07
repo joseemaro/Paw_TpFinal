@@ -50,9 +50,9 @@ img {
 .artistBtn{
     display: inline-block;
     font-size: 1.1em;
-    font-family: Didot LT STD;
+    /* font-family: Didot LT STD;
     font-style: italic;
-    font-weight: bold;
+    font-weight: bold; */
     padding: 0.6em 0.6em;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -62,7 +62,8 @@ img {
     border: none;
     cursor: pointer;
     width: 100%;
-    background-color: #e63946;
+    background-color: #A31D21;
+    color: white;
 }
 
 .artistBtn:hover{

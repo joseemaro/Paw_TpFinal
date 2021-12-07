@@ -27,25 +27,25 @@
         <section id="example">
             <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
         </section>
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
-                <div id="caption"></div>
-            </div>
-        <figure>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+        <!-- <figure>
             {% if variable.artist.photo %}
                 <img class="myImg" src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">
             {% endif %}
             <figcaption>
                 <p id="description-artist">{{ variable.artist.txt }}</p>
             </figcaption>
-        </figure>
-    </div>
-    <div class="container-img-artist">
-        {% for tattoo in variable.artist.tattoos %}
-            <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="">
-        {% endfor %}
+        </figure> -->
+        <div class="container-img-artist">
+            {% for tattoo in variable.artist.tattoos %}
+                <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="">
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock %}

@@ -36,7 +36,7 @@ main {
 
 header{
     grid-area: encabezado;
-    background-color: #464A4B; /* Davys grey*/
+    background-color: black; /* Davys grey*/
     width: 100%;
     position: relative;
 }
@@ -85,7 +85,7 @@ header::after{
 }
 
 .site-nav a{
-    color: #ebedb3;
+    color: white;
     display: block;
     padding: 2em 3em;
     text-transform: uppercase;
@@ -95,7 +95,7 @@ header::after{
 .site-nav a:hover,
 .site-nav a:focus{
     background: #F6BD60; /*Maximun yellow red*/
-    color: #464655;
+    color: black;
 }
 
 /*Esto que estoy haciendo acá es para desplegable de artistas*/
@@ -147,7 +147,7 @@ nav ul li .icon-mobile {
 .hamburger::after{
     content: '';
     display: block;
-    background: black;
+    background: white;
     height: 3px;
     width: 1.75em;
     border-radius: 3px;
@@ -168,11 +168,12 @@ nav ul li .icon-mobile {
     min-height: 100%;
 }
 
-.social-network {
+/* .social-network {
+    display: none;
     float: right;
     max-width: 30%;
     min-height: 100%;
-}
+} */
 
 #icon-fb, #icon-inst, #icon-tw, #icon-yt {
     float: left;
@@ -246,11 +247,12 @@ nav ul li .icon-mobile {
         border-bottom: 1px solid #575766;
     }
 
-    .social-network {
+    /* .social-network {
+        display: none;
         float: left;
         margin-top: 1em;
         margin-left: 1em;
-    }
+    } */
 
     #icon-fb, #icon-inst, #icon-tw, #icon-yt {
         font-size: 2.5em;
