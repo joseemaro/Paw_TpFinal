@@ -7,7 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/appointment/newAp.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/newAp.js"></script>
     <script type="text/javascript" src="/public/js/validateAp.js"></script>
 {% endblock %}
@@ -20,54 +20,49 @@
 
 {% block main %}
 
-    <form action="/save_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
-        <h1> Solicitud de turno </h1>
-
-
-        {% if not variable.session %}
-            (*) Se necesita estar logueado para poder registrar un turno<br>
+<div class="container-form">
+    <h1 class="title"> Solicitud de turno </h1>
+    <div class="login-ap">
+    {% if not variable.session %}
+            Se necesita estar logueado para poder registrar un turno<br>
             <a href="/login">Iniciar sesión/Registrarse</a>
-        {% else %}
-
+    {% else %}
         {% if session %}
             {% if not variable.adult %}
                 <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
             {% endif %}
         {% endif %}
-        <label>
-            Artista
-            <select name="id_artist">
-                {% for artist in artists %}
-                    <option>{{ artist.id_user }}</option>
-                {% endfor %}
-            </select>
-        </label>
+    </div>
+    <form action="/save_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
+  
+        <label for="fartist">Artista</label>
+        <select id="fartist" name="id_artist">
+            {% for artist in artists %}
+                <option>{{ artist.id_user }}</option>
+            {% endfor %}
+        </select>
 
-        <label> Fecha: <input type="date" name="date" id="date" class="datejs" required></label>
+        <label for="date">Fecha</label>
+        <input type="date" name="date" id="date" class="datejs" required>
 
-        <label> Horario (hh:min): <input type="time" min="09:00" max="17:00" step="900" name="hour" required></label>
+        <label for="fhour">Horario (hh:min)</label>
+        <input id="fhour" type="time" min="09:00" max="17:00" step="900" name="hour" required>
 
-        <label class="btn-img" > Imágenes de referencia 
-            <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple required>
-        </label>
+        <label for="fimg">Imágenes de referencia </label>
+        <input id="fimg" type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple required>
 
-        <section>
-            <label> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing?
-                <input name="pathology" type="checkbox" onChange="comprobar(this);" />
-            </label>
-
-            <textarea class="disease pathologyjs" name="pathology-txt" id="pathology-txt"
-                      pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:">
-            </textarea>
+       <section class="illness">
+            <label for="fillness"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
+            <input id="fillness" name="pathology" type="checkbox" onChange="comprobar(this);" />
+            <textarea class="disease pathologyjs" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
         </section>
 
-        <section>
-            <label>
-                <input type="checkbox" class="terms termsjs" name="terms" id="terms" > Acepto los <a class="terms" target="_blank" href="/term&cond">términos y condiciones</a>
-            </label>
-        </section>
+        <section class="terms-conditions">
+            <label for="terms">Acepto los <a class="terms" target="_blank" href="/term&cond">términos y condiciones</a></label>
+            <input type="checkbox" class="terms termsjs" name="terms" id="terms" > 
+        </section> 
 
-        <div>
+        <div class="buttons">
             <input class="button-newAp" type="reset" value="Limpiar" />
 
             {% if session %}
@@ -77,10 +72,13 @@
             {% endif %}
         </div>
 
-        <p class="footer-form"> Todos los campos son obligatorios</p><br>
-        {% endif %}
-
+        <div>
+            <p class="footer-form"> Todos los campos son obligatorios</p><br>
+        </div>
+    {% endif %}
     </form>
+  </div>
+
 {% endblock %}
 
 {% block footer %}

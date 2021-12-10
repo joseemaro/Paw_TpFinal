@@ -7,7 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/tattoo/upd.photos.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/upd.photos.js"></script>
 {% endblock %}
 
@@ -18,40 +18,43 @@
 
 {% block main %}
 
+<div class="container-form">
     <form method="post" action="/save_photos" enctype="multipart/form-data">
-        <label>
-            Profesional
-            <select name="artist">
-                {% for artist in artists %}
-                <option>{{ artist.id_user }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <label>
-            Sector
-            <select name="sector">
-                <option>Cabeza</option>
-                <option>Espalda</option>
-                <option>Brazo</option>
-                <option>Pecho</option>
-                <option>Panza</option>
-                <option>Costillas</option>
-                <option>Pierna</option>
-                <option>Pie</option>
-                <option>Otro</option>
-            </select>
-        </label>
-        <textarea name="description"></textarea>
-        <label> Seleccionar imágenes:
-            <input type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
-        </label>
-
-        {% if isArtist %}
-            <input type="submit" disabled id="up-btn" value="Subir imágenes" />
-        {% else %}
-            <input type="submit" disabled value="Subir imágenes" />
-        {% endif %}
+  
+    <label for="fprofesional">Profesional</label>
+    <select id="fprofesional" name="artist">
+        {% for artist in artists %}
+        <option>{{ artist.id_user }}</option>
+        {% endfor %}
+    </select>
+  
+    <label for="fsector">Sector</label>
+    <select id="fsector" name="sector">
+        <option>Cabeza</option>
+        <option>Espalda</option>
+        <option>Brazo</option>
+        <option>Pecho</option>
+        <option>Panza</option>
+        <option>Costillas</option>
+        <option>Pierna</option>
+        <option>Pie</option>
+        <option>Otro</option>
+    </select>
+  
+    <label for="fdescription">Descripción</label>
+    <textarea id="fdescription" name="description" style="height:200px"></textarea>
+  
+    <label for="fimage">Seleccionar imágenes</label>
+    <input id="fimage" type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
+  
+    {% if isArtist %} 
+        <input type="submit" disabled id="up-btn" value="Subir imágenes" />
+    {% else %}
+        <input type="submit" disabled value="Subir imágenes" />
+    {% endif %}
+  
     </form>
+</div>
 
 {% endblock %}
 

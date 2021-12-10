@@ -30,6 +30,7 @@
 
 .real-content:nth-child(1){
     background: #611a68;
+    color: #fff;
 }
 
 .real-content > img{

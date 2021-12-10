@@ -7,7 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
 {% endblock %}
 
 {% block header %}
@@ -17,19 +17,22 @@
 {% endblock %}
 
 {% block main %}
+<div class="container-form">
+    <h1 class="title">Ingresar</h1>
     <form action="/save_login" method="post" enctype="multipart/form-data">
-        <h1>Ingresar</h1>
-        <label>Usuario:</label>
-        <input type="text" name="id_user" placeholder="Ingrese su usuario" required>
+        
+        <label for="fuser" >Usuario</label>
+        <input id="fuser" type="text" name="id_user" placeholder="Ingrese su usuario" required>
 
-        <label>Contraseña:</label>
-        <input type="password" name="password" placeholder="Ingrese su contraseña" required>
+        <label for="fpassword">Contraseña</label>
+        <input id="fpassword" type="password" name="password" placeholder="Ingrese su contraseña" required>
 
-        <div id="button-form">
-            <button type="submit" class="submit-btn"> Iniciar sesión </button>
-            <a class="submit-btn" href="/new_user">Registrarse</a>
+        <div>
+            <input type="submit" value="Iniciar sesión" />
+            <a id="register" href="/new_user">Registrarse</a>
         </div>
     </form>
+</div>
 {% endblock %}
 
 {% block footer %}

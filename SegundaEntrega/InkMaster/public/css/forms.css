@@ -1,0 +1,95 @@
+/* --- General styles for all forms --- */
+
+/* Style inputs with type="text", select elements and textareas */
+select, textarea, input[type=date], input[type=time], input[type=text], input[type=password], input[type=number], input[type=tel], input[type=email] {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style input file */
+input[type=file] {
+  width: 100%;
+  /* padding: 12px; */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit], input[type=reset] {
+  background-color: var(--color-logo);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+/* input[type=submit]:hover {
+  background-color: #45a049;
+} */
+
+/* Add a background color and some padding around the form */
+.container-form {
+  margin: 4.5em auto 2em;
+  width: 40%;
+
+}
+
+@media screen and (max-width: 1024px) {
+  .container-form {
+    margin: 4.5em auto 2em;
+    width: 80%;
+  }
+}
+
+/* This is the checkbox section (for diseases, terms and conditions and register a new artist by administrator user) */
+.illness, .terms-conditions, .add-artist {
+  display: block;
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+}
+
+/* This is the text area for diseases and artist section */
+.disease, .artist-section {
+  display: none;
+}
+
+/* This is the main title of page */
+.title {
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  /* padding: 4.5em auto 0; */
+  font-weight: bold;
+}
+
+.login-ap {
+  margin: 2em auto 2em;
+  text-align: center;
+}
+
+input[type=reset] {
+  background-color: #202020;
+}
+
+/* This is the bottom warning */
+.footer-form {
+  border-top: 1px dashed var(--color-logo);
+  margin-top: 2em;
+  padding: 1em;
+  text-align: center;
+}
+
+/* --- Styles for Login form --- */
+
+#register, .login-register  {
+  display: block;
+  margin: 1em auto;
+}

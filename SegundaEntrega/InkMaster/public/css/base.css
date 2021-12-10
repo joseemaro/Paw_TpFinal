@@ -36,7 +36,7 @@ main {
 
 header{
     grid-area: encabezado;
-    background-color: black; /* Davys grey*/
+    background-color: #202020; /* Davys grey*/
     width: 100%;
     position: relative;
 }
@@ -274,7 +274,7 @@ nav ul li .icon-mobile {
 }
 
 /*Para pantallas muy grandes*/
-@media screen and (min-width:1920px) {
+/* @media screen and (min-width:1920px) {
     header {
         width: 80%;
         margin: 0 auto;
@@ -289,5 +289,5 @@ nav ul li .icon-mobile {
         width: 80%;
         margin: 0 auto;
     }
-}
+} */
 
