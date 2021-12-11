@@ -93,3 +93,45 @@ input[type=reset] {
   display: block;
   margin: 1em auto;
 }
+
+/* Styles, columns for register form */
+
+/* Floating column for labels: 25% width */
+.col-left {
+  float: left;
+  width: 48%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+/* Floating column for inputs: 75% width */
+.col-right {
+  float: left;
+  width: 48%;
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+/* Clear floats after the columns */
+.row-forms:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.one-column {
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.artist-section {
+  margin-top: 0.5em; /* Add a top margin */
+}
+
+@media screen and (max-width: 1024px) {
+  /* Floating column for labels: 25% width */
+  .col-left, .col-right, .one-column {
+    width: 100%; /* Full width */
+  }
+  
+}
