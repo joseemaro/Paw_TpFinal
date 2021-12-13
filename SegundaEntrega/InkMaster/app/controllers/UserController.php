@@ -213,7 +213,7 @@ class UserController extends Controller
         if (isset($_POST["phone"])) $parameters["phone"] = $_POST["phone"];
         if (isset($_POST["direction"])) $parameters["direction"] = $_POST["direction"];
         if (isset($_POST["email"])) $parameters["email"] = $_POST["email"];
-        if (isset($_FILES)) $parameters["photo"] = $_FILES;
+        if (isset($_FILES)) $parameters["photo"] = $_FILES['photo'];
         if (isset($_POST["pathology"])) $parameters["pathology"] = $_POST["pathology-txt"];
         if (isset($_POST["artist"])) {
             $parameters["artist"] = true;
