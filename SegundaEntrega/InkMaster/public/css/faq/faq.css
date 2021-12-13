@@ -1,168 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;500;700&family=Rowdies:wght@300&display=swap');
-
-h1 {
-    padding-top: 3em;
-    padding-bottom: 1.5em;
-    padding-left: 1em;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-decoration: underline;
-    text-decoration-color: #575766;
-    color: #343a40;
-    background-color: #dee2e6;
-    border-radius: 0.8em;
+.wrapper {
+  margin: 4em auto 2em;
 }
 
-button {
-    display: inline-block;
-    font-size: 85%;
-    padding: 0.6em 0.6em;
-    margin-top: 0.5em;
-    appearance: none;
-    color: white;
-    border-radius: 0.1875em;
-    border: none;
-    cursor: pointer;
-    width: 15%;
-    background-color: #202020;
-    font-family: 'Oswald', sans-serif;
-}
-
-#content{
-    padding-bottom:2em;
-}
-#content2{
-    padding-bottom:2em;
-}
-
-.addBtn {
-    background-color: #3C7931;
-    margin-bottom: 0.5em;
-    margin-left: 40%;
-}
-
-
-.editBtn{
-    margin-top: 1em;
-    background-color: #adb5bd;
-    color: black;
-    width: 10%;
-}
-
-.deleteBtn {
-    background-color: #8B0000;
-    width: 10%;
-}
-
-
-button:hover{
-    opacity: 0.8;
-    transition:  0.5s ease-in-out;
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-width : 320px) and (max-width : 1024px)
-{
-    .addBtn,
-    .editBtn,
-    .deleteBtn {
-        width: 50%;
-    }
-    .addBtn{
-        margin-left: 25%;
-    }
-    .deleteBtn{
-        margin-bottom: 1em;
-    }
-
-    .add-faq{
-        width: 50%;
-    }
-
-    .fontsize {
-        font-size: 0.625em;
-    }
-    #wrapper {
-        width: 80%;
-        margin: 1em auto;
-        padding-bottom: 3em;
-    }
-}
-
-#wrapper {
-    width: 80%;
-    margin: 0 auto;
-    background-color: #fff;
-    padding-bottom: 2em;
-    font-family: 'Oswald', sans-serif;
-
-}
-
-.preg {
-    font-size: 1.3em;
-    font-weight: bold;
-    padding-bottom: 1%;
-    color: #343a40;
-}
-
-a {
-    color: black;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-    text-decoration-color: #575766;
-}
-
-article {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    float: left;
-    height: 100%;
-    padding: 1%;
-    text-align: left;
-}
-
-#column1 {
+.accordion__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    background-color: #e9ecef;
-    border: #adb5bd 1px solid;
-    border-radius: 1em;
-    margin-bottom: 1em;
-}
-#column1 section{
-    margin-left: 2em;
 }
 
-.styled-select {
-    width: 20%; 
-    height: 90%; 
-    overflow: hidden; 
-    background: #ddd; 
-    border: 1px solid #ccc;
-    margin-left: 0.5%;
+.question-answer__accordion > .answer {
+    display: none;
 }
 
-.select-bar{
-    padding: 1.5%;
+.active > .answer {
+    display: block;
+    padding-bottom: 1.3rem;
 }
 
-
-
-@media only screen and (min-width : 320px) and (max-width : 480px)
-{
-    .styled-select {
-        width: 50%; 
-        height: 90%; 
-    }  
+.active img {
+  transform: rotate(180deg);
+  transition: all 0.3s ease-in;
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-    .styled-select {
-        width: 30%; 
-        height: 90%; 
-    }
+
+.questions__accordions {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.question-answer__accordion {
+  width: 80%;
+  border-bottom: 1px solid #e8e8ea;
+}
+
+.title__accordion {
+  font-size: 2em;
+  margin: 1em auto;
+  /* text-align: center; */
+  margin-left: 10%;
+}
+
+.title__question {
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin: 1.4rem 0rem;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.active h3 {
+  font-weight: 700;
+}
+
+.question img {
+  align-self: center;
+}
+
+.table-button {
+  background-color: var(--color-logo);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-faq {
+  margin: 1em 0;
+  margin-left: 10%;
+  /* text-align: center; */
+}
+
+.select-bar #faqs {
+  display: block;
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+.select-bar {
+  margin-left: 10%;
+  width: 40%;
+}
+
+/* @media (max-width: 700px) {
+
+  .question-answer__accordion {
+    width: 100%;
+  }
+  
+  .title__accordion {
+    text-align: center;
+  }
+
+} */
+
+.answer-block {
+  margin: 1% 0;
+}
+
+.visits {
+  margin-top: 2.5%;
+  color: var(--color-logo);
+}
+
+.manage-faqs form {
+  display: inline;
+}
+
+.manage-faqs .editBtn {
+  background-color: #202020;
 }

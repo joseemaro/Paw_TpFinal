@@ -25,7 +25,7 @@ figure {
 }
 
 figure img{
-    margin-left: 8%;
+    margin: 0 auto;
 }
 
 figcaption {
@@ -49,13 +49,12 @@ img {
 
 .artistBtn{
     display: inline-block;
-    font-size: 1.1em;
+    font-size: 1em;
     /* font-family: Didot LT STD;
     font-style: italic;
     font-weight: bold; */
     padding: 0.6em 0.6em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin: 0.5em auto;
     -webkit-appearance: none;
     appearance: none;
     border-radius: 0.1875em;
@@ -91,7 +90,7 @@ img {
     }
 }
 
-@media only screen and (min-width : 320px) and (max-width : 480px)
+/* @media only screen and (min-width : 320px) and (max-width : 480px)
 {
     figure img {
         margin-left: 1%;
@@ -102,4 +101,4 @@ img {
     figure img {
         margin-left: 1%;
     }   
-}
+} */

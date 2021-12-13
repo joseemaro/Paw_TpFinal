@@ -33,19 +33,22 @@
 	session_start();
 
     if ($resultado->num_rows>0) {
-    	$salida.="<section id='content'>
+    	$salida.="<div class='questions__accordions' id='content'>
 		";
 
     	while ($fila = $resultado->fetch_assoc()) {
     		$salida.="
-			<article id='column1'>
-			<section id='section-del' itemscope>
-			<a href='/view_faq/".$fila['id_faq']."'>
-				<p itemprop='name' class='preg'>".$fila['question']."</p>
-			</a>
-			<p class='answer' itemprop='description'>".$fila['answer']."</p>
-    		</section>
-			</tbody>";
+				<div class='question-answer__accordion'>
+					<div class='question'>
+						<h3 class='title__question'>
+							" . $fila['question'] . "
+						</h3>
+						<img src='/public/images/icon-arrow-down.svg' >
+					</div>
+					<div class='answer'>
+						<p class='answer-block'> " . $fila['answer'] . " </p>
+						<p class='answer-block'> " . $fila['summary'] . " </p>
+						<p class='answer-block visits'> Total de visitas: " . $fila['visits'] . " </p>";
 
 			$admin= false;
 			$aux = false;
@@ -61,28 +64,27 @@
 			}
 			if ($aux){
 				if ($aux->num_rows>0){
-					$salida.= "<section id='section2-del'>
-					<form method='get' id='edit-faq-".$fila['id_faq']."' action='/edit_faq/".$fila['id_faq']."'>
-						<input type='hidden' name='id_faq' value=".$fila['id_faq'].">
-						<button class ='table-button editBtn' type='submit' form='edit-faq-".$fila['id_faq']."'>Edit</button>
-					</form>
-		
-					<form method='get' id='destroy-faq-".$fila['id_faq']."' action='/del_faq/".$fila['id_faq']."' onSubmit='return confirm('Desea eliminar la pregunta?');'>
-						<input type='hidden' name='id_faq' value=".$fila['id_faq'].">
-						<button class ='table-button deleteBtn' type='submit' form='destroy-faq-".$fila['id_faq']."'>Delete</button>
-					</form>
-				</section>
-			
-				";
+					$salida.= "
+                	<section class='manage-faqs'>
+                	    <form method='get' id='edit-faq-" . $fila['id_faq'] . "' action='/edit_faq/" . $fila['id_faq'] . "'>
+                	        <input type='hidden' name='id_faq' value=" . $fila['id_faq'] . ">
+                	        <button class='table-button editBtn' type='submit' form='edit-faq-" . $fila['id_faq'] . "'>Editar</button>
+                	    </form>
+					
+                	    <form method='get' id='destroy-faq-" . $fila['id_faq'] . "' action='/del_faq/" . $fila['id_faq'] . "' onSubmit='return confirm('Desea eliminar la pregunta?');'>
+                	        <input type='hidden' name='id_faq' value=" . $fila['id_faq'] . ">
+                	        <button class='table-button deleteBtn' type='submit' form='destroy-faq-" . $fila['id_faq'] . "'>Borrar</button>
+                	    </form>
+                	</section>";
 				}
 			}
 			$salida.= "
-			</article>
+			</div>
+			</div>
 			";
 		};
 		$salida.= "
-		</article>
-		</section>";
+		</div>";
     }else{
     	$salida.="NO HAY DATOS :(";
     }
