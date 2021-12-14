@@ -7,6 +7,7 @@ use App\Core\App;
 
 class Tattoo extends Model
 {
+    protected $database = DB_NAME;
     protected $table = 'tattoo';
     protected $id;
     protected $id_artist;
@@ -100,6 +101,21 @@ class Tattoo extends Model
 
     public function countTattoos() {
         return $this->db->countTuples($this->table);
+    }
+
+    public function verifyArtist( $id_tattoo, $id_artist ) {
+        $count = $this->db->simpleQuery( "select count(*) as cant from $this->database.$this->table
+                                                where id_artist = :1 and id_tattoo = :2;", [$id_artist, $id_tattoo] );
+        if ( $count['cant'] > 0 ) {
+            $bool = true;
+        } else {
+            $bool = false;
+        }
+        return $bool;
+    }
+
+    public function deleteTattoo( $id_tattoo ) {
+        return $this->db->deleteFromID( "tattoo", $id_tattoo, "where id_tattoo = :id" );
     }
 }
 

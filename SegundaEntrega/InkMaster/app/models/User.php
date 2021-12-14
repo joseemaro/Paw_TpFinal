@@ -557,7 +557,7 @@ class User extends Model
         if ($artist) {
             $artist["photo"] = base64_encode($artist["photo"]);
             $artist["tattoos"] = $this->replace($this->db->query("select * from $this->database.tattoo as t
-                                                                    where t.id_artist = :1;", [$id_artist]));
+                                                                    where t.id_artist = :1 order by id_tattoo;", [$id_artist]));
         }
         return $artist;
     }

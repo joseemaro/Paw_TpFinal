@@ -18,24 +18,11 @@ class UserController extends Controller
     public function register() {
         return $this->generalController->view('register');
     }
-/*
-    public function saveUser() {
-        $array = $this->user->validateInsert($this->parameters());
-        $status = $array[count($array)-1];
-        if ($status) {  #si salio bien la validacion
-            //$variable["parameters"] = $array;
-            return $this->generalController->view('login');
-        } else {
-            $variable["errors"] = $array;
-            return $this->generalController->view('errors.register', $variable);
-        }
-    }
-*/
+
     public function saveUser() {
         $bool = $this->user->validateInsert($this->parameters());
         $status = $bool;
         if ($status) {  #si salio bien la validacion
-            //$variable["parameters"] = $array;
             session_start();
             if (isset($_SESSION["id_user"])) {
                 return $this->generalController->view('/index.views');

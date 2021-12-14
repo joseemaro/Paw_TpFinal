@@ -48,7 +48,6 @@ class ApController extends Controller
             if (isset($_POST["id_artist"])) {
                 $parameters["artist"] = $_POST["id_artist"];
             }
-            #var_dump(($_FILES["reference_image"]));
             if (isset($_FILES["reference_image"])) {
                 $parameters["reference_images"]["reference_image"] = $_FILES;
             }

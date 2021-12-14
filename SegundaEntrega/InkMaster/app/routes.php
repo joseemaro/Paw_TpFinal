@@ -41,5 +41,6 @@ $router->post('save_faq', 'GeneralController@saveFaq');
 $router->get('term&cond', 'GeneralController@listTerms');
 $router->get('gallery', 'GeneralController@listTattoos');
 $router->get('gallery/([0-9]{1,})', 'GeneralController@listTattoos');
-$router->get('upload_photos', 'GeneralController@updPhotos');
-$router->post('save_photos', 'GeneralController@savePhotos');
+$router->get('upload_photos', 'GeneralController@ulTattoos');
+$router->post('save_photos', 'GeneralController@saveTattoo');
+$router->get('delete_tattoo/([0-9]{1,})', 'GeneralController@delTattoo');

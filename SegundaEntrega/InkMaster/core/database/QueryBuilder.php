@@ -49,6 +49,27 @@ class QueryBuilder {
     }
 
     /**
+     * delete
+     *
+     * @param string $table
+     * @param integer $id
+     *
+     */
+    public function deleteFromID( $table, $id, $where_id ){
+
+        $sql = "DELETE from $this->database.$table " . $where_id;
+        try {
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(":id", $id);
+
+            return $statement->execute();
+        } catch (Exception $e) {
+            return false;
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
      * Finds a record into a table.
      *
      * @param string $id_user
@@ -259,7 +280,6 @@ class QueryBuilder {
             }
         }
     }
-
 
     /**
      * delete a faq

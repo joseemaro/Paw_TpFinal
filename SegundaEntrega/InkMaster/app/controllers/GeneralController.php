@@ -37,37 +37,57 @@ class GeneralController extends Controller
         return $this->view('index.views');
     }
 
-    public function updPhotos() {
+    public function ulTattoos() {
         session_start();
-        if (isset($_SESSION["id_user"])) {
+        if ( isset( $_SESSION["id_user"] ) ) {
             $id_user = $_SESSION["id_user"];
-            if ($this->user->havePermissions($id_user, 'tattoo.new')) {
-                return $this->view('tattoo/upload.tattoos');
+            if ( $this->user->havePermissions( $id_user, 'tattoo.new' ) ) {
+                $variable["artist"] = $id_user;
+                return $this->view( 'tattoo/upload.tattoos', $variable );
             }
         }
-        return $this->view('not_found');
+        return $this->view( 'not_found' );
     }
+
     public function updMedRec($id_user, $medical){
         return $this->user->updMedRec('medical_record' ,$id_user, $medical);
     }
 
-    public function savePhotos() {
+    public function saveTattoo() {
         session_start();
-        if (isset($_SESSION["id_user"])) {
+        if ( isset( $_SESSION["id_user"] ) ) {
             $id_user = $_SESSION["id_user"];
-            if ($this->user->havePermissions($id_user, 'tattoo.new')) {
+            if ( $this->user->havePermissions( $id_user, 'tattoo.new' ) ) {
                 $parameters = $this->parameters();
-                if ($parameters) {
-                    $array = $this->tattoo->validateInsert($parameters);
+                if ( $parameters ) {
+                    $array = $this->tattoo->validateInsert( $parameters );
                 } else {
                     $array = ["No se completaron todos los campos obligatorios", false];
                 }
                 $status = $array[count($array)-1];
-                if ($status) {  #si salio bien la validacion
-                    return $this->view('tattoo/upload.tattoos');
+                if ( $status ) {  #si salio bien la validacion
+                    return $this->view( 'tattoo/upload.tattoos' );
                 } else {
                     $variable["errors"] = $array;
-                    return $this->view('errors.register', $variable);
+                    return $this->view( 'errors.register', $variable );
+                }
+            }
+        }
+        return $this->view( 'not_found' );
+    }
+
+    public function delTattoo( $id_tattoo ) {
+        $id_tattoo = str_replace( "%20", " ", $id_tattoo );
+        session_start();
+        if ( isset( $_SESSION["id_user"] ) ) {
+            $id_user = $_SESSION["id_user"];
+            if ( $this->user->havePermissions( $id_user, 'tattoo.delete' ) ) {
+                if ( $this->isArtist( $id_user ) && $this->tattoo->verifyArtist( $id_tattoo, $id_user ) ) {
+                    $status = $this->tattoo->deleteTattoo( $id_tattoo );
+                    $variable["artist"] = $this->user->findArtist( $id_user );
+                    if ($status != false) {  #si salio bien la validacion
+                        return $this->view("artist/view.artist", $variable);
+                    }
                 }
             }
         }

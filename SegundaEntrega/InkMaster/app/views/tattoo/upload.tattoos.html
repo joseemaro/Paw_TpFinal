@@ -22,11 +22,7 @@
     <form method="post" action="/save_photos" enctype="multipart/form-data">
   
     <label for="fprofesional">Profesional</label>
-    <select id="fprofesional" name="artist">
-        {% for artist in artists %}
-        <option>{{ artist.id_user }}</option>
-        {% endfor %}
-    </select>
+    <input type="text" name="artist" id="fprofesional" class="" value="{{ variable['artist'] }}" disabled>
   
     <label for="fsector">Sector</label>
     <select id="fsector" name="sector">

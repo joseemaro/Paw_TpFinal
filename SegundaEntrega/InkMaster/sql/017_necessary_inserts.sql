@@ -21,6 +21,7 @@ insert into `permission` (`id_permission`, `txt`) values
 ('artist.edit', 'Editar la información de un artista'),
 ('artist.delete', 'Deshabilitar a un artista'),
 ('tattoo.new', 'Añadir la imagen de un nuevo tattoo'),
+('tattoo.delete', 'Eliminar la imagen de un tattoo'),
 ('faq.new', 'Crear una nueva pregunta frecuente'),
 ('faq.edit', 'Editar una pregunta frecuente'),
 ('faq.delete', 'Eliminar una pregunta frecuente');
@@ -44,9 +45,10 @@ insert into `permission_rol` (`id_permission_rol`, `id_permission`, `id_rol`) va
 (11, 'appointment.delete', 'artist'),
 (12, 'artist.edit', 'artist'),
 (13, 'tattoo.new', 'artist'),
-(14, 'user.edit', 'user'),
-(15, 'user.delete', 'user'),
-(16, 'user.view', 'user');
+(14, 'tattoo.delete', 'artist'),
+(15, 'user.edit', 'user'),
+(16, 'user.delete', 'user'),
+(17, 'user.view', 'user');
 
 /*necesario que se cree un usuario con nombre de usuario "Administrador"*/
 insert into `administrator` (`id_administrator`, `id_local`) values
