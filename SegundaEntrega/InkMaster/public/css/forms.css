@@ -135,3 +135,11 @@ input[type=reset] {
   }
   
 }
+
+.profile_picture_edit {
+  /* height: 30%; */
+  width: 50%;
+  height: 50%;
+  display: block;
+  padding: 12px;
+}

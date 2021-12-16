@@ -1,8 +1,18 @@
-#container-list {
-    padding: 1em;
+.container-listap {
+    margin: 4.5em auto 2em;
 }
-h1{
-    padding-top: 2.5rem;
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    text-transform: uppercase;
+    /* padding: 4.5em auto 0; */
+    font-weight: bold;
+}
+
+.without-ap {
+    text-align: center;  
+    margin: 1em auto;
 }
 
 #title-list {
@@ -16,8 +26,8 @@ tbody,
 tr,
 td,
 th {
-    border: 1px solid #CA4B1F;
-    background: whitesmoke;
+    border: 1px solid #202020;
+    /* background: whitesmoke; */
 }
 
 section p {
@@ -93,8 +103,8 @@ section p {
 
 table.width200,
 table.rwd_auto {
-    width:100%;
-    margin:0 0 0.625em 0;
+    width: 80%;
+    margin: 1em auto;
 }
 .width200 th,
 .rwd_auto th {

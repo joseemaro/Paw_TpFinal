@@ -55,10 +55,12 @@
             </nav>
         {% endif %}
     {% else %}
-        {% if isArtist %}
-            <a class="img-btn" href="/upload_photos">Subir fotos </a>
-        {% endif %}
-        <h2 id="warning_img"> No hay imágenes registrados hasta el momento </h2>
+        <div class="without-img">
+            <p class="text"> No hay imágenes registrados hasta el momento </p>
+            {% if isArtist %}
+            <a class="text" href="/upload_photos">Subir fotos</a>
+            {% endif %} 
+        </div> 
     {% endif %}
 
 {% endblock %}

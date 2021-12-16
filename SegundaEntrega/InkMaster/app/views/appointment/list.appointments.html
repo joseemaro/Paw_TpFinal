@@ -16,86 +16,83 @@
 {% endblock %}
 
 {% block main %}
-    <section id="container-list">
-        <h1 id="title-list">Lista de turnos</h1>
-        {% if variable.appointments %}
-
+<div class="container-listap">
+    <h1 class="title">Lista de turnos</h1>
+    {% if variable.appointments %}
         {% if variable.link and (isArtist or isAdministrator) %}
             <form method="get" action="{{ variable.link }} " target="_blank">
                 <button class ="calendarBtn" type="submit">Google calendar</button>
             </form>
         {% endif %}
-
-            <table class="width200">
-                <thead>
-                <tr>
-                    <th scope="col">Tatuador</th>
-                    <th scope="col">Local</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Hora</th>
-                    <th scope="col">Nombre del usuario</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-                </thead>
-
-                {% for appointment in variable.appointments %}
-                    <tbody>
-                        <tr>
-                            <td>{{ appointment.id_artist }}</td>
-                            <td>{{ appointment.id_local }}</td>
-                            <td>{{ appointment.date }}</td>
-                            <td>{{ appointment.hour }}</td>
-                            <td>{{ appointment.id_user }}</td>
-                            <td>{{ appointment.phone }}</td>
-                            <td>{{ appointment.email }}</td>
-                            <td>{{ appointment.status }}</td>
-                            {% if (appointment.price is null) %}
-                                <td> - </td>
-                            {% else %}
-                                <td>{{ appointment.price }}</td>
+        <table class="width200">
+            <thead>
+            <tr>
+                <th scope="col">Tatuador</th>
+                <th scope="col">Local</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Hora</th>
+                <th scope="col">Nombre del usuario</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+            </tr>
+            </thead>
+            {% for appointment in variable.appointments %}
+                <tbody>
+                    <tr>
+                        <td>{{ appointment.id_artist }}</td>
+                        <td>{{ appointment.id_local }}</td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.hour }}</td>
+                        <td>{{ appointment.id_user }}</td>
+                        <td>{{ appointment.phone }}</td>
+                        <td>{{ appointment.email }}</td>
+                        <td>{{ appointment.status }}</td>
+                        {% if (appointment.price is null) %}
+                            <td> - </td>
+                        {% else %}
+                            <td>{{ appointment.price }}</td>
+                        {% endif %}
+                        <td>
+                            {% if isArtist %}
+                                {% if (appointment.status == 'pending') %}
+                                    <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
+                                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                        <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
+                                    </form>
+                                {% endif %}
                             {% endif %}
-                            <td>
-                                {% if isArtist %}
-                                    {% if (appointment.status == 'pending') %}
-                                        <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
-                                            <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                            <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
-                                        </form>
-                                    {% endif %}
+                            <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="/view_appointment/{{ appointment.id_appointment }}">
+                                <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
+                            </form>
+                            {% if isArtist %}
+                                {% if (appointment.status != 'annulled') %}
+                                    <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="/edit_appointment/{{ appointment.id_appointment }}">
+                                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                        <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
+                                    </form>
                                 {% endif %}
-                                <form method="get" id="show-appointment-{{ appointment.id_appointment }}" action="/view_appointment/{{ appointment.id_appointment }}">
-                                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                    <button class ="table-button viewBtn" type="submit" form="show-appointment-{{ appointment.id_appointment }}">View</button>
-                                </form>
-
-                                {% if isArtist %}
-                                    {% if (appointment.status != 'annulled') %}
-                                        <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="/edit_appointment/{{ appointment.id_appointment }}">
-                                            <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                            <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
-                                        </form>
-                                    {% endif %}
-                                    {% if (appointment.status == 'pending') %}
-                                        <form method="get" id="destroy-appointment-{{ appointment.id_appointment }}" action="/del_appointment/{{ appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
-                                            <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                            <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Cancel</button>
-                                        </form>
-                                    {% endif %}
+                                {% if (appointment.status == 'pending') %}
+                                    <form method="get" id="destroy-appointment-{{ appointment.id_appointment }}" action="/del_appointment/{{ appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
+                                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                                        <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Cancel</button>
+                                    </form>
                                 {% endif %}
-
-                            </td>
-                        </tr>
-                    </tbody>
-                {% endfor %}
-            </table>
-        {% else %}
-            <p> No hay turnos registrados hasta el momento </p>
-        {% endif %}
-    </section>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    {% else %}
+    <div class="without-ap">
+        <p> No hay turnos registrados hasta el momento </p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block footer %}
