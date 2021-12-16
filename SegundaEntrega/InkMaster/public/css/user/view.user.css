@@ -1,202 +1,95 @@
-@import "https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,700&display=swap";
-@import "https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,700&display=swap";
-* {
-    box-sizing: border-box;
-}
-
-#container-viewUser {
+.user-container {
     width: 100%;
-    padding: 1em;
-    display: flex;
-    flex-flow: column;
+    margin: 4.5em 0 2em;
 }
 
-#title-viewUser,
-#title-local {
-    color: #575766;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-align: center;
-    padding-bottom: 0.5em;
-}
-
-#title-viewUser{
-    padding-top: 2rem;
-}
-
-#local-data{
-    margin-top: 3rem;
-}
-#personal-data,
-#local-data,
-#container-button {
-    width: 100%;
-}
-
-#container-button {
-    padding: 1em;
-    margin-left: 25%;
-}
-
-
-#personal-data{
-    overflow: visible;
-    height: 100%;
-}
-
-.backBtn,
-.editBtn,
-.deleteBtn {
-    display: inline-block;
-    font-size: 100%;
-    padding: 0.6em 0.6em;
-    margin-top: 0.5em;
-    appearance: none;
-    color: white;
-    border-radius: 0.1875em;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    background-color: #202020;
-}
-
-.editBtn{
-    background-color: #7FB685;
-    color: black;
-}
-
-.deleteBtn {
-    background-color: #8B0000;
-}
-
-button:hover{
-    opacity: 0.8;
-    transition:  0.5s ease-in-out;
-}
-
-figure {
-    background: whitesmoke;
-    margin: 1em auto;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    list-style-type: none;
-    padding: 1em;
+/* Floating column for labels: 25% width */
+.col-left, .col-right {
+    float: left;
     width: 50%;
+}
+
+.one-column {
+    width: 100%;
+}
+
+.one-column .user-data {
+    width: 40%;
+}
+ 
+/* Clear floats after the columns */
+.row-user:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.profile-picture #myImg {
+    /* max-height: 100%; */
+    height: 70%;
+    width: 70%;
+    padding: 2em;
+}
+
+.col-left {
+    text-align: center;
+}
+
+.user-data {
+    padding: 2em;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.textarea, input[type=date], input[type=text], input[type=number], input[type=tel], input[type=email] {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+    font-size: small;
+  }
+
+.title {
+    /* font-size: em; */
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+.editBtn, .deleteBtn, .backBtn {
+    background-color: #202020;
+    margin: 1%;
+    padding: 12px 20px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.backBtn, .container-button form {
+    display: inline;
+}
+
+.deleteBtn {
+    background-color: var(--color-logo);
+}
+
+@media screen and (max-width: 1024px) {
+
+    .col-left, .col-right {
+        width: 100%;
+    }
+
+    .user-data {
+        text-align: center;
+    }
+
+    .one-column .user-data {
+        width: 80%;
+    }
     
 }
-
-figure img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-left: 15%;
-}
-
-.zoom{
-    /* Aumentamos la anchura y altura durante 2 segundos */
-    transition: width 2s, height 2s, transform 2s;
-    -moz-transition: width 2s, height 2s, -moz-transform 2s;
-    -webkit-transition: width 2s, height 2s, -webkit-transform 2s;
-    -o-transition: width 2s, height 2s,-o-transform 2s;
-}
-.zoom:hover{
-    /* tranformamos el elemento al pasar el mouse por encima al doble de
-       su tamaño con scale(2). */
-    transform : scale(2);
-    -moz-transform : scale(2);      /* Firefox */
-    -webkit-transform : scale(2);   /* Chrome - Safari */
-    -o-transform : scale(2);        /* Opera */
-}
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-width : 320px) and (max-width : 480px)
-{
-    figure img {
-        margin-left: 1%;
-    }   
-    #container-button {
-        margin-left: 1%;
-    }
-}
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-    figure img {
-        margin-left: 1%;
-    }   
-    #container-button {
-        margin-left: 25%;
-    } 
-}
-
-
-@media screen and (min-width:700px){
-
-    #container-viewUser {
-        flex-flow: row;
-    }
-
-    #personal-data{
-        width: 50%;
-    }
-
-    #local-data {
-        width: 50%;
-    }
-
-    #container-viewUser label input,
-    #container-viewUser label textarea{
-        width: 60%;
-    }
-
-    .backBtn,
-    .editBtn,
-    .deleteBtn {
-        display: block;
-        width: 30%;
-        margin-top: 0.7em;
-        margin-left: 10%;
-    }
-}
-
-h1 {
-    font-family: 'Lora', serif;
-}
-
-.h2-form{
-    font-family: 'Lora', serif;
-}
-
-li p{
-    font-family: 'Lora', serif;
-    font-style: normal;
-    font-weight: bold;
-}
-
-.l-form{
-    font-family: 'Lora', serif;
-    font-weight: lighter;
-    font-style: italic;
-}
-
-
-#lista5 {
-    list-style: none;
-    padding: 0;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
-}
-
-#lista5 ol {
-    margin: 0 0 0 3em;
-}
-
-
-#lista5 {
-    list-style-type: none;
-    padding: 0;
-}
-
-#lista5 > li{
-    padding: 1em;
-    background-color: #eaeaea;
-}
-
-
-

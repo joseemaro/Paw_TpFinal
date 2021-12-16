@@ -19,113 +19,67 @@ Usuario
 {% endblock %}
 
 {% block main %}
-
-<section id="container-viewUser">
-
-    <section id="personal-data">
-        <h1 id="title-viewUser">{{ variable.user["id_user"] }} </h1>
-
+<div class="user-container"> 
+    <div class="row-user">
         {% if variable.user.photo %}
-        <figure>
-            <img id="myImg" src="data:image/jpg;base64, {{ variable.user['photo'] }} " alt="Foto de perfil de usuario">
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
-                <div id="caption"></div>
-              </div>
-        </figure>
+        <div class="col-left">
+            <figure class="profile-picture"> 
+                <img id="myImg" src="data:image/jpg;base64, {{ variable.user['photo'] }} " alt="Foto de perfil de usuario">
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
+                </div>
+            </figure>         
+        </div>
+        <div class="col-right">
+        {% else %}
+        <div class="one-column">
         {% endif %}
-
-        <section id="container-button">
-            <button class ="backBtn" type="submit" onclick="history.back()">Volver</button>
-            {% if variable.user.id_user == user %}
-            <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="/edit_user/{{ variable.user['id_user'] }}">
-                <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                <button class ="editBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Edit</button>
-            </form>
-            
-            <form method="get" id="del-user-{{ variable.user['id_user'] }}" action="/del_user/{{ variable.user['id_user'] }}">
-                <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                <button class ="deleteBtn" type="submit" form="del-user-{{ variable.user['id_user'] }}">Borrar Usuario</button>
-            </form>
-            
-            {% endif %}
-        </section>
-
-    </section>
-
-    <section id="local-data">
-        <ol id="lista5">
-            <li>
-                <p>Nombre de usuario:
-                    <label class="l-form">{{ variable.user.id_user }}</label>
-                </p>
-            </li>
-            <li>
-                <p>Nombre:
-                    <label class="l-form">{{ variable.user.first_name }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Apellido:
-                    <label class="l-form">{{ variable.user.last_name }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Nacimiento:
-                    <label class="l-form">{{ variable.user.born }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Nro de documento:
-                    <label class="l-form">{{ variable.user.nro_doc }}</label>
-                </p>
-            </li>
-
-            <li>
-                <p> Teléfono:
-                    <label class="l-form">{{ variable.user.phone }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Dirección:
-                    <label class="l-form">{{ variable.user.direction }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Email:
-                    <label class="l-form">{{ variable.user.email }}</label>
-                </p>
-            </li>
-
-            {% if (variable.user.considerations) %}
-            <li>
-                <p> Enfermedades:
-                    <label class="l-form">{{ variable.user.considerations }}</label>
-                </p>
-            </li>
-            {% endif %}
-
-            {% if (variable.user.id_artist) %}
-                <h2 class="h2-form" id="title-local">Datos como artista</h2>
-            <li>
-                <p>  Local de atención:
-                    <label class="l-form">{{ variable.user.local }}</label>
-                </p>
-            </li>
-            <li>
-                <p> Descripción:
-                    <label class="l-form">{{ variable.user.txt }}</label>
-                </p>
-            </li>
-            {% endif %}
-        </ol>
-    </section>
-
-</section>
-
-
-
+            <div class="user-data">
+                <h1 class="title">{{ variable.user["id_user"] }} </h1>
+                <label for="fname"> Nombre </label>
+                <input id="fname" type="text" readonly value="{{ variable.user.first_name }}">
+                <label for="flastname"> Apellido </label>
+                <input id="flastname" type="text" readonly value="{{ variable.user.last_name }}">
+                <label for="fborn"> Nacimiento </label>
+                <input id="fborn" type="date" readonly value="{{ variable.user.born }}">
+                <label for="fdni"> Número de documento </label>
+                <input id="fdni" type="number" readonly value="{{ variable.user.nro_doc }}">
+                <label for="ftel"> Teléfono </label>
+                <input id="ftel" type="tel" readonly value="{{ variable.user.phone }}">
+                <label for="faddress"> Dirección </label>
+                <input id="faddress" type="text" readonly value="{{ variable.user.direction }}">
+                <label for="femail"> Email </label>
+                <input id="femail" type="email" readonly value="{{ variable.user.email }}">
+                {% if (variable.user.considerations) %}
+                    <label for="fillness"> Enfermedades </label>
+                    <p id="fillness" class="textarea"> {{ variable.user.considerations }} </p>    
+                {% endif %}
+                {% if (variable.user.id_artist) %}
+                    <h1 class="title"> Datos como artista </h1>
+                    <label for="flocal"> Local de atención </label>
+                    <p id="flocal" class="textarea"> {{ variable.user.local }} </p>
+                    <label for="fdescription"> Descripción </label>
+                    <p id="fdescription" class="textarea"> {{ variable.user.txt }} </p>
+                {% endif %}
+                <div class="container-button">
+                    <!-- <button class ="backBtn" type="submit" onclick="history.back()">Volver</button> -->
+                    {% if variable.user.id_user == user %}
+                    <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="/edit_user/{{ variable.user['id_user'] }}">
+                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+                        <button class ="editBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Editar</button>
+                    </form>
+                    <form method="get" id="del-user-{{ variable.user['id_user'] }}" action="/del_user/{{ variable.user['id_user'] }}">
+                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
+                        <button class ="deleteBtn" type="submit" form="del-user-{{ variable.user['id_user'] }}">Borrar Usuario</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}
