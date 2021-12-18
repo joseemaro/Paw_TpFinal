@@ -7,7 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/appointment/newAp.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
   <!--   <script type="text/javascript" src="/public/js/newAp.js"></script> -->
     <script type="text/javascript" src="/public/js/validateEditAp.js"></script> 
 {% endblock %}
@@ -19,40 +19,38 @@
 {% endblock %}
 
 {% block main %}
-
+<div class="container-form">
+    <h1 class="title"> Editar turno </h1>
     <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
-        <h1> Edición de turno </h1>
-
         <input type="hidden" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}">
-
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
         {% endif %}
 
-        <label> Usuario: <input type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}"></label>
+        <label for="fuser"> Usuario </label> 
+        <input id="fuser" type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}">
 
-        <label> Artista: <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}"></label>
+        <label for="fartist"> Artista </label>
+        <input id="fartist" type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}">
 
-        <label> Fecha: <input type="date" name="date" class="datejs" value="{{ variable.appointment.date }}"></label>
+        <label for="fdate"> Fecha </label>
+        <input id="fdate" type="date" name="date" class="datejs" value="{{ variable.appointment.date }}">
 
-        <label> Horario (hh:min): <input type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
-            <span id="hour-invalid" style="display: none">no esta dentro del hoario de atencion</span>
-        </label>
-
-        <label> Imágenes de referencia
-            {% if variable.appointment.reference_images %}
-                {% for reference_image in variable.appointment.reference_images %}
-                    <img class="img-edit" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
-                {% endfor %}
-            {% endif %}
-           <!--  <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple> -->
-        </label>
-
+        <label for="fhour"> Horario (hh:min) </label> 
+        <input id="fhour" type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
+        <span class="invalid" style="display: none">no esta dentro del hoario de atencion</span>
+    
+        <label for="img"> Imágenes de referencia </label>
+        {% if variable.appointment.reference_images %}
+            {% for reference_image in variable.appointment.reference_images %}
+                <img id="img" class="img-edit" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
+            {% endfor %}
+        {% endif %}
+        <!--  <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple> -->
+        
         {% if  variable.appointment.txt %}
-            <label> Enfermedades
-                <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}
-                </textarea>
-            </label>
+            <label for="pathology-txt"> Enfermedades </label>
+            <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}</textarea> 
         {% endif %}
 
         <div>
@@ -64,6 +62,7 @@
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
 
     </form>
+</div>
 {% endblock %}
 
 {% block footer %}

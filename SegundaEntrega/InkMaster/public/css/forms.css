@@ -143,3 +143,10 @@ input[type=reset] {
   display: block;
   padding: 12px;
 }
+
+.img-edit {
+  width: 80%;
+  height: auto;
+  display: block;
+  padding: 12px;
+}
