@@ -20,118 +20,88 @@
 
 {% block main %}
 
-<section id="container-viewAp">
-
-    <section id="container-dataAp">
-
-        <h1 id="title-viewAp"> Datos del turno </h1>
-
-        {% if (session) and (not variable.adult) %}
-            <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
-        {% endif %}
-
-        {% if variable.appointment.link %}
-        <form method="get" action="{{ variable.appointment.link }}" target="_blank">
-            <button class ="calendarBtn" type="submit">Google calendar</button>
-        </form>
-        {% endif %}
-
-        <label> Usuario:
-            <input type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}">
-        </label>
-
-        <label> Artista:
-            <input type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}">
-        </label>
-
-        <label> Fecha:
-            <input type="date" name="date" readonly value="{{ variable.appointment.date }}">
-        </label>
-
-        <label> Horario (hh:min):
-            <input type="time" name="hour" readonly value="{{ variable.appointment.hour }}">
-        </label>
-
-        <label> Estado:
-            <input type="text" name="status" readonly value="{{ variable.appointment.status }}">
-        </label>
-
-        {% if (variable.appointment.price is null) %}
-        <label> Price:
-            <input type="text" name="price" readonly value="-">
-        </label>
-        {% else %}
-            <label> Price:
-                <input type="text" name="price" readonly value="{{ variable.appointment.price }}">
-            </label>
-        {% endif %}
-
-
-        {% if variable.appointment.txt %}
-            <label> Enfermedades
-                <textarea name="pathology-txt" id="pathology-txt"
-                          pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.txt }}
-                </textarea>
-            </label>
-        {% endif %}
-
-<!--    <section>
-            {% if variable.appointment.tattoo %}
-                <label> Tattoo
-                        <img src="data:image/jpg;base64, {{ variable.appointment.tattoo }}">
-                </label>
-            {% endif %}
-        </section>-->
-
-        <section>
-            {% if isArtist %}
-
-                {% if (variable.appointment.status == 'pending') %}
-                    <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
-                        <input type="hidden" name="id_appointment" value={{ variable.appointment.id_appointment }}>
-                        <button class ="acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Acept</button>
-                    </form>
+<div class="ap-container"> 
+    <div class="row-ap">
+        <div class="col-left">
+            <div class="user-data">
+                <h1 class="title"> Datos del turno </h1>
+                {% if (session) and (not variable.adult) %}
+                <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
                 {% endif %}
-                {% if (variable.appointment.status != 'annulled') %}
-                <form method="get" id="edit-appointment-{{ variable.appointment.id_appointment }}" action="/edit_appointment/{{ variable.appointment.id_appointment }}">
-                    <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                    <button class ="editBtn" type="submit" form="edit-appointment-{{ variable.appointment.id_appointment }}">Edit</button>
+                {% if variable.appointment.link %}
+                <form method="get" action="{{ variable.appointment.link }}" target="_blank">
+                    <button class ="calendarBtn" type="submit">Google calendar</button>
                 </form>
                 {% endif %}
-                {% if (variable.appointment.status == 'pending') %}
-                    <form method="get" id="destroy-appointment-{{ variable.appointment.id_appointment }}" action="/del_appointment/{{ variable.appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
-                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                        <button class ="deleteBtn" type="submit" form="destroy-appointment-{{ variable.appointment.id_appointment }}">Delete</button>
-                    </form>
+                <label for="fuser"> Usuario </label>
+                <input id="fuser" type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}">
+                <label for="fartist"> Artista </label>
+                <input id="fartist" type="text" name="id_artist" readonly value="{{ variable.appointment.id_artist }}">
+                <label for="fdate"> Fecha </label>
+                <input id="fdate" type="date" name="date" readonly value="{{ variable.appointment.date }}">
+                <label for="fhour"> Horario (hh:min) </label>
+                <input id="fhour" type="time" name="hour" readonly value="{{ variable.appointment.hour }}">
+                <label for="festado"> Estado </label>
+                <input id="festado" type="text" name="status" readonly value="{{ variable.appointment.status }}">
+                {% if (variable.appointment.price is null) %}
+                <label for="fprice"> Price </label>
+                <input id="fprice" type="text" name="price" readonly value="-">
+                {% else %}
+                <label for="fprice"> Price </label>
+                <input id="fprice"type="text" name="price" readonly value="{{ variable.appointment.price }}">
                 {% endif %}
-            {% endif %}
-
-        </section>
-    </section>
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
-    </div>
-
-    <section id="container-imgAp">
-        {% if variable.appointment.reference_images %}
-            <h1 class="title-imgAp">Imágenes de referencia</h1>
-                <div id="container-all-img">
-                    {% for reference_image in variable.appointment.reference_images %}
-                    <img class="myImg" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
-                    {% endfor %}
+                {% if variable.appointment.txt %}
+                <label for="fillness"> Enfermedades </label>
+                <textarea id="fillness" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" readonly> {{ variable.appointment.txt }}</textarea>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-right">
+            <div>
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div id="caption"></div>
                 </div>
-        {% else %}
-            <h1 class="title-imgAp">No hay imágenes de referencia</h1>
-        {% endif %}
-    </section>
-
-</section>
-
-
-
+            
+                <div class="container-img">
+                {% if variable.appointment.reference_images %}
+                    <div id="container-all-img">
+                        {% for reference_image in variable.appointment.reference_images %}
+                        <img class="myImg" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
+                        <p class="text-img">Imágen(es) de referencia</p>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h1 class="title">No hay imágenes de referencia</h1>
+                {% endif %}
+                </div>
+                <div class="artist-buttons">
+                {% if isArtist %}
+                    {% if (variable.appointment.status == 'pending') %}
+                    <form method="get" id="acept-appointment-{{ variable.appointment.id_appointment }}" action="/acept_appointment/{{ variable.appointment.id_appointment }}">
+                        <input type="hidden" name="id_appointment" value={{ variable.appointment.id_appointment }}>
+                        <button class ="acceptBtn" type="submit" form="acept-appointment-{{ variable.appointment.id_appointment }}">Aceptar</button>
+                    </form>
+                    {% endif %}
+                    {% if (variable.appointment.status != 'annulled') %}
+                    <form method="get" id="edit-appointment-{{ variable.appointment.id_appointment }}" action="/edit_appointment/{{ variable.appointment.id_appointment }}">
+                        <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                        <button class ="editBtn" type="submit" form="edit-appointment-{{ variable.appointment.id_appointment }}">Editar</button>
+                    </form>
+                    {% endif %}
+                    {% if (variable.appointment.status == 'pending') %}
+                        <form method="get" id="destroy-appointment-{{ variable.appointment.id_appointment }}" action="/del_appointment/{{ variable.appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
+                            <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
+                            <button class ="deleteBtn" type="submit" form="destroy-appointment-{{ variable.appointment.id_appointment }}">Eliminar</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}

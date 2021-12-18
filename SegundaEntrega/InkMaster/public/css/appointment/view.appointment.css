@@ -1,134 +1,96 @@
-* {
-    box-sizing: border-box;
-}
-
-h1{
-    margin-top: 2.5rem;
-}
-#container-viewAp {
+.ap-container {
     width: 100%;
-    padding: 1em;
-    display: flex;
-    flex-flow: column;
+    margin: 4.5em 0 2em;
 }
 
-#title-viewAp,
-.title-imgAp {
-    color: #575766;
+/* Floating column for labels: 25% width */
+.col-left, .col-right {
+    float: left;
+    width: 50%;
+}
+
+.row-ap:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.title {
+    /* font-size: em; */
+    text-transform: uppercase;
     font-weight: bold;
-    font-size: 1.5em;
-    text-align: left;
-    padding-bottom: 0.5em;
-}
-.calendarBtn{
-    display: inline-block;
-    font-size: 1em;
-    padding: 0.6em 0.6em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    -webkit-appearance: none;
-    appearance: none;
-    border-radius: 0.1875em;
-    border: none;
-    cursor: pointer;
-    width: 15%;
-    background-color: #5B85AA;
+    margin-bottom: 1em;
+    /* text-align: center; */
 }
 
-.calendarBtn:hover{
-    background-color: #39648a;
-    transition:  0.5s ease-in-out;
+textarea, input[type=date], input[type=time], input[type=text] {
+    width: 100%; /* Full width */
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+    font-size: small;
 }
 
-#container-dataAp {
-    width: 100%;
+.user-data {
+    padding: 2em;
+    width: 80%;
+    margin: 0 auto;
 }
 
-#container-imgAp {
-    width: 100%;
+.container-img .myImg {
+    /* max-height: 100%; */
+    height: 70%;
+    width: 70%;
+    margin: 0 auto;
 }
 
-#container-all-img {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    /*overflow: scroll;*/
-    /*height: 100vh;*/
+.col-right div {
+    padding: 2em;
+    text-align: center;
 }
 
-#container-dataAp label {
-    display: block;
-    padding: 0.5em 0;
+.artist-buttons form {
+    display: inline;
 }
 
-#container-dataAp label input {
-    display: block;
-    width: 100%;
-    margin-top: 0.5em;
-    padding: 0.2em;
-    height: 5vh;
-    border: 1px solid var(--color-logo);
-    text-align: left;
-    background-color: whitesmoke;
-    border-radius: 0.3125em;
-    font-size: 100%;
-}
-
-.acceptBtn,
-.editBtn,
-.deleteBtn {
-    display: inline-block;
-    font-size: 100%;
-    padding: 0.6em 0.6em;
-    margin-top: 0.5em;
-    appearance: none;
-    color: white;
-    border-radius: 0.1875em;
-    border: none;
-    cursor: pointer;
-    width: 100%;
+.editBtn, .deleteBtn, .acceptBtn {
     background-color: #202020;
+    margin: 1%;
+    padding: 12px 20px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.acceptBtn {
-    background-color: #3C7931;
+.calendarBtn{
+    background-color: var(--color-logo);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 1em auto;
 }
 
-.deleteBtn {
-    background-color: #8B0000;
+.text-img {
+    margin-top: 1em;
 }
 
-#container-imgAp img {
-    width: 18.75em;
-    margin: 0.5em;
-    max-height: 100%;
-    height: 50%;
-}
+@media screen and (max-width: 1024px) {
 
-#container-imgAp label {
-    display: block;
-}
-
-@media screen and (min-width:700px){
-    #container-dataAp label input {
-        width: 50%;
+    .col-left, .col-right {
+        width: 100%;
     }
 
-    .acceptBtn,
-    .editBtn,
-    .deleteBtn {
-        width: 30%;
+    .container-img .myImg {
+        /* max-height: 100%; */
+        height: 80%;
+        width: 80%;
     }
-
-    #container-viewAp {
-        flex-flow: row;
-    }
-
-    #container-dataAp {
-        width: 50%;
-    }
-
-    #container-imgAp {
-        width: 50%;
-    }
+    
 }
