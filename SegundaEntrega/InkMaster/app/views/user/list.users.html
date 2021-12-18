@@ -16,8 +16,8 @@
 {% endblock %}
 
 {% block main %}
-<section id="container-list">
-    <h1 id="title-list">Lista de Usuarios</h1>
+<div class="container-listusers">
+    <h1 class="title">Lista de Usuarios</h1>
     {% if variable.artists %}
         <table class="width200">
             <thead>
@@ -58,9 +58,11 @@
             {% endfor %}
         </table>
     {% else %}
-        <p> No hay usuarios registrados hasta el momento </p>
+        <div class="without-users">
+            <p> No hay usuarios registrados hasta el momento </p>
+        </div>
     {% endif %}
-</section>
+</div>
 {% endblock %}
 
 {% block footer %}
