@@ -4,7 +4,7 @@
 select, textarea, input[type=date], input[type=time], input[type=text], input[type=password], input[type=number], input[type=tel], input[type=email] {
   width: 100%; /* Full width */
   padding: 12px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
+  border: 1px solid #ccc !important; /* Gray border */
   border-radius: 4px; /* Rounded borders */
   box-sizing: border-box; /* Make sure that padding and width stays in place */
   margin-top: 6px; /* Add a top margin */
