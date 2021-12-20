@@ -35,10 +35,12 @@
 
         <label for="fdate"> Fecha </label>
         <input id="fdate" type="date" name="date" class="datejs" value="{{ variable.appointment.date }}">
+        <span id="date-invalid" style="display: none">Ingrese una fecha valida</span>
 
         <label for="fhour"> Horario (hh:min) </label> 
         <input id="fhour" type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
-        <span class="invalid" style="display: none">no esta dentro del hoario de atencion</span>
+        <span id="hour-invalid" style="display: none">Ingrese una hora valida (9am-5pm)</span>
+       
     
         <label for="img"> Imágenes de referencia </label>
         {% if variable.appointment.reference_images %}

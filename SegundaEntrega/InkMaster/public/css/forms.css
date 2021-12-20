@@ -12,6 +12,10 @@ select, textarea, input[type=date], input[type=time], input[type=text], input[ty
   resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
 }
 
+/*textarea not resize*/
+textarea{resize: none}
+
+
 /* Style input file */
 input[type=file] {
   width: 100%;
@@ -83,6 +87,12 @@ input[type=reset] {
 #btn-register{
   background-color: #c7c7c7;
 }
+
+/* This is the bottom send */
+#send-btn2{
+  background-color: #c7c7c7;
+}
+
 /* This is the bottom warning */
 .footer-form {
   border-top: 1px dashed var(--color-logo);
