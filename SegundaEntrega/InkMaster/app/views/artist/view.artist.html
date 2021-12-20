@@ -47,7 +47,7 @@
                     <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}">
                     {% if variable.artist.id_artist == user %}
                         <form method="get" id="delete-tattoo-{{ tattoo['id_tattoo'] }}" action="/delete_tattoo/{{ tattoo['id_tattoo'] }}">
-                            <button class ="deleteBtn" type="submit" form="delete-tattoo-{{ tattoo['id_tattoo'] }}">Delete</button>
+                            <button class ="deleteBtn" type="submit" form="delete-tattoo-{{ tattoo['id_tattoo'] }}">Borrar</button>
                         </form>
                     {% endif %}
                 </div>

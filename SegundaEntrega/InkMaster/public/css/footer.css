@@ -69,6 +69,19 @@ footer {
     justify-content: space-between;
 }
 
+.tel-css{
+    margin-left: 15px;
+    color: #c7c7c7;
+}
+
+.email-css{
+    color: #c7c7c7;
+}
+
+.normal-font-css{
+    color: #c7c7c7;
+}
+
 @media screen and (max-width: 856px) {
     .container-body {
         flex-direction: column;
