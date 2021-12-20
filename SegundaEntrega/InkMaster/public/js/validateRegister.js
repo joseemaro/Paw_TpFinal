@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } else {
             validate_username.style.background = "#e05f5f";
-
+            validate_username.style.border = "1px solid #ccc";
             var pass = document.getElementById("user-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } else {
             validate_password.style.background = "#e05f5f";
-
+            validate_password.style.border = "1px solid #ccc";
             var pass = document.getElementById("pass");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_confirmPassword.style.background = "#e05f5f";
+            validate_confirmPassword.style.border = "1px solid #ccc";
             var pass = document.getElementById("pass-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -77,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_name.style.background = "#e05f5f";
+            validate_name.style.border = "1px solid #ccc";
             var pass = document.getElementById("name-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -94,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_surname.style.background = "#e05f5f";
+            validate_surname.style.border = "1px solid #ccc";
             var pass = document.getElementById("surname-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -122,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var pass = document.getElementById("born-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
+            validate_born.style.border = "1px solid #ccc";
 
         } else {
             validate_born.style.background = "#ffffff";
@@ -142,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_identificationNumber.style.background = "#e05f5f";
+            validate_identificationNumber.style.border = "1px solid #ccc";
             var pass = document.getElementById("dni-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -159,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_phone.style.background = "#e05f5f";
+            validate_phone.style.border = "1px solid #ccc";
             var pass = document.getElementById("tel-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -177,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_address.style.background = "#e05f5f";
+            validate_address.style.border = "1px solid #ccc";
             var pass = document.getElementById("dir-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -194,6 +201,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_email.style.background = "#e05f5f";
+            validate_email.style.border = "1px solid #ccc";
             var pass = document.getElementById("email-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -207,8 +215,11 @@ document.addEventListener("DOMContentLoaded", function() {
         terms = document.getElementById("btn-register");
         if(validate_terms.checked) {
             terms.removeAttribute("disabled");
+            terms.style.background= "#A31D21"
+            
         }else{
             terms.setAttribute("disabled", "");
+            terms.style.background= "#c7c7c7"
         }
     });
 
@@ -224,6 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } else {
             validate_pathology.style.background = "#e05f5f";
+            validate_pathology.style.border = "1px solid #ccc";
             var pass = document.getElementById("pathology-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -241,6 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_description.style.background = "#e05f5f";
+            validate_description.style.border = "1px solid #ccc";
             var pass = document.getElementById("description-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
@@ -258,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function() {
             pass.style.display= "none";
         } else {
             validate_calendar.style.background = "#e05f5f";
+            validate_calendar.style.border = "1px solid #ccc";
             var pass = document.getElementById("calendar-invalid");
             pass.style.display= "block";
             pass.style.color= "#CD0808";
