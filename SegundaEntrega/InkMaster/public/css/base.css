@@ -52,242 +52,103 @@ header::after{
     display: block;
 }
 
-/*Nav principal está pensado Mobile first*/
-.site-nav {
-    top:100%;
-    left:0;
-    position: absolute;
-    background-color: var(--color-logo);
-    /* Animación para el menú */
-    clip-path: circle(0px at top left);
-    transition: clip-path ease-in-out 700ms;
-    width: 70%;
-    z-index:1;
-}
+/* nav styles */
 
-/*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/
-.site-nav-open{
-    clip-path: circle(150% at top right);
-}
-
-.site-nav ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.site-nav li{
-    border-bottom: 1px solid #575766;
-}
-
-.site-nav li:last-child{
-    border-bottom: none;
-}
-
-.site-nav a{
-    color: white;
+/* this is the hamburger icon */
+.nav-bar {
+    padding: 1.25em;
     display: block;
-    padding: 2em 3em;
-    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.main-nav {
+    height: 0;
+}
+
+.menu, .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu {
+    background-color: #202020;
+    width: 100%;
+    margin-left: -100%;
+    transition: all 0.5s;
+}
+
+.menu__link {
+    display: block;
+    padding: 1.25em;
+    color: white;
     text-decoration: none;
 }
 
-.site-nav a:hover,
-.site-nav a:focus{
-    background: #F6BD60; /*Maximun yellow red*/
-    color: black;
+.menu__link:hover {
+    background-color: #444;
 }
 
-/*Esto que estoy haciendo acá es para desplegable de artistas*/
-li > ul {
-    display: none;
+.submenu .menu__link:hover {
+    background-color: #222;
 }
 
-.icon-mobile {
-    cursor: pointer;
+.submenu {
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s;
 }
 
-nav ul li .icon-mobile {
-    float: right;
+.submenu .menu__link{
+    background-color: #333;
+    padding-left: 2.5em;
 }
 
-.submenu i {
+.menu i {
     margin-right: 0.5em;
 }
 
-.children li {
-    border: none;
+.show {
+  margin-left: 0;  
 }
 
-/*hasta acá*/
-
-/*el símbolo de menu desplegable*/
-.menu_toggle{
-    position: absolute;
-    left: 0.5em;
-    top: 0.5em;
-    padding: 0.5em;
+.row-down-submenu {
+    margin-left: 0.5em;
 }
 
-/*menu-open y site-nav-open son las clases que se agregan con js*/
-.menu-open .hamburger{
-    transform: rotate(45deg);
-}
-
-.menu-open .hamburger::before{
-    opacity: 0;
-}
-
-.menu-open .hamburger::after{
-    transform: translateY(-3px) rotate(-90deg);
-}
-
-.hamburger,
-.hamburger::before,
-.hamburger::after{
-    content: '';
-    display: block;
-    background: white;
-    height: 3px;
-    width: 1.75em;
-    border-radius: 3px;
-    transition: all ease-in-out 500ms;
-}
-
-.hamburger::before{
-    transform: translateY(-6px);
-}
-
-.hamburger::after{
-    transform: translateY(3px);
-}
-
-.logo{
-    float: right;
-    max-width: 50%;
-    min-height: 100%;
-}
-
-/* .social-network {
-    display: none;
-    float: right;
-    max-width: 30%;
-    min-height: 100%;
-} */
-
-#icon-fb, #icon-inst, #icon-tw, #icon-yt {
-    float: left;
-    font-size: 1.5em;
-    width: 2em;
-    color: rgba(255, 255, 255, .4);
-}
-
-.submenu > a {
-    pointer-events: none;
-    cursor: default;
-}
-
-.see-all {
-    display: block;
-}
-
-
-@media screen and (max-width:700px) {
-
-    .site-nav .submenu:hover .children,
-    .site-nav .submenu:focus .children {
-        display: block;
-        background: rgba(246, 189, 96, 0.9);
-    }
-}
-
-/*Versión del nav escritorio*/
-@media screen and (min-width:1050px){
-    /*Esto hace que desaparezca la "hamburguesa"*/
-    .menu_toggle{
+@media(min-width:1024px) {
+    .nav-bar {
         display: none;
     }
 
-    .site-nav{
-        /* position: static; */
-        width: 100%;
-        clip-path: initial;
+    .menu {
+        margin-left: 0;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: center;
     }
 
-    .site-nav li{
-        display: inline-block;
-        border: none;
-        padding: 1rem;
+    .menu__item {
+        margin: 0 1em;
     }
 
-    .site-nav a{
-        padding: 0;
-        margin-left: 3em;
+    .container-submenu {
+        position: relative;
     }
-
-    .site-nav a:hover,
-    .site-nav a:focus{
-        background: transparent;
-    }
-
-    nav li:hover ul {
-        display: flex;
-        flex-flow: column;
+    
+    .submenu {
         position: absolute;
-        overflow: hidden;
-        background-color: rgba(163, 29, 33, 0.9);
-        margin-top: 0.5rem;
+        /* top: 3.75em; */
+        width: 15em;
+        overflow: visible;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
     }
 
-
-    nav li:hover ul li {
-        border-bottom: 1px solid #575766;
+    .container-submenu:hover .submenu {
+        opacity: 1;
+        visibility: visible;
     }
-
-    /* .social-network {
-        display: none;
-        float: left;
-        margin-top: 1em;
-        margin-left: 1em;
-    } */
-
-    #icon-fb, #icon-inst, #icon-tw, #icon-yt {
-        font-size: 2.5em;
-    }
-
-    .site-nav--icon+.site-nav--icon{
-        display: none;
-    }
-
-    .site-nav li.see-all {
-        display: none;
-    }
-
-    .submenu > a {
-        pointer-events: initial;
-        cursor: pointer;
-    }
-
 }
-
-/*Para pantallas muy grandes*/
-/* @media screen and (min-width:1920px) {
-    header {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    main {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    footer {
-        width: 80%;
-        margin: 0 auto;
-    }
-} */
-

@@ -1,42 +1,42 @@
-<nav id="site-nav" class="site-nav">
-    <ul>
-        <li> <a href="/"> <i class="fas fa-home site-nav--icon"></i> Home </a></li>
-        <li id="artists" class="submenu">
-            <a href="/artists"> <i class="fas fa-paint-brush site-nav--icon"></i>  Artistas <i class="icon-mobile fas fa-chevron-down site-nav--icon"></i></a>
-            <ul class="children">
-                {% for artist in artists %}
-                    <li><a href="/view_artist/{{ artist.id_artist }}"><i class="fas fa-chevron-right"></i>{{ artist.id_artist }}</a></li>
-                {% endfor %}
-                <li class="see-all"><a href="/artists"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
+<nav class="main-nav">
+    <ul class="menu" id="menu">
+        <li class="menu__item"><a class="menu__link" href="/"> <i class="fas fa-home"></i> Home </a></li>
+        <li class="menu__item container-submenu">
+            <a class="menu__link submenu-btn" href="#"> <i class="fas fa-paint-brush"></i>  Artistas <i class="fas fa-chevron-down row-down-submenu"></i> </a>
+            <ul class="submenu">
+            {% for artist in artists %}
+                <li class="menu__item"><a class="menu__link" href="/view_artist/{{ artist.id_artist }}"><i class="fas fa-chevron-right"></i>{{ artist.id_artist }}</a></li>
+            {% endfor %}
+            <li class="menu__item"><a class="menu__link" href="/artists"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
             </ul>
         </li>
-        <li class="submenu">
-            <a href="/gallery"> <i class="far fa-image site-nav--icon"></i> Galeria </a>
-            <ul class="children">
-                {% if isArtist and session %}
-                    <li> <a href="/upload_photos"><i class="fas fa-chevron-right"></i> Cargar fotos </a></li>
-                    <li class="see-all"> <a href="/gallery"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
-                {% endif %}
+        <li class="menu__item container-submenu">
+            <a class="menu__link submenu-btn" href="#"> <i class="far fa-image"></i> Galeria <i class="fas fa-chevron-down row-down-submenu"></i> </a>
+            <ul class="submenu">
+            {% if isArtist and session %}
+                <li class="menu__item"> <a class="menu__link" href="/upload_photos"><i class="fas fa-chevron-right"></i> Cargar fotos </a></li>
+                <li class="menu__item"> <a class="menu__link" href="/gallery"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
+            {% endif %}
             </ul>
         </li>
-        <li> <a href="/new_appointment"> <i class="fas fa-calendar-check site-nav--icon"></i> Solicitar turno </a></li>
-        <li> <a href="/faq"><i class=" far fa-question-circle site-nav--icon"></i> FAQs </a></li>
+        <li class="menu__item"> <a class="menu__link" href="/new_appointment"> <i class="fas fa-calendar-check"></i> Solicitar turno </a></li>
+        <li class="menu__item"> <a class="menu__link" href="/faq"><i class=" far fa-question-circle"></i> FAQs </a></li>
         {% if session %}
-            <li class="submenu">
-                <a href="/view_user/{{ user }}"><i class="fas fa-user site-nav--icon"></i> {{ user }} <i class="icon-mobile fas fa-chevron-down site-nav--icon"></i></a>
-                <ul class="children">
-                    <li> <a href="/view_user/{{ user }}"><i class="fas fa-chevron-right"></i> Perfil </a></li>
+            <li class="menu__item container-submenu">
+                <a class="menu__link submenu-btn" href="#"><i class="fas fa-user"></i> {{ user }} <i class="fas fa-chevron-down row-down-submenu"></i></a>
+                <ul class="submenu">
+                    <li class="menu__item"> <a class="menu__link" href="/view_user/{{ user }}"><i class="fas fa-chevron-right"></i> Perfil </a></li>
                     {% if isAdministrator %}
-                        <li> <a href="/new_user"><i class="fas fa-chevron-right"></i> Registrar Artista </a></li>
-                        <li> <a href="/add_faq"><i class="fas fa-chevron-right"></i> Registrar FAQ </a></li>
-                        <li> <a href="/list_users"><i class="fas fa-chevron-right"></i> Lista de usuarios </a></li>
+                        <li class="menu__item"> <a class="menu__link" href="/new_user"><i class="fas fa-chevron-right"></i> Registrar Artista </a></li>
+                        <li class="menu__item"> <a class="menu__link" href="/add_faq"><i class="fas fa-chevron-right"></i> Registrar FAQ </a></li>
+                        <li class="menu__item"> <a class="menu__link" href="/list_users"><i class="fas fa-chevron-right"></i> Lista de usuarios </a></li>
                     {% endif %}
-                    <li> <a href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos </a></li>
-                    <li> <a href="/logout"><i class="fas fa-chevron-right"></i> Logout </a></li>
+                    <li class="menu__item"> <a class="menu__link" href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos </a></li>
+                    <li class="menu__item"> <a class="menu__link" href="/logout"><i class="fas fa-chevron-right"></i> Logout </a></li>
                 </ul>
             </li>
         {% else %}
-            <li> <a href="/login"><i class="fas fa-user site-nav--icon"></i> login </a></li>
+            <li class="menu__item"> <a class="menu__link" href="/login"><i class="fas fa-user"></i> login </a></li>
         {% endif %}
     </ul>
 </nav>
