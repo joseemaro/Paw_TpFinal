@@ -10,15 +10,17 @@
             <li class="menu__item"><a class="menu__link" href="/artists"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
             </ul>
         </li>
+        {% if isArtist and session %}
         <li class="menu__item container-submenu">
             <a class="menu__link submenu-btn" href="#"> <i class="far fa-image"></i> Galeria <i class="fas fa-chevron-down row-down-submenu"></i> </a>
             <ul class="submenu">
-            {% if isArtist and session %}
                 <li class="menu__item"> <a class="menu__link" href="/upload_photos"><i class="fas fa-chevron-right"></i> Cargar fotos </a></li>
                 <li class="menu__item"> <a class="menu__link" href="/gallery"> <i class="fas fa-chevron-right"></i> Ver todo </a></li>
-            {% endif %}
             </ul>
         </li>
+        {% else %}
+        <li class="menu__item"><a class="menu__link" href="/gallery"> <i class="far fa-image"></i> Galeria </a></li>
+        {% endif %}
         <li class="menu__item"> <a class="menu__link" href="/new_appointment"> <i class="fas fa-calendar-check"></i> Solicitar turno </a></li>
         <li class="menu__item"> <a class="menu__link" href="/faq"><i class=" far fa-question-circle"></i> FAQs </a></li>
         {% if session %}
@@ -36,7 +38,7 @@
                 </ul>
             </li>
         {% else %}
-            <li class="menu__item"> <a class="menu__link" href="/login"><i class="fas fa-user"></i> login </a></li>
+            <li class="menu__item"> <a class="menu__link" href="/login"><i class="fas fa-user"></i> Login </a></li>
         {% endif %}
     </ul>
 </nav>

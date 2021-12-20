@@ -154,3 +154,9 @@ input[type=reset] {
   display: block;
   padding: 12px;
 }
+
+/* validations */
+
+span {
+  margin-bottom: 1em;
+}
