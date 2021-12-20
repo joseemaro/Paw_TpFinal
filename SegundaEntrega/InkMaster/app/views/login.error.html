@@ -17,12 +17,9 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="get" enctype="multipart/form-data">
+    <form action="/login" method="get" enctype="multipart/form-data" class="error-login">
         <h1>Error en el registro de usuario</h1>
-
         <h3>Usuario o contraseña erronea.</h3>
-
-
         <div id="button-form">
             <button type="submit" class="submit-btn"> Volver </button>
         </div>
