@@ -4,6 +4,22 @@
     box-sizing: border-box;
 }
 
+.deleteBtn{
+    margin-left: 39%;
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--color-logo);
+    text-align: center;
+}
+
+.deleteBtn:hover{
+    background-color: rgb(199, 27, 27);
+    transition:  0.5s ease-in-out;
+}
+
 .container-artist {
     /* background-color: #E2E2DC; */
     width: 90%;
