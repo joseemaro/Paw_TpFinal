@@ -17,23 +17,22 @@
 .container {
     width: 80%;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-figure {
+.container figure {
     background: whitesmoke;
-    margin: 1em 2.5em;
+    margin: 1em;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     list-style-type: none;
-    float: left;
     padding: 1em;
 }
 
-figure img{
+figure img, figcaption{
     margin: 0 auto;
-}
-
-figcaption {
-    padding: 1.25em;
+    padding: 1em;
 }
 
 img {
