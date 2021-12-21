@@ -21,7 +21,8 @@ public function listFaq() {
 }
 
 public function newVisit($id_faq){
-    return $this->db->simpleQuery("update $this->database.$this->table set visits=visits+1 where id_faq = :1", [ $id_faq]);
+    return $this->db->update("update $this->database.$this->table set visits = visits+1 
+                                    where id_faq = :1;", [ $id_faq ]);
 }
 
 public function find($id_faq) {
