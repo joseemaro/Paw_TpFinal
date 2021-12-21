@@ -1,21 +1,16 @@
-h1 {
-    padding-top: 3em;
-    padding-bottom: 2em;
-    padding-left: 1em;
-    font-size: larger;
-    font-weight: bold;
-    text-decoration: underline;
-    color: #575766;
-}
-
-article {
+.container-error {
+    margin: 4.5em auto;
     width: 80%;
-    margin: auto auto;
-    background-color: #c7c7c7;
 }
 
-p {
-    padding-top: 1%;
-    margin-bottom: 1%;
+.title {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.container-error p {
+    text-align: center;
+    margin: 1em auto;
 }
 

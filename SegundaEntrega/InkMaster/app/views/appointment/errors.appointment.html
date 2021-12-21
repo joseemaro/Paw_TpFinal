@@ -17,12 +17,14 @@
 {% endblock %}
 
 {% block main %}
-    <h1> Error en el Registro del Turno</h1>
+<div class="container-error">
+    <h1 class="title"> Error en el Registro del Turno</h1>
     <article>
         {% for error in variable.errors %}
         <p> {{ error }} </p>
         {% endfor %}
     </article>
+</div>
 {% endblock %}
 
 {% block footer %}
