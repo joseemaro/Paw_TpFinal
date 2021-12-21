@@ -30,7 +30,7 @@ $router->get('internal_error', 'ErrorController@internal_error');
 $router->get('control', 'UserController@control');
 
 $router->get('faq', 'GeneralController@listFaq');
-$router->get('view_faq/([0-9]{1,})', 'GeneralController@viewFaq'); //la idea es pasar el id hacia el controler
+$router->get('increase_faq/([0-9]{1,})', 'GeneralController@increaseFaq');
 $router->get('del_faq/([0-9]{1,})', 'GeneralController@delFaq');
 $router->get('edit_faq/([0-9]{1,})', 'GeneralController@editFaq');
 $router->post('upd_faq', 'GeneralController@updFaq');

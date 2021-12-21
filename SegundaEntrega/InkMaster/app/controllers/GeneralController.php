@@ -128,11 +128,10 @@ class GeneralController extends Controller
         return $this->view('faq/list.faqs', $variable);
     }
 
-    public function viewFaq($id_faq) {
-        $variable = array();
-        $this->faq->newVisit($id_faq);
-        $variable["faq"] = $this->faq->find($id_faq);
-        return $this->view('faq/view.faq', $variable);
+    public function increaseFaq($id_faq) {
+        $this->faq->newVisit( $id_faq );
+        $faq = $this->faq->find($id_faq);
+        return $faq["visits"];
     }
 
     public function listTerms(){
