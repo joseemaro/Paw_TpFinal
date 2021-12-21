@@ -16,8 +16,8 @@ Se ha registrado el turno
 {% endblock %}
 
 {% block main %}
-<section id="container-list">
-    <h1 id="title-list">Se ha registrado su turno</h1>
+<div class="container-listap">
+    <h1 id="title">Se ha registrado su turno</h1>
 
     {% if variable.appointment %}
         <table class="width200">
@@ -53,7 +53,7 @@ Se ha registrado el turno
             </tbody>
         </table>
     {% endif %}
-</section>
+</div>
 {% endblock %}
 
 {% block footer %}

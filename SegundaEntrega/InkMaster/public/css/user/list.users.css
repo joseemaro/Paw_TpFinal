@@ -7,7 +7,7 @@
     text-align: center;
     font-size: 2em;
     text-transform: uppercase;
-    /* padding: 4.5em auto 0; */
+    /* padding: 2em auto; */
     font-weight: bold;
 }
 
@@ -155,4 +155,12 @@ table.rwd_auto {
     .fontsize {
         font-size: 0.625em;
     }
+}
+
+@media screen and (max-width: 1024px) {
+
+    .container-listusers {
+        margin: 2em auto 2em;
+    }
+    
 }

@@ -2,11 +2,15 @@
     box-sizing: border-box;
 }
 
+.artist-container {
+    margin: 4.5em auto 2em;
+}
+
 #title {
     text-align: center;
     font-size: 2em;
     text-transform: uppercase;
-    padding: 2em 0;
+    padding: 1em 0;
     font-weight: bold;
 }
 
@@ -90,15 +94,10 @@ img {
     }
 }
 
-/* @media only screen and (min-width : 320px) and (max-width : 480px)
-{
-    figure img {
-        margin-left: 1%;
-    }   
+@media screen and (max-width: 1024px) {
+
+    .artist-container {
+        margin: 2em auto 2em;
+    }
+    
 }
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-    figure img {
-        margin-left: 1%;
-    }   
-} */

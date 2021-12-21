@@ -48,7 +48,7 @@ input[type=submit], input[type=reset] {
 
 @media screen and (max-width: 1024px) {
   .container-form {
-    margin: 4.5em auto 2em;
+    margin: 2em auto 2em;
     width: 80%;
   }
 }
@@ -70,7 +70,7 @@ input[type=submit], input[type=reset] {
   text-align: center;
   font-size: 2em;
   text-transform: uppercase;
-  /* padding: 4.5em auto 0; */
+  padding: 1em 0;
   font-weight: bold;
 }
 

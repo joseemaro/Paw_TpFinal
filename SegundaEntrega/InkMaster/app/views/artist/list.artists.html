@@ -19,6 +19,7 @@
 {% endblock %}
 
 {% block main %}
+<div class="artist-container">
     <h1 id="title">InkMaster's Team</h1>
     {% if variable.artists %}
         <div class="container">
@@ -44,6 +45,7 @@
     {% else %}
         <p id="no-artist"> No hay artistas registrados hasta el momento </p>
     {% endif %}
+</div>
 {% endblock %}
 
 {% block footer %}
