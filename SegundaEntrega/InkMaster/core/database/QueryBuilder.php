@@ -31,20 +31,20 @@ class QueryBuilder {
      * @param  string $table
      * @param  array  $parameters
      */
-    public function insert($table, $parameters) {
-        $parameters = $this->cleanParameterName($parameters);
+    public function insert( $table, $parameters ) {
+        $parameters = $this->cleanParameterName( $parameters );
         $table = "$this->database." . $table;
         $sql = sprintf(
             'insert into %s (%s) values (%s)',
             $table,
-            implode(', ', array_keys($parameters)),
-            ':' . implode(', :', array_keys($parameters))
+            implode( ', ', array_keys( $parameters ) ),
+            ':' . implode( ', :', array_keys( $parameters ) )
         );
         try {
-            $statement = $this->pdo->prepare($sql);
-            $statement->execute($parameters);
-        } catch (Exception $e) {
-            $this->sendToLog($e);
+            $statement = $this->pdo->prepare( $sql );
+            $statement->execute( $parameters );
+        } catch ( Exception $e ) {
+            $this->sendToLog( $e );
         }
     }
 

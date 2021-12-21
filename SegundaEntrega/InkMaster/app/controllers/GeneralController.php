@@ -210,6 +210,7 @@ class GeneralController extends Controller
             $parameters["answer"]= $_POST['answer'];
             $parameters["question"]= $_POST['question'];
             $parameters["summary"]= $_POST['summary'];
+            $parameters["visits"]= 0;
             if ($this->user->havePermissions($id_user, 'faq.edit')) {
 
                 $this->faq->newFaq($parameters);
