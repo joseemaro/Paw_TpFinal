@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //validate pathologies
     validate_pathology = document.querySelector(".pathologyjs");
     validate_pathology.addEventListener("blur", function() {
-        var path = /^[a-zA-Z0-9+-.: ]{3,70}$/;
+        var path = /^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$/;
         if (path.exec(validate_pathology.value) || (validate_pathology.value === "")) {
             validate_pathology.style.border = "#ffffff";
             validate_pathology.style.background = "#ffffff";

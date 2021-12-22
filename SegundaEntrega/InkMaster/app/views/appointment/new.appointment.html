@@ -56,7 +56,7 @@
        <section class="illness">
             <label for="fillness"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
             <input id="fillness" name="pathology" type="checkbox" onChange="comprobar(this);" />
-            <textarea rows=10  class="disease pathologyjs" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
+            <textarea rows=10  class="disease pathologyjs" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
             <span id="illness-invalid" style="display: none">Solo se admiten letras y numeros (3-70 caracteres)</span>
         </section>
 

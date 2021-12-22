@@ -72,6 +72,22 @@ img.logo{
     opacity: 0.6
 }
 
+.btn-pag {
+    border: 0;
+    text-decoration: none;
+    font-size: 18px;
+    list-style: none;
+    letter-spacing: .5px;
+    color: #101010 !important;
+    font-weight: bold;
+}
+
+.btn-pag:hover{
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+
 .zoom{
     /* Aumentamos la anchura y altura durante 2 segundos */
     transition: width 2s, height 2s, transform 2s;
