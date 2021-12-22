@@ -24,8 +24,8 @@
 .modal-content {
   margin: auto;
   display: block;
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 40%;
+  max-height: 40%;
 }
 
 /* Caption of Modal Image */
@@ -59,9 +59,18 @@
 }
 
 /* The Close Button */
-.close {
+.close, .modal-next {
   position: absolute;
   right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.modal-previous {
+  position: absolute;
+  left: 35px;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;

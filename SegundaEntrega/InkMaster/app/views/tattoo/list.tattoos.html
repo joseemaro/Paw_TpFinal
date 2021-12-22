@@ -27,11 +27,13 @@
             <!-- The Modal -->
             <div id="myModal" class="modal">
                 <span class="close">&times;</span>
+                <span id="modal-previous" class="modal-previous">&lt;</span>
                 <img class="modal-content" onClick="if(event.stopPropagation){event.stopPropagation();}event.cancelBubble=true;" id="img01">
+                <span id="modal-next" class="modal-next">&gt;</span>
                 <div id="caption"></div>
             </div>
             {% for tattoo in variable.tattoos %}
-                <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}">
+                <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo }}">
             {% endfor %}
         </div>
         {% if (variable.total_pages)%}

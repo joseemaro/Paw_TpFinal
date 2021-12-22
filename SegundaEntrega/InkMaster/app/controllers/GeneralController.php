@@ -66,7 +66,8 @@ class GeneralController extends Controller
                 }
                 $status = $array[count($array)-1];
                 if ( $status ) {  #si salio bien la validacion
-                    return $this->view( 'tattoo/upload.tattoos' );
+                    $variable["artist"] = $id_user;
+                    return $this->view( 'tattoo/upload.tattoos', $variable );
                 } else {
                     $variable["errors"] = $array;
                     return $this->view( 'errors.register', $variable );
@@ -92,6 +93,44 @@ class GeneralController extends Controller
             }
         }
         return $this->view('not_found');
+    }
+
+    public function changeTattoo() {
+        if ( isset( $_POST["id_tattoo"] ) ){
+            $id_tattoo = $_POST["id_tattoo"];
+        }
+        if ( isset( $_POST["action"] ) ){
+            $action = $_POST["action"];
+        }
+        $id_tattoo = str_replace( "%20", " ", $id_tattoo );
+        $tattoos = $this->tattoo->listTattoos();
+        $i = 0;
+        $found = false;
+        while ( $found == false ) {
+            $tattoo = $tattoos[$i];
+            if ( $tattoo["id_tattoo"] == $id_tattoo ) {
+
+                $found = true;
+                if ( $action == "next" ) {
+                    $tattoo = ( $i + 1 >= count( $tattoos ) ) ? $tattoos[0] : $tattoos[$i+1];
+                } else {
+                    $tattoo = ( $i - 1 < 0 ) ? $tattoos[count( $tattoos ) - 1] : $tattoos[$i-1];
+                }
+                $tattoo["image"] = base64_encode( $tattoo["image"] );
+            }
+            if ( $action == "next" ) {
+                $i++;
+                if ( $i >= count( $tattoos ) ) {
+                    $i = 0;
+                }
+            } else {
+                $i--;
+                if ( $i < 0 ) {
+                    $i = count( $tattoos ) - 1;
+                }
+            }
+        }
+        return json_encode( $tattoo );
     }
 
     public function listTattoos() {

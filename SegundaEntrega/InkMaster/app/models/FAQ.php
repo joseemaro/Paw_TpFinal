@@ -17,7 +17,7 @@ class FAQ extends Model
 
 
 public function listFaq() {
-    return $this->db->selectAll($this->table);
+    return $this->db->selectAll( $this->table );
 }
 
 public function newVisit($id_faq){

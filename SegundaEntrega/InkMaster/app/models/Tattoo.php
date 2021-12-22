@@ -99,6 +99,10 @@ class Tattoo extends Model
         return $array;
     }
 
+    public function listTattoos() {
+        return $this->db->selectAll( $this->table );
+    }
+
     public function countTattoos() {
         return $this->db->countTuples($this->table);
     }

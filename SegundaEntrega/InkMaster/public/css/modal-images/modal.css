@@ -25,8 +25,8 @@
   .modal-content {
     margin: auto;
     display: block;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 40%;
+    max-height: 40%;
   }
   
   /* Caption of Modal Image */

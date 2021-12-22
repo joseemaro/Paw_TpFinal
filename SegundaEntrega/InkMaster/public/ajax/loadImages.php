@@ -34,7 +34,7 @@
         while ( $fila = $resultado->fetch_assoc() ) {
             $image = base64_encode($fila['image']);
             $salida.= "
-                <img class='myImg' src='data:image/png;base64, ".$image."' alt='".$fila['txt']."'>";
+                <img class='myImg' src='data:image/png;base64, ".$image."' alt='".$fila['txt']."' data-tattoo-id='".$fila['id_tattoo']."'>";
         }
     }
 

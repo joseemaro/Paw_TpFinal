@@ -44,3 +44,4 @@ $router->get('gallery/([0-9]{1,})', 'GeneralController@listTattoos');
 $router->get('upload_photos', 'GeneralController@ulTattoos');
 $router->post('save_photos', 'GeneralController@saveTattoo');
 $router->get('delete_tattoo/([0-9]{1,})', 'GeneralController@delTattoo');
+$router->post('change_tattoo', 'GeneralController@changeTattoo');
