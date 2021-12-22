@@ -23,16 +23,10 @@
     <h1 id="title">InkMaster's Team</h1>
     {% if variable.artists %}
         <div class="container">
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <img class="modal-content" id="img01">
-                <div id="caption"></div>
-            </div>
             {% for artist in variable.artists %}
                 <figure>
                     {% if artist.photo %}
-                        <img class="myImg" src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista">                      
+                        <img src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista">                      
                     {% endif %}
                     <figcaption>
                         <form method="get" action="/view_artist/{{ artist.id_artist }}">

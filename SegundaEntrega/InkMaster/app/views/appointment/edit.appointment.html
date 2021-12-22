@@ -52,7 +52,7 @@
         
         {% if  variable.appointment.txt %}
             <label for="pathology-txt"> Enfermedades </label>
-            <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: ]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}</textarea> 
+            <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}</textarea> 
         {% endif %}
 
         <div>

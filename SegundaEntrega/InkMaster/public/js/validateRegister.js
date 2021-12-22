@@ -116,21 +116,37 @@ document.addEventListener("DOMContentLoaded", function() {
             diahoy = '0' + diahoy;
         }
         var formato_hoy = (hoy.getFullYear() - 18) + "-" + meshoy + "-" + diahoy;
+        var formato_hoy2 = hoy.getFullYear() + "-" + meshoy + "-" + diahoy;
         if (validate_born.value === "") {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
             var pass = document.getElementById("born-invalid");
             pass.style.display= "none";
-        } else if (validate_born.value > formato_hoy) {
-            var pass = document.getElementById("born-invalid");
-            pass.style.display= "block";
-            pass.style.color= "#CD0808";
-            validate_born.style.border = "1px solid #ccc";
-
+        } else if (validate_born.value > formato_hoy){
+            if (validate_born.value < formato_hoy2){
+                validate_born.style.background = "#ffffff";
+            validate_born.style.border = "#ffffff";
+                var pass = document.getElementById("born-invalid");
+                pass.style.display= "block";
+                pass.style.color= "#CD0808";
+            }
         } else {
             validate_born.style.background = "#ffffff";
             validate_born.style.border = "#ffffff";
             var pass = document.getElementById("born-invalid");
+            pass.style.display= "none";
+        }
+        
+        if (validate_born.value > formato_hoy2){
+            validate_born.style.background = "#e05f5f";
+            validate_born.style.border = "#e05f5f";
+            var pass = document.getElementById("born2-invalid");
+            pass.style.display= "block";
+            pass.style.color= "#CD0808";
+            var pass = document.getElementById("born-invalid");
+            pass.style.display= "none";
+        }else{
+            var pass = document.getElementById("born2-invalid");
             pass.style.display= "none";
         }
     });
