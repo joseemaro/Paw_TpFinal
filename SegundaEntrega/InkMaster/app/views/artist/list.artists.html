@@ -26,7 +26,7 @@
             {% for artist in variable.artists %}
                 <figure>
                     {% if artist.photo %}
-                        <img src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista">                      
+                        <a href="/view_artist/{{ artist.id_artist }}"><img src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista"></a>                 
                     {% endif %}
                     <figcaption>
                         <form method="get" action="/view_artist/{{ artist.id_artist }}">

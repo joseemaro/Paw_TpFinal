@@ -10,11 +10,11 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 50px; /* Location of the box */
+  padding: 3.125em; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
-  height: 200%; /* Full height */
+  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
@@ -24,8 +24,8 @@
 .modal-content {
   margin: auto;
   display: block;
-  max-width: 40%;
-  max-height: 40%;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 /* Caption of Modal Image */
@@ -33,11 +33,10 @@
   margin: auto;
   display: block;
   width: 80%;
-  max-width: 700px;
+  max-width: 43.75em;
   text-align: center;
   color: #ccc;
-  padding: 10px 0;
-  height: 150px;
+  padding: 0.625em 0;
 }
 
 /* Add Animation */
@@ -59,22 +58,25 @@
 }
 
 /* The Close Button */
-.close, .modal-next {
+.close, .modal-next, .modal-previous {
   position: absolute;
-  right: 35px;
   color: #f1f1f1;
-  font-size: 40px;
   font-weight: bold;
   transition: 0.3s;
+  font-size: 2.5em;
+  cursor: pointer;
 }
 
-.modal-previous {
-  position: absolute;
-  left: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
+.modal-previous{
+  left: 3vw;
+}
+
+.modal-next, .close {
+  right: 3vw;
+}
+
+.modal-previous, .modal-next {
+  top: 50vh;
 }
 
 .close:hover,
@@ -85,8 +87,20 @@
 }
 
 /* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .modal-content {
-    width: 100%;
+@media screen and (max-width: 1024px) {
+  .close {
+    top: 1em;
+  }
+
+  .modal-previous, .modal-next {
+    top: 5em;
+  }
+
+  .modal-previous{
+    left: 5vw;
+  }
+  
+  .modal-next, .close {
+    right: 5vw;
   }
 }
