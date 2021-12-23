@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/artist/view.artist.css">
     <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
     <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     
 
 {% endblock %}
@@ -30,7 +31,9 @@
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <span class="close">&times;</span>
+            <span class="modal-previous">&lt;</span>
             <img class="modal-content" id="img01">
+            <span class="modal-next">&gt;</span>
             <div id="caption"></div>
         </div>
         <!-- <figure>
@@ -44,7 +47,7 @@
         <div class="container-img-artist">
             {% for tattoo in variable.artist.tattoos %}
                 <div>
-                    <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo}}">
+                    <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo}}" data-artist-id="{{ tattoo.id_artist }}">
                     {% if variable.artist.id_artist == user %}
                         <form method="get" id="delete-tattoo-{{ tattoo['id_tattoo'] }}" action="/delete_tattoo/{{ tattoo['id_tattoo'] }}">
                             <button class ="deleteBtn" type="submit" form="delete-tattoo-{{ tattoo['id_tattoo'] }}">Borrar</button>

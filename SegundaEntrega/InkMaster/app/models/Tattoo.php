@@ -103,6 +103,13 @@ class Tattoo extends Model
         return $this->db->selectAll( $this->table );
     }
 
+    public function listTattoosFindArtist( $id_artist ) {
+        $query = "select * from $this->database.$this->table
+                    where id_artist = :1
+                    order by id_tattoo asc;";
+        return $this->db->query($query, [$id_artist]);
+    }
+
     public function countTattoos() {
         return $this->db->countTuples($this->table);
     }

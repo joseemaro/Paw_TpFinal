@@ -103,7 +103,7 @@ class GeneralController extends Controller
             $action = $_POST["action"];
         }
         $id_tattoo = str_replace( "%20", " ", $id_tattoo );
-        $tattoos = $this->tattoo->listTattoos();
+        $tattoos = ( empty( $_POST["id_artist"] ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $_POST["id_artist"] );
         $i = 0;
         $found = false;
         while ( $found == false ) {
