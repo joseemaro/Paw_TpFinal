@@ -157,8 +157,24 @@ class GeneralController extends Controller
         return $this->view('tattoo/list.tattoos');
     }
 
-    public function viewTattoo() {
-        return view();#'list.appointments', compact('appointments'));
+    public function getTattoos() {
+        $salida = "";
+        $quantity = 6;
+
+        if ( isset( $_POST['val'] ) ) {
+            $val = $_POST['val'];
+        }
+        if ( isset( $_POST['page'] ) ) {
+            $page = $_POST['page'];
+            $beginning = ( ( $page * $quantity ) - $quantity );
+        }
+        $tattoos = $this->tattoo->getTattoos($beginning, $quantity);
+        if ( count( $tattoos ) > 0 ) {
+            foreach ( $tattoos as $tattoo ) {
+                $salida.= "<img class='myImg' src='data:image/png;base64, ".$tattoo["image"]."' alt='".$tattoo["txt"]."' data-tattoo-id='".$tattoo['id_tattoo']."'>";
+            }
+        }
+        return $salida;
     }
 
     public function listFaq() {
@@ -171,6 +187,67 @@ class GeneralController extends Controller
         $this->faq->newVisit( $id_faq );
         $faq = $this->faq->find($id_faq);
         return $faq["visits"];
+    }
+
+    public function buscarFaq() {
+        $salida = "";
+
+        $query = "SELECT * FROM faq";
+
+        if (isset($_POST['val'])) {
+            if ($_POST['val'] == 'MorePopular'){
+                $query = "SELECT * FROM faq order by visits desc";
+            }else if (($_POST['val'] == 'LessPopular')){
+                $query = "SELECT * FROM faq order by visits asc";
+            }else if(($_POST['val'] == 'MoreRecent')){
+                $query = "SELECT * FROM faq order by id_faq desc";
+            }else if(($_POST['val'] == 'LessRecent')){
+                $query = "SELECT * FROM faq order by id_faq asc";
+            }
+        }
+        $faqs = $this->faq->select( $query );
+        if ( count( $faqs ) > 0) {
+            $salida.="<div class='questions__accordions' id='content'>";
+
+            foreach ( $faqs as $faq ) {
+                $salida.="
+				<div class='question-answer__accordion'>
+					<div class='question'>
+						<h3 class='title__question'>
+							" . $faq['question'] . "
+						</h3>
+						<img src='/public/images/icon-arrow-down.svg' >
+					</div>
+					<div class='answer'>
+						<p class='answer-block'> " . $faq['answer'] . " </p>
+						<p class='answer-block'> " . $faq['summary'] . " </p>
+						<p class='answer-block visits'> Total de visitas: " . $faq['visits'] . " </p>";
+
+                if ( isset( $_SESSION["id_user"] ) ) {
+                    $id_usar = $_SESSION["id_user"];
+                    if ( $this->isAdministrator( $id_usar ) ) {
+                        $salida.= "
+                        <section class='manage-faqs'>
+                            <form method='get' id='edit-faq-" . $faq['id_faq'] . "' action='/edit_faq/" . $faq['id_faq'] . "'>
+                                <input type='hidden' name='id_faq' value=" . $faq['id_faq'] . ">
+                                <button class='table-button editBtn' type='submit' form='edit-faq-" . $faq['id_faq'] . "'>Editar</button>
+                            </form>
+    
+                            <form method='get' id='destroy-faq-" . $faq['id_faq'] . "' action='/del_faq/" . $faq['id_faq'] . "' onSubmit='return confirm('Desea eliminar la pregunta?');'>
+                                <input type='hidden' name='id_faq' value=" . $faq['id_faq'] . ">
+                                <button class='table-button deleteBtn' type='submit' form='destroy-faq-" . $faq['id_faq'] . "'>Borrar</button>
+                            </form>
+                        </section>";
+                    }
+                }
+                $salida.= "</div></div>";
+            }
+            $salida.= "</div>";
+        } else {
+            $salida.= "No hay FAQs registradas hasta el momento";
+        }
+
+        return $salida;
     }
 
     public function listTerms(){

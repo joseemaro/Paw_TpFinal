@@ -36,6 +36,7 @@ $router->get('edit_faq/([0-9]{1,})', 'GeneralController@editFaq');
 $router->post('upd_faq', 'GeneralController@updFaq');
 $router->get('add_faq', 'GeneralController@addFaq');
 $router->post('save_faq', 'GeneralController@saveFaq');
+$router->post('buscar_faq', 'GeneralController@buscarFaq');
 
 
 $router->get('term&cond', 'GeneralController@listTerms');
@@ -45,3 +46,4 @@ $router->get('upload_photos', 'GeneralController@ulTattoos');
 $router->post('save_photos', 'GeneralController@saveTattoo');
 $router->get('delete_tattoo/([0-9]{1,})', 'GeneralController@delTattoo');
 $router->post('change_tattoo', 'GeneralController@changeTattoo');
+$router->post('get_tattoos', 'GeneralController@getTattoos');

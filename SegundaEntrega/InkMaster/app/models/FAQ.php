@@ -30,6 +30,10 @@ public function find($id_faq) {
     return $this->db->simpleQuery("select * from $this->database.$this->table where id_faq = :1", [$id_faq]);
 }
 
+public function select( $query ) {
+    return $this->db->query( $query );
+}
+
 public function delFaq($id){
     return $this->db->delFaq($this->table, $id);
 }

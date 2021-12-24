@@ -12,22 +12,24 @@ function accordion() {
     }))
 }
 
-function getFaqs(val){
-    $.ajax({
-        type: "POST",
-        url: "/public/ajax/buscarFaq.php",
-        dataType: "html",
-        data: {val: val},
-    })
-    .done(function(respuesta){
-        var node = document.getElementById("content");
-        node.parentNode.removeChild(node);
-        $("#datos").html(respuesta);
-        accordion();
-    })
-    .fail(function(){
-        console.log("error");
-    });
+function getFaqs( val ){
+    $.ajax(
+        {
+            type: "POST",
+            url: "/buscar_faq",
+            dataType: "html",
+            data: {val: val},
+        }
+    )
+        .done( function( response ) {
+            var node = document.getElementById( "content" );
+            node.parentNode.removeChild( node );
+            $( "#datos" ).html( response );
+            accordion();
+        } )
+        .fail( function() {
+            console.log("error");
+        } );
 }
 
 function increaseVisits( question, faq_id ){
