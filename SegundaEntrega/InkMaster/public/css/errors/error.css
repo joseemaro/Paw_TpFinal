@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');
+
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.centered {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #202020;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 2em;
+  font-family: 'Lato', sans-serif;
+  font-size: 3.125em;
+}
+
+.message {
+  line-height: 1.2;
+  transition: line-height .2s, width .2s;
+  overflow: hidden;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.125em;
+  margin: 1em auto;
+}
