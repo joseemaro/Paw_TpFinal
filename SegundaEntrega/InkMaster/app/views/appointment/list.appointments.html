@@ -60,7 +60,7 @@
                                 {% if (appointment.status == 'pending') %}
                                     <form method="get" id="acept-appointment-{{ appointment.id_appointment }}" action="/acept_appointment/{{ appointment.id_appointment }}">
                                         <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                        <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Acept</button>
+                                        <button class ="table-button acceptBtn" type="submit" form="acept-appointment-{{ appointment.id_appointment }}">Aceptar</button>
                                     </form>
                                 {% endif %}
                             {% endif %}
@@ -72,13 +72,13 @@
                                 {% if (appointment.status != 'annulled') %}
                                     <form method="get" id="edit-appointment-{{ appointment.id_appointment }}" action="/edit_appointment/{{ appointment.id_appointment }}">
                                         <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                        <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Edit</button>
+                                        <button class ="table-button editBtn" type="submit" form="edit-appointment-{{ appointment.id_appointment }}">Editar</button>
                                     </form>
                                 {% endif %}
                                 {% if (appointment.status == 'pending') %}
                                     <form method="get" id="destroy-appointment-{{ appointment.id_appointment }}" action="/del_appointment/{{ appointment.id_appointment }}" onSubmit="return confirm('Desea eliminar el turno?');">
                                         <input type="hidden" name="id_appointment" value={{ appointment.id_appointment }}>
-                                        <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Cancel</button>
+                                        <button class ="table-button deleteBtn" type="submit" form="destroy-appointment-{{ appointment.id_appointment }}">Cancelar</button>
                                     </form>
                                 {% endif %}
                             {% endif %}

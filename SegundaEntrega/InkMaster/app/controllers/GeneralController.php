@@ -339,20 +339,20 @@ class GeneralController extends Controller
 
     public function updFaq(){
         session_start();
-        if (isset($_SESSION["id_user"])) {
-            $id_user= $_SESSION["id_user"];
+        if ( isset( $_SESSION["id_user"] ) ) {
+            $id_user = $_SESSION["id_user"];
             $id_faq = $_POST['id_faq'];
-            $parameters["answer"]= $_POST['answer'];
-            $parameters["question"]= $_POST['question'];
-            $parameters["summary"]= $_POST['summary'];
-            if ($this->user->havePermissions($id_user, 'faq.edit')) {
-                $this->faq->updateFaq($id_faq, $parameters);
+            $parameters["answer"] = $_POST['answer'];
+            $parameters["question"] = $_POST['question'];
+            $parameters["summary"] = $_POST['summary'];
+            if ( $this->user->havePermissions( $id_user, 'faq.edit' ) ) {
+                $this->faq->updateFaq( $id_faq, $parameters );
 
-                $variable["faqs"] =$this->faq->listFaq();
-                return $this->view('faq/list.faqs', $variable);
+                $variable["faqs"] = $this->faq->listFaq();
+                return $this->view( 'faq/list.faqs', $variable );
             }
         }
-        return $this->view('not_found');
+        return $this->view( 'not_found' );
     }
 
 }

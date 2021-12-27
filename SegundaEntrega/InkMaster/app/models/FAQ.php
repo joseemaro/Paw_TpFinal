@@ -38,13 +38,13 @@ public function delFaq($id){
     return $this->db->delFaq($this->table, $id);
 }
 
-public function newFaq( $parameters ){
+public function newFaq( $parameters ) {
     return $this->db->insert( $this->table, $parameters );
 }
 
-public function updateFaq($id_faq,$parameters){
-
-    return $this->db->updFaq($this->table, $id_faq, $parameters);
+public function updateFaq( $id_faq, $parameters ) {
+    return $this->db->update("update $this->database.$this->table set question = :1, summary = :2, answer = :3
+                                    where id_faq = :4;", [ $parameters["question"], $parameters["summary"], $parameters["answer"], $id_faq]);
 }
 
 }
