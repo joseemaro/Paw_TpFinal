@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         var description = /^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$/;
         if (description.exec(validate_description.value) || (validate_description.value === "")) {
-            console.log("ke");
+            console.log("description");
             validate_description.style.border = "#ffffff";
             validate_description.style.background = "#ffffff";
             var pass = document.getElementById("summary-invalid");
