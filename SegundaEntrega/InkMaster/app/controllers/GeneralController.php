@@ -190,6 +190,7 @@ class GeneralController extends Controller
     }
 
     public function buscarFaq() {
+        session_start();
         $salida = "";
 
         $query = "SELECT * FROM faq";
@@ -222,8 +223,7 @@ class GeneralController extends Controller
 						<p class='answer-block'> " . $faq['answer'] . " </p>
 						<p class='answer-block'> " . $faq['summary'] . " </p>
 						<p class='answer-block visits'> Total de visitas: " . $faq['visits'] . " </p>";
-
-                if ( isset( $_SESSION["id_user"] ) ) {
+                if (isset( $_SESSION["id_user"] ) ) {
                     $id_usar = $_SESSION["id_user"];
                     if ( $this->isAdministrator( $id_usar ) ) {
                         $salida.= "
