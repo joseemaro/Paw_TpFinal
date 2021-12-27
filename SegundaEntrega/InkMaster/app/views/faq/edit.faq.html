@@ -7,7 +7,7 @@ FAQ
 {% block head %}
 {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/faq/faq.edit.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/validateNewFaq.js"></script>
 {% endblock %}
 
@@ -17,38 +17,25 @@ FAQ
 {% endblock %}
 
 {% block main %}
-<section id="wrapper">
-
-    <section>
-        <article id="column1">
-            <form action="/upd_faq" method="post" id="form" name="form" enctype="multipart/form-data">
-
-            <h1>Editar Faq</h1>
-
-                <input type="hidden" name="id_faq" readonly value="{{ variable.faq.id_faq }}">
-
-                <label> Pregunta: <input type="text" name="question" class="questionjs" required value="{{ variable.faq.question }}"
-                                         pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,100}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-                    <span id="question-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- </span>
-
-                </label>
-
-                <label> Respuesta: <input type="text" name="answer" class="answerjs" required value="{{ variable.faq.answer }}"
-                                          pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-                    <span id="answer-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
-                </label>
-                <label> Descripcion: <input type="text" name="summary" class="descriptionjs" required value="{{ variable.faq.summary }}"
-                                            pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-                    <span id="summary-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
-
-                </label>
-
-                <input class="button-editFaq" type="submit" id="send-btn" value="Guardar" />
-
-            </form>
-        </article>
-    </section>
-</section>
+<div class="container-form">
+    <h1 class="title">Editar Faq</h1>
+    <form action="/upd_faq" method="post" id="form" name="form" enctype="multipart/form-data">
+        <input type="hidden" name="id_faq" readonly value="{{ variable.faq.id_faq }}">
+        <label for="fquestion"> Pregunta </label> 
+        <input id="fquestion" type="text" name="question" class="questionjs" required value="{{ variable.faq.question }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,100}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+        <span id="question-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- </span>
+        
+        <label for="fanswer"> Respuesta </label> 
+        <input id="fanswer" type="text" name="answer" class="answerjs" required value="{{ variable.faq.answer }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+        <span id="answer-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
+        
+        <label for="fdescription"> Descripcion </label> 
+        <input id="fdescription" type="text" name="summary" class="descriptionjs" required value="{{ variable.faq.summary }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
+        <span id="summary-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
+        
+        <input class="button-editFaq" type="submit" id="send-btn" value="Guardar" />
+    </form>
+</div>>
 {% endblock %}
 
 {% block footer %}
