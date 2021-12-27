@@ -60,7 +60,7 @@
         <div class="row-forms">
             <div class="one-column">
                 <label for="born"> Fecha de nacimiento (*) </label>
-                <input type="date" name="born" id="born" class="bornjs" value="2002-12-26"required>
+                <input type="date" name="born" id="born" class="bornjs" required>
                 <span id="born-invalid" style="display: none">Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor</span>
                 <span id="born2-invalid" style="display: none">Ingrese Fecha Valida</span>
             </div>
@@ -72,14 +72,14 @@
                 <span id="dni-invalid" style="display: none">El dni debe tener 8 digitos</span>
             </div>
             <div class="col-right">
-                <label for="tel"> Teléfono </label>
+                <label for="tel"> Teléfono (*) </label>
                 <input id="tel" type="tel" name="phone" class="phonejs" pattern="^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$" title="El numero ingresado no coincide con el formato local" required>
                 <span id="tel-invalid" style="display: none">El numero ingresado no coincide con el formato local</span>
             </div>
         </div>
         <div class="row-forms">
             <div class="col-left">
-                <label for="address"> Dirección </label>
+                <label for="address"> Dirección (*) </label>
                 <input id="address" type="text" name="direction" class="addressjs" pattern="^[a-zA-Z0-9 ]{3,50}$" title="Solo se permiten letras, numeros y espacios" required>
                 <span id="dir-invalid" style="display: none">Solo se permiten letras, numeros y espacios</span>
             </div>

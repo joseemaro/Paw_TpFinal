@@ -4,7 +4,7 @@ var window = window || {},
     id_tattoo_attribute,
     id_artist_attribute;
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMSubtreeModified", function() {
     // Get the modal
     var modal = document.getElementById("myModal"),
         modalNext = document.getElementsByClassName("modal-next")[0],
