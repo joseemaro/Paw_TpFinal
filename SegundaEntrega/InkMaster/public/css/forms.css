@@ -84,11 +84,6 @@ input[type=reset] {
   background-color: #c7c7c7;
 }
 
-/* This is the bottom send */
-#send-btn2{
-  background-color: #c7c7c7;
-}
-
 /* This is the bottom warning */
 .footer-form {
   border-top: 1px dashed var(--color-logo);
@@ -137,6 +132,50 @@ input[type=reset] {
 .artist-section {
   margin-top: 0.5em; /* Add a top margin */
 }
+
+
+/* Set styles for js validation */
+
+/* put inputs in red if are wrong */
+.valid-input{
+  border: #ffffff;
+  background-color: #ffffff;
+}
+.invalid-input{
+  border: #e05f5f;
+  background-color: #e05f5f;
+}
+
+/* show and hide alerts */
+.show-alert{
+  display: block;
+  color: #CD0808;
+}
+.hide-alert{
+  display: none;
+}
+
+/* style for buttom under terms and cond. */
+.terms-check{
+  background: #A31D21 !important;
+}
+.terms-uncheck{
+  background: #c7c7c7 !important;
+}
+
+/* show - block text area */
+.show-area{
+  display: block;
+}
+
+.hide-area{
+  display: none;
+}
+
+#send-btn2{
+  background: #c7c7c7;
+}
+
 
 @media screen and (max-width: 1024px) {
   /* Floating column for labels: 25% width */

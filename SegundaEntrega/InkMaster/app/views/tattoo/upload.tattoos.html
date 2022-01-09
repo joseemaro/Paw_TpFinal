@@ -8,7 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
-    <script type="text/javascript" src="/public/js/upd.photos.js"></script>
+    <script type="text/javascript" src="/public/js/validateForms.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -38,8 +38,8 @@
     </select>
   
     <label for="fdescription">Descripción</label>
-    <textarea id="fdescription" name="description" style="height:200px" class="descjs"></textarea>
-    <span id="des-invalid" style="display: none">Ha ingresado caracteres no validos(3-80 caracteres)</span>
+    <textarea id="fdescription" name="description" style="height:200px" class="descriptionjs"></textarea>
+    <span id="summary-invalid" class="hide-alert">Ha ingresado caracteres no validos(3-80 caracteres)</span>
   
     <label for="fimage">Seleccionar imágenes</label>
     <input id="fimage" type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->

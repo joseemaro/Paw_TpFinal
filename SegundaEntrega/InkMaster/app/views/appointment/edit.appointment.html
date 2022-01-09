@@ -8,8 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
-  <!--   <script type="text/javascript" src="/public/js/newAp.js"></script> -->
-    <script type="text/javascript" src="/public/js/validateEditAp.js"></script> 
+    <script type="text/javascript" src="/public/js/validateForms.js"></script> 
 {% endblock %}
 
 {% block header %}
@@ -35,11 +34,11 @@
 
         <label for="fdate"> Fecha </label>
         <input id="fdate" type="date" name="date" class="datejs" value="{{ variable.appointment.date }}">
-        <span id="date-invalid" style="display: none">Ingrese una fecha valida</span>
+        <span id="date-invalid" class="hide-alert">Ingrese una fecha valida</span>
 
         <label for="fhour"> Horario (hh:min) </label> 
         <input id="fhour" type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
-        <span id="hour-invalid" style="display: none">Ingrese una hora valida (9am-5pm)</span>
+        <span id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</span>
        
     
         <label for="img"> Imágenes de referencia </label>
@@ -53,6 +52,7 @@
         {% if  variable.appointment.txt %}
             <label for="pathology-txt"> Enfermedades </label>
             <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}</textarea> 
+            <span id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</span>
         {% endif %}
 
         <div>

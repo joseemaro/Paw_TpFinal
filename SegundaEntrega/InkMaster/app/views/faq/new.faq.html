@@ -8,7 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
-    <script type="text/javascript" src="/public/js/validateNewFaq.js"></script>
+    <script type="text/javascript" src="/public/js/validateForms.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -22,16 +22,16 @@
         <form action="/save_faq" method="post" id="form" name="form" enctype="multipart/form-data">      
             <label for="fquestion"> Pregunta </label> 
             <input id="fquestion" type="text" name="question" class="questionjs" required value="{{ variable.faq.question }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,100}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-            <span id="question-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- </span>
+            <span id="question-invalid" class="hide-alert">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- </span>
 
             <label for="fanswer"> Respuesta </label>
             <input id="fanswer" type="text" name="answer" class="answerjs" required value="{{ variable.faq.answer }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-            <span id="answer-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
+            <span id="answer-invalid" class="hide-alert">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
 
             
             <label for="fdescription"> Descripcion </label>
             <input id="fdescription" type="text" name="summary" class="descriptionjs" required value="{{ variable.faq.summary }}" pattern="^[a-zA-Z0-9?!¡¿.,; À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,300}$" title="Solo se permiten letras, numeros, espacios, y ?!¡¿.,+- ">
-            <span id="summary-invalid" style="display: none">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
+            <span id="summary-invalid" class="hide-alert">Solo se permiten letras, numeros, espacios, y ?!¡¿.,+-</span>
             
 
             <input type="submit" id="send-btn" value="Guardar" />

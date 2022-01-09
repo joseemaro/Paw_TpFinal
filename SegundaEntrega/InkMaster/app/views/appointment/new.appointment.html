@@ -8,8 +8,7 @@
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
     <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
-    <script type="text/javascript" src="/public/js/newAp.js"></script>
-    <script type="text/javascript" src="/public/js/validateAp.js"></script>
+    <script type="text/javascript" src="/public/js/validateForms.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -44,11 +43,11 @@
 
         <label for="date">Fecha</label>
         <input type="date" name="date" id="date" class="datejs" required>
-        <span id="date-invalid" style="display: none">Ingrese una fecha valida</span>
+        <span id="date-invalid" class="hide-alert">Ingrese una fecha valida</span>
 
         <label for="fhour">Horario (hh:min)</label>
         <input id="fhour" type="time" min="09:00" max="17:00" step="900" name="hour" class="hourjs" required>
-        <span id="hour-invalid" style="display: none">Ingrese una hora valida (9am-5pm)</span>
+        <span id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</span>
 
         <label for="fimg">Imágenes de referencia </label>
         <input id="fimg" type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple required>
@@ -56,8 +55,8 @@
        <section class="illness">
             <label for="fillness"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
             <input id="fillness" name="pathology" type="checkbox" onChange="comprobar(this);" />
-            <textarea rows=10  class="disease pathologyjs" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
-            <span id="illness-invalid" style="display: none">Solo se admiten letras y numeros (3-70 caracteres)</span>
+            <textarea rows=10  class="disease pathologyjs valid-input" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
+            <span id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</span>
         </section>
 
         <section class="terms-conditions">
@@ -69,7 +68,7 @@
             <input class="button-newAp" type="reset" value="Limpiar" />
 
             {% if session %}
-                <input class="button-newAp" type="submit" id="send-btn2" disabled value="Enviar" />
+                <input class="button-newAp terms-uncheck" type="submit" id="send-btn2" disabled value="Enviar" />
             {% else %}
                 <input class="button-newAp" type="submit" value="Enviar" disabled/>
             {% endif %}
