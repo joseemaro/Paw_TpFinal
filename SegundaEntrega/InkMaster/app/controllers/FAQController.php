@@ -21,6 +21,7 @@ class FAQController extends GeneralController
     public function listFaq() {
         $variable = array();
         $variable["faqs"] = $this->faq->listFaq();
+        $this->faq->genSeoJsonFaq($variable);
         return $this->view('faq/list.faqs', $variable);
     }
 

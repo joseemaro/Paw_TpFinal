@@ -1,0 +1,78 @@
+{
+    "@context": "http://schema.org/",
+    "@type": "TattooParlor",
+    "name": "InkMaster Tattoo",
+    "currenciesAccepted": "ARS",
+    "openingHours":"Mo-Fr 9:00-17:00",
+    "paymentAccepted": "Cash, Credit Card",
+    "priceRange" : "$3000 - $",
+    "telephone" : "2323433247",
+    "email" : "home@inkmaster.com",
+    "description" : "Somos un local de tatuajes de la ciudad de Lujan",
+    "address" : {
+      "@type" : "PostalAddress",
+      "streetAddress" : "San Martín 498",
+      "addressLocality" : "Lujan",
+      "addressRegion" : "Lujan",
+      "postalCode" : "6700"
+    },
+    "geo" : {
+      "@type" : "GeoCoordinates",
+      "latitude" : "-34.5915201",
+      "longitude" : "-59.1780572"
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "name": "XYZ  Area de de servicio",
+      "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "postalCode": "6700",
+          "latitude": "-34.5915201",
+          "longitude": "-59.1780572",
+          "description": "Nuestro local puede ser encontrado aqui.",
+          "name": "XYZ geo location"
+      },
+      "geoRadius": "2000",
+      "contactPoint" : { 
+          "@type" : "ContactPoint",
+          "telephone" : "2323433247",
+          "contactType" : "customer service",
+          "areaServed" : "AR"
+      },
+      "legalName":"InkMaster",
+      "smokingAllowed": "True",
+      "numberOfEmployees": 5,
+      "openingHoursSpecification": [
+          {
+          "@type": "OpeningHoursSpecification",
+          "closes":  "17:00:00",
+          "dayOfWeek": "https://schema.org/Monday",
+          "opens":  "09:00:00"
+          },
+          {
+          "@type": "OpeningHoursSpecification",
+          "closes": "17:00:00" ,
+          "dayOfWeek": "https://schema.org/Tuesday",
+          "opens": "09:00:00"
+          },
+          {
+          "@type": "OpeningHoursSpecification",
+          "closes":  "17:00:00",
+          "dayOfWeek": "https://schema.org/Wednesday",
+          "opens": "09:00:00"
+          },
+          {
+          "@type": "OpeningHoursSpecification",
+          "closes": "17:00:00",
+          "dayOfWeek": "https://schema.org/Thursday",
+          "opens": "09:00:00"
+          },
+          {
+          "@type": "OpeningHoursSpecification",
+          "closes": "17:00:00",
+          "dayOfWeek":  "https://schema.org/Friday",
+          "opens": "09:00:00"
+          }
+      ]
+  }
+}

@@ -47,4 +47,26 @@ public function updateFaq( $id_faq, $parameters ) {
                                     where id_faq = :4;", [ $parameters["question"], $parameters["summary"], $parameters["answer"], $id_faq]);
 }
 
+public function genSeoJsonFaq($faqs){
+    $arrayaux = array();
+    foreach ( $faqs["faqs"] as $faq ){
+        $aux = array(
+            "@type" => "Question",
+            "name"=> $faq["question"],
+            "acceptedAnswer"=> [
+                "@type"=> "Answer",
+                "text" => $faq["answer"]
+            ]
+        );
+        array_push($arrayaux, $aux);
+    };
+    $obj = [
+        "@context" => "https://schema.org",
+        "@type" => "FAQPage",
+        "mainEntity" => $arrayaux,
+    ];
+    $dataJson = json_encode($obj);
+    $file = './public/js/SEO/seoFaqs.jsonld';
+    file_put_contents($file, $dataJson);
+    }
 }
