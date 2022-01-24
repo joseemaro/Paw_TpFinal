@@ -1,6 +1,7 @@
 <?php
 
 $router->get('', 'GeneralController@index');
+$router->get('term&cond', 'GeneralController@listTerms');
 
 $router->get('new_appointment', 'ApController@newAp');
 $router->post('save_appointment', 'ApController@saveAp');
@@ -25,25 +26,22 @@ $router->get('list_users', 'UserController@listUsers');
 $router->get('edit_user/((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]){1,})', 'UserController@editUser');
 $router->post('upt_user', 'UserController@uptUser');
 
+$router->get('faq', 'FAQController@listFaq');
+$router->get('increase_faq/([0-9]{1,})', 'FAQController@increaseFaq');
+$router->get('del_faq/([0-9]{1,})', 'FAQController@delFaq');
+$router->get('edit_faq/([0-9]{1,})', 'FAQController@editFaq');
+$router->post('upd_faq', 'FAQController@updFaq');
+$router->get('add_faq', 'FAQController@addFaq');
+$router->post('save_faq', 'FAQController@saveFaq');
+$router->post('buscar_faq', 'FAQController@buscarFaq');
+
+$router->get('gallery', 'TattooController@listTattoos');
+$router->get('gallery/([0-9]{1,})', 'TattooController@listTattoos');
+$router->get('upload_photos', 'TattooController@ulTattoos');
+$router->post('save_photos', 'TattooController@saveTattoo');
+$router->get('delete_tattoo/([0-9]{1,})', 'TattooController@delTattoo');
+$router->post('change_tattoo', 'TattooController@changeTattoo');
+$router->post('get_tattoos', 'TattooController@getTattoos');
+
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');
-$router->get('control', 'UserController@control');
-
-$router->get('faq', 'GeneralController@listFaq');
-$router->get('increase_faq/([0-9]{1,})', 'GeneralController@increaseFaq');
-$router->get('del_faq/([0-9]{1,})', 'GeneralController@delFaq');
-$router->get('edit_faq/([0-9]{1,})', 'GeneralController@editFaq');
-$router->post('upd_faq', 'GeneralController@updFaq');
-$router->get('add_faq', 'GeneralController@addFaq');
-$router->post('save_faq', 'GeneralController@saveFaq');
-$router->post('buscar_faq', 'GeneralController@buscarFaq');
-
-
-$router->get('term&cond', 'GeneralController@listTerms');
-$router->get('gallery', 'GeneralController@listTattoos');
-$router->get('gallery/([0-9]{1,})', 'GeneralController@listTattoos');
-$router->get('upload_photos', 'GeneralController@ulTattoos');
-$router->post('save_photos', 'GeneralController@saveTattoo');
-$router->get('delete_tattoo/([0-9]{1,})', 'GeneralController@delTattoo');
-$router->post('change_tattoo', 'GeneralController@changeTattoo');
-$router->post('get_tattoos', 'GeneralController@getTattoos');
