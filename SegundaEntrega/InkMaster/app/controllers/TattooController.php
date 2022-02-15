@@ -6,6 +6,7 @@ use App\Controllers\GeneralController;
 use App\models\Local;
 use App\models\Tattoo;
 use App\models\User;
+use App\Core\App;
 
 class TattooController extends GeneralController
 {
@@ -16,6 +17,7 @@ class TattooController extends GeneralController
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
         $this->session = false;
+        $this->logger = App::get('logger');
     }
 
     public function ulTattoos() {
@@ -55,14 +57,14 @@ class TattooController extends GeneralController
     }
 
     public function changeTattoo() {
-        if ( isset( $_POST["id_tattoo"] ) ){
-            $id_tattoo = $_POST["id_tattoo"];
+        if ( ! empty( json_decode( $_POST["id_tattoo"] ) ) ){
+            $id_tattoo = json_decode( $_POST["id_tattoo"] );
         }
-        if ( isset( $_POST["action"] ) ){
-            $action = $_POST["action"];
+        if ( ! empty( ( $_POST["action"] ) ) ){
+            $action = ( $_POST["action"] );
         }
         $id_tattoo = str_replace( "%20", " ", $id_tattoo );
-        $tattoos = ( empty( $_POST["id_artist"] ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $_POST["id_artist"] );
+        $tattoos = ( empty( json_decode( $_POST["id_artist"] ) ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $_POST["id_artist"] );
         $i = 0;
         $found = false;
         while ( $found == false ) {

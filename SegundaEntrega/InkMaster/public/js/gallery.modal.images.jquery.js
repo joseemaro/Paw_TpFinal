@@ -42,35 +42,27 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function changeImage( action ) {
-    var xmlhttp = new XMLHttpRequest(),
-        url = "/change_tattoo",
-        param = new FormData();
-    param.append( 'id_tattoo', id_tattoo_attribute );
-    param.append( 'action', action );
-    param.append( 'id_artist', id_artist_attribute );
-    xmlhttp.open( "POST", url );
+    $.ajax(
+        {
+            type: "POST",
+            url: "/change_tattoo",
+            dataType: "json",
+            data: {
+                id_tattoo: id_tattoo_attribute,
+                action: action,
+                id_artist: id_artist_attribute
+            },
+        },
+    )
+        .done( function( response ) {
+            var modalImg = document.getElementById("img01"),
+                captionText = document.getElementById("caption");
 
-    xmlhttp.onload = function() {
-        var response = JSON.parse( xmlhttp.response ),
-            modalImg = document.getElementById( "img01" ),
-            captionText = document.getElementById( "caption" );
-
-        modalImg.src = "data:image/png;base64, " + response.image;
-        captionText.innerHTML = response.txt;
-        id_tattoo_attribute = response.id_tattoo;
-    };
-
-    xmlhttp.onprogress = function( event ) {
-        if ( event.lengthComputable ) {
-            console.log( `Received ${event.loaded} of ${event.total} bytes` );
-        } else {
-            console.log( `Received ${event.loaded} bytes` ); // no Content-Length
-        }
-
-    };
-
-    xmlhttp.onerror = function() {
-        console.log( "error" );
-    };
-    xmlhttp.send( param );
+            modalImg.src = "data:image/png;base64, " + response.image;
+            captionText.innerHTML = response.txt;
+            id_tattoo_attribute = response.id_tattoo;
+        } )
+        .fail( function() {
+            console.log( "error" );
+        } );
 }
