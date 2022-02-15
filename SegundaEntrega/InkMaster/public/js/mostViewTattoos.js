@@ -9,24 +9,31 @@ window.addEventListener( 'scroll', () => {
 })
 
 function loadImages( val = 6 ) {
-    var container = document.getElementById( "container" );
-    $.ajax(
-        {
-            type: "POST",
-            url: "/get_tattoos",
-            dataType: "html",
-            data: {
-                val: val,
-                page: page
-            },
-        },
-        page = page + 1,
-    )
-        .done( function( response ) {
-            container.insertAdjacentHTML( 'beforeend', response );
-            // page = page + 1;
-        } )
-        .fail( function() {
-            console.log( "error" );
-        } );
+    var container = document.getElementById( "container" ),
+        xmlhttp = new XMLHttpRequest(),
+        url = "/get_tattoos",
+        param = new FormData();
+    param.append( 'val', val );
+    param.append( 'page', page );
+    xmlhttp.open( "POST", url );
+
+    xmlhttp.onload = function() {
+        var response = xmlhttp.response;
+        container.insertAdjacentHTML( 'beforeend', response );
+    };
+
+    xmlhttp.onprogress = function( event ) {
+        if ( event.lengthComputable ) {
+            console.log( `Received ${event.loaded} of ${event.total} bytes` );
+        } else {
+            console.log( `Received ${event.loaded} bytes` ); // no Content-Length
+        }
+
+    };
+
+    xmlhttp.onerror = function() {
+        console.log( "error" );
+    };
+    xmlhttp.send( param );
+    page = page + 1;
 }
