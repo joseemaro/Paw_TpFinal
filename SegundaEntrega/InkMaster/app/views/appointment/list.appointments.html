@@ -20,9 +20,7 @@
     <h1 class="title">Lista de turnos</h1>
     {% if variable.appointments %}
         {% if variable.link and (isArtist or isAdministrator) %}
-            <form method="get" action="{{ variable.link }} " target="_blank">
-                <button class ="calendarBtn" type="submit">Google calendar</button>
-            </form>
+            <a href="{{ variable.link }}" class ="calendarBtn" target="_blank">Google calendar </a>
         {% endif %}
         <table class="width200">
             <thead>

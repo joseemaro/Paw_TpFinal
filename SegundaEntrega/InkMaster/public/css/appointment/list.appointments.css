@@ -9,6 +9,7 @@
     text-transform: uppercase;
     /* padding: 4.5em auto 0; */
     font-weight: bold;
+    padding-bottom: 1em;
 }
 
 .without-ap {
@@ -89,7 +90,7 @@ section p {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin: 1em auto;
+    margin: 5em auto;
 }
 
 .calendarBtn:hover{
@@ -100,7 +101,7 @@ section p {
 table.width200,
 table.rwd_auto {
     width: 80%;
-    margin: 1em auto;
+    margin: 2em auto;
 }
 .width200 th,
 .rwd_auto th {
