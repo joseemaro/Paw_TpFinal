@@ -3,6 +3,8 @@
 * {
     box-sizing: border-box;
     --color-logo: #A31D21; /*Auburn*/
+    --bg-color-white: #FFFFFF;
+    --bg-color-black: #202020;
 }
 
 body {
@@ -12,15 +14,12 @@ body {
     grid-template-areas:
             "encabezado encabezado"
             "navegador navegador"
-            "principal autor"
+            "principal principal"
             "pie pie";
-    background-color: #FFFFFF;
+    background-color: var(--bg-color-white);
     font-size: 100%;
     font-family: "Fira Sans", Helvetica, Arial, sans-serif;
-    /*-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;*/
     width: 100%;
-    /* max-width: 1920px; */
     min-height: 100vh;
     margin: 0 auto;
 }
@@ -36,7 +35,7 @@ main {
 
 header{
     grid-area: encabezado;
-    background-color: #202020; /* Davys grey*/
+    background-color: var(--bg-color-black);
     width: 100%;
     position: relative;
 }
@@ -58,7 +57,8 @@ header::after{
 .nav-bar {
     padding: 1.25em;
     display: block;
-    color: white;
+    background-color: var(--bg-color-black);
+    color: var(--bg-color-white);
     cursor: pointer;
     width: 100%;
 }
@@ -74,7 +74,7 @@ header::after{
 }
 
 .menu {
-    background-color: #202020;
+    background-color: var(--bg-color-black);
     width: 100%;
     margin-left: -100%;
     transition: all 0.5s;
@@ -118,7 +118,9 @@ header::after{
     margin-left: 0.5em;
 }
 
+/* Media query */
 @media(min-width:1024px) {
+    /* nav */
     .nav-bar {
         display: none;
     }
@@ -150,5 +152,58 @@ header::after{
     .container-submenu:hover .submenu {
         opacity: 1;
         visibility: visible;
+    }
+}
+
+/* footer styles */
+
+.container-footer-all {
+    background-color: var(--bg-color-black);
+    color: var(--bg-color-white);
+    width: 100%;
+}
+
+.container-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.column {
+    max-width: 30%;
+    padding: 1.25em;
+    margin: 0 auto;
+}
+
+.column p, 
+.column .social-network,
+.column .address {
+    margin-top: 1.25em;
+}
+
+.column .social-network {
+    display: block;
+    text-decoration: none;
+    color: var(--bg-color-white);
+}
+
+.container-footer {
+    background-color: #101010;
+    padding: 1.25em;
+}
+
+.title {
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 1024px) {
+    .container-body {
+        flex-direction: column;
+    }
+
+    .column {
+        max-width: 100%;
+        margin: 0;
     }
 }

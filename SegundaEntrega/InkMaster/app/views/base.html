@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     {% block head %}
         <meta charset="utf-8">
@@ -7,7 +7,6 @@
         <title>{% block title %}{% endblock %} - InkMaster</title>
         <link rel="stylesheet" type="text/css" href="/public/css/reset.css">
         <link rel="stylesheet" type="text/css" href="/public/css/base.css">
-        <link rel="stylesheet" type="text/css" href="/public/css/footer.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
         <script src="/public/js/base.js"> </script>
         <script type="application/ld+json" src="/public/js/seoTattooParlor.jsonld"></script>
@@ -16,6 +15,6 @@
 <body>
     <header>{% block header %}{% endblock %}</header>
     <main>{% block main %}{% endblock %}</main>
-    <footer>{% block footer %}{% endblock %}</footer>
+    <footer class="container-footer-all">{% block footer %}{% endblock %}</footer>
 </body>
 </html>

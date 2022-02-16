@@ -1,73 +1,39 @@
-
-
-<div class="container-footer-all">
-    <div class="container-body">
-        <div class="column1" itemscope itemtype="http://schema.org/TattooParlor">
-            <h2 itemprop="name"> INKMASTER </h2>
-            <p itemprop="description">
-                {% if local %}
-                    {{ local.txt }}
-                {% endif %}
-            </p>
-            <p> Horarios de atención: Lunes a viernes de 8:00 a 17:00
-                <meta itemprop="openingHours" content="Mo-Fr 08:00-17:00"/>
-            </p>
-            <p>
-                <meta itemprop="paymentAccepted" content="Cash, Credit Card, Debit Card"/>
-                Aceptamos: efectivo, tarjetas de débito y crédito
-            </p>
-        </div>
-        <div class="column2">
-            <h2> Redes sociales </h2>
-            <div class="row">
-                <a href="https://www.facebook.com/inkmaster/" target="_blank" rel="nofollow"><i class="fab fa-facebook"></i></a>
-                <label> Síguenos en Facebook </label>
-            </div>
-            <div class="row">
-                <a href="https://www.instagram.com/inkmaster/?hl=es-la" target="_blank" rel="nofollow"><i class="fab fa-instagram "></i></a>
-                <label> Síguenos en Instagram </label>
-            </div>
-            <div class="row">
-                <a href="https://twitter.com/inkmaster" target="_blank" rel="nofollow"><i class="fab fa-twitter"></i></a>
-                <label> Síguenos en Twitter </label>
-            </div>
-            <div class="row">
-                <a href="https://www.youtube.com/channel/UCzrh2s9Vu9wUBf2Y2iIYcgA" target="_blank" rel="nofollow"><i class="fab fa-youtube"></i></a>
-                <label> Síguenos en YouTube </label>
-            </div>
-        </div>
-        <div class="column3" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-            <h2> Información de contacto </h2>
-            <div class="row2">
-                <a href="https://goo.gl/maps/LfPyzvdqxCnWFwWn6" target="_blank" rel="nofollow"><i class="fas fa-home"></i></a>
-                <label class="normal-font-css">
-                    {% if local %}
-                        Encontranos en <span itemprop="streetAddress"> {{ local.direction }},</span>
-                        <span itemprop="postalCode">6700</span>
-                        <span itemprop="addressRegion">{{ local.province }}</span>,
-                        <span itemprop="addressCountry">{{ local.country }} </span>
-                    {% endif %}
-                </label>
-            </div>
-            <div class="row2" itemscope itemtype="https://schema.org/ContactPoint">
-                <i class="fas fa-mobile-alt"></i>
-                <label>
-                    {% if local %}
-                        <span itemprop="telephone" class="tel-css"> {{ local.phone }} </span>
-                    {% endif %}
-                </label>
-            </div>
-            <div class="row2" itemscope itemtype="https://schema.org/ContactPoint">
-                <i class="fas fa-envelope"></i>
-                <label>
-                    {% if local %}
-                        <span itemprop="email" class="email-css">{{ local.email }} </span>
-                    {% endif %}
-                </label>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-footer">
+<section class="container-body">
+    <section class="column" itemscope itemtype="http://schema.org/TattooParlor">
+        <h1 class="title" itemprop="name"> INKMASTER </h1>
+        <p itemprop="description">
+            {% if local %}
+                {{ local.txt }}
+            {% endif %}
+        </p>
+        <p> Horarios de atención: Lunes a viernes de 8:00 a 17:00
+            <meta itemprop="openingHours" content="Mo-Fr 08:00-17:00"/>
+        </p>
+        <p>
+            <meta itemprop="paymentAccepted" content="Cash, Credit Card, Debit Card"/>
+            Aceptamos: efectivo, tarjetas de débito y crédito
+        </p>
+    </section>
+    <section class="column">
+        <h1 class="title"> Redes sociales </h1> 
+        <a class="social-network" rel="nofollow" href="https://www.facebook.com/inkmaster/" target="_blank"><i class="fab fa-facebook"></i> Síguenos en Facebook </a>
+        <a class="social-network" rel="nofollow" href="https://www.instagram.com/inkmaster/?hl=es-la" target="_blank"><i class="fab fa-instagram "></i> Síguenos en Instagram </a>
+        <a class="social-network" rel="nofollow" href="https://twitter.com/inkmaster" target="_blank"><i class="fab fa-twitter"></i> Síguenos en Twitter </a>
+        <a class="social-network" rel="nofollow" href="https://www.youtube.com/channel/UCzrh2s9Vu9wUBf2Y2iIYcgA" target="_blank"><i class="fab fa-youtube"></i> Síguenos en YouTube </a>
+    </section>
+    <section class="column" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <h1 class="title"> Información de contacto </h1>
+        <address class="address" itemscope itemtype="https://schema.org/ContactPoint">
+            {% if local %}
+                Encontranos en  <a href="https://goo.gl/maps/LfPyzvdqxCnWFwWn6" target="_blank" rel="nofollow"><span itemprop="streetAddress"> {{ local.direction }},</span>
+                <span itemprop="postalCode">6700</span>
+                <span itemprop="addressRegion">{{ local.province }}</span>,
+                <span itemprop="addressCountry">{{ local.country }} </span></a> <br>
+                Si querés contactarte con nosotros, podes llamarnos por teléfono al <span itemprop="telephone"> {{ local.phone }} </span> o enviarnos un email a <a href="mailto:inkmasterpaw@gmail.com" itemprop="email">{{ local.email }} </a>
+            {% endif %}    
+        </address>
+    </section>
+</section>
+<section class="container-footer">
     <p class="copy-right"><i class="fas fa-copyright"></i> 2020 todos los derechos reservados INKMASTER </p>
-</div>
+</section>
