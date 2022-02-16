@@ -43,12 +43,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function changeImage( action ) {
     var xmlhttp = new XMLHttpRequest(),
-        url = "/change_tattoo",
+        url = "/change_tattoo/id_tattoo=" + id_tattoo_attribute + "&action=" + action + "&id_artist=" + id_artist_attribute,
         param = new FormData();
-    param.append( 'id_tattoo', id_tattoo_attribute );
-    param.append( 'action', action );
-    param.append( 'id_artist', id_artist_attribute );
-    xmlhttp.open( "POST", url );
+    xmlhttp.open( "GET", url );
 
     xmlhttp.onload = function() {
         var response = JSON.parse( xmlhttp.response ),
@@ -72,5 +69,5 @@ function changeImage( action ) {
     xmlhttp.onerror = function() {
         console.log( "error" );
     };
-    xmlhttp.send( param );
+    xmlhttp.send();
 }

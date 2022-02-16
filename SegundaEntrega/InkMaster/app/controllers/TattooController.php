@@ -56,15 +56,11 @@ class TattooController extends GeneralController
         return $this->view( 'not_found' );
     }
 
-    public function changeTattoo() {
-        if ( ! empty( json_decode( $_POST["id_tattoo"] ) ) ){
-            $id_tattoo = json_decode( $_POST["id_tattoo"] );
-        }
-        if ( ! empty( ( $_POST["action"] ) ) ){
-            $action = ( $_POST["action"] );
-        }
+    public function changeTattoo( $id_tattoo, $action ) {
         $id_tattoo = str_replace( "%20", " ", $id_tattoo );
-        $tattoos = ( empty( json_decode( $_POST["id_artist"] ) ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $_POST["id_artist"] );
+        $id_artist = ( ! empty( $_GET['id_artist'] ) ) ? str_replace( "%20", " ", $_GET['id_artist'] ) : null;
+        $id_tattoo = str_replace( "%20", " ", $id_tattoo );
+        $tattoos = ( empty( ( $_GET["id_artist"] ) ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $id_artist );
         $i = 0;
         $found = false;
         while ( $found == false ) {

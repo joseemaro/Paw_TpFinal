@@ -40,7 +40,7 @@ $router->get('gallery/([0-9]{1,})', 'TattooController@listTattoos');
 $router->get('upload_photos', 'TattooController@ulTattoos');
 $router->post('save_photos', 'TattooController@saveTattoo');
 $router->get('delete_tattoo/([0-9]{1,})', 'TattooController@delTattoo');
-$router->post('change_tattoo', 'TattooController@changeTattoo');
+$router->get('change_tattoo/id_tattoo=([0-9]{1,})[&]action=(next|previous)[&]id_artist=((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]))', 'TattooController@changeTattoo');
 $router->post('get_tattoos', 'TattooController@getTattoos');
 
 $router->get('not_found', 'ErrorController@not_found');
