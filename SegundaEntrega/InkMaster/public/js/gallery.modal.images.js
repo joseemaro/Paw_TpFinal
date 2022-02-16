@@ -43,8 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function changeImage( action ) {
     var xmlhttp = new XMLHttpRequest(),
-        url = "/change_tattoo/id_tattoo=" + id_tattoo_attribute + "&action=" + action + "&id_artist=" + id_artist_attribute,
-        param = new FormData();
+        url = "/change_tattoo/id_tattoo=" + id_tattoo_attribute + "&action=" + action + "&id_artist=" + id_artist_attribute;
     xmlhttp.open( "GET", url );
 
     xmlhttp.onload = function() {

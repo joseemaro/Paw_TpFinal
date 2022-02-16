@@ -34,6 +34,25 @@ public function select( $query ) {
     return $this->db->query( $query );
 }
 
+public function listFaqOrder( $order ) {
+    $query = "select * from $this->database.$this->table order by ";
+    switch ( $order ) {
+        case 'MorePopular':
+            $query .= "visits desc";
+            break;
+        case 'LessPopular':
+            $query .= "visits asc";
+            break;
+        case 'MoreRecent':
+            $query .= "id_faq desc";
+            break;
+        case 'LessRecent':
+            $query .= "id_faq asc";
+            break;
+    }
+    return $this->db->query( $query );
+}
+
 public function delFaq($id){
     return $this->db->delFaq($this->table, $id);
 }

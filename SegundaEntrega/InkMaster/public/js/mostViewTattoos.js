@@ -11,11 +11,8 @@ window.addEventListener( 'scroll', () => {
 function loadImages( val = 6 ) {
     var container = document.getElementById( "container" ),
         xmlhttp = new XMLHttpRequest(),
-        url = "/get_tattoos",
-        param = new FormData();
-    param.append( 'val', val );
-    param.append( 'page', page );
-    xmlhttp.open( "POST", url );
+        url = "/get_tattoos/page=" + page;
+    xmlhttp.open( "GET", url );
 
     xmlhttp.onload = function() {
         var response = xmlhttp.response;
@@ -34,6 +31,6 @@ function loadImages( val = 6 ) {
     xmlhttp.onerror = function() {
         console.log( "error" );
     };
-    xmlhttp.send( param );
+    xmlhttp.send();
     page = page + 1;
 }

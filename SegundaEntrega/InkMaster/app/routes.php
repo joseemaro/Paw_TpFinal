@@ -33,7 +33,7 @@ $router->get('edit_faq/([0-9]{1,})', 'FAQController@editFaq');
 $router->post('upd_faq', 'FAQController@updFaq');
 $router->get('add_faq', 'FAQController@addFaq');
 $router->post('save_faq', 'FAQController@saveFaq');
-$router->post('buscar_faq', 'FAQController@buscarFaq');
+$router->get('buscar_faq/val=(MorePopular|LessPopular|MoreRecent|LessRecent)', 'FAQController@buscarFaq');
 
 $router->get('gallery', 'TattooController@listTattoos');
 $router->get('gallery/([0-9]{1,})', 'TattooController@listTattoos');
@@ -41,7 +41,7 @@ $router->get('upload_photos', 'TattooController@ulTattoos');
 $router->post('save_photos', 'TattooController@saveTattoo');
 $router->get('delete_tattoo/([0-9]{1,})', 'TattooController@delTattoo');
 $router->get('change_tattoo/id_tattoo=([0-9]{1,})[&]action=(next|previous)[&]id_artist=((?![_.])(?!.*[_.]{2})[a-zA-Z0-9._% ]+(?<![_.]))', 'TattooController@changeTattoo');
-$router->post('get_tattoos', 'TattooController@getTattoos');
+$router->get('get_tattoos/page=([0-9]{1,})', 'TattooController@getTattoos');
 
 $router->get('not_found', 'ErrorController@not_found');
 $router->get('internal_error', 'ErrorController@internal_error');

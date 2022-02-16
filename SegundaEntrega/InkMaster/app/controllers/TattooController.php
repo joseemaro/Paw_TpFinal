@@ -132,17 +132,11 @@ class TattooController extends GeneralController
         return $this->view('tattoo/list.tattoos');
     }
 
-    public function getTattoos() {
+    public function getTattoos( $page = 1 ) {
         $salida = "";
         $quantity = 6;
 
-        if ( isset( $_POST['val'] ) ) {
-            $val = $_POST['val'];
-        }
-        if ( isset( $_POST['page'] ) ) {
-            $page = $_POST['page'];
-            $beginning = ( ( $page * $quantity ) - $quantity );
-        }
+        $beginning = ( ( $page * $quantity ) - $quantity );
         $tattoos = $this->tattoo->getTattoos($beginning, $quantity);
         if ( count( $tattoos ) > 0 ) {
             foreach ( $tattoos as $tattoo ) {

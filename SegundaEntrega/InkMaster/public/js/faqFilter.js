@@ -19,43 +19,47 @@ function accordion() {
 
 function getFaqs( values ){
 
-    var http = new XMLHttpRequest();
-    var url = "/buscar_faq";
-    var param = new FormData();
-    param.append('val', values);
-    http.open("POST", url, true);
-    
-    http.onreadystatechange = function (aEvt) {
-        if(http.readyState == 4 && http.status == 200) {
-            var node = document.getElementById( "content" );
-            node.parentNode.removeChild( node );
-            var target = document.getElementById("datos");
-            target.innerHTML += http.responseText;
-            accordion();
-        }
+    console.log(values);
+    var xmlhttp = new XMLHttpRequest(),
+        url = "/buscar_faq/val=" + values;
+    xmlhttp.open("GET", url );
+
+    xmlhttp.onload = function (aEvt) {
+        var node = document.getElementById( "content" );
+        node.parentNode.removeChild( node );
+        var target = document.getElementById("datos");
+        target.innerHTML += xmlhttp.response;
+        accordion();
     }
-    http.onerror = function() {
+
+    xmlhttp.onprogress = function( event ) {
+        if ( event.lengthComputable ) {
+            console.log( `Received ${event.loaded} of ${event.total} bytes` );
+        } else {
+            console.log( `Received ${event.loaded} bytes` );
+        }
+    };
+
+    xmlhttp.onerror = function() {
         console.log( "error" );
     };
-    http.send(param);
+    xmlhttp.send();
 }
 
 function increaseVisits( question, faq_id ){
-    var req = new XMLHttpRequest();
+    var xmlhttp = new XMLHttpRequest();
     var s = "/increase_faq/" + faq_id
-    req.open('GET', s, true);
-    req.onreadystatechange = function (aEvt) {
-    if (req.readyState == 4) {
-        if(req.status == 200){
-            var parentQuestion = question.parentElement,
+    xmlhttp.open('GET', s, true);
+
+    xmlhttp.onload = function (aEvt) {
+        var parentQuestion = question.parentElement,
             visits = parentQuestion.querySelector('.visits');
-            visits.innerHTML = "Total de visitas: " + req.responseText;
-        }
-        }
+        visits.innerHTML = "Total de visitas: " + xmlhttp.responseText;
     }
-    req.onerror = function() {
+
+    xmlhttp.onerror = function() {
         console.log( "error" );
     };
-req.send(null);
+    xmlhttp.send();
 }
 

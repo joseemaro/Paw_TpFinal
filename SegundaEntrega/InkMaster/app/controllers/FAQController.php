@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\GeneralController;
+use App\Core\App;
 use App\models\FAQ;
 use App\models\Local;
 use App\models\User;
@@ -16,6 +17,7 @@ class FAQController extends GeneralController
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
         $this->session = false;
+        $this->logger = App::get('logger');
     }
 
     public function listFaq() {
@@ -31,22 +33,20 @@ class FAQController extends GeneralController
         return $faq["visits"];
     }
 
-    public function buscarFaq() {
+    public function buscarFaq( $val = 'MorePopular' ) {
         session_start();
         $salida = "";
 
         $query = "SELECT * FROM faq";
 
-        if (isset($_POST['val'])) {
-            if ($_POST['val'] == 'MorePopular'){
-                $query = "SELECT * FROM faq order by visits desc";
-            }else if (($_POST['val'] == 'LessPopular')){
-                $query = "SELECT * FROM faq order by visits asc";
-            }else if(($_POST['val'] == 'MoreRecent')){
-                $query = "SELECT * FROM faq order by id_faq desc";
-            }else if(($_POST['val'] == 'LessRecent')){
-                $query = "SELECT * FROM faq order by id_faq asc";
-            }
+        if ( $val == 'MorePopular' ) {
+            $query = "SELECT * FROM faq order by visits desc";
+        }else if ( ( $val == 'LessPopular' ) ) {
+            $query = "SELECT * FROM faq order by visits asc";
+        }else if( ( $val == 'MoreRecent' ) ) {
+            $query = "SELECT * FROM faq order by id_faq desc";
+        }else if( ( $val == 'LessRecent' ) ) {
+            $query = "SELECT * FROM faq order by id_faq asc";
         }
         $faqs = $this->faq->select( $query );
         if ( count( $faqs ) > 0) {
@@ -90,6 +90,30 @@ class FAQController extends GeneralController
         }
 
         return $salida;
+    }
+
+    public function buscarFaqMVC( $val = 'MorePopular' ) {
+        $faqs = $this->faq->listFaqOrder( $val );
+
+        $faqs_order = array();
+        if ( count( $faqs ) > 0) {
+            $i = 1;
+            foreach ( $faqs as $faq ) {
+                $faqs_order[$faq['id_faq']] = $i;
+            }
+        }
+
+        $administrator = false;
+        if (isset( $_SESSION["id_user"] ) ) {
+            $id_usar = $_SESSION["id_user"];
+            if ($this->isAdministrator($id_usar)) {
+                $administrator = true;
+            }
+        }
+
+        $response['faqs'] = $faqs_order;
+        $response['isAdministrator'] = $administrator;
+        return $response;
     }
 
     public function delFaq($id_faq){
