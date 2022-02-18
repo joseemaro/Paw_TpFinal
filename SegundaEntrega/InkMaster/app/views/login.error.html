@@ -7,7 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/login.css">
 {% endblock %}
 
 {% block header %}
@@ -17,13 +16,11 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="get" enctype="multipart/form-data" class="error-login">
-        <h1>Error en el registro de usuario</h1>
-        <h3>Usuario o contraseña erronea.</h3>
-        <div id="button-form">
-            <button type="submit" class="submit-btn"> Volver </button>
-        </div>
-    </form>
+<article class="container-error">
+    <h1 class="title-center">Error en el registro de usuario</h1>
+    <p>Usuario o contraseña erronea.</p>
+    <a href="/login" class="submit-btn"> Volver </a>
+</article>
 {% endblock %}
 
 {% block footer %}

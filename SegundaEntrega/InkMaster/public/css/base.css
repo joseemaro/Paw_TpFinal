@@ -196,6 +196,8 @@ header::after{
 
 .title {
     text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2em;
 }
 
 @media screen and (max-width: 1024px) {
@@ -364,5 +366,40 @@ footer.footer-article {
         width: 100%;
         padding: 1.25em;
     }
-
 }
+
+/* ERRORS */
+
+.container-error {
+    margin: 15vh auto;
+    width: 80%;
+    text-align: center;
+}
+
+.title-center {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.container-error p {
+    margin: 2em auto;
+}
+
+.container-error a.submit-btn {
+    padding: 0.6em 0.6em;
+    margin: 0.5em auto;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.1875em;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    background-color: var(--color-logo);
+    color: var(--bg-color-white);
+}
+.submit-btn:hover{
+    background-color: rgb(199, 27, 27);
+    transition:  0.5s ease-in-out;
+}
+

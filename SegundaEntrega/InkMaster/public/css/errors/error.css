@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');
 
 * {
-  position: relative;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.centered {
+.internal-error, .not_found {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,13 +14,12 @@
   align-items: center;
   text-align: center;
   background-color: #202020;
-  color: white;
+  color: #FFFFFF;
 }
 
-h1 {
+.title  {
   margin-bottom: 2em;
-  font-family: 'Lato', sans-serif;
-  font-size: 3.125em;
+  font-size: 2em;
 }
 
 .message {
