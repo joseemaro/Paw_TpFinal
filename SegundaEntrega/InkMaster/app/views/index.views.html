@@ -7,8 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/slider/slider.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
     <script src="/public/js/slider.js"></script>
 {% endblock %}
 
@@ -19,50 +17,79 @@
 {% endblock %}
 
 {% block main %}
-    <div class="slide-container">
-        <div class="miSlider fade">
-            <img src="/public/css/slider/1.jpg" alt="Tatuaje en proceso">
-        </div>
-        <div class="miSlider fade">
-            <img src="/public/css/slider/2.jpg" alt="Preparando materiales">
-        </div>
-        <div class="miSlider fade">
-            <img src="/public/css/slider/3.jpg" alt="Diseño en proceso">
-        </div>
-        <div class="miSlider fade">
-            <img src="/public/css/slider/4.jpg" alt="Tatuaje en proceso">
-        </div>
-<!--        <div class="directions">-->
-<!--            <a href="#" class="back" onclick="back(-1)">&#10094;</a>-->
-<!--            <a href="#" class="next" onclick="next(1)">&#10095;</a>-->
-<!--        </div>-->
+<section class="main-section">
+    <article class="slide-container">
+        <figure class="miSlider fade">
+            <img src="/public/images/slider/1.jpg" alt="Artista X en proceso de realización de un tatuaje bajo la técnica hand pocket">
+            <figcaption>
+                ¡Contamos con diversidad de Artistas en varios estilos para que puedas elegir el que más se adecúe a vos!
+            </figcaption>
+        </figure>
+        <figure class="miSlider fade">
+            <img src="/public/images/slider/2.jpg" alt="Preparando materiales, demostración de las tintas">
+            <figcaption>
+                Utilizamos materiales de primera calidad. <br>
+                Para garantizar un buen resultado, trabajamos con primeras marcas como Eternal Ink y Dynamic Ink, líderes mundiales en el rubro. 
+            </figcaption>
+        </figure>
+        <figure class="miSlider fade">
+            <img src="/public/images/slider/3.jpg" alt="Artista X diseñando en una tablet gráfica">
+            <figcaption>
+                ¡Vení! Contanos tu idea y nosotros la hacemos real.
+            </figcaption>
+        </figure>
+        <figure class="miSlider fade">
+            <img src="/public/images/slider/4.jpg" alt="Tatuaje en proceso">
+            <figcaption>
+                Bruce and Remy welcome questions
+                    <small>Photo &copy; Bruce’s mum</small>
+            </figcaption>
+        </figure>
         <div class="bars">
             <span class="bar active" onclick="positionSlide(1)"></span>
             <span class="bar" onclick="positionSlide(2)"></span>
             <span class="bar" onclick="positionSlide(3)"></span>
             <span class="bar" onclick="positionSlide(4)"></span>
         </div>
-    </div>
+    </article>
+    <article class="piercings short-article">
+        <header class="header-article">
+            <h1>Piercings</h1>
+            <p>
+                Miércoles, jueves y sábados, sin turno previo. Piezas de material certificado en oro, titanio y acero quirúrgico.
+                ¡Mirá trabajos realizados!
+                <a class="link-button" href="/gallery"> Galería </a>
+            </p>
+        </header>
+        <footer class="footer-article">
+            <figure>
+                <img src="/public/images/home/1.jpg" alt="Diseño de flor en proceso">
+                <figcaption>
+                    Trabajo realizado en la Convención de Tatuajes de Rosario, Provincia de Santa Fe, Argentina; en el año 2018
+                </figcaption>
+            </figure>
+        </footer>
+    </article>
+    <article class="artists short-article">
+        <header class="header-article">
+            <h1>Experiencia única con artistas capacitados</h1>
+            <p>
+                Desde la primera consulta hasta los días posteriores a tu visita, te acompañamos para que todo el proceso sea feliz.
+                Artistas con experiencia en diferentes estilos hacen realidad la pieza que buscás. ¡Corré a verlos!
+                <a class="link-button" href="/artists"> Artistas </a>
+            </p>
+        </header>
+        <footer class="footer-article">
+            <figure>
+                <img src="/public/images/home/2.jpg" alt="Imagen del estudio">
+                <figcaption>
+                    Trabajo realizado en la Convención de Tatuajes de Rosario, Provincia de Santa Fe, Argentina; en el año 2018
+                </figcaption>
+            </figure>
+        </footer>
+    </article>
+</section>
 
-    <div class="content">
-        <section class="real-content">
-            <div>
-                <h2>Piercings</h2>
-                <p>Miércoles, jueves y sábados, sin turno previo. Piezas de material certificado en oro, titanio y acero quirúrgico.
-                    Mirá trabajos realizados!</p>
-                <a class="a-href" href="/gallery"> Galería </a>
-            </div>
-            <img src="/public/css/index-content/1.jpg" alt="Diseño de flor en proceso">
-        </section>
-        <section class="real-content">
-            <div>
-                <p>Desde la primera consulta hasta los días posteriores a tu visita, te acompañamos para que todo el proceso sea feliz.
-                    Artistas con experiencia en diferentes estilos hacen realidad la pieza que buscás. Corré a verlos!</p>
-                <a class="a-href" href="/artists"> Artistas </a>
-            </div>
-            <img src="/public/css/index-content/2.jpg" alt="Imagen del estudio">
-        </section>
-    </div>
 {% endblock %}
 
 {% block footer %}
