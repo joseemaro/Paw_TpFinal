@@ -33,19 +33,19 @@ main {
     height: fit-content;
 }
 
-header{
+header.main-header{
     grid-area: encabezado;
     background-color: var(--bg-color-black);
     width: 100%;
     position: relative;
 }
 
-footer {
+footer.main-footer {
     grid-area: pie;
     width: 100%;
 }
 
-header::after{
+header.main-header::after{
     content: '';
     clear: both;
     display: block;
@@ -333,12 +333,12 @@ footer.footer-article {
 }
 
 /* button */
-.link-button:hover {
+.link-btn-home:hover {
     opacity: 0.5;
     transition: 0.9s ease-in-out;
 }
 
-.link-button {
+.link-btn-home {
     color: var(--bg-color-white);
     background-color: #332863;
     width: 6.25em;
@@ -375,16 +375,11 @@ footer.footer-article {
     text-align: center;
 }
 
-.title-center {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
 .container-error p {
     margin: 2em auto;
 }
 
-.container-error a.submit-btn {
+.container-error a.link-btn {
     padding: 0.6em 0.6em;
     margin: 0.5em auto;
     -webkit-appearance: none;
@@ -396,8 +391,56 @@ footer.footer-article {
     background-color: var(--color-logo);
     color: var(--bg-color-white);
 }
-.submit-btn:hover{
+
+.link-btn .submit-btn:hover{
     background-color: rgb(199, 27, 27);
     transition:  0.5s ease-in-out;
 }
 
+/* General styles for all forms */
+
+/* Add a background color and some padding around the form */
+.container-form {
+    margin: 15vh auto 5vh;
+    width: 40%;
+}
+
+/* Style inputs with type="text", select elements and textareas */
+select, textarea, input {
+    width: 100%; /* Full width */
+    padding: 0.75em; /* Some padding */ 
+    border: 1px solid #ccc !important; /* Gray border */
+    border-radius: 0.25em; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 0.375em; /* Add a top margin */
+    margin-bottom: 1em; /* Bottom margin */
+    resize: none /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+    /* Style the submit button with a specific background color etc */
+input.submit-btn, input.reset-btn {
+    background-color: var(--color-logo);
+    color: var(--bg-color-white);
+    border: none;
+    cursor: pointer;
+    width: auto;
+}
+
+/* This is the main title of page */
+.title-form {
+    text-align: center;
+    font-size: 2em;
+    padding: 1em 0;
+}
+
+.register-link {
+    display: block;
+    padding: 0.25em;
+}
+
+@media screen and (max-width: 1024px) {
+    .container-form {
+        margin: 5vh auto;
+        width: 80%;
+    }
+  }
