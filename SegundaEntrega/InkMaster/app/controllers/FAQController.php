@@ -34,72 +34,14 @@ class FAQController extends GeneralController
     }
 
     public function buscarFaq( $val = 'MorePopular' ) {
-        session_start();
-        $salida = "";
-
-        $query = "SELECT * FROM faq";
-
-        if ( $val == 'MorePopular' ) {
-            $query = "SELECT * FROM faq order by visits desc";
-        }else if ( ( $val == 'LessPopular' ) ) {
-            $query = "SELECT * FROM faq order by visits asc";
-        }else if( ( $val == 'MoreRecent' ) ) {
-            $query = "SELECT * FROM faq order by id_faq desc";
-        }else if( ( $val == 'LessRecent' ) ) {
-            $query = "SELECT * FROM faq order by id_faq asc";
-        }
-        $faqs = $this->faq->select( $query );
-        if ( count( $faqs ) > 0) {
-            $salida.="<div class='questions__accordions' id='content'>";
-
-            foreach ( $faqs as $faq ) {
-                $salida.="
-				<div class='question-answer__accordion'>
-					<div class='question'>
-						<h3 class='title__question'>
-							" . $faq['question'] . "
-						</h3>
-						<img src='/public/images/icon-arrow-down.svg' >
-					</div>
-					<div class='answer'>
-						<p class='answer-block'> " . $faq['answer'] . " </p>
-						<p class='answer-block'> " . $faq['summary'] . " </p>
-						<p class='answer-block visits'> Total de visitas: " . $faq['visits'] . " </p>";
-                if (isset( $_SESSION["id_user"] ) ) {
-                    $id_usar = $_SESSION["id_user"];
-                    if ( $this->isAdministrator( $id_usar ) ) {
-                        $salida.= "
-                        <section class='manage-faqs'>
-                            <form method='get' id='edit-faq-" . $faq['id_faq'] . "' action='/edit_faq/" . $faq['id_faq'] . "'>
-                                <input type='hidden' name='id_faq' value=" . $faq['id_faq'] . ">
-                                <button class='table-button editBtn' type='submit' form='edit-faq-" . $faq['id_faq'] . "'>Editar</button>
-                            </form>
-    
-                            <form method='get' id='destroy-faq-" . $faq['id_faq'] . "' action='/del_faq/" . $faq['id_faq'] . "' onSubmit='return confirm('Desea eliminar la pregunta?');'>
-                                <input type='hidden' name='id_faq' value=" . $faq['id_faq'] . ">
-                                <button class='table-button deleteBtn' type='submit' form='destroy-faq-" . $faq['id_faq'] . "'>Borrar</button>
-                            </form>
-                        </section>";
-                    }
-                }
-                $salida.= "</div></div>";
-            }
-            $salida.= "</div>";
-        } else {
-            $salida.= "No hay FAQs registradas hasta el momento";
-        }
-
-        return $salida;
-    }
-
-    public function buscarFaqMVC( $val = 'MorePopular' ) {
         $faqs = $this->faq->listFaqOrder( $val );
 
         $faqs_order = array();
         if ( count( $faqs ) > 0) {
             $i = 1;
             foreach ( $faqs as $faq ) {
-                $faqs_order[$faq['id_faq']] = $i;
+                $faqs_order[$i] = $faq['id_faq'];
+                $i++;
             }
         }
 
@@ -113,7 +55,7 @@ class FAQController extends GeneralController
 
         $response['faqs'] = $faqs_order;
         $response['isAdministrator'] = $administrator;
-        return $response;
+        return json_encode( $response );
     }
 
     public function delFaq($id_faq){

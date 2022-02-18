@@ -41,8 +41,8 @@
     <div class="accordion__wrapper">
         <div class="questions__accordions" id="content">
             {% for query in variable.faqs %}
-                <div class="question-answer__accordion">
-                    <div class="question" data-faq-id="{{ query.id_faq }}">
+                <div class="question-answer__accordion" data-faq-id="{{ query.id_faq }}">
+                    <div class="question">
                         <h3 class="title__question">
                             {{ query.question }}
                         </h3>
