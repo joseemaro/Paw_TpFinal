@@ -197,7 +197,6 @@ header::after{
 .title {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 2em;
 }
 
 @media screen and (max-width: 1024px) {
@@ -379,7 +378,6 @@ footer.footer-article {
 .title-center {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 2em;
 }
 
 .container-error p {
