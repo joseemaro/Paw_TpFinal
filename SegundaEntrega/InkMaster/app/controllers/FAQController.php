@@ -22,7 +22,7 @@ class FAQController extends GeneralController
 
     public function listFaq() {
         $variable = array();
-        $variable["faqs"] = $this->faq->listFaq();
+        $variable["faqs"] = $this->faq->listFaqOrder( "MoreRecent" );
         $this->faq->genSeoJsonFaq($variable);
         return $this->view('faq/list.faqs', $variable);
     }

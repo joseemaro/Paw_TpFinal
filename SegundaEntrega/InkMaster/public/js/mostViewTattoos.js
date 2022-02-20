@@ -15,8 +15,18 @@ function loadImages( val = 6 ) {
     xmlhttp.open( "GET", url );
 
     xmlhttp.onload = function() {
-        var response = xmlhttp.response;
-        container.insertAdjacentHTML( 'beforeend', response );
+        var response = JSON.parse( xmlhttp.response );
+
+        for (var i = 0; i < Object.keys( response ).length; i++) {
+
+            var newImg = document.createElement("img");
+            newImg.className = "myImg";
+            newImg.src = "data:image/png;base64, " + response[i].image;
+            newImg.alt = response[i].txt;
+            newImg.setAttribute( "data-tattoo-id", response[i].id_tattoo );
+
+            container.appendChild( newImg );
+        }
     };
 
     xmlhttp.onprogress = function( event ) {

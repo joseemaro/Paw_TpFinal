@@ -133,17 +133,11 @@ class TattooController extends GeneralController
     }
 
     public function getTattoos( $page = 1 ) {
-        $salida = "";
         $quantity = 6;
 
         $beginning = ( ( $page * $quantity ) - $quantity );
         $tattoos = $this->tattoo->getTattoos($beginning, $quantity);
-        if ( count( $tattoos ) > 0 ) {
-            foreach ( $tattoos as $tattoo ) {
-                $salida.= "<img class='myImg' src='data:image/png;base64, ".$tattoo["image"]."' alt='".$tattoo["txt"]."' data-tattoo-id='".$tattoo['id_tattoo']."'>";
-            }
-        }
-        return $salida;
+        return json_encode( $tattoos );
     }
 
 }
