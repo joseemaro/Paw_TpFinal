@@ -7,7 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/errors/error.register.css">
 {% endblock %}
 
 {% block header %}
@@ -17,14 +16,12 @@
 {% endblock %}
 
 {% block main %}
-<div class="container-error">
+<article class="container-error">
     <h1 class="title"> Error en el Registro del Turno</h1>
-    <article>
-        {% for error in variable.errors %}
-        <p> {{ error }} </p>
-        {% endfor %}
-    </article>
-</div>
+    {% for error in variable.errors %}
+    <p> {{ error }} </p>
+    {% endfor %}
+</article>
 {% endblock %}
 
 {% block footer %}
