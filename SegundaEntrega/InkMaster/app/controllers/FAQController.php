@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\GeneralController;
 use App\Core\App;
 use App\models\FAQ;
 use App\models\Local;

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\GeneralController;
 use App\models\Local;
 use App\models\Tattoo;
 use App\models\User;
