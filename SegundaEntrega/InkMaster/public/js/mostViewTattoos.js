@@ -3,6 +3,13 @@ var page = 2;
 window.addEventListener( 'scroll', () => {
     var limit = document.documentElement.scrollHeight;
     if( window.scrollY + window.innerHeight >= limit ){
+        var gallery_container = document.getElementById( "container" );
+
+        var preload = document.createElement("img");
+        preload.src = "/public/images/Spinner.svg";
+        preload.id = "preload_gallery"
+
+        gallery_container.appendChild( preload );
         loadImages();
     }
 
@@ -27,6 +34,8 @@ function loadImages( val = 6 ) {
 
             container.appendChild( newImg );
         }
+        var preloadImg = document.getElementById( "preload_gallery" );
+        preloadImg.parentElement.removeChild( preloadImg );
     };
 
     xmlhttp.onprogress = function( event ) {
@@ -39,8 +48,15 @@ function loadImages( val = 6 ) {
     };
 
     xmlhttp.onerror = function() {
+        var preloadImg = document.getElementById( "preload_gallery" );
+        preloadImg.parentElement.removeChild( preloadImg );
         console.log( "error" );
     };
     xmlhttp.send();
     page = page + 1;
+}
+
+function removePreload() {
+    var preloadImg = document.getElementById( "preload_gallery" );
+    preloadImg.parentElement.removeChild( preloadImg );
 }

@@ -65,6 +65,11 @@ img.logo{
     -o-transform : scale(2);        /* Opera */
 }
 
+#preload_gallery {
+    position: absolute;
+    align-self: self-end;
+}
+
 @media screen and (max-width: 1024px) {
 
     .gallery-container {
