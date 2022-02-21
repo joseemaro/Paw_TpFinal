@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Edit Appointment
+    Editar Turno
 {% endblock %}
 
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/validateForms.js"></script> 
 {% endblock %}
 
@@ -18,9 +17,9 @@
 {% endblock %}
 
 {% block main %}
-<div class="container-form">
-    <h1 class="title"> Editar turno </h1>
-    <form action="/upt_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
+<section class="container-form">
+    <h1 class="title title-form"> Editar turno </h1>
+    <form action="/upt_appointment" method="post" name="form" enctype="multipart/form-data">
         <input type="hidden" name="id_appointment" readonly value="{{ variable.appointment.id_appointment }}">
         {% if (session) and (not variable.adult) %}
             <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
@@ -34,17 +33,18 @@
 
         <label for="fdate"> Fecha </label>
         <input id="fdate" type="date" name="date" class="datejs" value="{{ variable.appointment.date }}">
-        <span id="date-invalid" class="hide-alert">Ingrese una fecha valida</span>
+        <p id="date-invalid" class="hide-alert">Ingrese una fecha valida</p>
 
         <label for="fhour"> Horario (hh:min) </label> 
         <input id="fhour" type="time" name="hour" class="hourjs" value="{{ variable.appointment.hour }}">
-        <span id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</span>
+        <p id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</p>
        
-    
         <label for="img"> Imágenes de referencia </label>
         {% if variable.appointment.reference_images %}
             {% for reference_image in variable.appointment.reference_images %}
-                <img id="img" class="img-edit" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
+            <figure>
+                <img class="img-edit" src="data:image/png;base64, {{reference_image}}" alt="imagen de tattoo de referencia">
+            </figure>
             {% endfor %}
         {% endif %}
         <!--  <input type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple> -->
@@ -52,19 +52,16 @@
         {% if  variable.appointment.txt %}
             <label for="pathology-txt"> Enfermedades </label>
             <textarea readonly name="txt" id="pathology-txt" class="pathologyjs" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:" > {{ variable.appointment.txt }}</textarea> 
-            <span id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</span>
+            <p id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</p>
         {% endif %}
 
-        <div>
-            <input class="button-editAp" type="reset" value="Limpiar" />
-
-            <input class="button-editAp" type="submit" id="send-btn" value="Editar" />
-        </div>
-
+        <input class="reset-btn" type="reset" value="Limpiar" />
+        <input class="submit-btn" type="submit" id="send-btn" value="Editar" />
+        
         <p class="footer-form"> Todos los campos son obligatorios</p><br>
 
     </form>
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}

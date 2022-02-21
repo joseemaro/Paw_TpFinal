@@ -7,7 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/validateForms.js"></script>
 {% endblock %}
 
@@ -19,9 +18,9 @@
 
 {% block main %}
 
-<div class="container-form">
-    <h1 class="title"> Solicitud de turno </h1>
-    <div class="login-ap">
+<section class="container-form">
+    <h1 class="title title-form"> Solicitud de turno </h1>
+    <section class="login-ap">
     {% if not variable.session %}
             Se necesita estar logueado para poder registrar un turno<br>
             <a href="/login">Iniciar sesión/Registrarse</a>
@@ -31,9 +30,8 @@
                 <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
             {% endif %}
         {% endif %}
-    </div>
-    <form action="/save_appointment" method="post" id="form" name="form" enctype="multipart/form-data">
-  
+    </section>
+    <form action="/save_appointment" method="post" name="form" enctype="multipart/form-data">
         <label for="fartist">Artista</label>
         <select id="fartist" name="id_artist">
             {% for artist in artists %}
@@ -43,43 +41,38 @@
 
         <label for="date">Fecha</label>
         <input type="date" name="date" id="date" class="datejs" required>
-        <span id="date-invalid" class="hide-alert">Ingrese una fecha valida</span>
+        <p id="date-invalid" class="hide-alert">Ingrese una fecha valida</p>
 
         <label for="fhour">Horario (hh:min)</label>
         <input id="fhour" type="time" min="09:00" max="17:00" step="900" name="hour" class="hourjs" required>
-        <span id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</span>
+        <p id="hour-invalid" class="hide-alert">Ingrese una hora valida (9am-5pm)</p>
 
         <label for="fimg">Imágenes de referencia </label>
-        <input id="fimg" type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple required>
+        <input class="file" id="fimg" type="file" name="reference_image[]" accept="image/jpeg, image/x-png, image/x-jpg" multiple required>
 
-       <section class="illness">
+       <fieldset class="illness">
             <label for="fillness"> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing? </label>
-            <input id="fillness" name="pathology" type="checkbox" onChange="comprobar(this);" />
+            <input id="fillness" class="checkbox" name="pathology" type="checkbox" onChange="comprobar(this);" />
             <textarea rows=10  class="disease pathologyjs valid-input" name="pathology-txt" id="pathology-txt" pattern="^[a-zA-Z0-9+-.: À-ÿ\u00f1\u00d1\u00E0-\u00FC]{3,70}$" title="Solo se permiten letras, numeros, espacios, y +-.:"></textarea>
-            <span id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</span>
-        </section>
+            <p id="illness-invalid" class="hide-alert">Solo se admiten letras y numeros (3-70 caracteres)</p>
+        </fieldset>
 
-        <section class="terms-conditions">
+        <fieldset class="terms-conditions">
             <label for="terms">Acepto los <a class="terms" target="_blank" href="/term&cond">términos y condiciones</a></label>
-            <input type="checkbox" class="terms termsjs" name="terms" id="terms" > 
-        </section> 
+            <input type="checkbox" class="checkbox terms termsjs" name="terms" id="terms" > 
+        </fieldset> 
 
-        <div class="buttons">
-            <input class="button-newAp" type="reset" value="Limpiar" />
+        <input class="reset-btn" type="reset" value="Limpiar" />
+        {% if session %}
+            <input class="submit-btn terms-uncheck" type="submit" id="send-btn2" disabled value="Enviar" />
+        {% else %}
+            <input class="submit-btn" type="submit" value="Enviar" disabled/>
+        {% endif %}
 
-            {% if session %}
-                <input class="button-newAp terms-uncheck" type="submit" id="send-btn2" disabled value="Enviar" />
-            {% else %}
-                <input class="button-newAp" type="submit" value="Enviar" disabled/>
-            {% endif %}
-        </div>
-
-        <div>
-            <p class="footer-form"> Todos los campos son obligatorios</p><br>
-        </div>
+        <p class="footer-form"> Todos los campos son obligatorios</p><br>
     {% endif %}
     </form>
-  </div>
+</section>
 
 {% endblock %}
 

@@ -118,43 +118,6 @@ header.main-header::after{
     margin-left: 0.5em;
 }
 
-/* Media query */
-@media(min-width:1024px) {
-    /* nav */
-    .nav-bar {
-        display: none;
-    }
-
-    .menu {
-        margin-left: 0;
-        display: flex;
-        justify-content: center;
-    }
-
-    .menu__item {
-        margin: 0 1em;
-    }
-
-    .container-submenu {
-        position: relative;
-    }
-    
-    .submenu {
-        position: absolute;
-        /* top: 3.75em; */
-        width: 15em;
-        overflow: visible;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-    }
-
-    .container-submenu:hover .submenu {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-
 /* footer styles */
 
 .container-footer-all {
@@ -197,17 +160,6 @@ header.main-header::after{
 .title {
     text-transform: uppercase;
     font-weight: bold;
-}
-
-@media screen and (max-width: 1024px) {
-    .container-body {
-        flex-direction: column;
-    }
-
-    .column {
-        max-width: 100%;
-        margin: 0;
-    }
 }
 
 /* Content of pages / container */
@@ -355,18 +307,6 @@ footer.footer-article {
     color: #332863;
 }
 
-
-@media screen and (max-width: 1024px){
-    footer.footer-article {
-        display: none;
-    }
-
-    header.header-article {
-        width: 100%;
-        padding: 1.25em;
-    }
-}
-
 /* ERRORS */
 
 .container-error {
@@ -401,7 +341,7 @@ footer.footer-article {
 
 /* Add a background color and some padding around the form */
 .container-form {
-    margin: 15vh auto 5vh;
+    margin: 12vh auto 5vh;
     width: 40%;
 }
 
@@ -417,13 +357,21 @@ select, textarea, input {
     resize: none /* Allow the user to vertically resize the textarea (not horizontally) */
 }
 
-    /* Style the submit button with a specific background color etc */
+/* Style the submit button with a specific background color etc */
 input.submit-btn, input.reset-btn {
     background-color: var(--color-logo);
     color: var(--bg-color-white);
     border: none;
     cursor: pointer;
     width: auto;
+}
+
+fieldset {
+    border: none;
+}
+
+.reset-btn {
+    background-color: var(--bg-color-black) !important;
 }
 
 /* This is the main title of page */
@@ -438,9 +386,282 @@ input.submit-btn, input.reset-btn {
     padding: 0.25em;
 }
 
+/* Style input file */
+.file {
+    padding: 0;
+    border: none !important;
+    border-radius: 0%;
+}
+
+/* This is the checkbox section (for diseases, terms and conditions and register a new artist by administrator user) */
+.illness, .terms-conditions, .add-artist {
+    display: block;
+    margin-top: 0.375em; /* Add a top margin */
+    margin-bottom: 1em; /* Bottom margin */
+}
+
+/* This is the text area for diseases and artist section */
+.disease, .artist-section {
+    display: none;
+}
+
+.img-edit {
+    width: 80%;
+    height: auto;
+    display: block;
+    padding: 0.75em;
+}
+
+.footer-form {
+    border-top: 1px dashed var(--color-logo);
+    margin-top: 2em;
+    padding: 1em;
+    text-align: center;
+}
+
+.login-ap {
+    margin: 2em auto 2em;
+    text-align: center;
+}
+
+/* Set styles for js validation */
+
+/* put inputs in red if are wrong */
+.valid-input{
+    border: #ffffff;
+    background-color: #ffffff;
+}
+
+.invalid-input{
+    border: #e05f5f;
+    background-color: #e05f5f;
+}
+
+/* show and hide alerts */
+.show-alert{
+    display: block;
+    color: var(--color-logo);
+    margin-bottom: 1em;
+}
+
+.hide-alert{
+    display: none;
+}
+
+/* style for buttom under terms and cond. */
+.terms-check{
+    background: var(--color-logo) !important;
+}
+
+.terms-uncheck{
+    background: #c7c7c7 !important;
+}
+
+/* show - block text area */
+.show-area{
+    display: block;
+}
+
+.hide-area{
+    display: none;
+}
+
+.checkbox {
+    width: auto;
+}
+
+
+/* List Ap view */
+
+.container-section {
+    margin: 12vh auto 5vh;
+    text-align: center;
+}
+
+.without-ap {
+    text-align: center;  
+    margin: 1em auto;
+}
+
+.calendar-btn {
+    background-color: var(--color-logo);
+    text-decoration: none;
+    color: var(--bg-color-white);
+    padding: 0.75em 1.25em;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+
+.calendar-btn:hover{
+    opacity: 0.5;
+    transition: 0.9s ease-in-out;
+}
+
+.link {
+    color: var(--bg-color-black);
+    cursor: pointer;
+    display: block;
+    margin: 0.5em auto;
+}
+
+.accept-btn:hover {
+    color: #3C7931;
+}
+
+.cancel-btn:hover {
+    color: var(--color-logo);
+}
+
+/* Table styles */
+tbody,
+tr,
+td,
+th {
+    border: 1px solid var(--bg-color-black);
+}
+
+table.width200 {
+    width: 80%;
+    margin: 2em auto;
+}
+
+.width200 th {
+    padding: 0.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.width200 td {
+    padding: 0.5em;
+    text-align:center;
+    overflow: hidden;
+}
+
+/* View AP styles */
+
+.col-content {
+    float: left;    
+    width: 50%;
+}
+
+.two-columns {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Media querys */
+
+@media(min-width:1024px) {
+    /* nav */
+    .nav-bar {
+        display: none;
+    }
+
+    .menu {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .menu__item {
+        margin: 0 1em;
+    }
+
+    .container-submenu {
+        position: relative;
+    }
+    
+    .submenu {
+        position: absolute;
+        /* top: 3.75em; */
+        width: 15em;
+        overflow: visible;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .container-submenu:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 @media screen and (max-width: 1024px) {
-    .container-form {
+    .container-body {
+        flex-direction: column;
+    }
+
+    .column {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    footer.footer-article {
+        display: none;
+    }
+
+    header.header-article {
+        width: 100%;
+        padding: 1.25em;
+    }
+
+    .container-form, .container-section {
         margin: 5vh auto;
         width: 80%;
     }
-  }
+
+    .container-section {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px) {
+    
+    tbody {
+        margin-top: 1em;
+    }
+
+    table.width200,
+    .width200 thead,
+    .width200 tbody,
+    .width200 th,
+    .width200 td,
+    .width200 tr {
+        display: block;
+    }
+
+    .width200 thead tr {
+        position: absolute;
+        top: -62.4375em;
+        left: -62.4375em;
+    }
+
+    .width200 td {
+        position: relative;
+        padding-left: 40%;
+        text-align: left
+    }
+
+    .width200 td:before {
+        position: absolute;
+        top: 0.375em;
+        left: 0.375em;
+        width: 40%;
+        padding-right: 0;
+        white-space: nowrap;
+    }
+
+    .width200 td:nth-of-type(1):before { content: "Tatuador";}
+    .width200 td:nth-of-type(2):before { content: "Local"; }
+    .width200 td:nth-of-type(3):before { content: "Fecha"; }
+    .width200 td:nth-of-type(4):before { content: "Hora"; }
+    .width200 td:nth-of-type(5):before { content: "Nombre"; }
+    .width200 td:nth-of-type(6):before { content: "Telefono"; }
+    .width200 td:nth-of-type(7):before { content: "Email"; }
+    .width200 td:nth-of-type(8):before { content: "Estado"; }
+    .width200 td:nth-of-type(9):before { content: "Precio"; }
+    .width200 td:nth-of-type(10):before { content: "Acciones"; }
+}
