@@ -405,7 +405,7 @@ fieldset {
     display: none;
 }
 
-.img-edit {
+.img-edit, figcaption {
     width: 80%;
     height: auto;
     display: block;
@@ -502,7 +502,7 @@ fieldset {
     color: var(--bg-color-black);
     cursor: pointer;
     display: block;
-    margin: 0.5em auto;
+    margin: 1em auto;
 }
 
 .accept-btn:hover {
@@ -536,19 +536,6 @@ table.width200 {
     padding: 0.5em;
     text-align:center;
     overflow: hidden;
-}
-
-/* View AP styles */
-
-.col-content {
-    float: left;    
-    width: 50%;
-}
-
-.two-columns {
-    content: "";
-    display: table;
-    clear: both;
 }
 
 /* Media querys */

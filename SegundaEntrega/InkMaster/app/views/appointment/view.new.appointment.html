@@ -7,7 +7,6 @@ Se ha registrado el turno
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/appointment/list.appointments.css">
 {% endblock %}
 
 {% block header %}
@@ -16,9 +15,8 @@ Se ha registrado el turno
 {% endblock %}
 
 {% block main %}
-<div class="container-listap">
-    <h1 id="title">Se ha registrado su turno</h1>
-
+<section class="container-section">
+    <h1 class="title title-form">Se ha registrado su turno</h1>
     {% if variable.appointment %}
         <table class="width200">
             <thead>
@@ -31,7 +29,6 @@ Se ha registrado el turno
                     <th scope="col">Precio</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr>
                     <td>{{ variable.appointment.id_artist }}</td>
@@ -45,15 +42,13 @@ Se ha registrado el turno
                         <td>{{ variable.appointment.price }}</td>
                     {% endif %}
                     <td>
-                        <form method="get" action="/new_appointment">
-                            <button class ="table-button editBtn" type="submit">Volver</button>
-                        </form>
+                        <a href="/new_appointment">Nuevo Turno</a>
                     </td>
                 </tr>
             </tbody>
         </table>
     {% endif %}
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}
