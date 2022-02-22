@@ -405,7 +405,7 @@ fieldset {
     display: none;
 }
 
-.img-edit, figcaption {
+.img-edit, .text-img {
     width: 80%;
     height: auto;
     display: block;
@@ -538,7 +538,41 @@ table.width200 {
     overflow: hidden;
 }
 
+/* List Artists */
+
+.list-artists {
+    width: 80% !important;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.artist {
+    background: whitesmoke;
+    margin: 1em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    list-style-type: none;
+    padding: 1em;
+}
+
+.artist .artist-img, .artist figcaption {
+    background: whitesmoke;
+    max-width: 18.75em;
+    margin: 1em;
+    text-align: center;
+}
+
 /* Media querys */
+
+@media(max-width:375px) {
+    .artist .artist-img {
+        max-width: 15em;
+    }
+}
 
 @media(min-width:1024px) {
     /* nav */

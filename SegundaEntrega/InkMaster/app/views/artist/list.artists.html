@@ -7,8 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/artist/list.artist.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
     <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
 
 {% endblock %}
@@ -19,27 +17,26 @@
 {% endblock %}
 
 {% block main %}
-<div class="artist-container">
-    <h1 id="title">InkMaster's Team</h1>
+<section class="container-section list-artists">
+    <h1 class="title title-form">InkMaster's Team</h1>
+    <p> ¡Entrá a conocer a nuestro equipo! Mirá el portfolio de nuestro staff para elegir tu próximo turno.</p>
     {% if variable.artists %}
-        <div class="container">
-            {% for artist in variable.artists %}
-                <figure>
-                    {% if artist.photo %}
-                        <a href="/view_artist/{{ artist.id_artist }}"><img src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista"></a>                 
-                    {% endif %}
-                    <figcaption>
-                        <form method="get" action="/view_artist/{{ artist.id_artist }}">
-                            <button class ="artistBtn" type="submit">{{ artist.id_artist }}</button>
-                        </form>
-                    </figcaption>
-                </figure>
-            {% endfor %}
-        </div>
+    <section class="gallery">
+        {% for artist in variable.artists %}
+            <figure class="artist">
+                {% if artist.photo %}
+                    <a href="/view_artist/{{ artist.id_artist }}"><img class="artist-img" src="data:image/jpg;base64, {{ artist.photo }}" alt="Foto de perfil artista"></a>          
+                {% endif %}
+                <figcaption>
+                    <a class="link" href="/view_artist/{{ artist.id_artist }}"> Ver {{ artist.id_artist }} </a>
+                </figcaption>
+            </figure>
+        {% endfor %}
+    </section>
     {% else %}
-        <p id="no-artist"> No hay artistas registrados hasta el momento </p>
+        <p> No hay artistas registrados hasta el momento </p>
     {% endif %}
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}
