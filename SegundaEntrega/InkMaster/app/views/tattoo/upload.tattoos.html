@@ -7,7 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/forms.css">
     <script type="text/javascript" src="/public/js/validateForms.js"></script>
 {% endblock %}
 
@@ -18,40 +17,34 @@
 
 {% block main %}
 
-<div class="container-form">
+<section class="container-form">
     <form method="post" action="/save_photos" enctype="multipart/form-data">
+        <label for="fprofesional">Profesional</label>
+        <input type="text" name="artist" id="fprofesional" class="" value="{{ variable['artist'] }}" disabled>
+        
+        <label for="fsector">Sector</label>
+        <select id="fsector" name="sector">
+            <option>Cabeza</option>
+            <option>Espalda</option>
+            <option>Brazo</option>
+            <option>Pecho</option>
+            <option>Panza</option>
+            <option>Costillas</option>
+            <option>Pierna</option>
+            <option>Pie</option>
+            <option>Otro</option>
+        </select>
   
-    <label for="fprofesional">Profesional</label>
-    <input type="text" name="artist" id="fprofesional" class="" value="{{ variable['artist'] }}" disabled>
+        <label for="fdescription">Descripción</label>
+        <textarea id="fdescription" name="description" style="height:200px" class="descriptionjs"></textarea>
+        <p id="summary-invalid" class="hide-alert">Ha ingresado caracteres no validos(3-80 caracteres)</p>
+        
+        <label for="fimage">Seleccionar imágenes</label>
+        <input id="fimage" type="file" name="image" class="file imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
   
-    <label for="fsector">Sector</label>
-    <select id="fsector" name="sector">
-        <option>Cabeza</option>
-        <option>Espalda</option>
-        <option>Brazo</option>
-        <option>Pecho</option>
-        <option>Panza</option>
-        <option>Costillas</option>
-        <option>Pierna</option>
-        <option>Pie</option>
-        <option>Otro</option>
-    </select>
-  
-    <label for="fdescription">Descripción</label>
-    <textarea id="fdescription" name="description" style="height:200px" class="descriptionjs"></textarea>
-    <span id="summary-invalid" class="hide-alert">Ha ingresado caracteres no validos(3-80 caracteres)</span>
-  
-    <label for="fimage">Seleccionar imágenes</label>
-    <input id="fimage" type="file" name="image" class="imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
-  
-    {% if isArtist %} 
-        <input type="submit" disabled id="up-btn" value="Subir imágenes" />
-    {% else %}
-        <input type="submit" disabled value="Subir imágenes" />
-    {% endif %}
-  
+        <input type="submit" disabled class="submit-btn" value="Subir imágenes" />
     </form>
-</div>
+</section>
 
 {% endblock %}
 

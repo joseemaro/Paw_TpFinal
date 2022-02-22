@@ -7,11 +7,8 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/artist/view.artist.css">
     <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
     <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    
 
 {% endblock %}
 
@@ -22,41 +19,27 @@
 {% endblock %}
 
 {% block main %}
-
-    <div class="container-artist">
-
-        <section id="example">
-            <h1 id="title-artist">{{ variable.artist.id_user }}</h1>
-        </section>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <span class="close">&times;</span>
-            <span class="modal-previous">&lt;</span>
-            <img class="modal-content" id="img01">
-            <span class="modal-next">&gt;</span>
-            <div id="caption"></div>
-        </div>
-        <!-- <figure>
-            {% if variable.artist.photo %}
-                <img class="myImg" src="data:image/jpg;base64, {{ variable.artist.photo }}" alt="Foto de perfil artista">
-            {% endif %}
-            <figcaption>
-                <p id="description-artist">{{ variable.artist.txt }}</p>
-            </figcaption>
-        </figure> -->
-        <div class="container-img-artist">
-            {% for tattoo in variable.artist.tattoos %}
-                <div>
-                    <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo}}" data-artist-id="{{ tattoo.id_artist }}">
-                    {% if variable.artist.id_artist == user %}
-                        <form method="get" id="delete-tattoo-{{ tattoo['id_tattoo'] }}" action="/delete_tattoo/{{ tattoo['id_tattoo'] }}">
-                            <button class ="deleteBtn" type="submit" form="delete-tattoo-{{ tattoo['id_tattoo'] }}">Borrar</button>
-                        </form>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+<article class="container-section list-artists">
+    <h1 class="title title-form">{{ variable.artist.id_user }}</h1>
+    <!-- The Modal -->
+    <figure id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <span class="modal-previous">&lt;</span>
+        <img class="modal-content" id="img01">
+        <span class="modal-next">&gt;</span>
+        <figcaption id="caption"></figcaption>
+    </figure>
+    <section class="gallery">
+        {% for tattoo in variable.artist.tattoos %}
+            <figure>
+                <img class="myImg artist-img" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo}}" data-artist-id="{{ tattoo.id_artist }}">
+                {% if variable.artist.id_artist == user %}
+                    <a class="link cancel-btn" id="delete-tattoo-{{ tattoo['id_tattoo'] }}" href="/delete_tattoo/{{ tattoo['id_tattoo'] }}">Borrar</a>
+                {% endif %}
+            </figure>
+        {% endfor %}
+    </section>
+</article>
 
 {% endblock %}
 
