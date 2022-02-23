@@ -7,10 +7,8 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/tattoo/gallery.css">
     <link rel="stylesheet" type="text/css" href="/public/css/modal-images/gallery.modal.css">
     <script type="text/javascript" src="/public/js/gallery.modal.images.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="/public/js/mostViewTattoos.js"></script>
 {% endblock %}
 
@@ -20,31 +18,30 @@
 {% endblock %}
 
 {% block main %}
-<div class="gallery-container">
-    <h1 id="title">INKMASTER GANG</h1>
+<section class="container-section list-artists">
+    <h1 class="title title-form">INKMASTER GANG</h1>
     {% if (variable.tattoos)%}
-        <div id="container">
-            <!-- The Modal -->
-            <div id="myModal" class="modal">
-                <span class="close">&times;</span>
-                <span class="modal-previous">&lt;</span>
-                <img class="modal-content" id="img01">
-                <span class="modal-next">&gt;</span>
-                <div id="caption"></div>
-            </div>
+        <figure id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <span class="modal-previous">&lt;</span>
+            <img class="modal-content" id="img01">
+            <span class="modal-next">&gt;</span>
+            <figcaption id="caption"></figcaption>
+        </figure>
+        <section class="gallery">
             {% for tattoo in variable.tattoos %}
-                <img class="myImg" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo }}">
+            <figure>
+                <img class="myImg artist-img" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo }}">
+            </figure>
             {% endfor %}
-        </div>
+        </section>
     {% else %}
-        <div class="without-img">
-            <p class="text"> No hay imágenes registrados hasta el momento </p>
-            {% if isArtist %}
-            <a class="text" href="/upload_photos">Subir fotos</a>
-            {% endif %} 
-        </div> 
+        <p> No hay imágenes registrados hasta el momento </p>
+        {% if isArtist %}
+        <a class="link" href="/upload_photos">Subir fotos</a>
+        {% endif %} 
     {% endif %}
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}
