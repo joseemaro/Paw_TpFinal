@@ -7,9 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript" src="/public/js/faqFilter.js"></script>
-    <link rel="stylesheet" type="text/css" href="/public/css/faq/faq.css">
     <script type="application/ld+json" src="/public/js/SEO/seoFaqs.jsonld"></script>
 {% endblock %}
 
@@ -19,60 +17,40 @@
 {% endblock %}
 
 {% block main %}
-<div class="wrapper">
-    <h1 class="title__accordion">FAQ's</h1>
+<section class="container-section faq-container">
+    <h1 class="title title-form">FAQ's</h1>
     {% if isAdministrator %}
-        <div class="new-faq">
-            <form method="get" id="add-faq" action="/add_faq">
-                <input type="hidden" name="add_faq" value="add_faq">
-                <button class="table-button addBtn" type="submit" form="add-faq">Nueva Pregunta</button>
-            </form>
-        </div>
+        <a class="link" href="/add_faq">Nueva Pregunta</a>
     {% endif %}
-    <section class="select-bar">
-        <label for="faqs">Filtrar por </label>
-        <select name="faqs" id="faqs" class="styled-select" onchange="getFaqs(this.value)">
-            <option value="MoreRecent">Mas Recientes</option>
-            <option value="LessRecent">Menos recientes</option>
-            <option value="MorePopular">Mas populares</option>
-            <option value="LessPopular">Menos populares</option>
-        </select>
+    <label class="styled-select" for="faqs">Filtrar por </label>
+    <select name="faqs" class="styled-select" onchange="getFaqs(this.value)">
+        <option value="MoreRecent">Mas Recientes</option>
+        <option value="LessRecent">Menos recientes</option>
+        <option value="MorePopular">Mas populares</option>
+        <option value="LessPopular">Menos populares</option>
+    </select>
+    <section class="accordion__wrapper" id="content">
+        {% for query in variable.faqs %}
+            <article class="question-answer__accordion" data-faq-id="{{ query.id_faq }}">
+                <header class="question">
+                    <h1 class="title__question">
+                        {{ query.question }}
+                    </h1>
+                    <img src="/public/images/icon-arrow-down.svg" >
+                </header>
+                <footer class="answer">
+                    <p class="answer-block"> {{ query.answer }} </p>
+                    <p class="answer-block">{{ query.summary }} </p>
+                    <p class="answer-block visits"> Total de visitas: {{ query.visits }} </p>
+                    {% if isAdministrator %}
+                        <a class="link-faq" id="edit-faq-{{ query.id_faq }}" href="/edit_faq/{{ query.id_faq }}">Editar</a>
+                        <a class="link-faq" id="destroy-faq-{{ query.id_faq }}" href="/del_faq/{{ query.id_faq }}">Borrar</a>
+                    {% endif %}
+                </footer>
+            </article>
+        {% endfor %}
     </section>
-    <div class="accordion__wrapper">
-        <div class="questions__accordions" id="content">
-            {% for query in variable.faqs %}
-                <div class="question-answer__accordion" data-faq-id="{{ query.id_faq }}">
-                    <div class="question">
-                        <h3 class="title__question">
-                            {{ query.question }}
-                        </h3>
-                        <img src="/public/images/icon-arrow-down.svg" >
-                    </div>
-                    <div class="answer">
-                        <p class="answer-block"> {{ query.answer }} </p>
-                        <p class="answer-block">{{ query.summary }} </p>
-                        <p class="answer-block visits"> Total de visitas: {{ query.visits }} </p>
-
-                        {% if isAdministrator %}
-                            <section class="manage-faqs">
-                                <form method="get" id="edit-faq-{{ query.id_faq }}" action="/edit_faq/{{ query.id_faq }}">
-                                    <input type="hidden" name="id_faq" value={{ query.id_faq }}>
-                                    <button class="table-button editBtn" type="submit" form="edit-faq-{{ query.id_faq }}">Editar</button>
-                                </form>
-                            
-                                <form method="get" id="destroy-faq-{{ query.id_faq }}" action="/del_faq/{{ query.id_faq }}" onSubmit="return confirm('Desea eliminar la pregunta?');">
-                                    <input type="hidden" name="id_faq" value={{ query.id_faq }}>
-                                    <button class="table-button deleteBtn" type="submit" form="destroy-faq-{{ query.id_faq }}">Borrar</button>
-                                </form>
-                            </section>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div id="datos"></div>
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}
