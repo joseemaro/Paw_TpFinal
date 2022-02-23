@@ -470,6 +470,11 @@ fieldset {
     width: auto;
 }
 
+/* Secondary title in forms */
+.h2-form {
+    margin: 1em 0
+}
+
 /* List Ap view */
 
 .container-section {
