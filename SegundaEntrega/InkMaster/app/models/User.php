@@ -126,28 +126,32 @@ class User extends Model
     public function validate_confirm_password($confirmPassword) {
         $boolean = true;
 
-        if (!empty($confirmPassword)) {
-            $pattern = "\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\"";
-            if (!preg_match($pattern, $confirmPassword)) {
-                unset($this->parameters["password"]);
-                unset($this->parameters_user["password"]);
-                $error = "El formato de la contraseña ingresada es inválido";
-                array_push($this->return, $error);
-                $boolean = false;
-            } elseif ($this->parameters["password"] != $confirmPassword) {
+        if ( ! empty( $this->parameters["password"] ) ) {
+            if (!empty($confirmPassword)) {
+                $pattern = "\"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\"";
+                if (!preg_match($pattern, $confirmPassword)) {
+                    unset($this->parameters["password"]);
+                    unset($this->parameters_user["password"]);
+                    $error = "El formato de la contraseña ingresada es inválido";
+                    array_push($this->return, $error);
+                    $boolean = false;
+                } elseif ($this->parameters["password"] != $confirmPassword) {
+                    unset($this->parameters["password"]);
+                    unset($this->parameters_user["password"]);
+                    $error = "Se precisa que reescriba la contraseña previamente ingresada";
+                    array_push($this->return, $error);
+                    $boolean = false;
+                }
+                $this->parameters["password"] = password_hash($this->parameters["password"], PASSWORD_BCRYPT);
+                $this->parameters_user["password"] = $this->parameters["password"];
+            } else {
                 unset($this->parameters["password"]);
                 unset($this->parameters_user["password"]);
                 $error = "Se precisa que reescriba la contraseña previamente ingresada";
                 array_push($this->return, $error);
                 $boolean = false;
             }
-            $this->parameters["password"] = password_hash($this->parameters["password"], PASSWORD_BCRYPT);
-            $this->parameters_user["password"] = $this->parameters["password"];
         } else {
-            unset($this->parameters["password"]);
-            unset($this->parameters_user["password"]);
-            $error = "Se precisa que reescriba la contraseña previamente ingresada";
-            array_push($this->return, $error);
             $boolean = false;
         }
 
@@ -390,11 +394,12 @@ class User extends Model
         if ( $count > 1 || ( $count = 1 && !empty( $parameters['photo']['name'] ) ) ) {
             foreach ($parameters as $parameter => $value) {
                 $validate = "validate_" . $parameter;
-                $boolean = $boolean && self::$validate($value);
+
+                $status = $this->$validate( $value );
+                $boolean = $boolean && $status;
             }
         }
         return $boolean;
-
     }
 
     public function validateInsert($parameters) {

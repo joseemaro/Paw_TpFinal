@@ -22,7 +22,9 @@ class UserController extends GeneralController
     }
 
     public function saveUser() {
-        $status = $this->user->validateInsert($this->parameters());
+        $parameters = $this->parameters();
+        $array = $this->user->validateInsert( $parameters );
+        $status = $array[count($array)-1];
         if ($status) {  #si salio bien la validacion
             session_start();
             if (isset($_SESSION["id_user"])) {
@@ -32,8 +34,11 @@ class UserController extends GeneralController
                 return $this->view('login');
             }
         } else {
-            $variable["errors"] = $status;
-            return $this->view('errors.register', $variable);
+            array_pop( $array );
+            $variable["errors"] = $array;
+            if (isset( $parameters["pathology"] ) ) $parameters["pathology_check"] = true;
+            $variable["data"] = $parameters;
+            return $this->view('register', $variable);
         }
     }
 
@@ -128,6 +133,7 @@ class UserController extends GeneralController
                     $variable["user"] = $user;
                     return $this->view('user/view.user2', $variable);
                 } else {
+                    array_pop( $array );
                     $variable["errors"] = $array;
                     return $this->view('errors.register', $variable);
                 }
