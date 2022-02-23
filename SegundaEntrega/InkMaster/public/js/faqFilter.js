@@ -25,27 +25,24 @@ function getFaqs( values ){
     xmlhttp.onload = function (aEvt) {
         var response = JSON.parse( xmlhttp.response );
         var faqs_response = response.faqs;
-        var newDiv = document.createElement("div");
-        newDiv.className = "questions__accordions";
-        var newNode = document.createElement("div");
-        newNode.className = "questions__accordions";
-        newNode.id = "content";
+        var newSection = document.createElement("section");
+        newSection.className = "accordion__wrapper";
+        newSection.id = "content";
         var node = document.getElementById( "content" );
-        var accordion_wrapper = node.parentElement;
+        var faq_container = node.parentElement;
 
         for (var i = 1; i <= Object.keys( faqs_response ).length; i++) {
             var question = node.getElementsByClassName("question-answer__accordion");
             for (var j = 0; j < question.length; j++) {
                 var faq_id = question[j].getAttribute("data-faq-id");
                 if ( faqs_response[i] === faq_id ) {
-                    newDiv.appendChild(question[j]);
+                    newSection.appendChild(question[j]);
                 }
             }
         }
 
         node.parentNode.removeChild( node );
-        newNode.appendChild(newDiv);
-        accordion_wrapper.appendChild(newNode);
+        faq_container.appendChild(newSection);
     }
 
     xmlhttp.onprogress = function( event ) {
