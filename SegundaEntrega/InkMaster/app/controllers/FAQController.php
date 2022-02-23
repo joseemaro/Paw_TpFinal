@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\App;
+use App\models\Appointment;
 use App\models\FAQ;
 use App\models\Local;
 use App\models\User;
@@ -15,6 +16,7 @@ class FAQController extends GeneralController
         $this->faq = new FAQ();
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
+        $this->appointment = new Appointment();
         $this->session = false;
         $this->logger = App::get('logger');
     }

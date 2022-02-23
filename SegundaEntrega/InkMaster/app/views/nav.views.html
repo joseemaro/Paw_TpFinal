@@ -25,7 +25,12 @@
         <li class="menu__item"> <a class="menu__link" href="/faq"><i class=" far fa-question-circle"></i> FAQs </a></li>
         {% if session %}
             <li class="menu__item container-submenu">
-                <a class="menu__link submenu-btn" href="#"><i class="fas fa-user"></i> {{ user }} <i class="fas fa-chevron-down row-down-submenu"></i></a>
+                <a class="menu__link submenu-btn" href="#"><i class="fas fa-user"></i>
+                    {% if notifications_count %}
+                        <span class="notifications-count" style="margin-left: -0.5em;"> {{ notifications_count }} </span>
+                    {% endif %}
+                    {{ user }}
+                    <i class="fas fa-chevron-down row-down-submenu"></i></a>
                 <ul class="submenu">
                     <li class="menu__item"> <a class="menu__link" href="/view_user/{{ user }}"><i class="fas fa-chevron-right"></i> Perfil </a></li>
                     {% if isAdministrator %}
@@ -33,7 +38,11 @@
                         <li class="menu__item"> <a class="menu__link" href="/add_faq"><i class="fas fa-chevron-right"></i> Registrar FAQ </a></li>
                         <li class="menu__item"> <a class="menu__link" href="/list_users"><i class="fas fa-chevron-right"></i> Lista de usuarios </a></li>
                     {% endif %}
-                    <li class="menu__item"> <a class="menu__link" href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos </a></li>
+                    <li class="menu__item"> <a class="menu__link" href="/list_appointment"><i class="fas fa-chevron-right"></i> Lista de turnos
+                        {% if notifications_count %}
+                        <span class="notifications-count"> {{ notifications_count }} </span>
+                        {% endif %}
+                    </a></li>
                     <li class="menu__item"> <a class="menu__link" href="/logout"><i class="fas fa-chevron-right"></i> Logout </a></li>
                 </ul>
             </li>

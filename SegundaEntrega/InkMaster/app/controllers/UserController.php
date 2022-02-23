@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\models\Appointment;
 use App\models\Local;
 use App\models\User;
 use App\Controllers\GeneralController;
@@ -13,6 +14,7 @@ class UserController extends GeneralController
         $this->user = new User();
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
+        $this->appointment = new Appointment();
         $this->session = false;
 
     }

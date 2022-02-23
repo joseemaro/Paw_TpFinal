@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\models\Appointment;
 use App\models\User;
 use App\models\Tattoo;
 use App\models\FAQ;
@@ -15,6 +16,7 @@ class GeneralController extends Controller
         $this->user = new User();
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
+        $this->appointment = new Appointment();
         $this->session = false;
     }
 
@@ -26,7 +28,8 @@ class GeneralController extends Controller
             $user = $_SESSION["id_user"];
             $isArtist = $this->isArtist($user);
             $isAdministrator = $this->isAdministrator($user);
-            return view($html, compact('session', 'artists', 'local', 'user', 'isArtist', 'isAdministrator', 'variable'));
+            $notifications_count = $this->appointment->notifications_count( $user, $isArtist );
+            return view($html, compact('session', 'artists', 'local', 'user', 'notifications_count', 'isArtist', 'isAdministrator', 'variable'));
         }
         return view($html, compact('session', 'artists', 'local', 'isArtist', 'variable'));
     }

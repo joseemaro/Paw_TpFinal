@@ -385,4 +385,20 @@ class Appointment extends Model
         return $appointment;
     }
 
+    public function notifications_count( $id_user, $isArtist ) {
+        if ( $isArtist ) {
+            $query = "select count(*) as cant from $this->database.$this->table where id_artist = :1 and status = :2";
+            $status = 'pending';
+        } else {
+            return false;
+        }
+
+        $count = $this->db->simpleQuery( $query, [$id_user, $status]);
+        if ($count["cant"] > 0) {
+            return $count["cant"];
+        } else {
+            return false;
+        }
+    }
+
 }

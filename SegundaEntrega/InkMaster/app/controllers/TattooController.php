@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\models\Appointment;
 use App\models\Local;
 use App\models\Tattoo;
 use App\models\User;
@@ -15,6 +16,7 @@ class TattooController extends GeneralController
         $this->tattoo = new Tattoo();
         $this->local = new Local();
         $this->id_local = $this->local->getLocal();
+        $this->appointment = new Appointment();
         $this->session = false;
         $this->logger = App::get('logger');
     }
