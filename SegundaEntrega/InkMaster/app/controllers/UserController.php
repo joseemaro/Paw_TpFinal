@@ -60,8 +60,11 @@ class UserController extends GeneralController
                 $variable["msgWelcome"] = "bienvenido $id_user ! ";
                 $_SESSION["id_user"] = $id_user;
             } else {
-                $variable["msgWelcome"] = "usuario inválido";
-                return $this->view('/login.error', $variable);
+                $variable["errors"] = true;
+                $login["id_user"] = $id_user;
+                $login["password"] = $password;
+                $variable["data"] = $login;
+                return $this->view('/login', $variable);
             }
             return $this->view('/index.views', $variable);
             

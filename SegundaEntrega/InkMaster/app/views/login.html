@@ -7,24 +7,32 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
 {% endblock %}
 
 {% block header %}
     {{ include('header.views.html') }}
     {{ include('nav.views.html') }}
-    <!--{{ include('session.views.html') }}-->
 {% endblock %}
 
 {% block main %}
 <section class="container-form">
+    {% if variable.errors %}
+    <div id="myModal" class="modal" style="display: inherit; text-align: -webkit-center;">
+        <div id="container" class="container" style="background-color: white; width: 50%; padding: 50px;">
+            <p class="errors">El usuario y/o la contraseña son erroneas</p>
+            <div class="ok" style="padding: 10px; background-color: red; width: 10%; margin-top: 20px; cursor: pointer;">Ok</div>
+        </div>
+    </div>
+    {% endif %}
     <h1 class="title title-form">Ingresar</h1>
     <form action="/save_login" method="post" enctype="multipart/form-data">
         
         <label for="fuser" >Usuario</label>
-        <input id="fuser" type="text" name="id_user" placeholder="Ingrese su usuario" required>
+        <input id="fuser" type="text" name="id_user" placeholder="Ingrese su usuario" required value="{{ variable.data.id_user }}">
 
         <label for="fpassword">Contraseña</label>
-        <input id="fpassword" type="password" name="password" placeholder="Ingrese su contraseña" required>
+        <input id="fpassword" type="password" name="password" placeholder="Ingrese su contraseña" required value="{{ variable.data.password }}">
         
         <input class="submit-btn" type="submit" value="Iniciar sesión" />
         <a class="register-link" href="/new_user">Registrarse</a>

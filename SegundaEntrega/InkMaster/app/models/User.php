@@ -508,18 +508,6 @@ class User extends Model
         }else{
             return false;
         }
-        
-/*         $verify = password_verify($password, $hash["password"]);
-        if ($verify) {
-            $enabled = $this->isEnabled($id_user);
-            if ($enabled){
-                return true;
-            }else{
-                return false;
-            }           
-        } else {
-            return false;
-        } */
     }
 
     public function listArtists($id_local) {
