@@ -7,7 +7,6 @@ Usuario
 {% block head %}
 {{ parent() }}
 <meta name="keywords" content="PAW,2020,Templates,PHP">
-<link rel="stylesheet" type="text/css" href="/public/css/user/view.user.css">
 <link rel="stylesheet" type="text/css" href="/public/css/modal-images/modal.css">
 <script type="text/javascript" src="/public/js/modal.images.js"></script>
 {% endblock %}
@@ -19,67 +18,63 @@ Usuario
 {% endblock %}
 
 {% block main %}
-<div class="user-container"> 
-    <div class="row-user">
-        {% if variable.user.photo %}
-        <div class="col-left">
-            <figure class="profile-picture"> 
-                <img id="myImg" src="data:image/jpg;base64, {{ variable.user['photo'] }} " alt="Foto de perfil de usuario">
-                <div id="myModal" class="modal">
-                    <span class="close">&times;</span>
-                    <img class="modal-content" id="img01">
-                    <div id="caption"></div>
-                </div>
-            </figure>         
+<section class="container-form"> 
+    <h1 class="title title-form">Mi Perfil</h1>
+
+    <label for="fusername"> Username </label> 
+    <input id="fusername" type="text" readonly value="{{ variable.user['id_user'] }}">
+
+    <label for="fname"> Nombre </label>
+    <input id="fname" type="text" readonly value="{{ variable.user.first_name }}">
+
+    <label for="flastname"> Apellido </label>
+    <input id="flastname" type="text" readonly value="{{ variable.user.last_name }}">
+
+    <label for="fborn"> Fecha de Nacimiento </label>
+    <input id="fborn" type="date" readonly value="{{ variable.user.born }}">
+
+    <label for="ftel"> Teléfono </label>
+    <input id="ftel" type="tel" readonly value="{{ variable.user.phone }}">
+
+    <label for="femail"> Email </label>
+    <input id="femail" type="email" readonly value="{{ variable.user.email }}">
+
+    <label for="fdni"> DNI </label>
+    <input id="fdni" type="number" readonly value="{{ variable.user.nro_doc }}">
+   
+    <label for="faddress"> Dirección </label>
+    <input id="faddress" type="text" readonly value="{{ variable.user.direction }}">
+
+    {% if (variable.user.considerations) %}
+    <label for="fillness"> Enfermedades </label>
+    <input id="fillness"  readonly value="{{ variable.user.considerations }}"">    
+    {% endif %}
+
+    {% if variable.user.photo %}
+    <figure> 
+        <img id="myImg" class="img-edit" src="data:image/jpg;base64, {{ variable.user['photo'] }} " alt="Foto de perfil de usuario">
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
         </div>
-        <div class="col-right">
-        {% else %}
-        <div class="one-column">
-        {% endif %}
-            <div class="user-data">
-                <h1 class="title">{{ variable.user["id_user"] }} </h1>
-                <label for="fname"> Nombre </label>
-                <input id="fname" type="text" readonly value="{{ variable.user.first_name }}">
-                <label for="flastname"> Apellido </label>
-                <input id="flastname" type="text" readonly value="{{ variable.user.last_name }}">
-                <label for="fborn"> Nacimiento </label>
-                <input id="fborn" type="date" readonly value="{{ variable.user.born }}">
-                <label for="fdni"> Número de documento </label>
-                <input id="fdni" type="number" readonly value="{{ variable.user.nro_doc }}">
-                <label for="ftel"> Teléfono </label>
-                <input id="ftel" type="tel" readonly value="{{ variable.user.phone }}">
-                <label for="faddress"> Dirección </label>
-                <input id="faddress" type="text" readonly value="{{ variable.user.direction }}">
-                <label for="femail"> Email </label>
-                <input id="femail" type="email" readonly value="{{ variable.user.email }}">
-                {% if (variable.user.considerations) %}
-                    <label for="fillness"> Enfermedades </label>
-                    <p id="fillness" class="textarea"> {{ variable.user.considerations }} </p>    
-                {% endif %}
-                {% if (variable.user.id_artist) %}
-                    <h1 class="title"> Datos como artista </h1>
-                    <label for="flocal"> Local de atención </label>
-                    <p id="flocal" class="textarea"> {{ variable.user.local }} </p>
-                    <label for="fdescription"> Descripción </label>
-                    <p id="fdescription" class="textarea"> {{ variable.user.txt }} </p>
-                {% endif %}
-                <div class="container-button">
-                    <!-- <button class ="backBtn" type="submit" onclick="history.back()">Volver</button> -->
-                    {% if variable.user.id_user == user %}
-                    <form method="get" id="edit-user-{{ variable.user['id_user'] }}" action="/edit_user/{{ variable.user['id_user'] }}">
-                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                        <button class ="editBtn" type="submit" form="edit-user-{{ variable.user['id_user'] }}">Editar</button>
-                    </form>
-                    <form method="get" id="del-user-{{ variable.user['id_user'] }}" action="/del_user/{{ variable.user['id_user'] }}">
-                        <input type="hidden" name="id_user" value='{{ variable.user["id_user"] }}'>
-                        <button class ="deleteBtn" type="submit" form="del-user-{{ variable.user['id_user'] }}">Borrar Usuario</button>
-                    </form>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </figure>    
+    {% endif %}
+
+    {% if (variable.user.id_artist) %}
+        <h2 class="title h2-form">Staff Info</h2>
+        <label for="flocal"> Local de atención </label>
+        <p id="flocal" class="textarea"> {{ variable.user.local }} </p>
+        <label for="fdescription"> Descripción </label>
+        <p id="fdescription" class="textarea"> {{ variable.user.txt }} </p>
+    {% endif %}
+                
+    {% if variable.user.id_user == user %}
+    <a class="link" id="edit-user-{{ variable.user['id_user'] }}" href="/edit_user/{{ variable.user['id_user'] }}">Editar</a>
+    <a class="link cancel-btn" id="del-user-{{ variable.user['id_user'] }}" href="/del_user/{{ variable.user['id_user'] }}"> Borrar Usuario</a>
+    {% endif %}
+
+</section>
 {% endblock %}
 
 {% block footer %}

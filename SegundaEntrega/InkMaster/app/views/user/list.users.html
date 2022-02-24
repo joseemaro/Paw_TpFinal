@@ -7,7 +7,6 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
-    <link rel="stylesheet" type="text/css" href="/public/css/user/list.users.css">
 {% endblock %}
 
 {% block header %}
@@ -16,53 +15,47 @@
 {% endblock %}
 
 {% block main %}
-<div class="container-listusers">
-    <h1 class="title">Lista de Usuarios</h1>
+<section class="container-section">
+    <h1 class="title title-form">Lista de Usuarios</h1>
     {% if variable.artists %}
         <table class="width200">
             <thead>
                 <tr>
-                    <th scope="col">Nombre de usuario</th>
+                    <th scope="col">Username</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
-                    <th scope="col">Nacimiento</th>
-                    <th scope="col">Telefono</th>
+                    <th scope="col">F. de Nacimiento</th>
+                    <th scope="col">Teléfono</th>
                     <th scope="col">Email</th>
                     <th scope="col">Artista</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
-
+            <tbody>
             {% for user in variable.artists %}
-                <tbody>
-                    <tr>
-                        <td>{{ user.id_user }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.born }}</td>
-                        <td>{{ user.phone }}</td>
-                        <td>{{ user.email }}</td>
-                        {% if user.id_artist %}
-                            <td>true</td>
-                        {% else %}
-                            <td>false</td>
-                        {% endif %}
-                        <td>
-                            <form method="get" id="show-user-{{ user.id_user }}" action="view_user/{{ user.id_user }}">
-                                <input type="hidden" name="id_user" value={{ user.id_user }}>
-                                <button class ="table-button viewBtn" type="submit" form="show-user-{{ user.id_user }}">View</button>
-                            </form>
-                            <!!TODO agregar botones si sos admin para eliminar usuarios CAPAZ y agregar boton de eliminar artistas (este si o si) y se podria hacer un boton de ver los turnos que involucren a esa persona y/o artista!>
-                        </td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td>{{ user.id_user }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.born }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.email }}</td>
+                    {% if user.id_artist %}
+                        <td>Sí</td>
+                    {% else %}
+                        <td>No</td>
+                    {% endif %}
+                    <td>
+                        <a class="link" id="show-user-{{ user.id_user }}" href="view_user/{{ user.id_user }}"> Ver </a>
+                    </td>
+                </tr>
             {% endfor %}
+            </tbody>
         </table>
     {% else %}
-        <div class="without-users">
-            <p> No hay usuarios registrados hasta el momento </p>
-        </div>
+        <p class="without-ap"> No hay usuarios registrados hasta el momento </p>
     {% endif %}
-</div>
+</section>
 {% endblock %}
 
 {% block footer %}
