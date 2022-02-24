@@ -7,7 +7,8 @@ window.addEventListener( 'scroll', () => {
 
         var preload = document.createElement("img");
         preload.src = "/public/images/Spinner.svg";
-        preload.id = "preload_gallery"
+        preload.id = "preload_gallery";
+        preload.className = "preload-spinner";
 
         gallery_container.appendChild( preload );
         loadImages();

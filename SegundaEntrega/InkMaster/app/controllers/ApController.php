@@ -73,16 +73,9 @@ class ApController extends GeneralController
     public function listAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $id_user = $_SESSION["id_user"];
-            #if ($this->user->havePermissions($id_user, 'appointment.edit')) {
-                $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                $variable["link"] ="https://calendar.google.com/calendar/r";
-                return $this->view('appointment/list.appointments', $variable);
-            /*}else{
-                $variable["appointments"] = $this->appointment->listAppointments($id_user);
-                $variable["link"] =false;
-                return $this->view('appointment/list.appointments', $variable);
-            }*/
+            $variable["appointments"] = json_decode( $this->getAps( 1, false ) );
+            $variable["link"] ="https://calendar.google.com/calendar/r";
+            return $this->view('appointment/list.appointments', $variable);
         }
         return $this->view('not_found');
     }
@@ -91,7 +84,6 @@ class ApController extends GeneralController
         session_start();
         if (isset($_SESSION["id_user"])) {
             $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
-            #$medical = $this->user->viewMedRec($variable["appointment"]["id_user"]);
             $medical = false;
             if ($medical) {
                 $variable["medical_record"] = $medical["considerations"];
@@ -188,7 +180,6 @@ class ApController extends GeneralController
                 $m = $this->calendar->add_turno_calendar($array["id_user"],$array["date"],$array["hour"],$array["id_artist"],$link["link"]);
                 if ($m["ok"] != ''){
                     //si salio bien el registro del turno en calendar
-                    //$variable["appointment"]["link"] = $m["ok"];
                     $this->appointment->insertLink($id_appointment,$m["ok"],$m["id_calendar"]);
                     $result = $this->appointment->changeStatus($id_appointment, $id_user, 'accepted');
                 }else{
@@ -209,19 +200,27 @@ class ApController extends GeneralController
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
             if ($this->user->havePermissions($id_user, 'appointment.delete')) {
-
                 $result = $this->appointment->changeStatus($id_appointment, $id_user, 'annulled');
-
-/*                 $variable["appointment"] = $this->appointment->findAppointment($id_appointment);
-                $artist = $this->appointment->findCalendar($variable["appointment"]["id_user"]);
-                $ap = $this->appointment->findAppointment($variable["appointment"]["id_appointment"]);
-                $this->calendar->deleteCalendar($artist["link"],$ap["id_calendar"]); */
-
-
             }
             $variable["appointments"] = $this->appointment->listAppointments($id_user);
             return $this->view('appointment/list.appointments', $variable);
         }
         return $this->view('not_found');
+    }
+
+    public function getAps( $page = 1, $json = true ) {
+        if ( $json ) {
+            session_start();
+        }
+        if (isset($_SESSION["id_user"])) {
+            $id_user = $_SESSION["id_user"];
+        }
+        $quantity = 6;
+
+        $isArtist = $this->isArtist( $id_user );
+        $isAdmin = $this->isAdministrator( $id_user );
+        $beginning = ( ( $page * $quantity ) - $quantity );
+        $appointments = $this->appointment->getAps( $id_user, $beginning, $quantity, $isArtist, $isAdmin );
+        return json_encode( $appointments );
     }
 }

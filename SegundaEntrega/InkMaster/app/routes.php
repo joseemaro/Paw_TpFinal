@@ -12,6 +12,7 @@ $router->get('view_appointment/([0-9]{1,})', 'ApController@viewAp');
 $router->get('edit_appointment/([0-9]{1,})', 'ApController@editAp');
 $router->get('cancel_appointment/([0-9]{1,})', 'ApController@cancelAp');
 $router->post('upt_appointment', 'ApController@uptAp');
+$router->get('get_appointments/page=([0-9]{1,})', 'ApController@getAps');
 
 $router->get('login', 'UserController@logIn');
 $router->post('save_login', 'UserController@autentication');
