@@ -211,7 +211,7 @@ class QueryBuilder {
      * @param array $parameters
      * @return array
      */
-    public function querylimit( $sql, $parameters = null, $beginning, $quantity )
+    public function querylimit( $sql, $beginning, $quantity, $parameters = null )
     {
         try {
             $statement = $this->pdo->prepare($sql);

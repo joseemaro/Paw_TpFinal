@@ -73,7 +73,7 @@ class ApController extends GeneralController
     public function listAp() {
         session_start();
         if (isset($_SESSION["id_user"])) {
-            $variable["appointments"] = json_decode( $this->getAps( 1, false ) );
+            $variable["appointments"] = $this->getAps( 1, false );
             $variable["link"] ="https://calendar.google.com/calendar/r";
             return $this->view('appointment/list.appointments', $variable);
         }
@@ -215,12 +215,17 @@ class ApController extends GeneralController
         if (isset($_SESSION["id_user"])) {
             $id_user = $_SESSION["id_user"];
         }
-        $quantity = 6;
+        $quantity = 3;
 
         $isArtist = $this->isArtist( $id_user );
         $isAdmin = $this->isAdministrator( $id_user );
         $beginning = ( ( $page * $quantity ) - $quantity );
         $appointments = $this->appointment->getAps( $id_user, $beginning, $quantity, $isArtist, $isAdmin );
-        return json_encode( $appointments );
+        if ( $json ) {
+            $responde["appointments"] = $appointments;
+            $responde["isArtist"] = $isArtist;
+            return json_encode( $responde );
+        }
+        return ( $appointments );
     }
 }

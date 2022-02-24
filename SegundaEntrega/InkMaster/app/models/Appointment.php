@@ -406,19 +406,19 @@ class Appointment extends Model
             return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
                                         inner join $this->database.user as u on (u.id_user = ap.id_user)
                                         where ap.id_artist = :1
-                                        order by ap.status desc, ap.date asc, ap.hour asc
-                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+                                        order by ap.status desc, ap.date desc, ap.hour asc
+                                        limit :beginning , :quantity", $beginning, $quantity, [ $id_user ] );
         } elseif ( $isAdmin ) {
             return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
                                         inner join $this->database.user as u on (u.id_user = ap.id_user)
-                                        order by ap.status desc, ap.date asc, ap.hour asc
-                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+                                        order by ap.status desc, ap.date desc, ap.hour asc
+                                        limit :beginning , :quantity", $beginning, $quantity );
         } else {
             return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
                                         inner join $this->database.user as u on (u.id_user = ap.id_user)
                                         where ap.id_user = :1
-                                        order by ap.status desc, ap.date asc, ap.hour asc
-                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+                                        order by ap.status desc, ap.date desc, ap.hour asc
+                                        limit :beginning , :quantity", $beginning, $quantity, [ $id_user ] );
         }
     }
 
