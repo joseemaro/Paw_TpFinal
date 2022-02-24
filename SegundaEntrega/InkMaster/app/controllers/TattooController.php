@@ -57,11 +57,11 @@ class TattooController extends GeneralController
         return $this->view( 'not_found' );
     }
 
-    public function changeTattoo( $id_tattoo, $action ) {
+    public function changeTattoo( $id_tattoo, $action, $id_artist ) {
         $id_tattoo = str_replace( "%20", " ", $id_tattoo );
-        $id_artist = ( ! empty( $_GET['id_artist'] ) ) ? str_replace( "%20", " ", $_GET['id_artist'] ) : null;
+        $id_artist = ( $id_artist == 'null' ) ? null : str_replace( "%20", " ", $id_artist );
         $id_tattoo = str_replace( "%20", " ", $id_tattoo );
-        $tattoos = ( empty( ( $_GET["id_artist"] ) ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $id_artist );
+        $tattoos = ( is_null( $id_artist ) ) ? $this->tattoo->listTattoos() : $this->tattoo->listTattoosFindArtist( $id_artist );
         $i = 0;
         $found = false;
         while ( $found == false ) {
