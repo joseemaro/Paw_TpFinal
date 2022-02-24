@@ -7,6 +7,7 @@
 {% block head %}
     {{ parent() }}
     <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <script type="text/javascript" src="/public/js/mostViewAppointments.js"></script>
 {% endblock %}
 
 {% block header %}
@@ -36,9 +37,9 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
+            <tbody class="table-content">
             {% for appointment in variable.appointments %}
-            <tbody>
-                <tr>
+                <tr data-appointment-id="{{ appointment.id_appointment }}">
                     <td>{{ appointment.id_artist }}</td>
                     <td>{{ appointment.id_local }}</td>
                     <td>{{ appointment.date }}</td>
@@ -69,8 +70,8 @@
                         {% endif %}
                     </td>
                 </tr>
-            </tbody>
             {% endfor %}
+            </tbody>
         </table>
     {% else %}
     <p class="without-ap"> No hay turnos registrados hasta el momento </p>

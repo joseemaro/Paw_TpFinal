@@ -401,4 +401,25 @@ class Appointment extends Model
         }
     }
 
+    public function getAps( $id_user, $beginning, $quantity, $isArtist, $isAdmin ) {
+        if ( $isArtist ) {
+            return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
+                                        inner join $this->database.user as u on (u.id_user = ap.id_user)
+                                        where ap.id_artist = :1
+                                        order by ap.status desc, ap.date asc, ap.hour asc
+                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+        } elseif ( $isAdmin ) {
+            return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
+                                        inner join $this->database.user as u on (u.id_user = ap.id_user)
+                                        order by ap.status desc, ap.date asc, ap.hour asc
+                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+        } else {
+            return $this->db->querylimit( "select ap.*, u.phone, u.email from $this->database.$this->table as ap
+                                        inner join $this->database.user as u on (u.id_user = ap.id_user)
+                                        where ap.id_user = :1
+                                        order by ap.status desc, ap.date asc, ap.hour asc
+                                        limit :beginning , :quantity", [ $id_user ], $beginning, $quantity );
+        }
+    }
+
 }

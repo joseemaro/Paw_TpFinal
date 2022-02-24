@@ -117,17 +117,16 @@ class QueryBuilder {
          }
     }
 
-     /**
-        * Recovers images from database table.
-        *
-        * @param string $table
-        * @param integer $beginning
-        * @param integer $quantity
-        * @return array
-        */
-     public function getTattoos($table, $beginning, $quantity)
-     {
-         //VER ESTO no estamos utilizando el bind porque me pone comillas y no funciona
+    /**
+     * Recovers images from database table.
+     *
+     * @param string $table
+     * @param integer $beginning
+     * @param integer $quantity
+     * @return array
+     */
+    public function getTattoos($table, $beginning, $quantity)
+    {
         $sql = "select * from $this->database.$table limit :beginning , :quantity";
         try {
             $statement = $this->pdo->prepare($sql);
@@ -139,7 +138,7 @@ class QueryBuilder {
         } catch (Exception $e) {
             $this->sendToLog($e);
         }
-     }
+    }
 
     /**
      * Counts the number of tuples in a table
@@ -198,6 +197,31 @@ class QueryBuilder {
                     $statement->bindValue(":$i", $parameters[$i-1]);
                 }
             }
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            $this->sendToLog($e);
+        }
+    }
+
+    /**
+     * Counts the number of tuples in a table
+     *
+     * @param string $sql
+     * @param array $parameters
+     * @return array
+     */
+    public function querylimit( $sql, $parameters = null, $beginning, $quantity )
+    {
+        try {
+            $statement = $this->pdo->prepare($sql);
+            if (!is_null($parameters)) {
+                for ($i = 1; $i < count($parameters)+1; $i++) {
+                    $statement->bindValue(":$i", $parameters[$i-1]);
+                }
+            }
+            $statement->bindValue(":beginning", $beginning, PDO::PARAM_INT);
+            $statement->bindValue(":quantity", $quantity, PDO::PARAM_INT);
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
