@@ -27,13 +27,14 @@ class UserController extends GeneralController
         $parameters = $this->parameters();
         $array = $this->user->validateInsert( $parameters );
         $status = $array[count($array)-1];
-        if ($status) {  #si salio bien la validacion
+        if ( $status ) {  #si salio bien la validacion
             session_start();
             if (isset($_SESSION["id_user"])) {
                 return $this->view('/index.views');
             }else{
                 $_SESSION = array();
-                return $this->view('login');
+                $_SESSION["id_user"] = $parameters["user"];
+                return $this->view('/index.views');
             }
         } else {
             array_pop( $array );
@@ -58,7 +59,7 @@ class UserController extends GeneralController
             $id_user = $_POST["id_user"];
             $password = $_POST["password"];
             $result = $this->user->autentication($id_user, $password);
-            if ($result) {
+            if ( $result ) {
                 $variable["msgWelcome"] = "bienvenido $id_user ! ";
                 $_SESSION["id_user"] = $id_user;
             } else {
