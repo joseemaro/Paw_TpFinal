@@ -501,6 +501,10 @@ fieldset {
     background: #c7c7c7;
 }
 
+.red-alert {
+    margin: 1em auto;
+}
+
 /* Secondary title in forms */
 .h2-form {
     margin: 1em 0
@@ -621,6 +625,7 @@ table.width200 {
 .active > .answer {
     display: block;
     padding-bottom: 1.3rem;
+    text-align: justify;
 }
 
 .active img {

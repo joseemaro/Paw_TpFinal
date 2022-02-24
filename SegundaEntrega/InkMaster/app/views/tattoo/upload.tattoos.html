@@ -42,7 +42,11 @@
         <label for="fimage">Seleccionar imágenes</label>
         <input id="fimage" type="file" name="image" class="file imagejs" accept="image/jpeg, image/x-png, image/x-jpg"> <!--multiple-->
   
+        {% if isArtist %} 
+        <input type="submit" disabled class="submit-btn" id="up-btn" value="Subir imágenes" />
+        {% else %}
         <input type="submit" disabled class="submit-btn" value="Subir imágenes" />
+        {% endif %}
     </form>
 </section>
 
