@@ -640,6 +640,12 @@ table.width200 {
     margin: auto 1em;
 }
 
+/* image of preload */
+#preload_gallery {
+     position: absolute;
+     align-self: self-end;
+ }
+
 /* Media querys */
 
 @media(max-width:375px) {
