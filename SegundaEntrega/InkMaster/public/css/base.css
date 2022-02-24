@@ -682,6 +682,11 @@ table.width200 {
 .modal-header-errors {
     margin-top: 5em;
 }
+/* image of preload */
+#preload_gallery {
+     position: absolute;
+     align-self: self-end;
+ }
 
 /* Media querys */
 
