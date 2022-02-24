@@ -47,10 +47,13 @@ class TattooController extends GeneralController
                 $status = $array[count($array)-1];
                 if ( $status ) {  #si salio bien la validacion
                     $variable["artist"] = $id_user;
+                    $variable["success"] = true;
                     return $this->view( 'tattoo/upload.tattoos', $variable );
                 } else {
+                    $variable["artist"] = $id_user;
                     $variable["errors"] = $array;
-                    return $this->view( 'errors.register', $variable );
+                    $variable["success"] = false;
+                    return $this->view( 'tattoo/upload.tattoos', $variable );
                 }
             }
         }
