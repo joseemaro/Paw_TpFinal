@@ -470,6 +470,37 @@ fieldset {
     width: auto;
 }
 
+/* Register form */
+
+.two-column p {
+    width: 49%;
+}
+
+.left {
+    margin-right: 1%;
+}
+
+.right {
+    margin-left: 1%;
+}
+
+.two-column {
+    display: flex;
+}
+
+.artist-section {
+    margin-top: 0.5em; /* Add a top margin */
+}
+
+.login-register  {
+    display: block;
+    margin: 1em auto;
+}
+
+#send-btn2{
+    background: #c7c7c7;
+}
+
 /* Secondary title in forms */
 .h2-form {
     margin: 1em 0
@@ -684,9 +715,9 @@ table.width200 {
 }
 /* image of preload */
 #preload_gallery {
-     position: absolute;
-     align-self: self-end;
- }
+    position: absolute;
+    align-self: self-end;
+}
 
 /* Media querys */
 
@@ -772,6 +803,20 @@ table.width200 {
     .faq-container{
         width: 80%;
     }
+
+    .left, .right {
+        margin: auto;
+    }
+
+    .two-column p {
+        width: 100%;
+    }
+
+    .two-column {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
 }
 
 @media only screen and (max-width: 760px), (min-width: 768px) and (max-width: 1024px) {
