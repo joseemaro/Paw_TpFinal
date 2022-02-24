@@ -268,7 +268,7 @@ footer.footer-article {
 
 /* figcaption */
 .short-article figcaption {
-    text-align: justify;
+    text-align: center;
     padding: 1%;
     font-size: 80%;
 }
@@ -673,7 +673,7 @@ table.width200 {
 
 .link-faq {
     color: var(--bg-color-black);
-    margin: auto 1em;
+    margin-right: 1em;
 }
 
 /* Errors in modal */
@@ -723,6 +723,11 @@ table.width200 {
 .preload-spinner {
     position: absolute;
     align-self: self-end;
+}
+
+.calendar-link {
+    text-align: center;
+    color: var(--color-logo);
 }
 
 /* Media querys */
@@ -775,6 +780,10 @@ table.width200 {
     .container-submenu:hover .submenu {
         opacity: 1;
         visibility: visible;
+    }
+
+    .img-edit {
+        width: 40%;
     }
 }
 

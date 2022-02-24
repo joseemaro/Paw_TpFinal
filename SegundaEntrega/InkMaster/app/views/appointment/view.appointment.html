@@ -24,7 +24,7 @@
         <p class="red-alert">*El usuario al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
     {% endif %}
     {% if variable.appointment.link %}
-        <a href="{{ variable.appointment.link }}">Google calendar</a>
+        <a class="link calendar-link" href="{{ variable.appointment.link }}">Google calendar</a>
     {% endif %}
     <label for="fuser"> Usuario </label>
     <input id="fuser" type="text" name="id_user" readonly value="{{ variable.appointment.id_user }}">
@@ -65,17 +65,11 @@
         <p>No hay imágenes de referencia</p>
     {% endif %}
         
-    {% if isArtist %}
+    {% if ((isArtist) and (variable.appointment.status == 'pending')) %}
         <h2 class="title">Acciones</h2>
-        {% if (variable.appointment.status == 'pending') %}
         <a class="link accept-btn" id="acept-appointment-{{ variable.appointment.id_appointment }}" href="/acept_appointment/{{ variable.appointment.id_appointment }}">Aceptar</a>
-        {% endif %}
-        {% if (variable.appointment.status != 'annulled') %}
         <a class="link" id="edit-appointment-{{ variable.appointment.id_appointment }}" href="/edit_appointment/{{ variable.appointment.id_appointment }}">Editar</a>
-        {% endif %}
-        {% if (variable.appointment.status == 'pending') %}
-        <a class="link cancel-btn" id="destroy-appointment-{{ variable.appointment.id_appointment }}" href="/del_appointment/{{ variable.appointment.id_appointment }}">Eliminar</a>
-        {% endif %}
+        <a class="link cancel-btn" id="destroy-appointment-{{ variable.appointment.id_appointment }}" href="/del_appointment/{{ variable.appointment.id_appointment }}">Eliminar</a>   
     {% endif %} 
 </section>
 {% endblock %}

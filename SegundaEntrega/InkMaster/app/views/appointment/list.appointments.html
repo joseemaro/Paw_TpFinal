@@ -61,10 +61,8 @@
                         {% endif %}
                         <a class="link view-btn" id="show-appointment-{{ appointment.id_appointment }}" href="/view_appointment/{{ appointment.id_appointment }}">Ver</a>
                         {% if isArtist %}
-                            {% if (appointment.status != 'annulled') %}
-                                <a class="link edit-btn" id="edit-appointment-{{ appointment.id_appointment }}" href="/edit_appointment/{{ appointment.id_appointment }}">Editar</a>
-                            {% endif %}
                             {% if (appointment.status == 'pending') %}
+                                <a class="link edit-btn" id="edit-appointment-{{ appointment.id_appointment }}" href="/edit_appointment/{{ appointment.id_appointment }}">Editar</a>
                                 <a class="link cancel-btn" id="destroy-appointment-{{ appointment.id_appointment }}" href="/del_appointment/{{ appointment.id_appointment }}">Cancelar</a>
                             {% endif %}
                         {% endif %}
