@@ -28,13 +28,13 @@
             <span class="modal-next">&gt;</span>
             <figcaption id="caption"></figcaption>
         </figure>
-        <section class="gallery">
+        <article class="gallery">
             {% for tattoo in variable.tattoos %}
             <figure>
                 <img class="myImg artist-img" src="data:image/png;base64, {{tattoo.image}}" alt="{{tattoo.txt}}" data-tattoo-id="{{ tattoo.id_tattoo }}">
             </figure>
             {% endfor %}
-        </section>
+        </article>
     {% else %}
         <p> No hay imágenes registrados hasta el momento </p>
         {% if isArtist %}

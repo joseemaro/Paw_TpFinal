@@ -21,7 +21,7 @@
     <h1 class="title title-form">InkMaster's Team</h1>
     <p> ¡Entrá a conocer a nuestro equipo! Mirá el portfolio de nuestro staff para elegir tu próximo turno.</p>
     {% if variable.artists %}
-    <section class="gallery">
+    <article class="gallery">
         {% for artist in variable.artists %}
             <figure class="artist">
                 {% if artist.photo %}
@@ -32,7 +32,7 @@
                 </figcaption>
             </figure>
         {% endfor %}
-    </section>
+    </article>
     {% else %}
         <p> No hay artistas registrados hasta el momento </p>
     {% endif %}

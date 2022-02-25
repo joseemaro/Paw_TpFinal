@@ -20,7 +20,7 @@
 
 <section class="container-form">
     <h1 class="title title-form"> Solicitud de turno </h1>
-    <section class="login-ap">
+    <article class="login-ap">
     {% if not variable.session %}
             Se necesita estar logueado para poder registrar un turno<br>
             <a href="/login">Iniciar sesión/Registrarse</a>
@@ -30,7 +30,7 @@
                 <p class="red-alert">*Al ser menor de 18 años deberá asistir al establecimiento con su madre/padre/tutor*</p>
             {% endif %}
         {% endif %}
-    </section>
+    </article>
     <form action="/save_appointment" method="post" name="form" enctype="multipart/form-data">
         <label for="fartist">Artista</label>
         <select id="fartist" name="id_artist">

@@ -618,11 +618,11 @@ table.width200 {
     width: 100%;
 }
 
-.question-answer__accordion > .answer {
+.question-answer__accordion .answer {
     display: none;
 }
 
-.active > .answer {
+.active .answer {
     display: block;
     padding-bottom: 1.3rem;
     text-align: justify;
@@ -664,6 +664,7 @@ table.width200 {
 
 .answer-block {
     margin: 1% 0;
+    text-align: justify;
 }
 
 .visits {

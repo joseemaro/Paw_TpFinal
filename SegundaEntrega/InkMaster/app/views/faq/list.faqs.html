@@ -29,27 +29,27 @@
         <option value="MorePopular">Mas populares</option>
         <option value="LessPopular">Menos populares</option>
     </select>
-    <section class="accordion__wrapper" id="content">
+    <article class="accordion__wrapper" id="content">
         {% for query in variable.faqs %}
-            <article class="question-answer__accordion" data-faq-id="{{ query.id_faq }}">
-                <header class="question">
+            <details class="question-answer__accordion" data-faq-id="{{ query.id_faq }}">
+                <summary class="question">
                     <h1 class="title__question">
                         {{ query.question }}
                     </h1>
                     <img src="/public/images/icon-arrow-down.svg" >
-                </header>
-                <footer class="answer">
-                    <p class="answer-block"> {{ query.answer }} </p>
-                    <p class="answer-block">{{ query.summary }} </p>
-                    <p class="answer-block visits"> Total de visitas: {{ query.visits }} </p>
-                    {% if isAdministrator %}
-                        <a class="link-faq" id="edit-faq-{{ query.id_faq }}" href="/edit_faq/{{ query.id_faq }}">Editar</a>
-                        <a class="link-faq" id="destroy-faq-{{ query.id_faq }}" href="/del_faq/{{ query.id_faq }}">Borrar</a>
-                    {% endif %}
-                </footer>
-            </article>
+                </summary>
+                <p class="answer-block"> {{ query.answer }} </p>
+                <p class="answer-block">{{ query.summary }} </p>
+                <p class="answer-block visits"> Total de visitas: {{ query.visits }} </p>
+                {% if isAdministrator %}
+                <p class="answer-block">
+                    <a class="link-faq" id="edit-faq-{{ query.id_faq }}" href="/edit_faq/{{ query.id_faq }}">Editar</a>
+                    <a class="link-faq" id="destroy-faq-{{ query.id_faq }}" href="/del_faq/{{ query.id_faq }}">Borrar</a>
+                </p>
+                {% endif %}
+            </details>
         {% endfor %}
-    </section>
+    </article>
 </section>
 {% endblock %}
 
